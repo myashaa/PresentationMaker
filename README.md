@@ -1,2 +1,4 @@
-# presentationMaker
-Presentation Maker
+# PresentationMaker
+
+Приложение для создания презентаций
+
