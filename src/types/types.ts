@@ -16,19 +16,13 @@ export type Presentation = {
 };
 
 export type Slide = {
-  animation: SlideAnimation;
   elementList: SlideElement[];
   background: Background;
 };
 
-export type SlideAnimation = {
-  fadeIn: 0;
-  fadeOut: 1;
-};
-
 export type Background = {
-  color: string;
-  picture: Image;
+  color: string | null;
+  picture: Image | null;
 };
 
 export type SlideElement = {
