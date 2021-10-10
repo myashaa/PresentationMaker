@@ -12,7 +12,7 @@ export type PresentationHistory = {
 export type Presentation = {
   name: string;
   slideList: Slide[];
-  selectedSlide: Slide[];
+  selectedSlides: Slide[];
 };
 
 export type Slide = {
@@ -64,8 +64,8 @@ export type Image = {
 };
 
 export type Filter = {
-  blur: 0;
-  colorSelection: 1;
+  blur: number;
+  colorSelection: string;
 };
 
 export type Figure = {
