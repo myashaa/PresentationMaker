@@ -3,4 +3,5 @@
   height: 100vh;
   flex-direction: column;
   background-color: #fafafa;
+  user-select: none;
 }
