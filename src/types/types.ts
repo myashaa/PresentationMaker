@@ -1,32 +1,38 @@
-type Editor = {
+export type Editor = {
   mode: "view" | "edit";
   history: PresentationHistory[];
   presentation: Presentation;
 };
 
-type PresentationHistory = {
+export type PresentationHistory = {
   index: number;
   prevState: any;
 };
 
-type Presentation = {
+export type Presentation = {
   name: string;
   slideList: Slide[];
   currentSlide: Slide;
   selectedSlide: Slide[];
 };
 
-type Slide = {
+export type Slide = {
+  animation: SlideAnimation;
   elementList: SlideElement[];
   background: Background;
 };
 
-type Background = {
-  color: string;
-  picture?: Image;
+export type SlideAnimation = {
+  fadeIn: 0;
+  fadeOut: 1;
 };
 
-type SlideElement = {
+export type Background = {
+  color: string;
+  picture: Image;
+};
+
+export type SlideElement = {
   width: number;
   heigth: number;
   position: {
@@ -38,13 +44,13 @@ type SlideElement = {
   data: SlideText | Image | Figure;
 };
 
-type Border = {
+export type Border = {
   width: number;
   type: "solid" | "dotted" | "dashed";
   color: string;
 };
 
-type SlideText = {
+export type SlideText = {
   fontFamily: string;
   fontColor: string;
   fontSize: number;
@@ -53,16 +59,16 @@ type SlideText = {
   underline: boolean;
 };
 
-type Image = {
+export type Image = {
   url: string;
   filter: Filter;
 };
 
-type Filter = {
+export type Filter = {
   blur: 0;
   colorSelection: 1;
 };
 
-type Figure = {
+export type Figure = {
   type: "circle" | "triangle" | "sguare";
 };
