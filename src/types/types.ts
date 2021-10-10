@@ -32,8 +32,8 @@ export type SlideElement = {
     x: number;
     y: number;
   };
-  color: string;
-  border: Border;
+  color?: string;
+  border?: Border;
   data: SlideText | Image | Figure;
 };
 
@@ -50,6 +50,7 @@ export type SlideText = {
   bold: boolean;
   italic: boolean;
   underline: boolean;
+  content: string;
 };
 
 export type Image = {
