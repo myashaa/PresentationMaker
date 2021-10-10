@@ -17,19 +17,13 @@ type Presentation = {
 };
 
 type Slide = {
-  animation: SlideAnimation;
   elementList: SlideElement[];
   background: Background;
 };
 
-type SlideAnimation = {
-  fadeIn: 0;
-  fadeOut: 1;
-};
-
 type Background = {
   color: string;
-  picture: Image;
+  picture?: Image;
 };
 
 type SlideElement = {
