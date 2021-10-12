@@ -1,200 +1,211 @@
 /**
  * @param { File } file
- * @return { Presentation }
+ * @return { Editor }
  */
 function loadPresentation(file) {}
 
 /**
  * @param { Presentation } presentation
- * @return { File }
  */
 function savePresentation(presentation) {}
 
 /**
  * @param { Presentation } presentation
- * @return { File }
  */
 function exportPresentation(presentation) {}
 
 /**
  * @param { string } name
  * @param { Presentation } presentation
- * @return { Presentation }
+ * @return { Editor }
  */
 function renamePresentation(name, presentation) {}
 
 /**
- * @return { Presentation }
+ * @param { Editor } editor
+ * @return { Editor }
  */
-function createPresentation() {}
+function createPresentation(editor) {}
 
 /**
- * @param { History } history
- * @param { Action[] } actions
- * @return { History }
+ * @param { Editor } editor
+ * @return { Editor }
  */
-function saveChanges(history, actions) {}
+function createSlide(editor) {} // ?
 
 /**
- * @param { Presentation } presentation
- * @return { Presentation }
+ * @param { Editor } editor
+ * @param { number } slideId
+ * @return { Editor }  //
  */
-function createSlide(presentation) {}
+function deleteSlide(editor, index) {}
 
 /**
- * @param { Presentation } presentation
- * @param { number } index
- * @return { Presentation }
- */
-function deleteSlide(presentation, index) {}
-
-/**
- * @param { Presentation } presentation
- * @param { number } index
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { number } indexTo
- * @return { Presentation }
+ * @return { Editor }
  */
-function moveSlide(presentation, index, indexTo) {}
+function moveSlide(editor, slideId, indexTo) {}
 
 /**
- * @param { Presentation } presentation
+ * @param { Editor } editor
  * @param { number[] } slideIds
- * @return { Presentation }
+ * @return { Editor }
  */
-function selectSlides(presentation, slideIds) {}
+function selectSlides(editor, slideIds) {}
 
 /**
- * @param { Presentation } presentation
- * @return { Presentation }
- */
-function deleteSlide(presentation) {}
-
-/**
- * @param { Slide } Slide
- * @param { Animation } animation
- * @return { Slide }
- */
-function setAnimation(slide, animation) {}
-
-/**
- * @param { Slide } slide
- * @return { Slide }
- */
-function deleteAnimation(slide) {}
-
-/**
- * @param { Slide } slide
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { string } backgroundType
- * @return { Slide }
+ * @return { Editor }
  */
-function setBackground(slide, backgroundType) {}
+function setBackground(editor, slideId, backgroundType) {}
 
 /**
- * @param { Slide } slide
- * @return { Slide }
+ * @param { Editor } editor
+ * @param { number } slideId
+ * @return { Editor }
  */
-function clearBackground(slide) {}
+function clearBackground(editor, slideId) {}
 
 /**
- * @param { Slide } slide
+ * @param { Editor } editor // заменить Slide на Editor передавать slideId
+ * @param { number } slideId
  * @param { (Text | Image | Figure) } elementType
- * @return { Slide }
+ * @return { Editor }
  */
-function createElement(slide, elementType) {}
+function createElement(editor, slideId, elementType) {}
 
 /**
- * @param { Slide } slide
- * @param { number } index
- * @return { Slide }
+ * @param { Editor } editor
+ * @param { number } slideId
+ * @param { number } elementId
+ * @return { Editor }
  */
-function removeElement(slide, index) {}
+function removeElement(editor, slideId, elementId) {}
 
 /**
- * @param { Slide } slide
- * @return { Slide }
+ * @param { Editor } editor
+ * @param { number } slideId
+ * @return { Editor }
  */
-function removeElements(slide) {}
+function removeElements(editor, slideId) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { Position } position
- * @return { Element }
+ * @return { Editor }
  */
-function moveElement(element, position) {}
+function moveElement(editor, slideId, element, position) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { number } width
  * @param { number } height
- * @return { Element }
+ * @return { Editor }
  */
-function resizeElement(element, width, heigth) {}
+function resizeElement(editor, slideId, element, width, heigth) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { Border } border
- * @return { Element }
+ * @return { Editor }
  */
-function changeElementBorder(element, border) {}
+function changeElementBorder(editor, slideId, element, border) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { string } color
- * @return { Element }
+ * @return { Editor }
  */
-function changeElementColor(element, color) {}
+function changeElementColor(editor, slideId, element, color) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { string } fontFamily
- * @return { Element }
+ * @return { Editor }
  */
-function setFontFamily(element, fontFamily) {}
+function setFontFamily(editor, slideId, element, fontFamily) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { string } color
- * @return { Element }
+ * @return { Editor }
  */
-function sentFontColor(element, color) {}
+function sentFontColor(editor, slideId, element, color) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { number } size
- * @return { Element }
+ * @return { Editor }
  */
-function setFontSize(element, size) {}
+function setFontSize(editor, sldeId, element, size) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
  * @param { string } filter
- * @return { Element }
+ * @return { Editor }
  */
-function setFilter(element, filter) {}
+function setFilter(editor, slideId, element, filter) {}
 
 /**
+ * @param { Editor } editor
+ * @param { number } slideId
  * @param { Element } element
- * @return { Element }
+ * @return { Editor }
  */
-function deleteFilter(element) {}
+function deleteFilter(editor, slideId, element) {}
 
 /**
+ * @param { Editor } editor
  * @param { Presentation } presentation
  * @param { string } mode
- * @return { Presentation }
+ * @return { Editor }
  */
-function changeMode(presentation, mode) {}
+function changeMode(editor, presentation, mode) {}
 
 /**
+ * @param { Editor } editor
  * @param { Element } element
  * @param { Image } image
- * @return { Element }
+ * @return { Editor }
  */
-function loadImage(element, image) {}
+function loadImage(editor, element, image) {}
 
 /**
+ * @param { Editor } editor
  * @param { Presentation } presentation
  * @param { number } slideId
- * @return { Slide }
+ * @return { Editor }
  */
-function selectSlide(presentation, slideId) {}
+function selectSlide(editor, presentation, slideId) {}
+
+/**
+ * @param { Editor } editor
+ * @return { Editor }
+ */
+function undo(editor) {}
+
+/**
+ * @param { Editor } editor
+ * @return { Editor }
+ */
+function redo(editor) {}
