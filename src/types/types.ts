@@ -6,30 +6,23 @@ export type Editor = {
 
 export type PresentationHistory = {
   index: number;
-  prevState: any;
+  prevState: []; //smth
 };
 
 export type Presentation = {
   name: string;
   slideList: Slide[];
-  currentSlide: Slide;
-  selectedSlide: Slide[];
+  selectedSlides: Slide[];
 };
 
 export type Slide = {
-  animation: SlideAnimation;
   elementList: SlideElement[];
   background: Background;
 };
 
-export type SlideAnimation = {
-  fadeIn: 0;
-  fadeOut: 1;
-};
-
 export type Background = {
-  color: string;
-  picture: Image;
+  color: string | null;
+  picture: Image | null;
 };
 
 export type SlideElement = {
@@ -39,8 +32,8 @@ export type SlideElement = {
     x: number;
     y: number;
   };
-  color: string;
-  border: Border;
+  color?: string;
+  border?: Border;
   data: SlideText | Image | Figure;
 };
 
@@ -57,6 +50,7 @@ export type SlideText = {
   bold: boolean;
   italic: boolean;
   underline: boolean;
+  content: string;
 };
 
 export type Image = {
@@ -65,8 +59,8 @@ export type Image = {
 };
 
 export type Filter = {
-  blur: 0;
-  colorSelection: 1;
+  blur: number;
+  colorSelection: string;
 };
 
 export type Figure = {
