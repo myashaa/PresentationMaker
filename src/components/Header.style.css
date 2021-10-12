@@ -1,5 +1,52 @@
 .header {
-  height: 100px;
+  padding: 16px 24px;
   background-color: #fff;
   border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.app-logo {
+  width: 64px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: 250ms;
+}
+
+.app-logo:active {
+  transform: scaleX(0.95) scaleY(0.95);
+  transition: 250ms;
+}
+
+.presentation-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.presentation-title {
+  padding-left: 8px;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.presentation-actions {
+  display: flex;
+  margin-top: 8px;
+}
+
+.header-button {
+  width: 200px;
+  font-family: "Montserrat";
+  outline: none;
+  cursor: pointer;
+  padding: 8px 32px;
+  background-color: #fccd89;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: bold;
 }
