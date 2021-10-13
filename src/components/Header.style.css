@@ -33,11 +33,6 @@
   margin: 0;
 }
 
-.presentation-actions {
-  display: flex;
-  margin-top: 8px;
-}
-
 .header-button {
   width: 200px;
   font-family: "Montserrat";
