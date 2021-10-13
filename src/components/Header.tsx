@@ -4,6 +4,7 @@ import "./Header.style.css";
 
 import Logo from "../logo.svg";
 import { MenuBar } from "./menu/MenuBar";
+import { PresentationTitle } from "./header/PresentationTitle";
 
 type HeaderProps = {
   children?: React.ReactNode;
@@ -14,7 +15,7 @@ export function Header({ children }: HeaderProps) {
     <div className="header">
       <img src={Logo} className="app-logo" alt="" />
       <div className="presentation-info">
-        <h1 className="presentation-title">Название презентации</h1>
+        <PresentationTitle title="Команда Ю - Демонстрация" />
         <MenuBar
           menu={[
             {

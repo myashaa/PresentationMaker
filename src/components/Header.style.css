@@ -26,13 +26,6 @@
   flex: 1;
 }
 
-.presentation-title {
-  padding-left: 8px;
-  font-size: 21px;
-  font-weight: bold;
-  margin: 0;
-}
-
 .header-button {
   width: 200px;
   font-family: "Montserrat";
