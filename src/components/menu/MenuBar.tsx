@@ -1,22 +1,10 @@
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 
-import "./MenuBar.styles.css";
 import { MenuButton } from "./MenuButton";
+import { MenuBarProps } from "./MenuTypes";
 
-export type MenuAction = {
-  label: string;
-  action?: () => void;
-};
-
-type Menu = {
-  label: string;
-  actions?: MenuAction[];
-};
-
-type MenuBarProps = {
-  menu: Menu[];
-};
+import "./MenuBar.styles.css";
 
 export function MenuBar({ menu }: MenuBarProps) {
   const [menuIndex, setMenuIndex] = useState(-1);

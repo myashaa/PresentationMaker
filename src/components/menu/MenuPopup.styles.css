@@ -1,0 +1,10 @@
+.menu-popup {
+  margin-top: 6px;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 0px 8px 8px 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  padding: 8px 0px;
+  min-width: 248px;
+  transition: 100ms;
+}
