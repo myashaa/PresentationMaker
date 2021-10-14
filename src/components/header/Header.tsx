@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Header.style.css";
 
-import Logo from "../logo.svg";
+import Logo from "../../logo.svg";
 import { MenuBar } from "../menu/MenuBar";
 import { PresentationTitle } from "../header/PresentationTitle";
 
