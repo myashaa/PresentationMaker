@@ -1,0 +1,30 @@
+.menu-container {
+  position: relative;
+}
+
+.menu-label {
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #b9b9b9;
+  font-weight: bold;
+  transition: 100ms;
+}
+
+.menu-label:active {
+  transform: scaleX(0.95) scaleY(0.95);
+  transition: 100ms;
+}
+
+.menu-label:hover {
+  background-color: #4e4e4e;
+}
+
+.menu-label.selected {
+  background-color: #fccd89;
+  border-radius: 8px 8px 0px 0px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  transition: 100ms;
+  color: #423624;
+}
