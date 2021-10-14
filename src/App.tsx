@@ -1,4 +1,4 @@
-import { Header } from "./components/Header";
+import { Header } from "./components/header/Header";
 import { SidePanel } from "./components/SidePanel";
 import { EditorContainer } from "./components/EditorContainer";
 
