@@ -4,6 +4,7 @@ import { EditorContainer } from "./components/EditorContainer";
 
 import "./App.css";
 import { ActionBar } from "./components/actions/ActionBar";
+import { Editor } from "./components/editor/Editor";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <ActionBar />
       <div className="app-content">
         <SidePanel width={300}></SidePanel>
-        <EditorContainer></EditorContainer>
+        <EditorContainer>
+          <Editor />
+        </EditorContainer>
         <SidePanel width={300}></SidePanel>
       </div>
     </div>
