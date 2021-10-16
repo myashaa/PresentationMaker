@@ -37,7 +37,7 @@ export function MenuBar({ menu }: MenuBarProps) {
   ));
 
   return (
-    <div ref={menuRef} className="presentation-actions">
+    <div ref={menuRef} className="presentation-menu-bar">
       {menuButtons}
     </div>
   );

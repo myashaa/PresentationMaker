@@ -11,9 +11,9 @@ export function MenuButton({
   onHover,
 }: MenuButtonProps) {
   return (
-    <div className="menu-container">
+    <div className="menu-button-container">
       <span
-        className={`menu-label ${expand ? "selected" : ""}`}
+        className={`menu-button-label ${expand ? "selected" : ""}`}
         onClick={onClick}
         onMouseEnter={onHover}
       >

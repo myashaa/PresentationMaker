@@ -1,8 +1,8 @@
-.menu-container {
+.menu-button-container {
   position: relative;
 }
 
-.menu-label {
+.menu-button-label {
   font-size: 16px;
   padding: 6px 8px;
   border-radius: 8px;
@@ -12,16 +12,16 @@
   transition: 100ms;
 }
 
-.menu-label:active {
+.menu-button-label:active {
   transform: scaleX(0.95) scaleY(0.95);
   transition: 100ms;
 }
 
-.menu-label:hover {
+.menu-button-label:hover {
   background-color: #f2f2f2;
 }
 
-.menu-label.selected {
+.menu-button-label.selected {
   background-color: #fff2b2;
   border-radius: 8px 8px 0px 0px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
