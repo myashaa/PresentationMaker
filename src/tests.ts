@@ -1,13 +1,18 @@
-import * as tp from "./types/types"
+import {Editor} from "./model/editor/EditorTypes"
+import {PresentationHistory} from "./model/history/HistoryTypes"
+import {Presentation} from "./model/presentation/PresentationTypes"
+import {Slide, Background} from "./model/slide/SlideTypes"
+import * as el from "./model/element/ElementTypes"
+import {Image, Filter} from "./model/image/ImageTypes"
 
-const initialState: tp.PresentationHistory = {
+const initialState: PresentationHistory = {
   index: 0,
   prevState: [],
 };
 
 const presentationHistory = [initialState];
 
-const elem1: tp.SlideElement = {
+const elem1: el.SlideElement = {
   width: 800,
   heigth: 50,
   position: {
@@ -26,7 +31,7 @@ const elem1: tp.SlideElement = {
   },
 };
 
-const elem2: tp.SlideElement = {
+const elem2: el.SlideElement = {
   width: 200,
   heigth: 100,
   position: {
@@ -42,7 +47,7 @@ const elem2: tp.SlideElement = {
   },
 };
 
-const elem3: tp.SlideElement = {
+const elem3: el.SlideElement = {
   width: 50,
   heigth: 50,
   position: {
@@ -60,16 +65,16 @@ const elem3: tp.SlideElement = {
   },
 };
 
-const slide1 = {
-  elementList: [],
+const slide1: Slide = {
+  elementList: [elem1],
   background: {
     color: "#fff",
     picture: null,
   }
 };
 
-const slide2 = {
-  elementList: [],
+const slide2: Slide = {
+  elementList: [elem2],
   background: {
     color: null,
     picture: {
@@ -82,8 +87,8 @@ const slide2 = {
   }
 };
 
-const slide3 = {
-  elementList: [],
+const slide3: Slide = {
+  elementList: [elem3],
   background: {
     color: "#000",
     picture: null,
@@ -92,15 +97,14 @@ const slide3 = {
 
 const slides = [slide1, slide2, slide3];
 
-const sSlides = [slide1];
-
-const pres: tp.Presentation = {
+const pres: Presentation = {
   name: "Presentation1",
   slideList: slides,
-  selectedSlides: sSlides,
+  selectedSlidesIds: [0],
+  selectedElementIds: [0],
 };
 
-export const editor: tp.Editor = {
+export const editor: Editor = {
   mode: "edit",
   history: presentationHistory,
   presentation: pres,
