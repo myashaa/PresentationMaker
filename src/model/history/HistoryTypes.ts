@@ -1,4 +1,4 @@
-import { Presentation } from "../presentation/types";
+import { Presentation } from "../presentation/PresentationTypes";
 
 export type PresentationHistory = {
   index: number;

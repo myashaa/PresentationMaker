@@ -1,4 +1,4 @@
-import { Image } from "../image/types";
+import { Image } from "../image/ImageTypes";
 
 export type SlideElement = {
   width: number;

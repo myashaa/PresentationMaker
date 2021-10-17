@@ -1,5 +1,5 @@
-import { SlideElement } from "../element/types";
-import { Image } from "../image/types";
+import { SlideElement } from "../element/ElementTypes";
+import { Image } from "../image/ImageTypes";
 
 export type Slide = {
   elementList: SlideElement[];
