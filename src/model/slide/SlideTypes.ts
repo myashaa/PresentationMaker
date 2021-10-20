@@ -8,5 +8,5 @@ export type Slide = {
 
 export type Background = {
   color: string | null;
-  picture: Image | null;
+  picture?: Image | null;
 };
