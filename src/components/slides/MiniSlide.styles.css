@@ -1,0 +1,16 @@
+.slide-miniature {
+  width: 300px;
+  height: 180px;
+  background: white;
+  border-radius: 4px;
+  /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.05); */
+  border: 1px solid #e2e2e2;
+  cursor: pointer;
+  transition: 100ms;
+  margin-bottom: 16px;
+}
+
+.slide-miniature:hover {
+  transform: translateY(-2px);
+  transition: 100ms;
+}

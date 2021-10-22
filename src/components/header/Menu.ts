@@ -2,11 +2,11 @@ export const menu = [
   {
     label: "Презентация",
     actions: [
-      { icon: "add", label: "Создать" },
+      { icon: "create_new_folder", label: "Создать" },
       { icon: "folder_open", label: "Открыть" },
       { label: "" },
-      { icon: "save", label: "Сохранить" },
-      { label: "Сохранить как" },
+      { icon: "download_for_offline", label: "Сохранить" },
+      { icon: "downloading", label: "Сохранить как" },
       { label: "" },
       { icon: "edit", label: "Переименовать" },
     ],
@@ -17,7 +17,7 @@ export const menu = [
       { icon: "add", label: "Новый слайд" },
       { icon: "delete", label: "Удалить слайд" },
       { label: "" },
-      { icon: "edit", label: "Изменить фон" },
+      { icon: "filter", label: "Изменить фон" },
     ],
   },
   {
