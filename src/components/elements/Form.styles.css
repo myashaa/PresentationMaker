@@ -1,0 +1,95 @@
+.form {
+  width: 100%;
+}
+
+.header-form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.header-form--title {
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.header-form--content {
+  justify-content: space-between;
+}
+
+.line {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #888888;
+}
+
+.header-form--withoutText {
+  height: 30px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-form-icon {
+  border: none;
+  outline: none;
+  background-color: #fafafa;
+  color: #888888;
+  padding: 8px;
+  border-radius: 8px;
+  transition: 250ms;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.header-form-title {
+  font-size: 16px;
+  line-height: 30px;
+  color: #000;
+}
+
+.header-form-size {
+  display: flex;
+  align-items: center;
+}
+
+.header-form-input {
+  min-width: 20px;
+  max-width: 70px;
+  height: 20px;
+  border: 1px solid #fff;
+  background: #fafafa;
+  outline: none;
+  font-family: "Montserrat";
+  font-size: 14px;
+}
+
+.header-form-input:hover {
+  border: 1px solid #888888;
+}
+
+.header-form-input:focus {
+  border: 1px solid #000;
+}
+
+.header-form-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.header-form-select {
+  width: 160px;
+  height: 24px;
+  border: 1px solid #fff;
+  background: #fafafa;
+  outline: none;
+  font-family: "Montserrat";
+  font-size: 14px;
+}
+
+.header-form-select:hover {
+  border: 1px solid #888888;
+}
+
+.header-form-select:focus {
+  border: 1px solid #000;
+}

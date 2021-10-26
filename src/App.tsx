@@ -7,6 +7,8 @@ import { ActionBar } from "./components/actions/ActionBar";
 import { Editor } from "./components/editor/Editor";
 import { MiniSlide } from "./components/slides/MiniSlide";
 import { TextForm } from "./components/elements/TextForm";
+import { ImageForm } from "./components/elements/ImageForm";
+import { FigureForm } from "./components/elements/FigureForm";
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <Editor />
         </EditorContainer>
         <SidePanel width={300}>
-          <TextForm />
+          {/*<TextForm />*/}
+          {/*<ImageForm />*/}
+          <FigureForm />
         </SidePanel>
       </div>
     </div>
