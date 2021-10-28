@@ -4,6 +4,7 @@ import {Presentation} from "./model/presentation/PresentationTypes"
 import {Slide, Background} from "./model/slide/SlideTypes"
 import * as el from "./model/element/ElementTypes"
 import {Image, Filter} from "./model/image/ImageTypes"
+import { setBackground } from "./model/slide/SlideActions"
 
 const initialState: PresentationHistory = {
   index: 0,
@@ -110,3 +111,4 @@ export const editor: Editor = {
   presentation: pres,
 };
 
+setBackground(editor, 1, );
