@@ -1,0 +1,29 @@
+.field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fieldLabel {
+  font-size: 16px;
+  color: #c7c7c7;
+}
+
+.fieldInput {
+  min-width: 20px;
+  max-width: 70px;
+  border: 1px solid #fff;
+  background: #fafafa;
+  outline: none;
+  font-family: "Montserrat";
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.fieldSign {
+  font-size: 14px;
+  margin-left: 4px;
+}
