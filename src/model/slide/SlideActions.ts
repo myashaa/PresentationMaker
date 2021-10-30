@@ -109,3 +109,62 @@ export function removeElements() {
     },
   };
 }
+
+// Перемещение элемента
+export function moveElement(
+  editor: Editor,
+  slideId: number,
+  elementId: number,
+  newPosition: { x: number; y: number }
+): Editor {
+  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
+    index === slideId
+      ? {
+          ...slide,
+          elementList: slide.elementList.map((element, index) =>
+            index === elementId
+              ? { ...element, position: newPosition }
+              : element
+          ),
+        }
+      : slide
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      slideList: newSlideList,
+    },
+  };
+}
+
+// Изменение размеров элемента
+export function resizeElement(
+  editor: Editor,
+  slideId: number,
+  elementId: number,
+  newWidth: number,
+  newHeight: number
+): Editor {
+  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
+    index === slideId
+      ? {
+          ...slide,
+          elementList: slide.elementList.map((element, index) =>
+            index === elementId
+              ? { ...element, width: newWidth, height: newHeight }
+              : element
+          ),
+        }
+      : slide
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      slideList: newSlideList,
+    },
+  };
+}
