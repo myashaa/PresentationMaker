@@ -14,12 +14,12 @@ function savePresentation(presentation) {}
  */
 function exportPresentation(presentation) {}
 
-/**
- * @param { string } name
- * @param { Presentation } presentation
- * @return { Editor }
- */
-function renamePresentation(name, presentation) {}
+ /**
+  * @param { Editor } editor
+  * @param { string } name
+  * @return { Editor }
+  */
+function renamePresentation(editor, name) {}
 
 /**
  * @param { Editor } editor
@@ -176,11 +176,10 @@ function deleteFilter(editor, slideId, element) {}
 
 /**
  * @param { Editor } editor
- * @param { Presentation } presentation
  * @param { string } mode
  * @return { Editor }
  */
-function changeMode(editor, presentation, mode) {}
+function changeMode(editor, mode) {}
 
 /**
  * @param { Editor } editor
