@@ -1,4 +1,5 @@
 import { Editor } from "../editor/EditorTypes";
+import { SlideElement } from "../element/ElementTypes";
 import { Figure, SlideText } from "../element/ElementTypes";
 import { Image } from "../image/ImageTypes";
 import { Background, Slide } from "./SlideTypes";
@@ -38,5 +39,73 @@ export function clearBackground(editor: Editor, slideId: number): Editor {
 export function createElement(
   editor: Editor,
   slideId: number,
-  elementType: SlideText | Image | Figure
-): Editor {}
+  element: SlideText | Image | Figure
+): Editor {
+  const newElement: SlideElement = {
+    width: 100,
+    height: 100,
+    position: { x: 0, y: 0 },
+    color: "#000",
+    data: element,
+  };
+
+  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
+    index === slideId
+      ? { ...slide, elementList: [...slide.elementList, element] }
+      : slide
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      slideList: newSlideList,
+    },
+  };
+}
+
+// Удаление элемента
+export function removeElement(
+  editor: Editor,
+  slideId: number,
+  elementId: number
+): Editor {
+  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
+    index === slideId
+      ? {
+          ...slide,
+          elementList: slide.elementList.filter(
+            (element, index) => index !== elementId
+          ),
+        }
+      : slide
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      slideList: newSlideList,
+    },
+  };
+}
+
+// Удаление всех элементов
+export function removeElements() {
+  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
+    index === slideId
+      ? {
+          ...slide,
+          elementList: [],
+        }
+      : slide
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      slideList: newSlideList,
+    },
+  };
+}
