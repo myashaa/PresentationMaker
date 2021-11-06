@@ -9,7 +9,6 @@ import { MiniSlide } from "./components/slides/MiniSlide";
 import { TextForm } from "./components/elements/TextForm";
 import { ImageForm } from "./components/elements/ImageForm";
 import { FigureForm } from "./components/elements/FigureForm";
-import { Field } from "./components/form/Field";
 
 function App() {
   return (
@@ -24,9 +23,9 @@ function App() {
           <Editor />
         </EditorContainer>
         <SidePanel width={300}>
-          {/* <TextForm /> */}
-          {/*<ImageForm />*/}
-          <FigureForm />
+          <TextForm />
+          {/* <ImageForm /> */}
+          {/* <FigureForm /> */}
         </SidePanel>
       </div>
     </div>

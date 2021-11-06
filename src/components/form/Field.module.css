@@ -1,29 +1,64 @@
 .field {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 8px;
 }
 
 .fieldLabel {
   font-size: 16px;
-  color: #c7c7c7;
+  line-height: 30px;
+  color: #000;
+}
+
+.fieldValue {
+  display: flex;
+  align-items: center;
 }
 
 .fieldInput {
-  min-width: 20px;
-  max-width: 70px;
+  width: 70px;
+  height: 20px;
   border: 1px solid #fff;
   background: #fafafa;
   outline: none;
   font-family: "Montserrat";
   font-size: 14px;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
-.fieldSign {
+.fieldInput:hover  {
+  border: 1px solid #888888;
+}
+
+.fieldInput:focus  {
+  border: 1px solid #000;
+}
+
+.fieldCheckbox {
+  width: 20px;
+  height: 20px;
+}
+
+.fielSelect {
+  width: 160px; 
+  height: 32px;
+  border: 1px solid #fff;
+  background: #fafafa;
+  outline: none;
+  font-family: "Montserrat";
   font-size: 14px;
-  margin-left: 4px;
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+.fielSelect:hover {
+  border: 1px solid #888888;
+}
+
+.fielSelect:focus {
+  border: 1px solid #000;
 }
