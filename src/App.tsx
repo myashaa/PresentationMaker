@@ -16,7 +16,20 @@ function App() {
       <Header />
       <ActionBar />
       <div className="app-content">
-        <SidePanel width={300}>
+        <SidePanel width={317}>
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
+          <MiniSlide />
           <MiniSlide />
         </SidePanel>
         <EditorContainer>

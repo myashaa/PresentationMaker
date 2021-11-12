@@ -16,11 +16,38 @@ export function ImageForm({}: ImageFormProps) {
       <FieldInput label={"Отступ сверху"} type={"number"} />
       <FieldInput label={"Отступ слева"} type={"number"} />
       <FieldInput label={"Рамка"} type={"number"} />
-      <FieldSelect item1={"точечная"} item2={"пунктирная"} item3={"сплошная"} item4={"двойная"} />
-      <FieldSelect item1={"красный"} item2={"оранжевый"} item3={"желтый"} item4={"зеленый"} item5={"голубой"} item6={"синий"} item7={"фиолетовый"} item8={"розовый"} item9={"белый"} item10={"черный"} />
-      <FieldSelect label={"Заливка"} item1={"красный"} item2={"оранжевый"} item3={"желтый"} item4={"зеленый"} item5={"голубой"} item6={"синий"} item7={"фиолетовый"} item8={"розовый"} item9={"белый"} item10={"черный"} />
+      <FieldSelect items={["точечная", "пунктирная", "сплошная", "двойная"]} />
+      <FieldSelect
+        items={[
+          "красный",
+          "оранжевый",
+          "желтый",
+          "зеленый",
+          "голубой",
+          "синий",
+          "фиолетовый",
+          "розовый",
+          "белый",
+          "черный",
+        ]}
+      />
+      <FieldSelect
+        label={"Заливка"}
+        items={[
+          "красный",
+          "оранжевый",
+          "желтый",
+          "зеленый",
+          "голубой",
+          "синий",
+          "фиолетовый",
+          "розовый",
+          "белый",
+          "черный",
+        ]}
+      />
       <div className="line"></div>
-      <FieldSelect label={"Фильтр"} item1={"блюр"} item2={"выделение цвета"} />
+      <FieldSelect label={"Фильтр"} items={["блюр", "выделение цвета"]} />
     </div>
   );
 }

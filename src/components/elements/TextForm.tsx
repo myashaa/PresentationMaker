@@ -17,13 +17,54 @@ export function TextForm({}: TextFormProps) {
       <FieldInput label={"Отступ сверху"} type={"number"} />
       <FieldInput label={"Отступ слева"} type={"number"} />
       <FieldInput label={"Рамка"} type={"number"} />
-      <FieldSelect item1={"точечная"} item2={"пунктирная"} item3={"сплошная"} item4={"двойная"} />
-      <FieldSelect item1={"красный"} item2={"оранжевый"} item3={"желтый"} item4={"зеленый"} item5={"голубой"} item6={"синий"} item7={"фиолетовый"} item8={"розовый"} item9={"белый"} item10={"черный"} />
-      <FieldSelect label={"Заливка"} item1={"красный"} item2={"оранжевый"} item3={"желтый"} item4={"зеленый"} item5={"голубой"} item6={"синий"} item7={"фиолетовый"} item8={"розовый"} item9={"белый"} item10={"черный"} />
+      <FieldSelect items={["точечная", "пунктирная", "сплошная", "двойная"]} />
+      <FieldSelect
+        items={[
+          "красный",
+          "оранжевый",
+          "желтый",
+          "зеленый",
+          "голубой",
+          "синий",
+          "фиолетовый",
+          "розовый",
+          "белый",
+          "черный",
+        ]}
+      />
+      <FieldSelect
+        label={"Заливка"}
+        items={[
+          "красный",
+          "оранжевый",
+          "желтый",
+          "зеленый",
+          "голубой",
+          "синий",
+          "фиолетовый",
+          "розовый",
+          "белый",
+          "черный",
+        ]}
+      />
       <div className="line"></div>
-      <FieldSelect label={"Шрифт"} item1={"Arial"} item2={"Roboto"} item3={"Open Sans"} />
+      <FieldSelect label={"Шрифт"} items={["Arial", "Roboto", "Open Sans"]} />
       <FieldInput label={"Размер"} type={"number"} />
-      <FieldSelect label={"Цвет"} item1={"красный"} item2={"оранжевый"} item3={"желтый"} item4={"зеленый"} item5={"голубой"} item6={"синий"} item7={"фиолетовый"} item8={"розовый"} item9={"белый"} item10={"черный"} />
+      <FieldSelect
+        label={"Цвет"}
+        items={[
+          "красный",
+          "оранжевый",
+          "желтый",
+          "зеленый",
+          "голубой",
+          "синий",
+          "фиолетовый",
+          "розовый",
+          "белый",
+          "черный",
+        ]}
+      />
       <FieldCheckbox label={"Жирный"} />
       <FieldCheckbox label={"Подчеркнутый"} />
       <FieldCheckbox label={"Курсивный"} />
