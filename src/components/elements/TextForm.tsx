@@ -1,4 +1,4 @@
-import "./Form.styles.css";
+import styles from "./Form.module.css";
 import { FieldInput } from "../form/FieldInput";
 import { FieldCheckbox } from "../form/FieldCheckbox";
 import { FieldSelect } from "../form/FieldSelect";
@@ -7,10 +7,10 @@ type TextFormProps = {};
 
 export function TextForm({}: TextFormProps) {
   return (
-    <div className="form">
-      <div className="header-form">
-        <span className="material-icons header-form-icon">title</span>
-        <span className="header-form-title">Текст</span>
+    <div className={styles.form}>
+      <div className={styles.headerForm}>
+        <span className="material-icons {styles.headerFormIcon}">title</span>
+        <span className={styles.headerFormTitle}>Текст</span>
       </div>
       <FieldInput label={"Высота"} type={"number"} />
       <FieldInput label={"Ширина"} type={"number"} />
@@ -47,7 +47,7 @@ export function TextForm({}: TextFormProps) {
           "черный",
         ]}
       />
-      <div className="line"></div>
+      <div className={styles.line}></div>
       <FieldSelect label={"Шрифт"} items={["Arial", "Roboto", "Open Sans"]} />
       <FieldInput label={"Размер"} type={"number"} />
       <FieldSelect

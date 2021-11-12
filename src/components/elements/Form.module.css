@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.header-form {
+.headerForm {
   display: flex;
   width: 100%;
   align-items: center;
@@ -10,7 +10,7 @@
   margin-bottom: 10px;
 }
 
-.header-form-icon {
+.headerFormIcon {
   border: none;
   outline: none;
   background-color: #fafafa;
@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.header-form-title {
+.headerFormTitle {
   font-size: 16px;
   line-height: 30px;
   color: #000;

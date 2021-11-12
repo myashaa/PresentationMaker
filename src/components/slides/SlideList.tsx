@@ -2,7 +2,7 @@ import React from "react";
 import { Slide } from "../../model/slide/types";
 import { MiniSlide } from "./MiniSlide";
 
-import "./SlideList.styles.css";
+import styles from "./SlideList.module.css";
 
 type SlideListProps = {
   slides?: Slide[];

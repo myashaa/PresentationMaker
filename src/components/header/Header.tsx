@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Header.style.css";
+import styles from "./Header.module.css";
 
 import Logo from "../../logo.svg";
 import { MenuBar } from "../menu/MenuBar";
@@ -14,9 +14,9 @@ type HeaderProps = {
 
 export function Header({ children }: HeaderProps) {
   return (
-    <div className="header">
-      <img src={Logo} className="app-logo" alt="" />
-      <div className="presentation-info">
+    <div className={styles.header}>
+      <img src={Logo} className={styles.appLogo} alt="" />
+      <div className={styles.presentationInfo}>
         <PresentationTitle title="Команда Ю - Демонстрация" />
         <MenuBar menu={menu} />
       </div>

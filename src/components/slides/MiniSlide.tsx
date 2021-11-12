@@ -2,7 +2,7 @@ import React from "react";
 import { SlideElement } from "../../model/element/types";
 import { Background } from "../../model/slide/types";
 
-import "./MiniSlide.styles.css";
+import styles from "./MiniSlide.module.css";
 
 type MiniSlideProps = {
   elements?: SlideElement[];
@@ -10,5 +10,5 @@ type MiniSlideProps = {
 };
 
 export function MiniSlide({ elements, background }: MiniSlideProps) {
-  return <div className="slide-miniature"></div>;
+  return <div className={styles.slideMiniature}></div>;
 }

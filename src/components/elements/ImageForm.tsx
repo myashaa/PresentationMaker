@@ -1,4 +1,4 @@
-import "./Form.styles.css";
+import styles from "./Form.module.css";
 import { FieldInput } from "../form/FieldInput";
 import { FieldSelect } from "../form/FieldSelect";
 
@@ -6,10 +6,10 @@ type ImageFormProps = {};
 
 export function ImageForm({}: ImageFormProps) {
   return (
-    <div className="form">
-      <div className="header-form header-form--title">
-        <span className="material-icons header-form-icon">image</span>
-        <span className="header-form-title">Изображение</span>
+    <div className={styles.form}>
+      <div className={styles.headerForm}>
+        <span className="material-icons {styles.headerFormIcon}">image</span>
+        <span className={styles.headerFormTitle}>Изображение</span>
       </div>
       <FieldInput label={"Высота"} type={"number"} />
       <FieldInput label={"Ширина"} type={"number"} />
@@ -46,7 +46,7 @@ export function ImageForm({}: ImageFormProps) {
           "черный",
         ]}
       />
-      <div className="line"></div>
+      <div className={styles.line}></div>
       <FieldSelect label={"Фильтр"} items={["блюр", "выделение цвета"]} />
     </div>
   );

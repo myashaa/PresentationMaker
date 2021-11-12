@@ -1,6 +1,6 @@
 import { MenuItemProps } from "./MenuTypes";
 
-import "./MenuItem.styles.css";
+import styles from "./MenuItem.module.css";
 
 export function MenuItem({
   label,
@@ -9,7 +9,7 @@ export function MenuItem({
 }: MenuItemProps) {
   return (
     <div
-      className={label === "" ? "menu-popup-divider" : "menu-popup-item"}
+      className={label === "" ? styles.menuPopupDivider : styles.menuPopupItem}
       onClick={actionCallback}
     >
       {materialIcon && (
@@ -19,7 +19,7 @@ export function MenuItem({
       )}
       {label && (
         <span
-          className="menu-item-label"
+          className={styles.menuItemLabel}
           style={{ paddingLeft: !materialIcon ? 34 : 10 }}
         >
           {label}
