@@ -1,5 +1,5 @@
 .slideMiniature {
-  width: 300px;
+  width: 250px;
   height: 180px;
   background: white;
   border-radius: 4px;
@@ -14,3 +14,14 @@
   transform: translateY(-2px);
   transition: 100ms;
 } */
+
+.slideIndex {
+  font-size: 12px;
+  margin-right: 12px;
+  width: 16px;
+  color: #c7c7c7;
+}
+
+.slidePreview {
+  display: flex;
+}

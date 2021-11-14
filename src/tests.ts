@@ -3,7 +3,7 @@ import { PresentationHistory } from "./model/history/HistoryTypes";
 import { Presentation } from "./model/presentation/PresentationTypes";
 import { Slide, Background } from "./model/slide/SlideTypes";
 import * as el from "./model/element/ElementTypes";
-import { Image, Filter } from "./model/image/ImageTypes";
+import { Image, Filter } from "./model/element/ElementTypes";
 import { setBackground } from "./model/slide/SlideActions";
 
 const initialState: PresentationHistory = {
@@ -15,16 +15,18 @@ const presentationHistory = [initialState];
 
 const elem1: el.Element = {
   width: 800,
-  heigth: 50,
+  height: 50,
   position: {
     x: 0,
     y: 0,
   },
   color: "#fff",
   data: {
-    fontFamily: "Arial",
-    fontColor: "#000",
-    fontSize: 20,
+    font: {
+      family: "Arial",
+      color: "#000",
+      size: 20,
+    },
     bold: true,
     italic: false,
     underline: false,
@@ -34,7 +36,7 @@ const elem1: el.Element = {
 
 const elem2: el.Element = {
   width: 200,
-  heigth: 100,
+  height: 100,
   position: {
     x: 100,
     y: 50,
@@ -50,7 +52,7 @@ const elem2: el.Element = {
 
 const elem3: el.Element = {
   width: 50,
-  heigth: 50,
+  height: 50,
   position: {
     x: 150,
     y: 200,
@@ -70,14 +72,12 @@ const slide1: Slide = {
   elementList: [elem1],
   background: {
     color: "#fff",
-    picture: null,
   },
 };
 
 const slide2: Slide = {
   elementList: [elem2],
   background: {
-    color: null,
     picture: {
       url: "background.png",
       filter: {
@@ -92,7 +92,6 @@ const slide3: Slide = {
   elementList: [elem3],
   background: {
     color: "#000",
-    picture: null,
   },
 };
 
@@ -111,4 +110,4 @@ export const editor: Editor = {
   presentation: pres,
 };
 
-setBackground(editor, 1);
+// setBackground(editor, { color: "#fff" });

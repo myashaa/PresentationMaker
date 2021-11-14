@@ -16,6 +16,7 @@ export function renamePresentation(editor: Editor, name: string): Editor {
   const newEditor: Editor = {
     ...editor,
   };
+  console.log(newEditor);
 
   newEditor.presentation.name = name;
 

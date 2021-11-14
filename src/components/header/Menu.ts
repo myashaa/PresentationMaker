@@ -1,3 +1,6 @@
+import { dispatch } from "../../editor";
+import { setPresentationTitle } from "../PresentationUtils";
+
 export const menu = [
   {
     label: "Презентация",
@@ -8,7 +11,14 @@ export const menu = [
       { icon: "download_for_offline", label: "Сохранить" },
       { icon: "downloading", label: "Сохранить как" },
       { label: "" },
-      { icon: "edit", label: "Переименовать" },
+      {
+        icon: "edit",
+        label: "Переименовать",
+        action: () => {
+          const title = prompt("Введите название");
+          setPresentationTitle(title || "Untitled");
+        },
+      },
     ],
   },
   {
