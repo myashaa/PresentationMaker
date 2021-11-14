@@ -1,8 +1,7 @@
-import { SlideElement } from "../element/ElementTypes";
-import { Image } from "../image/ImageTypes";
+import { Element, Image } from "../element/ElementTypes";
 
 export type Slide = {
-  elementList: SlideElement[];
+  elementList: Element[];
   background: Background;
 };
 

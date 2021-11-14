@@ -1,7 +1,6 @@
 import { Editor } from "../editor/EditorTypes";
-import { SlideElement } from "../element/ElementTypes";
-import { Figure, SlideText } from "../element/ElementTypes";
-import { Image } from "../image/ImageTypes";
+import { Element } from "../element/ElementTypes";
+import { Figure, Text, Image } from "../element/ElementTypes";
 import { Background, Slide } from "./SlideTypes";
 
 // Установка фона для слайда
@@ -10,20 +9,32 @@ export function setBackground(
   slideId: number,
   background: Background
 ): Editor {
-  return editor.presentation.slideList.map((slide, index) =>
+  const { presentation } = editor;
+  const { slideList } = presentation;
+
+  const newSlideList = slideList.map((slide, index) =>
     index === slideId ? { ...slide, background } : slide
   );
+
+  const newEditor: Editor = {
+    ...editor,
+    presentation: {
+      ...presentation,
+      slideList: newSlideList,
+    },
+  };
+
+  return newEditor;
 }
 
 // Очистка фона слайда
 export function clearBackground(editor: Editor, slideId: number): Editor {
   const background: Background = {
-    color: "#fff",
-    picture: null,
+    color: "#FFFFFF",
   };
 
-  const newSlideList: Slide[] = editor.presentation.slideList.map(
-    (slide, index) => (index === slideId ? { ...slide, background } : slide)
+  const newSlideList = editor.presentation.slideList.map((slide, index) =>
+    index === slideId ? { ...slide, background } : slide
   );
 
   return {
@@ -39,21 +50,24 @@ export function clearBackground(editor: Editor, slideId: number): Editor {
 export function createElement(
   editor: Editor,
   slideId: number,
-  element: SlideText | Image | Figure
+  element: Text | Image | Figure
 ): Editor {
-  const newElement: SlideElement = {
+  const newElement: Element = {
     width: 100,
     height: 100,
     position: { x: 0, y: 0 },
-    color: "#000",
+    color: "#FFFFFF",
     data: element,
   };
 
-  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
-    index === slideId
-      ? { ...slide, elementList: [...slide.elementList, element] }
-      : slide
-  );
+  const { slideList } = editor.presentation;
+  const newSlideList = slideList.map((slide, index) => {
+    if (index === slideId) {
+      const { elementList } = slide;
+      return { ...slide, elementList: [...elementList, newElement] };
+    }
+    return slide;
+  });
 
   return {
     ...editor,
@@ -70,16 +84,18 @@ export function removeElement(
   slideId: number,
   elementId: number
 ): Editor {
-  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
-    index === slideId
-      ? {
-          ...slide,
-          elementList: slide.elementList.filter(
-            (element, index) => index !== elementId
-          ),
-        }
-      : slide
-  );
+  const { slideList } = editor.presentation;
+  const newSlideList = slideList.map((slide, index) => {
+    if (index === slideId) {
+      const { elementList } = slide;
+      return {
+        ...slide,
+        // ???
+        elementList: elementList.filter((element, id) => id !== elementId),
+      };
+    }
+    return slide;
+  });
 
   return {
     ...editor,
@@ -90,16 +106,26 @@ export function removeElement(
   };
 }
 
-// Удаление всех элементов
-export function removeElements() {
-  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
-    index === slideId
-      ? {
-          ...slide,
-          elementList: [],
-        }
-      : slide
-  );
+// Удаление элементов
+export function removeElements(
+  editor: Editor,
+  slideId: number,
+  elementIds: number[]
+) {
+  const { slideList } = editor.presentation;
+  const newSlideList = slideList.map((slide, index) => {
+    if (index === slideId) {
+      const { elementList } = slide;
+      return {
+        ...slide,
+        elementList: elementList.filter(
+          // ???
+          (element, id) => !elementIds.some(() => id)
+        ),
+      };
+    }
+    return slide;
+  });
 
   return {
     ...editor,
@@ -117,18 +143,18 @@ export function moveElement(
   elementId: number,
   newPosition: { x: number; y: number }
 ): Editor {
-  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
-    index === slideId
-      ? {
-          ...slide,
-          elementList: slide.elementList.map((element, index) =>
-            index === elementId
-              ? { ...element, position: newPosition }
-              : element
-          ),
-        }
-      : slide
-  );
+  const { slideList } = editor.presentation;
+
+  const newSlideList = slideList.map((slide, index) => {
+    if (index === slideId) {
+      const { elementList } = slide;
+      const newElementList = elementList.map((element, id) =>
+        id === elementId ? { ...element, position: newPosition } : element
+      );
+      return { ...slide, elementList: newElementList };
+    }
+    return slide;
+  });
 
   return {
     ...editor,
@@ -147,18 +173,20 @@ export function resizeElement(
   newWidth: number,
   newHeight: number
 ): Editor {
-  const newSlideList = editor.presentation.slideList.filter((slide, index) =>
-    index === slideId
-      ? {
-          ...slide,
-          elementList: slide.elementList.map((element, index) =>
-            index === elementId
-              ? { ...element, width: newWidth, height: newHeight }
-              : element
-          ),
-        }
-      : slide
-  );
+  const { slideList } = editor.presentation;
+
+  const newSlideList = slideList.map((slide, index) => {
+    if (index === slideId) {
+      const { elementList } = slide;
+      const newElementList = elementList.map((element, id) =>
+        id === elementId
+          ? { ...element, width: newWidth, height: newHeight }
+          : element
+      );
+      return { ...slide, elementList: newElementList };
+    }
+    return slide;
+  });
 
   return {
     ...editor,

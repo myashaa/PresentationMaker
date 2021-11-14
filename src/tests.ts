@@ -1,10 +1,10 @@
-import {Editor} from "./model/editor/EditorTypes"
-import {PresentationHistory} from "./model/history/HistoryTypes"
-import {Presentation} from "./model/presentation/PresentationTypes"
-import {Slide, Background} from "./model/slide/SlideTypes"
-import * as el from "./model/element/ElementTypes"
-import {Image, Filter} from "./model/image/ImageTypes"
-import { setBackground } from "./model/slide/SlideActions"
+import { Editor } from "./model/editor/EditorTypes";
+import { PresentationHistory } from "./model/history/HistoryTypes";
+import { Presentation } from "./model/presentation/PresentationTypes";
+import { Slide, Background } from "./model/slide/SlideTypes";
+import * as el from "./model/element/ElementTypes";
+import { Image, Filter } from "./model/image/ImageTypes";
+import { setBackground } from "./model/slide/SlideActions";
 
 const initialState: PresentationHistory = {
   index: 0,
@@ -13,7 +13,7 @@ const initialState: PresentationHistory = {
 
 const presentationHistory = [initialState];
 
-const elem1: el.SlideElement = {
+const elem1: el.Element = {
   width: 800,
   heigth: 50,
   position: {
@@ -32,7 +32,7 @@ const elem1: el.SlideElement = {
   },
 };
 
-const elem2: el.SlideElement = {
+const elem2: el.Element = {
   width: 200,
   heigth: 100,
   position: {
@@ -48,7 +48,7 @@ const elem2: el.SlideElement = {
   },
 };
 
-const elem3: el.SlideElement = {
+const elem3: el.Element = {
   width: 50,
   heigth: 50,
   position: {
@@ -62,7 +62,7 @@ const elem3: el.SlideElement = {
     color: "#d5d5d6",
   },
   data: {
-    type: "triangle"
+    type: "triangle",
   },
 };
 
@@ -71,7 +71,7 @@ const slide1: Slide = {
   background: {
     color: "#fff",
     picture: null,
-  }
+  },
 };
 
 const slide2: Slide = {
@@ -85,7 +85,7 @@ const slide2: Slide = {
         colorSelection: "#fff",
       },
     },
-  }
+  },
 };
 
 const slide3: Slide = {
@@ -93,7 +93,7 @@ const slide3: Slide = {
   background: {
     color: "#000",
     picture: null,
-  }
+  },
 };
 
 const slides = [slide1, slide2, slide3];
@@ -111,4 +111,4 @@ export const editor: Editor = {
   presentation: pres,
 };
 
-setBackground(editor, 1, );
+setBackground(editor, 1);

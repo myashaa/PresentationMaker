@@ -1,53 +1,56 @@
+import { Editor } from "../editor/EditorTypes";
+import { Border } from "./ElementTypes";
+
 export function changeElementBorder(
   editor: Editor,
   slideId: number,
   elementId: number,
   border: Border
-): Editor {}
+): Editor {
+  const { presentation } = editor;
+
+  const { slideList } = presentation;
+  const currentSlide = slideList.filter((slide, index) => index === slideId)[0];
+
+  const { elementList } = currentSlide;
+  const newElementList = elementList.map((element, index) =>
+    index === elementId ? { ...element, border } : element
+  );
+
+  return {
+    ...editor,
+    presentation: {
+      ...presentation,
+      slideList: slideList.map((slide, index) =>
+        index === slideId ? { ...slide, elementList: newElementList } : slide
+      ),
+    },
+  };
+}
 
 export function changeElementColor(
   editor: Editor,
   slideId: number,
-  element: SlideElement,
+  elementId: number,
   color: string
-): Editor {}
+): Editor {
+  const { presentation } = editor;
 
-export function setFontFamily(
-  editor: Editor,
-  slideId: number,
-  element: SlideElement,
-  fontFamily: string
-): Editor {}
+  const { slideList } = presentation;
+  const currentSlide = slideList.filter((slide, index) => index === slideId)[0];
 
-export function setFontColor(
-  editor: Editor,
-  slideId: number,
-  element: SlideElement,
-  color: string
-): Editor {}
+  const { elementList } = currentSlide;
+  const newElementList = elementList.map((element, index) =>
+    index === elementId ? { ...element, color } : element
+  );
 
-export function setFontSize(
-  editor: Editor,
-  slideId: number,
-  element: SlideElement,
-  size: number
-): Editor {}
-
-export function setFilter(
-  editor: Editor,
-  slideId: number,
-  element: SlideElement,
-  filter: string
-): Editor {}
-
-export function deleteFilter(
-  editor: Editor,
-  slideId: number,
-  element: SlideElement
-): Editor {}
-
-export function loadImage(
-  editor: Editor,
-  element: SlideElement,
-  image: Image
-): Editor {}
+  return {
+    ...editor,
+    presentation: {
+      ...presentation,
+      slideList: slideList.map((slide, index) =>
+        index === slideId ? { ...slide, elementList: newElementList } : slide
+      ),
+    },
+  };
+}

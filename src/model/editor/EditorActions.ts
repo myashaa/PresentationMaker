@@ -1,22 +1,17 @@
-import {Editor} from "./EditorTypes"
-import {Presentation} from "../presentation/PresentationTypes"
-//import {createSlide} from "../presentation/PresentationActions"
+import { Editor } from "./EditorTypes";
+import { Presentation } from "../presentation/PresentationTypes";
+import { createSlide } from "../presentation/PresentationActions";
 
-export function loadPresentation(file: File): Editor {
+export function loadPresentation(file: File) {
   //TODO: parsing json
   //const newEditor = {};
-
-  return newEditor;
+  // return newEditor;
 }
 
-export function savePresentation(presentation: Presentation) {
+export function savePresentation(presentation: Presentation) {}
 
-}
+export function exportPresentation(presentation: Presentation) {}
 
-export function exportPresentation(presentation: Presentation) {
-
-}
- 
 export function renamePresentation(editor: Editor, name: string): Editor {
   const newEditor: Editor = {
     ...editor,
@@ -26,22 +21,19 @@ export function renamePresentation(editor: Editor, name: string): Editor {
 
   return newEditor;
 }
- 
+
 export function createPresentation(editor: Editor): Editor {
   const newEditor: Editor = {
     ...editor,
+    presentation: {
+      name: "New Presentation",
+      slideList: [],
+      selectedSlidesIds: [],
+      selectedElementIds: [],
+    },
   };
 
-  newEditor.presentation = {
-    name: "New Presentation",
-    slideList: [],
-    selectedSlidesIds: [],
-    selectedElementIds: [],
-  };
-
-  //TODO: newEditor = createSlide(newEditor);
-
-  return newEditor;
+  return createSlide(newEditor);
 }
 
 export function undo(editor: Editor): Editor {
@@ -70,7 +62,6 @@ export function changeMode(editor: Editor, mode: "view" | "edit"): Editor {
   };
 
   newEditor.mode = mode;
-  
+
   return newEditor;
 }
-
