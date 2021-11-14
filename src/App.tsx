@@ -36,14 +36,21 @@ function App({ editor }: AppProps) {
         />
         <MenuBar menu={menu} />
       </Header>
+
       <ActionBar />
+
       <div className="app-content">
         <SidePanel width={300}>
-          <SlideList slides={editor.presentation.slideList} />
+          <SlideList
+            slides={editor.presentation.slideList}
+            selectedSlides={editor.presentation.selectedSlidesIds}
+          />
         </SidePanel>
+
         <EditorContainer>
           <Editor />
         </EditorContainer>
+
         <SidePanel width={300}>
           {/* <TextForm /> */}
           {/* <ImageForm /> */}

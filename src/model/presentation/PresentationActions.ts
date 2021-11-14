@@ -17,6 +17,7 @@ export function createSlide(editor: Editor): Editor {
     presentation: {
       ...presentation,
       slideList: [...slideList, newSlide],
+      selectedSlidesIds: [slideList.length],
     },
   };
 
@@ -64,6 +65,20 @@ export function moveSlide(
     presentation: {
       ...presentation,
       slideList: newSlideList,
+    },
+  };
+
+  return newEditor;
+}
+
+export function selectSlides(editor: Editor, slideIds: number[]): Editor {
+  const { presentation } = editor;
+
+  const newEditor: Editor = {
+    ...editor,
+    presentation: {
+      ...presentation,
+      selectedSlidesIds: slideIds,
     },
   };
 

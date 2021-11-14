@@ -7,7 +7,6 @@
   border: 1px solid #e2e2e2;
   cursor: pointer;
   transition: 100ms;
-  margin-bottom: 16px;
 }
 
 /* .slide-miniature:hover {
@@ -24,4 +23,14 @@
 
 .slidePreview {
   display: flex;
+  margin-left: -24px;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 0 8px 8px 0;
+}
+
+.slidePreviewActive {
+  background-color: #fff2b2;
 }
