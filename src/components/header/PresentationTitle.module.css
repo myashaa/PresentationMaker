@@ -4,10 +4,11 @@
   font-weight: bold;
   margin: 0;
   color: #000;
-  border: 1px solid #e2e2e2;
+  border: 1px solid #fff;
   border-radius: 8px;
   font-family: Montserrat;
   outline: none;
+  transition: 250ms;
 }
 
 .presentationTitle:hover {
@@ -15,5 +16,5 @@
 }
 
 .presentationTitle:focus {
-  border-color: #fff2b2;
+  border-color: #ffdd00;
 }

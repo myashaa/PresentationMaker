@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import styles from "./PresentationTitle.module.css";
 
@@ -9,20 +9,26 @@ type PresentationTitleProps = {
 
 export function PresentationTitle({ title, onSubmit }: PresentationTitleProps) {
   const [value, setValue] = useState(title);
-  const [isAction, setActive] = useState(false);
+  const [isActive, setActive] = useState(false);
 
   return (
     <input
       className={styles.presentationTitle}
-      style={{ borderColor: isAction ? "#fff2b2" : "#FFF" }}
       value={value}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      onFocus={(e) => {
+        setActive(true);
+        e.currentTarget.select();
+      }}
+      onBlur={() => {
+        setActive(false);
+        onSubmit && onSubmit(value);
+      }}
       onChange={(e) => setValue(e.target.value)}
       onKeyPress={(e) => {
         setActive(false);
         if (e.key === "Enter") {
           onSubmit && onSubmit(value);
+          e.currentTarget.blur();
         }
       }}
     />
