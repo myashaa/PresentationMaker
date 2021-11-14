@@ -1,15 +1,36 @@
-import { Image } from "../image/ImageTypes";
-
-export type SlideElement = {
+export type Element = {
   width: number;
-  heigth: number;
+  height: number;
   position: {
     x: number;
     y: number;
   };
   color?: string;
   border?: Border;
-  data: SlideText | Image | Figure;
+  data: Text | Image | Figure;
+};
+
+export type Text = {
+  content: string;
+  font: Font;
+  bold: boolean;
+  italic: boolean;
+  underline: boolean;
+};
+
+export type Font = {
+  family: string;
+  color: string;
+  size: number;
+};
+
+export type Image = {
+  url: string;
+  filter: Filter;
+};
+
+export type Figure = {
+  type: "circle" | "triangle" | "sguare";
 };
 
 export type Border = {
@@ -18,16 +39,7 @@ export type Border = {
   color: string;
 };
 
-export type SlideText = {
-  fontFamily: string;
-  fontColor: string;
-  fontSize: number;
-  bold: boolean;
-  italic: boolean;
-  underline: boolean;
-  content: string;
-};
-
-export type Figure = {
-  type: "circle" | "triangle" | "sguare";
+export type Filter = {
+  blur: number;
+  colorSelection: string;
 };
