@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./SidePanel.style.css";
+import styles from "./SidePanel.module.css";
 
 type SidePanelProps = {
   width?: number;
@@ -9,7 +9,7 @@ type SidePanelProps = {
 
 export function SidePanel({ width = 300, children }: SidePanelProps) {
   return (
-    <div className="app-side-panel" style={{ width: width + "px" }}>
+    <div className={styles.appSidePanel} style={{ width: width + "px" }}>
       {children}
     </div>
   );

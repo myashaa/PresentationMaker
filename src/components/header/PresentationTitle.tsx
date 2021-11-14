@@ -1,11 +1,11 @@
 import React from "react";
 
-import "./PresentationTitle.styles.css";
+import styles from "./PresentationTitle.module.css";
 
 type PresentationTitleProps = {
   title: string;
 };
 
 export function PresentationTitle({ title }: PresentationTitleProps) {
-  return <h1 className="presentation-title">{title}</h1>;
+  return <h1 className={styles.presentationTitle}>{title}</h1>;
 }

@@ -1,7 +1,7 @@
 import { MenuButtonProps } from "./MenuTypes";
 import { MenuPopup } from "./MenuPopup";
 
-import "./MenuButton.styles.css";
+import styles from "./MenuButton.module.css";
 
 export function MenuButton({
   label,
@@ -11,9 +11,9 @@ export function MenuButton({
   onHover,
 }: MenuButtonProps) {
   return (
-    <div className="menu-button-container">
+    <div className={styles.menuButtonContainer}>
       <span
-        className={`menu-button-label ${expand ? "selected" : ""}`}
+        className={expand ? styles.menuButtonLabelSelected : styles.menuButtonLabel}
         onClick={onClick}
         onMouseEnter={onHover}
       >

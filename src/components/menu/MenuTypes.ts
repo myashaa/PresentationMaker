@@ -1,5 +1,6 @@
 export type MenuAction = {
   label: string;
+  icon?: string;
   action?: () => void;
 };
 
@@ -22,6 +23,7 @@ export type MenuButtonProps = {
 
 export type MenuItemProps = {
   label: string;
+  materialIcon?: string;
   actionCallback?: () => void;
 };
 

@@ -1,11 +1,30 @@
 import { MenuItemProps } from "./MenuTypes";
 
-import "./MenuItem.styles.css";
+import styles from "./MenuItem.module.css";
 
-export function MenuItem({ label, actionCallback }: MenuItemProps) {
+export function MenuItem({
+  label,
+  materialIcon,
+  actionCallback,
+}: MenuItemProps) {
   return (
-    <div className="menu-popup-item" onClick={actionCallback}>
-      <span>{label}</span>
+    <div
+      className={label === "" ? styles.menuPopupDivider : styles.menuPopupItem}
+      onClick={actionCallback}
+    >
+      {materialIcon && (
+        <span className="material-icons" style={{ color: "#d2d2d2" }}>
+          {materialIcon}
+        </span>
+      )}
+      {label && (
+        <span
+          className={styles.menuItemLabel}
+          style={{ paddingLeft: !materialIcon ? 34 : 10 }}
+        >
+          {label}
+        </span>
+      )}
     </div>
   );
 }

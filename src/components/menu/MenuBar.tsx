@@ -4,7 +4,7 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { MenuButton } from "./MenuButton";
 import { MenuBarProps } from "./MenuTypes";
 
-import "./MenuBar.styles.css";
+import styles from  "./MenuBar.module.css";
 
 export function MenuBar({ menu }: MenuBarProps) {
   const [menuIndex, setMenuIndex] = useState(-1);
@@ -37,7 +37,7 @@ export function MenuBar({ menu }: MenuBarProps) {
   ));
 
   return (
-    <div ref={menuRef} className="presentation-menu-bar">
+    <div ref={menuRef} className={styles.presentationMenuBar}>
       {menuButtons}
     </div>
   );

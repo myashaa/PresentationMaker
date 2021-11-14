@@ -1,11 +1,11 @@
 import React from "react";
 
-import "./EditorContainer.styles.css";
+import styles from "./EditorContainer.module.css";
 
 type EditorContainerProps = {
   children?: React.ReactNode;
 };
 
 export function EditorContainer({ children }: EditorContainerProps) {
-  return <div className="app-editor-container">{children}</div>;
+  return <div className={styles.appEditorContainer}>{children}</div>;
 }

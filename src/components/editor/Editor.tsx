@@ -1,7 +1,7 @@
 import React from "react";
 
-import "./Editor.styles.css";
+import styles from "./Editor.module.css";
 
 export function Editor() {
-  return <div className="app-editor-view"></div>;
+  return <div className={styles.appEditorView}></div>;
 }
