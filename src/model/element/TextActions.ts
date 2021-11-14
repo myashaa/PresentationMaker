@@ -1,5 +1,5 @@
 import { Editor } from "../editor/EditorTypes";
-import { Text } from "./ElementTypes";
+import { Element, Text } from "./ElementTypes";
 
 export function setFontFamily(
   editor: Editor,
@@ -112,5 +112,28 @@ export function setFontSize(
           : slide
       ),
     },
+  };
+}
+
+export function setText(
+  editor: Editor,
+  slideId: number,
+  elementId: number,
+  content: string
+): Editor {
+  const { slideList } = editor.presentation;
+  const newSlideList = slideList.map((slide, index) => {
+    if (slideId === index) {
+      const { elementList } = slide;
+      const newElementList = elementList.map((el, id) =>
+        id === elementId ? { ...el, data: { ...el.data, content } } : el
+      );
+      return { ...slide, elementList: newElementList };
+    }
+    return slide;
+  });
+  return {
+    ...editor,
+    presentation: { ...editor.presentation, slideList: newSlideList },
   };
 }
