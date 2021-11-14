@@ -1,7 +1,19 @@
 .presentationTitle {
-  padding-left: 8px;
+  padding-left: 7px;
   font-size: 20px;
   font-weight: bold;
   margin: 0;
   color: #000;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  font-family: Montserrat;
+  outline: none;
+}
+
+.presentationTitle:hover {
+  border-color: #e2e2e2;
+}
+
+.presentationTitle:focus {
+  border-color: #fff2b2;
 }

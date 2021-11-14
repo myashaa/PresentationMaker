@@ -16,16 +16,24 @@ import { menu } from "./components/header/Menu";
 import { setPresentationTitle } from "./components/PresentationUtils";
 import { useEffect } from "react";
 import { SlideList } from "./components/slides/SlideList";
+import { dispatch } from "./editor";
 
 type AppProps = {
   editor: EditorType;
 };
 
 function App({ editor }: AppProps) {
+  useEffect(() => {
+    document.title = editor.presentation.name || "Презентация";
+  }, [editor]);
+
   return (
     <div className="app">
       <Header>
-        <PresentationTitle title={editor?.presentation?.name || "Жопа"} />
+        <PresentationTitle
+          title={editor?.presentation?.name || "Жопа"}
+          onSubmit={(title) => setPresentationTitle(title)}
+        />
         <MenuBar menu={menu} />
       </Header>
       <ActionBar />
