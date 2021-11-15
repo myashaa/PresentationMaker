@@ -1,10 +1,10 @@
-import React from "react";
-import { dispatch } from "../../editor";
 import { Text } from "../../model/element/ElementTypes";
-import { createSlide } from "../../model/presentation/PresentationActions";
-import { createElement } from "../../model/slide/SlideActions";
-import { MenuPopup } from "../menu/MenuPopup";
 import { Spacer } from "../Spacer";
+import { ActionButton } from "./ActionButton";
+
+import { dispatch } from "../../editor";
+import { createElement } from "../../model/slide/SlideActions";
+import { createSlide } from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
 
@@ -40,29 +40,5 @@ export function ActionBar() {
       <ActionButton icon="image" label="Добавить изображение" />
       <ActionButton icon="category" label="Добавить фигуру" />
     </div>
-  );
-}
-
-type ActionButtonProps = {
-  label?: string;
-  icon?: string;
-  primary?: boolean;
-  onClick?: () => void;
-};
-
-export function ActionButton({
-  label,
-  icon,
-  primary,
-  onClick,
-}: ActionButtonProps) {
-  return (
-    <button
-      className={primary ? styles.actionButtonPrimary : styles.actionButton}
-      onClick={onClick}
-    >
-      {icon && <span className="material-icons">{icon}</span>}
-      {label && <span className={styles.actionButtonLabel}>{label}</span>}
-    </button>
   );
 }

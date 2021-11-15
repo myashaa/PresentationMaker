@@ -11,6 +11,7 @@ type MiniSlideProps = {
   selected?: boolean;
   onSelect?: () => void;
   onMultiSelect?: () => void;
+  onDelete?: () => void;
 };
 
 export function MiniSlide({
@@ -18,6 +19,7 @@ export function MiniSlide({
   selected,
   onSelect,
   onMultiSelect,
+  onDelete,
   elements,
   background,
 }: MiniSlideProps) {
@@ -35,7 +37,17 @@ export function MiniSlide({
       }}
     >
       <span className={styles.slideIndex}>{index}</span>
-      <div className={styles.slideMiniature}></div>
+      <div className={styles.slideMiniature}>
+        <span
+          className={`${styles.slideRemove} material-icons`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete && onDelete();
+          }}
+        >
+          close
+        </span>
+      </div>
     </div>
   );
 }

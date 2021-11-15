@@ -1,4 +1,3 @@
-import { dispatch } from "../../editor";
 import { setPresentationTitle } from "../PresentationUtils";
 
 export const menu = [

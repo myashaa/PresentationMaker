@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { dispatch } from "../../editor";
-import { selectSlides } from "../../model/presentation/PresentationActions";
+import {
+  deleteSlide,
+  selectSlides,
+} from "../../model/presentation/PresentationActions";
 import { Slide } from "../../model/slide/SlideTypes";
 import { MiniSlide } from "./MiniSlide";
-
-import styles from "./SlideList.module.css";
 
 type SlideListProps = {
   slides?: Slide[];
@@ -12,12 +12,6 @@ type SlideListProps = {
 };
 
 export function SlideList({ slides, selectedSlides }: SlideListProps) {
-  // const selectSlides = (id: number) => {
-  //   if (!selectedSlides.some((i) => i === id)) {
-  //     dispatch(selectSlides, [id]);
-  //   }
-  // };
-
   const slideList = slides?.map((slide, index) => (
     <MiniSlide
       key={index}
@@ -36,6 +30,9 @@ export function SlideList({ slides, selectedSlides }: SlideListProps) {
             selectSlides,
             selectedSlides.filter((id) => id !== index)
           );
+      }}
+      onDelete={() => {
+        dispatch(deleteSlide, index);
       }}
     />
   ));

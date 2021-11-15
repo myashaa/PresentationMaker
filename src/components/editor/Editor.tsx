@@ -1,22 +1,16 @@
-import React from "react";
 import { Slide } from "../../model/slide/SlideTypes";
-import {
-  Element as ElementType,
-  Text,
-  Figure,
-  Image,
-} from "../../model/element/ElementTypes";
+import { Element as ElementType } from "../../model/element/ElementTypes";
 
 import styles from "./Editor.module.css";
 
 type EditorProps = {
-  slide: Slide;
+  slide?: Slide;
 };
 
 export function Editor({ slide }: EditorProps) {
   return (
     <div className={styles.appEditorView}>
-      {slide.elementList.map((element, index) => (
+      {slide?.elementList.map((element, index) => (
         <Element key={index} element={element} />
       ))}
     </div>

@@ -6,7 +6,7 @@ import { Editor } from "./components/editor/Editor";
 import { Editor as EditorType } from "./model/editor/EditorTypes";
 import { PresentationTitle } from "./components/header/PresentationTitle";
 import { MenuBar } from "./components/menu/MenuBar";
-import { menu } from "./components/header/Menu";
+import { menu } from "./components/menu/Menu";
 import { setPresentationTitle } from "./components/PresentationUtils";
 import { useEffect } from "react";
 import { SlideList } from "./components/slides/SlideList";
@@ -46,15 +46,7 @@ function App({ editor }: AppProps) {
         </SidePanel>
 
         <EditorContainer>
-          <Editor
-            slide={
-              slideList.filter(
-                (slide, index) =>
-                  index === selectedSlidesIds[selectedSlidesIds.length - 1] &&
-                  slide
-              )[0]
-            }
-          />
+          <Editor />
         </EditorContainer>
 
         <SidePanel width={300}>
