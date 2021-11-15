@@ -17,7 +17,7 @@ export function Header({ children }: HeaderProps) {
     <div className={styles.header}>
       <img src={Logo} className={styles.appLogo} alt="" />
       <div className={styles.presentationInfo}>
-        <PresentationTitle title="Команда Ю - Демонстрация" />
+        <PresentationTitle title="Команда Ю" />
         <MenuBar menu={menu} />
       </div>
     </div>

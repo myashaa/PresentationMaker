@@ -8,7 +8,7 @@ export function FigureForm({}: FigureFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerForm}`}>category</span>
+        <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
         <span className={styles.headerFormTitle}>Фигура</span>
       </div>
       <FieldInput label={"Высота"} type={"number"} />

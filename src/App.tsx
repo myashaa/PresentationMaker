@@ -9,10 +9,12 @@ import { MiniSlide } from "./components/slides/MiniSlide";
 import { TextForm } from "./components/elements/TextForm";
 import { ImageForm } from "./components/elements/ImageForm";
 import { FigureForm } from "./components/elements/FigureForm";
+import { Popup } from "./components/popup/Popup";
 
 function App() {
   return (
     <div className="app">
+      <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} />
       <Header />
       <ActionBar />
       <div className="app-content">
@@ -36,9 +38,9 @@ function App() {
           <Editor />
         </EditorContainer>
         <SidePanel width={300}>
-          <TextForm />
+          {/* <TextForm /> */}
           {/* <ImageForm /> */}
-          {/* <FigureForm /> */}
+          <FigureForm />
         </SidePanel>
       </div>
     </div>
