@@ -15,8 +15,8 @@ function addChangeHandler(handler: Function) {
   editorChangeHandler = handler;
 }
 
-function dispatch(modify: Function, payload: Object) {
-  const newEditor = modify(editor, payload);
+function dispatch(modify: Function, ...payload: any) {
+  const newEditor = modify(editor, ...payload);
   setEditor(newEditor);
 
   if (editorChangeHandler) {

@@ -14,11 +14,11 @@ function savePresentation(presentation) {}
  */
 function exportPresentation(presentation) {}
 
- /**
-  * @param { Editor } editor
-  * @param { string } name
-  * @return { Editor }
-  */
+/**
+ * @param { Editor } editor
+ * @param { string } name
+ * @return { Editor }
+ */
 function renamePresentation(editor, name) {}
 
 /**

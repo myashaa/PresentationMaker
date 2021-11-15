@@ -1,14 +1,8 @@
 import { Header } from "./components/header/Header";
 import { SidePanel } from "./components/SidePanel";
 import { EditorContainer } from "./components/EditorContainer";
-
-import "./App.css";
 import { ActionBar } from "./components/actions/ActionBar";
 import { Editor } from "./components/editor/Editor";
-import { MiniSlide } from "./components/slides/MiniSlide";
-import { TextForm } from "./components/elements/TextForm";
-import { ImageForm } from "./components/elements/ImageForm";
-import { FigureForm } from "./components/elements/FigureForm";
 import { Editor as EditorType } from "./model/editor/EditorTypes";
 import { PresentationTitle } from "./components/header/PresentationTitle";
 import { MenuBar } from "./components/menu/MenuBar";
@@ -16,7 +10,8 @@ import { menu } from "./components/header/Menu";
 import { setPresentationTitle } from "./components/PresentationUtils";
 import { useEffect } from "react";
 import { SlideList } from "./components/slides/SlideList";
-import { dispatch } from "./editor";
+
+import "./App.css";
 
 type AppProps = {
   editor: EditorType;
@@ -25,7 +20,10 @@ type AppProps = {
 function App({ editor }: AppProps) {
   useEffect(() => {
     document.title = editor.presentation.name || "Презентация";
+    console.log(editor);
   }, [editor]);
+
+  const { slideList, selectedSlidesIds } = editor.presentation;
 
   return (
     <div className="app">
@@ -48,7 +46,15 @@ function App({ editor }: AppProps) {
         </SidePanel>
 
         <EditorContainer>
-          <Editor />
+          <Editor
+            slide={
+              slideList.filter(
+                (slide, index) =>
+                  index === selectedSlidesIds[selectedSlidesIds.length - 1] &&
+                  slide
+              )[0]
+            }
+          />
         </EditorContainer>
 
         <SidePanel width={300}>

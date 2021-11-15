@@ -13,9 +13,9 @@ export type Element = {
 export type Text = {
   content: string;
   font: Font;
-  bold: boolean;
-  italic: boolean;
-  underline: boolean;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
 };
 
 export type Font = {
