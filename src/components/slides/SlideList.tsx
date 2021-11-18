@@ -33,12 +33,7 @@ export function SlideList({ slides, selectedSlides }: SlideListProps) {
           );
       }}
       onDelete={() => {
-        if (selectedSlides.length > 1) {
-          dispatch(deleteSlides, selectedSlides);
-          console.log("multidelete", selectedSlides);
-        } else {
-          dispatch(deleteSlide, index);
-        }
+        dispatch(deleteSlides, selectedSlides);
       }}
     />
   ));

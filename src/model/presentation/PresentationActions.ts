@@ -6,6 +6,7 @@ export function createSlide(editor: Editor): Editor {
   const { slideList } = presentation;
 
   const newSlide: Slide = {
+    id: editor.presentation.slideList.length,
     elementList: [],
     background: {
       color: "#FFFFFF",
@@ -48,10 +49,9 @@ export function deleteSlides(editor: Editor, slideIds: number[]): Editor {
   const { slideList } = presentation;
 
   const newSlideList = slideList.filter(
-    (slide, index) => slideIds.some((id) => id === index) && slide
+    (slide, index) => !slideIds.sort().some((id) => id === index) && slide
   );
-  console.log("slideList", slideList);
-  console.log("newSlideList", newSlideList);
+  console.log(slideIds, newSlideList);
 
   const newEditor: Editor = {
     ...editor,
