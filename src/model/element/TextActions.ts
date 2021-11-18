@@ -1,4 +1,5 @@
 import { Editor } from "../editor/EditorTypes";
+import { Slide } from "../slide/SlideTypes";
 import { Element, Text } from "./ElementTypes";
 
 export function setFontFamily(
@@ -19,8 +20,8 @@ export function setFontFamily(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.data as Text;
-  const elementFont = { ...elementData.font, family: fontFamily };
+  const elementData = currentElement.text;
+  const elementFont = { ...elementData?.font, family: fontFamily };
   const newElement = {
     ...currentElement,
     data: { ...elementData, font: elementFont },
@@ -57,8 +58,8 @@ export function setFontColor(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.data as Text;
-  const elementFont = { ...elementData.font, color };
+  const elementData = currentElement.text;
+  const elementFont = { ...elementData?.font, color };
   const newElement = {
     ...currentElement,
     data: { ...elementData, font: elementFont },
@@ -95,8 +96,8 @@ export function setFontSize(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.data as Text;
-  const elementFont = { ...elementData.font, size };
+  const elementData = currentElement.text;
+  const elementFont = { ...elementData?.font, size };
   const newElement = {
     ...currentElement,
     data: { ...elementData, font: elementFont },
@@ -122,12 +123,15 @@ export function setText(
   content: string
 ): Editor {
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide, index) => {
+  const newSlideList: Slide[] = slideList.map((slide, index) => {
     if (slideId === index) {
       const { elementList } = slide;
-      const newElementList = elementList.map((el, id) =>
-        id === elementId ? { ...el, data: { ...el.data, content } } : el
-      );
+      const newElementList: Element[] = elementList.map((element, id) => {
+        if (id === elementId) {
+          return { ...element, content: content || "" };
+        }
+        return element;
+      });
       return { ...slide, elementList: newElementList };
     }
     return slide;

@@ -1,3 +1,4 @@
+import { random } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Element } from "../element/ElementTypes";
 import { Figure, Text, Image } from "../element/ElementTypes";
@@ -50,14 +51,18 @@ export function clearBackground(editor: Editor, slideId: number): Editor {
 export function createElement(
   editor: Editor,
   slideId: number,
-  element: Text | Image | Figure
+  text?: Text,
+  image?: Image,
+  figure?: Figure
 ): Editor {
   const newElement: Element = {
-    width: 100,
-    height: 100,
-    position: { x: 0, y: 0 },
+    width: -1,
+    height: -1,
+    position: { x: random(0, 640), y: random(0, 480) },
     color: "#FFFFFF",
-    data: element,
+    figure,
+    image,
+    text,
   };
 
   const { slideList } = editor.presentation;

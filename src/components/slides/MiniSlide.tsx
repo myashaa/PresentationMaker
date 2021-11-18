@@ -1,11 +1,12 @@
 import React, { MouseEvent } from "react";
-import { Element } from "../../model/element/ElementTypes";
+import { Element as ElementType } from "../../model/element/ElementTypes";
 import { Background } from "../../model/slide/SlideTypes";
+import { Element } from "../editor/Editor";
 
 import styles from "./MiniSlide.module.css";
 
 type MiniSlideProps = {
-  elements?: Element[];
+  elements?: ElementType[];
   background?: Background;
   index?: number;
   selected?: boolean;
@@ -47,6 +48,12 @@ export function MiniSlide({
         >
           close
         </span>
+        <div className={styles.slidePreviewMini}>
+          {elements &&
+            elements.map((element, index) => (
+              <Element key={index} element={element} />
+            ))}
+        </div>
       </div>
     </div>
   );

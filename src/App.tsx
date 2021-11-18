@@ -30,6 +30,7 @@ function App({ editor }: AppProps) {
 
         <EditorContainer>
           <Editor
+            slideId={selectedSlidesIds[selectedSlidesIds.length - 1]}
             slide={slideList[selectedSlidesIds[selectedSlidesIds.length - 1]]}
             selectedElements={selectedElementIds}
           />

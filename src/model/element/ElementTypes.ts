@@ -7,7 +7,10 @@ export type Element = {
   };
   color?: string;
   border?: Border;
-  data: Text | Image | Figure;
+  // data: Text | Image | Figure;
+  text?: Text;
+  image?: Image;
+  figure?: Figure;
 };
 
 export type Text = {
