@@ -196,3 +196,17 @@ export function resizeElement(
     },
   };
 }
+
+export function selectElements(editor: Editor, elementsIds: number[]): Editor {
+  const { presentation } = editor;
+
+  const newEditor: Editor = {
+    ...editor,
+    presentation: {
+      ...presentation,
+      selectedElementIds: elementsIds,
+    },
+  };
+
+  return newEditor;
+}

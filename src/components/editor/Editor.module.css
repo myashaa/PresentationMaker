@@ -13,5 +13,17 @@
 
 .element {
   position: absolute;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 250ms;
+  border: 1px solid #fff;
+}
+
+.element:hover {
   border: 1px solid #f2f2f2;
+  transition: 250ms;
+}
+
+.element.selected {
+  border-color: #ffdd00;
 }

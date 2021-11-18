@@ -8,7 +8,11 @@ import { createSlide } from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
 
-export function ActionBar() {
+type ActionBarProps = {
+  selectedSlide: number;
+};
+
+export function ActionBar({ selectedSlide }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
       <ActionButton
@@ -33,7 +37,7 @@ export function ActionBar() {
               color: "#000",
             },
           };
-          dispatch(createElement, 0, newText);
+          dispatch(createElement, selectedSlide, newText);
         }}
       />
       <ActionButton icon="image" />
