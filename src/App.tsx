@@ -4,11 +4,6 @@ import { EditorContainer } from "./components/EditorContainer";
 import { ActionBar } from "./components/actions/ActionBar";
 import { Editor } from "./components/editor/Editor";
 import { Editor as EditorType } from "./model/editor/EditorTypes";
-import { PresentationTitle } from "./components/header/PresentationTitle";
-import { MenuBar } from "./components/menu/MenuBar";
-import { menu } from "./components/menu/Menu";
-import { setPresentationTitle } from "./components/PresentationUtils";
-import { useEffect } from "react";
 import { SlideList } from "./components/slides/SlideList";
 
 import "./App.css";
@@ -18,23 +13,9 @@ type AppProps = {
 };
 
 function App({ editor }: AppProps) {
-  useEffect(() => {
-    document.title = editor.presentation.name || "Презентация";
-    console.log(editor);
-  }, [editor]);
-
-  const { slideList, selectedSlidesIds } = editor.presentation;
-
   return (
     <div className="app">
-      <Header>
-        <PresentationTitle
-          title={editor?.presentation?.name || "Жопа"}
-          onSubmit={(title) => setPresentationTitle(title)}
-        />
-        <MenuBar menu={menu} />
-      </Header>
-
+      <Header title={editor.presentation.name} />
       <ActionBar />
 
       <div className="app-content">
@@ -49,11 +30,7 @@ function App({ editor }: AppProps) {
           <Editor />
         </EditorContainer>
 
-        <SidePanel width={300}>
-          {/* <TextForm /> */}
-          {/* <ImageForm /> */}
-          {/* <FigureForm /> */}
-        </SidePanel>
+        <SidePanel width={300}></SidePanel>
       </div>
     </div>
   );

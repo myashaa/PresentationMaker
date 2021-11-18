@@ -1,6 +1,7 @@
 import { dispatch } from "../../editor";
 import {
   deleteSlide,
+  deleteSlides,
   selectSlides,
 } from "../../model/presentation/PresentationActions";
 import { Slide } from "../../model/slide/SlideTypes";
@@ -32,7 +33,12 @@ export function SlideList({ slides, selectedSlides }: SlideListProps) {
           );
       }}
       onDelete={() => {
-        dispatch(deleteSlide, index);
+        if (selectedSlides.length > 1) {
+          dispatch(deleteSlides, selectedSlides);
+          console.log("multidelete", selectedSlides);
+        } else {
+          dispatch(deleteSlide, index);
+        }
       }}
     />
   ));

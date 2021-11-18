@@ -21,10 +21,9 @@ export function ActionBar() {
       />
       <ActionButton icon="undo" />
       <ActionButton icon="redo" />
-      <Spacer width={60} />
+
       <ActionButton
         icon="title"
-        label="Добавить текст"
         onClick={() => {
           const newText: Text = {
             content: "Sample Text",
@@ -37,8 +36,8 @@ export function ActionBar() {
           dispatch(createElement, 0, newText);
         }}
       />
-      <ActionButton icon="image" label="Добавить изображение" />
-      <ActionButton icon="category" label="Добавить фигуру" />
+      <ActionButton icon="image" />
+      <ActionButton icon="category" />
     </div>
   );
 }

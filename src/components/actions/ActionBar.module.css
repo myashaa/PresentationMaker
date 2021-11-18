@@ -1,7 +1,13 @@
 .appActionBar {
   display: flex;
   align-items: center;
-  padding: 12px 24px;
+  padding: 8px 24px;
   background-color: #fff;
   border-bottom: 1px solid #e2e2e2;
+}
+
+.appActions {
+  flex: 1;
+  justify-content: center;
+  display: flex;
 }

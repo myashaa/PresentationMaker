@@ -30,10 +30,10 @@
   color: #000;
 }
 
-/* .slide-miniature:hover {
-  transform: translateY(-2px);
-  transition: 100ms;
-} */
+.slide-miniature:hover {
+  transform: translateX(-3px);
+  transition: 250ms;
+}
 
 .slideIndex {
   font-size: 12px;
@@ -46,12 +46,13 @@
   display: flex;
   margin-left: -24px;
   padding-left: 24px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding-top: 8px;
   padding-bottom: 8px;
   border-radius: 0 8px 8px 0;
+  padding-right: 8px;
 }
 
 .slidePreviewActive {
-  background-color: #fff2b2;
+  background-color: #fff6ca;
 }

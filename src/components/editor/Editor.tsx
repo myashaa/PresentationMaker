@@ -5,15 +5,33 @@ import styles from "./Editor.module.css";
 
 type EditorProps = {
   slide?: Slide;
+  empty?: boolean;
 };
 
-export function Editor({ slide }: EditorProps) {
+export function Editor({ slide, empty }: EditorProps) {
   return (
-    <div className={styles.appEditorView}>
-      {slide?.elementList.map((element, index) => (
-        <Element key={index} element={element} />
-      ))}
-    </div>
+    <>
+      {!empty && (
+        <div className={styles.appEditorView}>
+          {slide?.elementList.map((element, index) => (
+            <Element key={index} element={element} />
+          ))}
+        </div>
+      )}
+      {empty && (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p style={{ color: "#acacac" }}>Создайте или выберите слайд</p>
+        </div>
+      )}
+    </>
   );
 }
 

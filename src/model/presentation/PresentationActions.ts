@@ -43,6 +43,27 @@ export function deleteSlide(editor: Editor, slideId: number): Editor {
   return newEditor;
 }
 
+export function deleteSlides(editor: Editor, slideIds: number[]): Editor {
+  const { presentation } = editor;
+  const { slideList } = presentation;
+
+  const newSlideList = slideList.filter(
+    (slide, index) => slideIds.some((id) => id === index) && slide
+  );
+  console.log("slideList", slideList);
+  console.log("newSlideList", newSlideList);
+
+  const newEditor: Editor = {
+    ...editor,
+    presentation: {
+      ...presentation,
+      slideList: newSlideList,
+    },
+  };
+
+  return newEditor;
+}
+
 export function moveSlide(
   editor: Editor,
   indexFrom: number,
