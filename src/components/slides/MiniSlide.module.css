@@ -7,6 +7,18 @@
   border: 1px solid #e2e2e2;
   cursor: pointer;
   transition: 100ms;
+  margin-bottom: 16px;
+  margin-left: 20px;
+}
+
+/* .slide-miniature:hover {
+  transform: translateY(-2px);
+  transition: 100ms;
+} */
+
+.slideMiniature:hover {
+  box-shadow: -50px 0px rgba(255, 242, 178, 0.3);
+  border: 1px solid #f3c873;
   position: relative;
   display: flex;
 }

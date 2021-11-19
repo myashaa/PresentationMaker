@@ -9,7 +9,7 @@ export function TextForm({}: TextFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
-        <span className="material-icons {styles.headerFormIcon}">title</span>
+        <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
         <span className={styles.headerFormTitle}>Текст</span>
       </div>
       <FieldInput label={"Высота"} type={"number"} />
