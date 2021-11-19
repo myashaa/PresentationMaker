@@ -1,5 +1,4 @@
 import { Text } from "../../model/element/ElementTypes";
-import { Spacer } from "../Spacer";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";
@@ -15,33 +14,36 @@ type ActionBarProps = {
 export function ActionBar({ selectedSlide }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
-      <ActionButton
-        icon="add_to_photos"
-        label="Добавить слайд"
-        primary
-        onClick={() => {
-          dispatch(createSlide, {});
-        }}
-      />
-      <ActionButton icon="undo" />
-      <ActionButton icon="redo" />
-
-      <ActionButton
-        icon="title"
-        onClick={() => {
-          const newText: Text = {
-            content: "Sample Text",
-            font: {
-              family: "Montserrat",
-              size: 16,
-              color: "#000",
-            },
-          };
-          dispatch(createElement, selectedSlide, newText);
-        }}
-      />
-      <ActionButton icon="image" />
-      <ActionButton icon="category" />
+      <div className={styles.appActions}>
+        <ActionButton
+          icon="add_to_photos"
+          label="Добавить слайд"
+          primary
+          onClick={() => {
+            dispatch(createSlide, {});
+          }}
+        />
+        <ActionButton icon="undo" />
+        <ActionButton icon="redo" />
+      </div>
+      <div className={`${styles.appActions} ${styles.appActionsRigth}`}>
+        <ActionButton
+          icon="title"
+          onClick={() => {
+            const newText: Text = {
+              content: "Sample Text",
+              font: {
+                family: "Montserrat",
+                size: 16,
+                color: "#000",
+              },
+            };
+            dispatch(createElement, selectedSlide, newText);
+          }}
+        />
+        <ActionButton icon="image" />
+        <ActionButton icon="category" />
+      </div>
     </div>
   );
 }

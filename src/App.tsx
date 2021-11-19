@@ -43,9 +43,9 @@ function App({ editor }: AppProps) {
         </EditorContainer>
 
         <SidePanel width={300}>
-          {/* <TextForm /> */}
+          <TextForm />
           {/* <ImageForm /> */}
-          <FigureForm />
+          {/* <FigureForm /> */}
         </SidePanel>
       </div>
     </div>
