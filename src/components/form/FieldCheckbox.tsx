@@ -1,23 +1,20 @@
-import styles from "./Field.module.css";
+import { CheckBox } from "./CheckBox";
+import { Field } from "./Field";
 
 type FieldCheckboxProps = {
   label?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  checked?: boolean;
+  onChange?: () => void;
 };
 
-export function FieldCheckbox({ label, value, onChange }: FieldCheckboxProps) {
+export function FieldCheckbox({
+  label,
+  checked,
+  onChange,
+}: FieldCheckboxProps) {
   return (
-    <div className={styles.field}>
-      <span className={styles.fieldLabel}>{label}</span>
-      <div className={styles.fieldValue}>
-        <input
-          className={styles.fieldCheckbox}
-          type= "checkbox"
-          value={value}
-          onChange={(e) => onChange && onChange(e.target.value)}
-        />
-      </div>
-    </div>
+    <Field label={label}>
+      <CheckBox checked={checked} onChecked={onChange} />
+    </Field>
   );
 }

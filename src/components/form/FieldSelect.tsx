@@ -1,3 +1,4 @@
+import { Field } from "./Field";
 import styles from "./Field.module.css";
 
 type FieldSelectProps = {
@@ -7,13 +8,13 @@ type FieldSelectProps = {
 
 export function FieldSelect({ label, items }: FieldSelectProps) {
   return (
-    <div className={styles.field}>
-      <span className={styles.fieldLabel}>{label}</span>
+    <Field label={label}>
       <select className={styles.fielSelect}>
+        <option>Не выбрано</option>
         {items?.map((item, index) => (
           <option key={index}>{item}</option>
         ))}
       </select>
-    </div>
+    </Field>
   );
 }
