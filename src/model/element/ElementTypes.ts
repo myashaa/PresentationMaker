@@ -7,15 +7,18 @@ export type Element = {
   };
   color?: string;
   border?: Border;
-  data: Text | Image | Figure;
+  // data: Text | Image | Figure;
+  text?: Text;
+  image?: Image;
+  figure?: Figure;
 };
 
 export type Text = {
   content: string;
   font: Font;
-  bold: boolean;
-  italic: boolean;
-  underline: boolean;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
 };
 
 export type Font = {

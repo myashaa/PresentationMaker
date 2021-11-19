@@ -1,14 +1,38 @@
+import { dispatch } from "../../editor";
+import { loadPresentation } from "../../model/editor/EditorActions";
+import { setPresentationTitle } from "../PresentationUtils";
+
 export const menu = [
   {
     label: "Презентация",
     actions: [
       { icon: "create_new_folder", label: "Создать" },
-      { icon: "folder_open", label: "Открыть" },
+      {
+        icon: "folder_open",
+        label: "Открыть",
+        action: () => {
+          // ...
+          const fileInputNode = document.createElement("input");
+          fileInputNode.type = "file";
+          fileInputNode.click();
+          fileInputNode.addEventListener("change", () => {
+            console.log(fileInputNode.files?.[0]);
+            loadPresentation(fileInputNode.files?.[0]);
+          });
+        },
+      },
       { label: "" },
       { icon: "download_for_offline", label: "Сохранить" },
       { icon: "downloading", label: "Сохранить как" },
       { label: "" },
-      { icon: "edit", label: "Переименовать" },
+      {
+        icon: "edit",
+        label: "Переименовать",
+        action: () => {
+          const title = prompt("Введите название");
+          setPresentationTitle(title || "Untitled");
+        },
+      },
     ],
   },
   {
