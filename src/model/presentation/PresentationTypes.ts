@@ -1,4 +1,4 @@
-import { Slide } from "../slide/types";
+import { Slide } from "../slide/SlideTypes";
 
 export type Presentation = {
   name: string;

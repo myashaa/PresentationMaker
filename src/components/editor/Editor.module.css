@@ -8,4 +8,33 @@
   overflow: hidden;
   border: 1px solid #e2e2e2;
   box-shadow: 0 4px 8px rgb(0 0 0 / 6%);
+  position: relative;
+}
+
+.element {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 250ms;
+  border: 1px solid #fff;
+  padding: 10px;
+}
+
+.element p {
+  margin: 0;
+}
+
+.element:hover {
+  border: 1px solid #f2f2f2;
+  transition: 250ms;
+}
+
+.element.selected {
+  border-color: #ffdd00;
+}
+
+.selection {
+  background-color: rgba(255, 221, 0, 0.2);
+  border: 1px solid #ffdd00;
+  position: absolute;
 }

@@ -1,23 +1,25 @@
-import React from "react";
+import { MenuBar } from "../menu/MenuBar";
+import { PresentationTitle } from "./PresentationTitle";
+import { menu } from "../menu/Menu";
+import { setPresentationTitle } from "../PresentationUtils";
+
+import Logo from "../../assets/icons/logo.svg";
 
 import styles from "./Header.module.css";
 
-import Logo from "../../logo.svg";
-import { MenuBar } from "../menu/MenuBar";
-import { PresentationTitle } from "../header/PresentationTitle";
-
-import { menu } from "./Menu";
-
 type HeaderProps = {
-  children?: React.ReactNode;
+  title?: string;
 };
 
-export function Header({ children }: HeaderProps) {
+export function Header({ title }: HeaderProps) {
   return (
     <div className={styles.header}>
       <img src={Logo} className={styles.appLogo} alt="" />
       <div className={styles.presentationInfo}>
-        <PresentationTitle title="Команда Ю" />
+        <PresentationTitle
+          title={title || "Без имени"}
+          onSubmit={(title) => setPresentationTitle(title)}
+        />
         <MenuBar menu={menu} />
       </div>
     </div>

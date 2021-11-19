@@ -7,4 +7,5 @@
   padding: 8px 0px;
   min-width: 300px;
   transition: 100ms;
+  z-index: 999;
 }

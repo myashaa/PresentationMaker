@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src: local("Montserrat"),
-    url(./fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+    url(./assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
 }
 
 @font-face {
@@ -9,7 +9,7 @@
   font-style: normal;
   font-weight: 400;
   src: local("Material Icons"), local("MaterialIcons"),
-    url(./fonts/MaterialIcons.ttf) format("truetype");
+    url(./assets/fonts/MaterialIcons.ttf) format("truetype");
 }
 
 body {

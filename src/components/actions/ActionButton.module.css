@@ -1,0 +1,44 @@
+.actionButton {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #fafafa;
+  font-size: 14px;
+  color: #888888;
+  font-family: "Montserrat";
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 250ms;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.actionButton:hover {
+  background-color: #f2f2f2;
+  transition: 250ms;
+}
+
+.actionButton:active {
+  transform: scaleX(0.97) scaleY(0.97);
+}
+
+.actionButtonPrimary {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Montserrat";
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 250ms;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #fff2b2;
+  color: #69623b;
+}
+
+.actionButtonLabel {
+  margin-left: 8px;
+}
