@@ -1,0 +1,10 @@
+.sidePanel {
+  width: 300px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-top: 0;
+  border-bottom: 0;
+  padding: 30px;
+  overflow: auto;
+}
