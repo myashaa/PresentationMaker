@@ -3,15 +3,13 @@ import { Presentation } from "../presentation/PresentationTypes";
 import { createSlide } from "../presentation/PresentationActions";
 
 export function loadPresentation(file?: File) {
-  console.log("file", file);
-  const dataStr = window.URL.createObjectURL(file);
-  console.log("data", dataStr);
+  // console.log("file", file);
+  // const dataStr = window.URL.createObjectURL(file);
+  // console.log("data", dataStr);
   // let presentation = {};
-
   // fetch(filePath)
   //   .then((response) => response.json())
   //   .then((json) => (presentation = JSON.parse(json)));
-
   // return presentation;
 }
 
