@@ -208,3 +208,9 @@ function undo(editor) {}
  * @return { Editor }
  */
 function redo(editor) {}
+
+/**
+ * @param { Editor } editor
+ * @return { Editor }
+ */
+function updateHistory(editor) {}
