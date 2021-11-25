@@ -7,6 +7,9 @@ import { SlidesPanel } from "./components/editor/SlidesPanel";
 import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
+import { useEffect } from "react";
+import { dispatch } from "./editor";
+import { updateHistory } from "./model/editor/EditorActions";
 
 type AppProps = {
   editor: EditorType;
@@ -16,12 +19,18 @@ function App({ editor }: AppProps) {
   const { slideList, name, selectedSlidesIds, selectedElementIds } =
     editor.presentation;
 
+    useEffect(() => {
+
+      console.log(editor)
+    }, [editor])
+
   return (
     <div className="app">
       {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} /> */}
       <Header title={name} />
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
+        editor={editor}
       />
 
       <div className="app-content">
