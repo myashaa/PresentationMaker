@@ -3,6 +3,6 @@ import { Presentation } from "../presentation/PresentationTypes";
 
 export type Editor = {
   mode: "view" | "edit";
-  history: PresentationHistory[];
+  history: PresentationHistory;
   presentation: Presentation;
 };
