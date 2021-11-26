@@ -6,44 +6,55 @@ import { createElement } from "../../model/slide/SlideActions";
 import { createSlide } from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
+import { Editor } from "../../model/editor/EditorTypes";
+import { undo, redo, updateHistory } from "../../model/editor/EditorActions";
 
 type ActionBarProps = {
   selectedSlide: number;
+  editor: Editor;
 };
 
-export function ActionBar({ selectedSlide }: ActionBarProps) {
+export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
-      <div className={styles.appActions}>
-        <ActionButton
-          icon="add_to_photos"
-          label="Добавить слайд"
-          primary
-          onClick={() => {
-            dispatch(createSlide, {});
-          }}
+      <ActionButton
+        icon="add_to_photos"
+        label="Добавить слайд"
+        primary
+        onClick={() => {
+          dispatch(createSlide, {});
+          dispatch(updateHistory, editor);
+        }}
+      />
+      <ActionButton 
+        icon="undo" 
+        onClick={() => {
+          dispatch(undo, editor);
+        }}
         />
-        <ActionButton icon="undo" />
-        <ActionButton icon="redo" />
-      </div>
-      <div className={`${styles.appActions} ${styles.appActionsRigth}`}>
-        <ActionButton
-          icon="title"
-          onClick={() => {
-            const newText: Text = {
-              content: "Sample Text",
-              font: {
-                family: "Montserrat",
-                size: 16,
-                color: "#000",
-              },
-            };
-            dispatch(createElement, selectedSlide, newText);
-          }}
-        />
-        <ActionButton icon="image" />
-        <ActionButton icon="category" />
-      </div>
+      <ActionButton 
+        icon="redo" 
+        onClick={() => {
+          dispatch(redo, editor);
+        }}
+      />
+
+      <ActionButton
+        icon="title"
+        onClick={() => {
+          const newText: Text = {
+            content: "Sample Text",
+            font: {
+              family: "Montserrat",
+              size: 16,
+              color: "#000",
+            },
+          };
+          dispatch(createElement, selectedSlide, newText);
+        }}
+      />
+      <ActionButton icon="image" />
+      <ActionButton icon="category" />
     </div>
   );
 }

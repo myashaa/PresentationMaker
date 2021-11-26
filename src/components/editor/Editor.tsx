@@ -20,7 +20,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
 
   return (
-    <>
+    <div className={styles.appEditorContainer}>
       {slide && (
         <div
           className={styles.appEditorView}
@@ -65,7 +65,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           <p style={{ color: "#acacac" }}>Создайте или выберите слайд</p>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
