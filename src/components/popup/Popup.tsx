@@ -1,4 +1,5 @@
 import styles from "./Popup.module.css";
+import Image from "../../assets/cat.png"
 
 type PopupProps = {
   title?: string;
@@ -16,6 +17,7 @@ export function Popup({ title, text }: PopupProps) {
           <button className={styles.button}>Сохранить</button>
           <button className={styles.button}>Отменить</button>
         </div>
+        <img src={Image} className={styles.image} />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { setText } from "../../model/element/TextActions";
+import Image from "../../assets/cat.png"
 
 type EditorProps = {
   slide?: Slide;
@@ -55,10 +56,12 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
             width: "100%",
             height: "100%",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
+          <img src={Image} className={styles.image} />
           <p style={{ color: "#acacac" }}>Создайте или выберите слайд</p>
         </div>
       )}

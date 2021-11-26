@@ -1,5 +1,4 @@
 import { Text } from "../../model/element/ElementTypes";
-import { Spacer } from "../Spacer";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";

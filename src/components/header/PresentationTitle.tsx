@@ -7,6 +7,7 @@ type PresentationTitleProps = {
   onSubmit?: (value: string) => void;
 };
 
+// не выносит субмит
 export function PresentationTitle({ title, onSubmit }: PresentationTitleProps) {
   const [value, setValue] = useState(title);
   const [isActive, setActive] = useState(false);

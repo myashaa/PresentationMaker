@@ -23,7 +23,7 @@ export const menu = [
       },
       { label: "" },
       { icon: "download_for_offline", label: "Сохранить" },
-      { icon: "downloading", label: "Сохранить как" },
+      { icon: "downloading", label: "Сохранить как pdf" },
       { label: "" },
       {
         icon: "edit",
