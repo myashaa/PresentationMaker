@@ -1,4 +1,5 @@
 export type Element = {
+  id: number;
   width: number;
   height: number;
   position: {
