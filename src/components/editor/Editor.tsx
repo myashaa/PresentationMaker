@@ -1,12 +1,10 @@
 import { Slide } from "../../model/slide/SlideTypes";
-import { Element as ElementType, Text } from "../../model/element/ElementTypes";
 
 import styles from "./Editor.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
-import { setText } from "../../model/element/TextActions";
+import { SlideElement } from "./SlideElement";
 
 type EditorProps = {
   slide?: Slide;
@@ -34,7 +32,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           onMouseUp={() => setSelection(false)}
         >
           {slide?.elementList.map((element, index) => (
-            <Element
+            <SlideElement
               key={index}
               id={index}
               slideId={slideId}
@@ -61,56 +59,6 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
         >
           <p style={{ color: "#acacac" }}>Создайте или выберите слайд</p>
         </div>
-      )}
-    </div>
-  );
-}
-
-type ElementProps = {
-  slideId?: number;
-  id?: number;
-
-  element: ElementType;
-  selected?: boolean;
-  onClick?: (onCtrl?: boolean) => void;
-};
-
-export function Element({
-  element,
-  selected,
-  id,
-  slideId,
-  onClick,
-}: ElementProps) {
-  const [isEditMode, setEditMode] = useState(false);
-
-  return (
-    <div
-      className={`${styles.element} ${selected && styles.selected}`}
-      style={{
-        width: element.width < 0 ? "auto" : element.width,
-        height: element.height < 0 ? "auto" : element.height,
-        top: element.position.y,
-        left: element.position.x,
-      }}
-      onClick={(event) => {
-        event.stopPropagation();
-        onClick && onClick(event.ctrlKey);
-      }}
-    >
-      {element?.text && (
-        <p
-          onDoubleClick={() => setEditMode(true)}
-          contentEditable={isEditMode}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              dispatch(setText, slideId, id, "e.");
-              setEditMode(false);
-            }
-          }}
-        >
-          {element?.text?.content}
-        </p>
       )}
     </div>
   );
