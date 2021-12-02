@@ -26,9 +26,3 @@
   border: 1px solid #ffdd00;
   position: absolute;
 }
-
-.image {
-  width: 150px;
-  height: auto;
-  filter: opacity(0.4);
-}

@@ -39,6 +39,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           {elements}
         </div>
       )}
+
       {!slide && <Empty text="Выберите или создайте слайд" />}
     </div>
   );
