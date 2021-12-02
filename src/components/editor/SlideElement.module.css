@@ -10,6 +10,7 @@
 .element p {
   margin: 0;
   outline: none;
+  overflow: hidden;
 }
 
 .element:hover {
