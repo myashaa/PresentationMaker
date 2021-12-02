@@ -27,24 +27,24 @@ function App({ editor }: AppProps) {
   return (
     <div className="app">
       {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} /> */}
-      <Header title={name} />
+      {/* <Header title={name} /> */}
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
         editor={editor}
       />
 
       <div className="app-content">
-        <SlidesPanel
+        {/* <SlidesPanel
           width={300}
           slides={slideList}
           selectedSlides={selectedSlidesIds}
-        />
+        /> */}
         <Editor
           slideId={selectedSlidesIds[selectedSlidesIds.length - 1]}
           slide={slideList[selectedSlidesIds[selectedSlidesIds.length - 1]]}
           selectedElements={selectedElementIds}
         />
-        <ElementsPanel />
+        {/* <ElementsPanel /> */}
       </div>
     </div>
   );

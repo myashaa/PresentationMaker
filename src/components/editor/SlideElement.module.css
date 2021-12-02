@@ -1,0 +1,63 @@
+.element {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 250ms border-color, 250ms transform;
+  border: 2px dashed #fff;
+  padding: 10px;
+}
+
+.element p {
+  margin: 0;
+  outline: none;
+}
+
+.element:hover {
+  border: 2px dashed #f2f2f2;
+  transition: 250ms border-color, 250ms transform;
+}
+
+.element.selected {
+  border-color: #ffdd00;
+  border-style: dashed;
+  transition: 250ms border-color, 250ms transform;
+}
+
+.moving.moving {
+  transform: scale(1.1);
+  transition: 250ms border-color, 250ms transform;
+}
+
+.resizer {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border: 2px solid #ffdd00;
+  border-radius: 4px;
+}
+
+.rt {
+  top: -8px;
+  right: -8px;
+  cursor: sw-resize;
+}
+
+.rb {
+  bottom: -8px;
+  right: -8px;
+  cursor: se-resize;
+}
+
+.lt {
+  top: -8px;
+  left: -8px;
+  cursor: nw-resize;
+}
+
+.lb {
+  bottom: -8px;
+  left: -8px;
+  cursor: ne-resize;
+}
