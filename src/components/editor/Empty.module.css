@@ -9,3 +9,9 @@
 .text {
   color: #acacac;
 }
+
+.image {
+  width: 150px;
+  height: auto;
+  filter: opacity(0.4);
+}
