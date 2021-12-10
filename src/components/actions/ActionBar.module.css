@@ -7,11 +7,8 @@
   border-bottom: 1px solid #e2e2e2;
 }
 
-.appActions {
-  display: flex;
-  justify-content: space-between;
-}
-
 .appActionsRigth {
+  display: flex;
+  flex-direction: row;
   margin-left: 75px;
 }

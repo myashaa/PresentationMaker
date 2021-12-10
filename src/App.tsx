@@ -10,6 +10,7 @@ import "./App.css";
 import { useEffect } from "react";
 import { dispatch } from "./editor";
 import { updateHistory } from "./model/editor/EditorActions";
+// import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
   editor: EditorType;
@@ -26,7 +27,7 @@ function App({ editor }: AppProps) {
 
   return (
     <div className="app">
-      {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} /> */}
+      {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} />   */}
       <Header title={name} />
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
