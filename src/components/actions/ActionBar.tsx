@@ -39,22 +39,24 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
         }}
       />
 
-      <ActionButton
-        icon="title"
-        onClick={() => {
-          const newText: Text = {
-            content: "Sample Text",
-            font: {
-              family: "Montserrat",
-              size: 16,
-              color: "#000",
-            },
-          };
-          dispatch(createElement, selectedSlide, newText);
-        }}
-      />
-      <ActionButton icon="image" />
-      <ActionButton icon="category" />
+      <div className={styles.appActionsRigth}>
+        <ActionButton
+          icon="title"
+          onClick={() => {
+            const newText: Text = {
+              content: "Sample Text",
+              font: {
+                family: "Montserrat",
+                size: 16,
+                color: "#000",
+              },
+            };
+            dispatch(createElement, selectedSlide, newText);
+          }}
+        />
+        <ActionButton icon="image" />
+        <ActionButton icon="category" />
+      </div>
     </div>
   );
 }
