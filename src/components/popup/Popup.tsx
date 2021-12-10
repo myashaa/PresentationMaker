@@ -1,23 +1,22 @@
 import styles from "./Popup.module.css";
-import Image from "../../assets/cat.png"
+import { PopupContent } from "./PopupContent";
+import { PopupFooter } from "./PopupFooter";
+import { PopupHeader } from "./PopupHeader";
 
 type PopupProps = {
   title?: string;
   text?: string;
+  leftButton?: string;
+  rightButton?: string;
 };
 
-export function Popup({ title, text }: PopupProps) {
+export function Popup({ title, text, leftButton, rightButton }: PopupProps) {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <button className={styles.exit}><span className={styles.exitText}>+</span></button>
-        <p className={styles.title}>{title}</p>
-        <p className={styles.text}>{text}</p>
-        <div className={styles.buttons}>
-          <button className={styles.button}>Сохранить</button>
-          <button className={styles.button}>Отменить</button>
-        </div>
-        <img src={Image} className={styles.image} />
+        <PopupHeader title={title} />
+        <PopupContent text={text} />
+        <PopupFooter leftButton={leftButton} rightButton={rightButton} />
       </div>
     </div>
   );
