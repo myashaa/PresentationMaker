@@ -27,7 +27,10 @@ function App({ editor }: AppProps) {
 
   return (
     <div className="app">
-      <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} leftButton={"Сохранить"} rightButton={"Отменить"} />  
+      {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} needButtons leftButton={"Сохранить"} rightButton={"Отменить"} />   */}
+      {/* <Popup title={"О проекте"} text ={"Благодаря Ю Презентациям вы можете создавать файлы, редактировать и показывать их, а также работать над ними где и когда угодно – совершенно бесплатно."} needCat />   */}
+      {/* <Popup title={"Инструкция пользователя"} text={"Помощь начинающим"  } needSlider /> */}
+      {/* <Popup title={"Инструкция пользователя"} needIcon needButtons leftButton={"Сохранить"} rightButton={"Отменить"} /> */}
       <Header title={name} />
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}

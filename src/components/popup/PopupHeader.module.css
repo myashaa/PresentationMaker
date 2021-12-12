@@ -1,15 +1,17 @@
 .container {
+  width: 100%;
   position: relative;
 }
 
 .exit {
-  top: -20px;
-  right: -50px;
+  top: -43px;
+  right: -45px;
   position: absolute;
   padding: 8px;
   font-size: 24px;
   color: #c7c7c7;
   transition: 200ms;
+  cursor: pointer;
 }
 
 .exit:hover {
