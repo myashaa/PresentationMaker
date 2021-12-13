@@ -20,8 +20,8 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
       element={element}
       selected={selectedElements?.some((id) => id === index)}
       onClick={(onCtrl) => {
-        !onCtrl && dispatch(selectElements, [index]);
-        onCtrl && dispatch(selectElements, [...selectedElements, index]);
+        !onCtrl && dispatch(selectElements, false, [index]);
+        onCtrl && dispatch(selectElements, false, [...selectedElements, index]);
       }}
     />
   ));
@@ -33,7 +33,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           className={styles.appEditorView}
           onClick={(e) => {
             e.stopPropagation();
-            dispatch(selectElements, []);
+            dispatch(selectElements, false, []);
           }}
         >
           {elements}

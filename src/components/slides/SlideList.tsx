@@ -21,19 +21,20 @@ export function SlideList({ slides, selectedSlides }: SlideListProps) {
       background={slide.background}
       selected={selectedSlides.some((id) => id === index)}
       onSelect={() => {
-        dispatch(selectSlides, [index]);
+        dispatch(selectSlides, false, [index]);
       }}
       onMultiSelect={() => {
         if (!selectedSlides.some((id) => id === index))
-          dispatch(selectSlides, [...selectedSlides, index]);
+          dispatch(selectSlides, false, [...selectedSlides, index]);
         else if (selectedSlides.length > 1)
           dispatch(
             selectSlides,
+            false,
             selectedSlides.filter((id) => id !== index)
           );
       }}
       onDelete={() => {
-        dispatch(deleteSlides, selectedSlides);
+        dispatch(deleteSlides, true, selectedSlides);
       }}
     />
   ));

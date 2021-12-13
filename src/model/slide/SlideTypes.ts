@@ -1,7 +1,7 @@
 import { Element, Image } from "../element/ElementTypes";
 
 export type Slide = {
-  id: number;
+  id: string;
   elementList: Element[];
   background: Background;
 };

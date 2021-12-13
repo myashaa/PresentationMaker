@@ -8,8 +8,6 @@ import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
-import { dispatch } from "./editor";
-import { updateHistory } from "./model/editor/EditorActions";
 // import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
@@ -20,10 +18,10 @@ function App({ editor }: AppProps) {
   const { slideList, name, selectedSlidesIds, selectedElementIds } =
     editor.presentation;
 
-    useEffect(() => {
-
-      console.log(editor)
-    }, [editor])
+  useEffect(() => {
+    console.log(editor);
+    document.title = editor.presentation.name;
+  }, [editor]);
 
   return (
     <div className="app">

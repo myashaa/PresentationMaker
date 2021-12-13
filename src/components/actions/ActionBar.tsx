@@ -7,7 +7,7 @@ import { createSlide } from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
 import { Editor } from "../../model/editor/EditorTypes";
-import { undo, redo, updateHistory } from "../../model/editor/EditorActions";
+import { undo, redo } from "../../model/editor/EditorActions";
 
 type ActionBarProps = {
   selectedSlide: number;
@@ -22,20 +22,19 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
         label="Добавить слайд"
         primary
         onClick={() => {
-          dispatch(createSlide, {});
-          dispatch(updateHistory, editor);
+          dispatch(createSlide, true, {});
         }}
       />
-      <ActionButton 
-        icon="undo" 
+      <ActionButton
+        icon="undo"
         onClick={() => {
-          dispatch(undo, editor);
+          dispatch(undo, false, editor);
         }}
-        />
-      <ActionButton 
-        icon="redo" 
+      />
+      <ActionButton
+        icon="redo"
         onClick={() => {
-          dispatch(redo, editor);
+          dispatch(redo, false, editor);
         }}
       />
 
@@ -51,7 +50,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
                 color: "#000",
               },
             };
-            dispatch(createElement, selectedSlide, newText);
+            dispatch(createElement, true, selectedSlide, newText);
           }}
         />
         <ActionButton icon="image" />

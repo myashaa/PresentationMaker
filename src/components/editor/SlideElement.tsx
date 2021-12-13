@@ -34,7 +34,7 @@ export function SlideElement({
   });
 
   useEffect(() => {
-    selected && dispatch(moveElement, slideId, id, position);
+    selected && dispatch(moveElement, true, slideId, id, position);
   }, [isMoving]);
 
   return (
@@ -63,20 +63,7 @@ export function SlideElement({
           <span className={`${styles.resizer} ${styles.rb}`} />
         </>
       )}
-      {element?.text && (
-        <p
-          onDoubleClick={() => setEditMode(true)}
-          contentEditable={isEditMode}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              dispatch(setText, slideId, id, "e.");
-              setEditMode(false);
-            }
-          }}
-        >
-          {element?.text?.content}
-        </p>
-      )}
+      {element?.text && <p>{element?.text?.content}</p>}
     </div>
   );
 }

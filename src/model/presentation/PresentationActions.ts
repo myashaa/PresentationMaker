@@ -1,3 +1,4 @@
+import { uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Slide } from "../slide/SlideTypes";
 
@@ -6,7 +7,7 @@ export function createSlide(editor: Editor): Editor {
   const { slideList } = presentation;
 
   const newSlide: Slide = {
-    id: editor.presentation.slideList.length,
+    id: uuid4(),
     elementList: [],
     background: {
       color: "#FFFFFF",

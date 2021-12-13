@@ -1,4 +1,4 @@
-import { random } from "../../utils";
+import { random, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Element } from "../element/ElementTypes";
 import { Figure, Text, Image } from "../element/ElementTypes";
@@ -56,6 +56,7 @@ export function createElement(
   figure?: Figure
 ): Editor {
   const newElement: Element = {
+    id: uuid4(),
     width: -1,
     height: -1,
     position: { x: random(0, 640), y: random(0, 480) },
