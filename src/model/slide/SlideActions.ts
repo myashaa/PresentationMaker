@@ -50,10 +50,8 @@ export function clearBackground(editor: Editor, slideId: number): Editor {
 // Создание элемента на слайде
 export function createElement(
   editor: Editor,
-  slideId: number,
-  text?: Text,
-  image?: Image,
-  figure?: Figure
+  slideId: string,
+  content: Text & Image & Figure
 ): Editor {
   const newElement: Element = {
     id: uuid4(),
@@ -61,14 +59,12 @@ export function createElement(
     height: -1,
     position: { x: random(0, 640), y: random(0, 480) },
     color: "#FFFFFF",
-    figure,
-    image,
-    text,
+    data: content,
   };
 
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
       return { ...slide, elementList: [...elementList, newElement] };
     }

@@ -1,14 +1,13 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dispatch } from "../../editor";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { Element as ElementType } from "../../model/element/ElementTypes";
-import { setText } from "../../model/element/TextActions";
 import { moveElement } from "../../model/slide/SlideActions";
 import styles from "./SlideElement.module.css";
 
 type ElementProps = {
   slideId?: string;
-  id?: number;
+  id?: string;
 
   element: ElementType;
   selected?: boolean;
@@ -22,7 +21,6 @@ export function SlideElement({
   slideId,
   onClick,
 }: ElementProps) {
-  const [isEditMode, setEditMode] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
   const [isMulti, setMuli] = useState(false);
 
@@ -36,6 +34,9 @@ export function SlideElement({
   useEffect(() => {
     selected && dispatch(moveElement, true, slideId, id, position);
   }, [isMoving]);
+
+  const isText = element.data.hasOwnProperty("font");
+  const isImage = element.data.hasOwnProperty("url");
 
   return (
     <div
@@ -63,7 +64,8 @@ export function SlideElement({
           <span className={`${styles.resizer} ${styles.rb}`} />
         </>
       )}
-      {element?.text && <p>{element?.text?.content}</p>}
+      {isText && <p>{element?.data?.content}</p>}
+      {isImage && <img src={element.data.url} alt="" />}
     </div>
   );
 }

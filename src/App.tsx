@@ -18,8 +18,12 @@ function App({ editor }: AppProps) {
   const { slideList, name, selectedSlidesIds, selectedElementIds } =
     editor.presentation;
 
+  const currentSlide = slideList.filter(
+    (slide) => slide.id === selectedSlidesIds[selectedSlidesIds.length - 1]
+  )[0];
+
   useEffect(() => {
-    // console.log(editor);
+    console.log(editor);
     document.title = editor.presentation.name;
   }, [editor]);
 
@@ -38,11 +42,11 @@ function App({ editor }: AppProps) {
           slides={slideList}
           selectedSlides={selectedSlidesIds}
         />
-        {/* <Editor
-          slideId={selectedSlidesIds[selectedSlidesIds.length - 1]}
-          slide={slideList[selectedSlidesIds[selectedSlidesIds.length - 1]]}
+        <Editor
+          slideId={currentSlide.id}
+          slide={currentSlide}
           selectedElements={selectedElementIds}
-        /> */}
+        />
         <ElementsPanel />
       </div>
     </div>

@@ -2,9 +2,9 @@
   position: absolute;
   cursor: pointer;
   border-radius: 4px;
-  transition: 250ms border-color, 250ms transform;
-  border: 2px dashed #fff;
-  padding: 10px;
+  /* transition: 250ms border-color, 250ms transform; */
+  border-color: #fff;
+  padding: 12px;
 }
 
 .element p {
@@ -15,12 +15,14 @@
 .element:hover {
   border: 2px dashed #f2f2f2;
   transition: 250ms border-color, 250ms transform;
+  padding: 12px;
 }
 
 .element.selected {
   border-color: #ffdd00;
   border-style: dashed;
   transition: 250ms border-color, 250ms transform;
+  padding: 10px;
 }
 
 .moving.moving {

@@ -1,4 +1,4 @@
-import { Text } from "../../model/element/ElementTypes";
+import { Image, Text } from "../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";
@@ -53,7 +53,15 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
             dispatch(createElement, true, selectedSlide, newText);
           }}
         />
-        <ActionButton icon="image" />
+        <ActionButton
+          icon="image"
+          onClick={() => {
+            const newImage: Image = {
+              url: "https://via.placeholder.com/150",
+            };
+            dispatch(createElement, true, selectedSlide, newImage);
+          }}
+        />
         <ActionButton icon="category" />
       </div>
     </div>

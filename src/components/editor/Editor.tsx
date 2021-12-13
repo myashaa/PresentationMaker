@@ -7,7 +7,7 @@ import { Empty } from "./Empty";
 
 type EditorProps = {
   slide?: Slide;
-  slideId: string;
+  slideId?: string;
   selectedElements: number[];
 };
 
@@ -15,7 +15,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
   const elements = slide?.elementList.map((element, index) => (
     <SlideElement
       key={index}
-      id={index}
+      id={slide.id}
       slideId={slideId}
       element={element}
       selected={selectedElements?.some((id) => id === index)}
