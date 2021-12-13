@@ -7,7 +7,7 @@ import { Empty } from "./Empty";
 
 type EditorProps = {
   slide?: Slide;
-  slideId: number;
+  slideId: string;
   selectedElements: number[];
 };
 

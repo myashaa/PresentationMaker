@@ -19,7 +19,7 @@ export function createSlide(editor: Editor): Editor {
     presentation: {
       ...presentation,
       slideList: [...slideList, newSlide],
-      selectedSlidesIds: [slideList.length],
+      selectedSlidesIds: [newSlide.id],
     },
   };
 
@@ -45,14 +45,13 @@ export function deleteSlide(editor: Editor, slideId: number): Editor {
   return newEditor;
 }
 
-export function deleteSlides(editor: Editor, slideIds: number[]): Editor {
+export function deleteSlides(editor: Editor, slideIds: string[]): Editor {
   const { presentation } = editor;
   const { slideList } = presentation;
 
   const newSlideList = slideList.filter(
-    (slide, index) => !slideIds.sort().some((id) => id === index) && slide
+    (slide) => !slideIds.some((id) => id === slide.id) && slide
   );
-  console.log(slideIds, newSlideList);
 
   const newEditor: Editor = {
     ...editor,
@@ -93,7 +92,7 @@ export function moveSlide(
   return newEditor;
 }
 
-export function selectSlides(editor: Editor, slideIds: number[]): Editor {
+export function selectSlides(editor: Editor, slideIds: string[]): Editor {
   const { presentation } = editor;
 
   const newEditor: Editor = {

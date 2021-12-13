@@ -7,7 +7,7 @@ import { moveElement } from "../../model/slide/SlideActions";
 import styles from "./SlideElement.module.css";
 
 type ElementProps = {
-  slideId?: number;
+  slideId?: string;
   id?: number;
 
   element: ElementType;

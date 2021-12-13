@@ -10,7 +10,7 @@ import { Editor } from "../../model/editor/EditorTypes";
 import { undo, redo } from "../../model/editor/EditorActions";
 
 type ActionBarProps = {
-  selectedSlide: number;
+  selectedSlide: string;
   editor: Editor;
 };
 
