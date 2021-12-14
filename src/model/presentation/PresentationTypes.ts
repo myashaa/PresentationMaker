@@ -4,5 +4,5 @@ export type Presentation = {
   name: string;
   slideList: Slide[];
   selectedSlidesIds: string[];
-  selectedElementIds: number[];
+  selectedElementIds: string[];
 };

@@ -2,7 +2,7 @@ import { random, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Element } from "../element/ElementTypes";
 import { Figure, Text, Image } from "../element/ElementTypes";
-import { Background, Slide } from "./SlideTypes";
+import { Background } from "./SlideTypes";
 
 // Установка фона для слайда
 export function setBackground(
@@ -141,17 +141,19 @@ export function removeElements(
 // Перемещение элемента
 export function moveElement(
   editor: Editor,
-  slideId: number,
-  elementId: number,
+  slideId: string,
+  elementId: string,
   newPosition: { x: number; y: number }
 ): Editor {
   const { slideList } = editor.presentation;
 
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
-      const newElementList = elementList.map((element, id) =>
-        id === elementId ? { ...element, position: newPosition } : element
+      const newElementList = elementList.map((element) =>
+        element.id === elementId
+          ? { ...element, position: newPosition }
+          : element
       );
       return { ...slide, elementList: newElementList };
     }
@@ -199,7 +201,7 @@ export function resizeElement(
   };
 }
 
-export function selectElements(editor: Editor, elementsIds: number[]): Editor {
+export function selectElements(editor: Editor, elementsIds: string[]): Editor {
   const { presentation } = editor;
 
   const newEditor: Editor = {

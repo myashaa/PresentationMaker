@@ -8,7 +8,7 @@ import { Empty } from "./Empty";
 type EditorProps = {
   slide?: Slide;
   slideId?: string;
-  selectedElements: number[];
+  selectedElements: string[];
 };
 
 export function Editor({ slide, slideId, selectedElements }: EditorProps) {
@@ -18,10 +18,11 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
       id={slide.id}
       slideId={slideId}
       element={element}
-      selected={selectedElements?.some((id) => id === index)}
+      selected={selectedElements?.some((id) => id === element.id)}
       onClick={(onCtrl) => {
-        !onCtrl && dispatch(selectElements, false, [index]);
-        onCtrl && dispatch(selectElements, false, [...selectedElements, index]);
+        !onCtrl && dispatch(selectElements, false, [element.id]);
+        onCtrl &&
+          dispatch(selectElements, false, [...selectedElements, element.id]);
       }}
     />
   ));

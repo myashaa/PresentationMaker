@@ -32,7 +32,7 @@ export function SlideElement({
   });
 
   useEffect(() => {
-    selected && dispatch(moveElement, true, slideId, id, position);
+    selected && dispatch(moveElement, true, slideId, element.id, position);
   }, [isMoving]);
 
   const isText = element.data.hasOwnProperty("font");
@@ -64,6 +64,7 @@ export function SlideElement({
           <span className={`${styles.resizer} ${styles.rb}`} />
         </>
       )}
+      <p>{element.id}</p>
       {isText && <p>{element?.data?.content}</p>}
       {isImage && <img src={element.data.url} alt="" />}
     </div>
