@@ -23,7 +23,7 @@ function App({ editor }: AppProps) {
   )[0];
 
   useEffect(() => {
-    console.log(editor);
+    // console.log("selected", editor.presentation.selectedSlidesIds);
     document.title = editor.presentation.name;
   }, [editor]);
 
@@ -42,11 +42,7 @@ function App({ editor }: AppProps) {
           slides={slideList}
           selectedSlides={selectedSlidesIds}
         />
-        <Editor
-          slideId={currentSlide.id}
-          slide={currentSlide}
-          selectedElements={selectedElementIds}
-        />
+        <Editor slide={currentSlide} selectedElements={selectedElementIds} />
         <ElementsPanel />
       </div>
     </div>

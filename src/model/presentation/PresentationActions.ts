@@ -1,4 +1,4 @@
-import { uuid4 } from "../../utils";
+import { at, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Slide } from "../slide/SlideTypes";
 
@@ -26,25 +26,6 @@ export function createSlide(editor: Editor): Editor {
   return newEditor;
 }
 
-export function deleteSlide(editor: Editor, slideId: number): Editor {
-  const { presentation } = editor;
-  const { slideList } = presentation;
-
-  const newSlideList = slideList.filter(
-    (slide, index) => index !== slideId && slide
-  );
-
-  const newEditor: Editor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: newSlideList,
-    },
-  };
-
-  return newEditor;
-}
-
 export function deleteSlides(editor: Editor, slideIds: string[]): Editor {
   const { presentation } = editor;
   const { slideList } = presentation;
@@ -53,17 +34,21 @@ export function deleteSlides(editor: Editor, slideIds: string[]): Editor {
     (slide) => !slideIds.some((id) => id === slide.id) && slide
   );
 
+  const newSelectedSlides = at(newSlideList, -1)?.id;
+
   const newEditor: Editor = {
     ...editor,
     presentation: {
       ...presentation,
       slideList: newSlideList,
+      selectedSlidesIds: newSelectedSlides ? [newSelectedSlides] : [],
     },
   };
 
   return newEditor;
 }
 
+// TODO: Переписать функцию для перемещения слайдов местами
 export function moveSlide(
   editor: Editor,
   indexFrom: number,
