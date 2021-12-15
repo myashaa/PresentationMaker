@@ -1,3 +1,4 @@
+import { at, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Slide } from "../slide/SlideTypes";
 
@@ -6,7 +7,7 @@ export function createSlide(editor: Editor): Editor {
   const { slideList } = presentation;
 
   const newSlide: Slide = {
-    id: editor.presentation.slideList.length,
+    id: uuid4(),
     elementList: [],
     background: {
       color: "#FFFFFF",
@@ -18,52 +19,36 @@ export function createSlide(editor: Editor): Editor {
     presentation: {
       ...presentation,
       slideList: [...slideList, newSlide],
-      selectedSlidesIds: [slideList.length],
+      selectedSlidesIds: [newSlide.id],
     },
   };
 
   return newEditor;
 }
 
-export function deleteSlide(editor: Editor, slideId: number): Editor {
+export function deleteSlides(editor: Editor, slideIds: string[]): Editor {
   const { presentation } = editor;
   const { slideList } = presentation;
 
   const newSlideList = slideList.filter(
-    (slide, index) => index !== slideId && slide
+    (slide) => !slideIds.some((id) => id === slide.id) && slide
   );
+
+  const newSelectedSlides = at(newSlideList, -1)?.id;
 
   const newEditor: Editor = {
     ...editor,
     presentation: {
       ...presentation,
       slideList: newSlideList,
+      selectedSlidesIds: newSelectedSlides ? [newSelectedSlides] : [],
     },
   };
 
   return newEditor;
 }
 
-export function deleteSlides(editor: Editor, slideIds: number[]): Editor {
-  const { presentation } = editor;
-  const { slideList } = presentation;
-
-  const newSlideList = slideList.filter(
-    (slide, index) => !slideIds.sort().some((id) => id === index) && slide
-  );
-  console.log(slideIds, newSlideList);
-
-  const newEditor: Editor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: newSlideList,
-    },
-  };
-
-  return newEditor;
-}
-
+// TODO: Переписать функцию для перемещения слайдов местами
 export function moveSlide(
   editor: Editor,
   indexFrom: number,
@@ -92,7 +77,7 @@ export function moveSlide(
   return newEditor;
 }
 
-export function selectSlides(editor: Editor, slideIds: number[]): Editor {
+export function selectSlides(editor: Editor, slideIds: string[]): Editor {
   const { presentation } = editor;
 
   const newEditor: Editor = {

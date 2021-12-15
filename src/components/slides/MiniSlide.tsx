@@ -1,7 +1,6 @@
-import React, { MouseEvent } from "react";
 import { Element as ElementType } from "../../model/element/ElementTypes";
 import { Background } from "../../model/slide/SlideTypes";
-import { Element } from "../editor/Editor";
+import { SlideElement } from "../editor/SlideElement";
 
 import styles from "./MiniSlide.module.css";
 
@@ -51,7 +50,7 @@ export function MiniSlide({
         <div className={styles.slidePreviewMini}>
           {elements &&
             elements.map((element, index) => (
-              <Element key={index} element={element} />
+              <SlideElement key={index} element={element} />
             ))}
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { random } from "../../utils";
+import { random, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Element } from "../element/ElementTypes";
 import { Figure, Text, Image } from "../element/ElementTypes";
-import { Background, Slide } from "./SlideTypes";
+import { Background } from "./SlideTypes";
 
 // Установка фона для слайда
 export function setBackground(
@@ -50,24 +50,21 @@ export function clearBackground(editor: Editor, slideId: number): Editor {
 // Создание элемента на слайде
 export function createElement(
   editor: Editor,
-  slideId: number,
-  text?: Text,
-  image?: Image,
-  figure?: Figure
+  slideId: string,
+  content: Text & Image & Figure
 ): Editor {
   const newElement: Element = {
+    id: uuid4(),
     width: -1,
     height: -1,
     position: { x: random(0, 640), y: random(0, 480) },
     color: "#FFFFFF",
-    figure,
-    image,
-    text,
+    data: content,
   };
 
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
       return { ...slide, elementList: [...elementList, newElement] };
     }
@@ -144,17 +141,19 @@ export function removeElements(
 // Перемещение элемента
 export function moveElement(
   editor: Editor,
-  slideId: number,
-  elementId: number,
+  slideId: string,
+  elementId: string,
   newPosition: { x: number; y: number }
 ): Editor {
   const { slideList } = editor.presentation;
 
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
-      const newElementList = elementList.map((element, id) =>
-        id === elementId ? { ...element, position: newPosition } : element
+      const newElementList = elementList.map((element) =>
+        element.id === elementId
+          ? { ...element, position: newPosition }
+          : element
       );
       return { ...slide, elementList: newElementList };
     }
@@ -202,7 +201,7 @@ export function resizeElement(
   };
 }
 
-export function selectElements(editor: Editor, elementsIds: number[]): Editor {
+export function selectElements(editor: Editor, elementsIds: string[]): Editor {
   const { presentation } = editor;
 
   const newEditor: Editor = {
