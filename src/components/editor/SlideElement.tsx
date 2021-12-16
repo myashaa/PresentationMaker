@@ -1,15 +1,14 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dispatch } from "../../editor";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { useResize } from "../../hooks/useResize";
 import { Element as ElementType } from "../../model/element/ElementTypes";
-import { setText } from "../../model/element/TextActions";
 import { moveElement } from "../../model/slide/SlideActions";
 import styles from "./SlideElement.module.css";
 
 type ElementProps = {
-  slideId?: number;
-  id?: number;
+  slideId?: string;
+  id?: string;
 
   element: ElementType;
   selected?: boolean;
@@ -23,7 +22,6 @@ export function SlideElement({
   slideId,
   onClick,
 }: ElementProps) {
-  const [isEditMode, setEditMode] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
   const [isMulti, setMuli] = useState(false);
 
@@ -55,6 +53,9 @@ export function SlideElement({
     // selected && dispatch(moveElement, slideId, id, position);
   }, [isMoving]);
 
+  const isText = element.data.hasOwnProperty("font");
+  const isImage = element.data.hasOwnProperty("url");
+
   return (
     <div
       className={`${styles.element} ${selected && styles.selected} ${
@@ -83,20 +84,9 @@ export function SlideElement({
           <span ref={brRef} className={`${styles.resizer} ${styles.rb}`} />
         </>
       )}
-      {element?.text && (
-        <p
-          onDoubleClick={() => setEditMode(true)}
-          contentEditable={isEditMode}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              dispatch(setText, slideId, id, "e.");
-              setEditMode(false);
-            }
-          }}
-        >
-          {element?.text?.content}
-        </p>
-      )}
+      <p>{element.id}</p>
+      {isText && <p>{element?.data?.content}</p>}
+      {isImage && <img src={element.data.url} alt="" />}
     </div>
   );
 }

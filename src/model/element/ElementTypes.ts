@@ -1,4 +1,5 @@
 export type Element = {
+  id: string;
   width: number;
   height: number;
   position: {
@@ -7,10 +8,7 @@ export type Element = {
   };
   color?: string;
   border?: Border;
-  // data: Text | Image | Figure;
-  text?: Text;
-  image?: Image;
-  figure?: Figure;
+  data: Text & Image & Figure;
 };
 
 export type Text = {
@@ -29,7 +27,7 @@ export type Font = {
 
 export type Image = {
   url: string;
-  filter: Filter;
+  filter?: Filter;
 };
 
 export type Figure = {

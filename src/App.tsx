@@ -8,9 +8,9 @@ import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
+import { useHotKey } from "./hooks/useHotKey";
 import { dispatch } from "./editor";
-import { updateHistory } from "./model/editor/EditorActions";
-// import { Popup } from "./components/popup/Popup";
+import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
   editor: EditorType;
@@ -20,14 +20,20 @@ function App({ editor }: AppProps) {
   const { slideList, name, selectedSlidesIds, selectedElementIds } =
     editor.presentation;
 
-    useEffect(() => {
+  const currentSlide = slideList.filter(
+    (slide) => slide.id === selectedSlidesIds[selectedSlidesIds.length - 1]
+  )[0];
 
-      console.log(editor)
-    }, [editor])
+  useEffect(() => {
+    document.title = editor.presentation.name;
+  }, [editor]);
 
   return (
     <div className="app">
-      {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} />   */}
+      {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} needButtons leftButton={"Сохранить"} rightButton={"Отменить"} />   */}
+      {/* <Popup title={"О проекте"} text ={"Благодаря Ю Презентациям вы можете создавать файлы, редактировать и показывать их, а также работать над ними где и когда угодно – совершенно бесплатно."} needCat />   */}
+      {/* <Popup title={"Инструкция пользователя"} text={"Помощь начинающим"  } needSlider /> */}
+      {/* <Popup title={"Инструкция пользователя"} needIcon needButtons leftButton={"Сохранить"} rightButton={"Отменить"} /> */}
       <Header title={name} />
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
@@ -40,11 +46,7 @@ function App({ editor }: AppProps) {
           slides={slideList}
           selectedSlides={selectedSlidesIds}
         />
-        <Editor
-          slideId={selectedSlidesIds[selectedSlidesIds.length - 1]}
-          slide={slideList[selectedSlidesIds[selectedSlidesIds.length - 1]]}
-          selectedElements={selectedElementIds}
-        />
+        <Editor slide={currentSlide} selectedElements={selectedElementIds} />
         <ElementsPanel />
       </div>
     </div>

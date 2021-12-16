@@ -20,7 +20,7 @@ export function setFontFamily(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.text;
+  const elementData = currentElement.data as Text;
   const elementFont = { ...elementData?.font, family: fontFamily };
   const newElement = {
     ...currentElement,
@@ -58,7 +58,7 @@ export function setFontColor(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.text;
+  const elementData = currentElement.data as Text;
   const elementFont = { ...elementData?.font, color };
   const newElement = {
     ...currentElement,
@@ -96,7 +96,7 @@ export function setFontSize(
     (element, index) => index === elementId
   )[0];
 
-  const elementData = currentElement.text;
+  const elementData = currentElement.data as Text;
   const elementFont = { ...elementData?.font, size };
   const newElement = {
     ...currentElement,

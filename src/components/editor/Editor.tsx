@@ -7,21 +7,22 @@ import { Empty } from "./Empty";
 
 type EditorProps = {
   slide?: Slide;
-  slideId: number;
-  selectedElements: number[];
+  slideId?: string;
+  selectedElements: string[];
 };
 
 export function Editor({ slide, slideId, selectedElements }: EditorProps) {
   const elements = slide?.elementList.map((element, index) => (
     <SlideElement
       key={index}
-      id={index}
+      id={slide.id}
       slideId={slideId}
       element={element}
-      selected={selectedElements?.some((id) => id === index)}
+      selected={selectedElements?.some((id) => id === element.id)}
       onClick={(onCtrl) => {
-        !onCtrl && dispatch(selectElements, [index]);
-        onCtrl && dispatch(selectElements, [...selectedElements, index]);
+        !onCtrl && dispatch(selectElements, false, [element.id]);
+        onCtrl &&
+          dispatch(selectElements, false, [...selectedElements, element.id]);
       }}
     />
   ));
@@ -33,7 +34,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           className={styles.appEditorView}
           onClick={(e) => {
             e.stopPropagation();
-            dispatch(selectElements, []);
+            dispatch(selectElements, false, []);
           }}
         >
           {elements}

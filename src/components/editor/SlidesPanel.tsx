@@ -1,11 +1,17 @@
+import { dispatch } from "../../editor";
+import { useHotKey } from "../../hooks/useHotKey";
+import {
+  deleteSlides,
+  selectSlides,
+} from "../../model/presentation/PresentationActions";
 import { Slide } from "../../model/slide/SlideTypes";
-import { SlideList } from "../slides/SlideList";
+import { MiniSlide } from "../slides/MiniSlide";
 import styles from "./SidePanel.module.css";
 
 type SlidesPanelProps = {
   width?: number;
   slides: Slide[];
-  selectedSlides: number[];
+  selectedSlides: string[];
 };
 
 export const SlidesPanel = ({
@@ -13,9 +19,39 @@ export const SlidesPanel = ({
   slides,
   selectedSlides,
 }: SlidesPanelProps) => {
+  useHotKey(() => {
+    dispatch(deleteSlides, true, selectedSlides);
+  }, "Delete");
+
+  const selectSlideHandle = (ids: string[]) => {
+    dispatch(selectSlides, false, ids);
+  };
+
+  const slideList = slides?.map((slide, index) => (
+    <MiniSlide
+      key={index}
+      index={index + 1}
+      elements={slide.elementList}
+      background={slide.background}
+      selected={selectedSlides.some((id) => id === slide.id)}
+      onSelect={() => {
+        selectSlideHandle([slide.id]);
+      }}
+      onMultiSelect={() => {
+        if (!selectedSlides.some((id) => id === slide.id))
+          selectSlideHandle([...selectedSlides, slide.id]);
+        else if (selectedSlides.length > 1)
+          selectSlideHandle(selectedSlides.filter((id) => id !== slide.id));
+      }}
+      onDelete={() => {
+        dispatch(deleteSlides, true, selectedSlides);
+      }}
+    />
+  ));
+
   return (
     <div className={styles.sidePanel} style={{ width }}>
-      <SlideList slides={slides} selectedSlides={selectedSlides} />
+      {slideList}
     </div>
   );
 };

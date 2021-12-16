@@ -4,7 +4,7 @@
   font-weight: bold;
   margin: 0;
   color: #000;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 8px;
   font-family: Montserrat;
   outline: none;
@@ -13,8 +13,10 @@
 
 .presentationTitle:hover {
   border-color: #e2e2e2;
+  transition: 250ms;
 }
 
 .presentationTitle:focus {
   border-color: #ffdd00;
+  transition: 250ms;
 }
