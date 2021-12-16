@@ -15,7 +15,7 @@ export function Header({ title }: HeaderProps) {
     <div className={styles.header}>
       <img src={Logo} className={styles.appLogo} alt="" />
       <div className={styles.presentationInfo}>
-        <Title title={title || "Без имени"} />
+        <Title title={title} />
         <MenuBar menu={menu} />
       </div>
     </div>

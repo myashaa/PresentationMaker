@@ -5,7 +5,7 @@ import { renamePresentation } from "../../model/editor/EditorActions";
 import styles from "./Title.module.css";
 
 type Props = {
-  title: string;
+  title?: string;
 };
 
 export function Title({ title }: Props) {
@@ -34,6 +34,7 @@ export function Title({ title }: Props) {
           setTitle();
         }
       }}
+      placeholder="Новая презентация"
     />
   );
 }
