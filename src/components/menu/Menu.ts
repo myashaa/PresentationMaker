@@ -1,6 +1,8 @@
 import { dispatch } from "../../editor";
-import { loadPresentation } from "../../model/editor/EditorActions";
-import { setPresentationTitle } from "../PresentationUtils";
+import {
+  loadPresentation,
+  renamePresentation,
+} from "../../model/editor/EditorActions";
 
 export const menu = [
   {
@@ -29,8 +31,8 @@ export const menu = [
         icon: "edit",
         label: "Переименовать",
         action: () => {
-          const title = prompt("Введите название");
-          setPresentationTitle(title || "Untitled");
+          const title = prompt("Введите новое название");
+          dispatch(renamePresentation, true, title);
         },
       },
     ],
