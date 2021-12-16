@@ -1,4 +1,4 @@
-import { Text } from "../../model/element/ElementTypes";
+import { Image, Text } from "../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";
@@ -7,10 +7,10 @@ import { createSlide } from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
 import { Editor } from "../../model/editor/EditorTypes";
-import { undo, redo, updateHistory } from "../../model/editor/EditorActions";
+import { undo, redo } from "../../model/editor/EditorActions";
 
 type ActionBarProps = {
-  selectedSlide: number;
+  selectedSlide: string;
   editor: Editor;
 };
 
@@ -22,20 +22,19 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
         label="Добавить слайд"
         primary
         onClick={() => {
-          dispatch(createSlide, {});
-          dispatch(updateHistory, editor);
+          dispatch(createSlide, true, {});
         }}
       />
-      <ActionButton 
-        icon="undo" 
+      <ActionButton
+        icon="undo"
         onClick={() => {
-          dispatch(undo, editor);
+          dispatch(undo, false, editor);
         }}
-        />
-      <ActionButton 
-        icon="redo" 
+      />
+      <ActionButton
+        icon="redo"
         onClick={() => {
-          dispatch(redo, editor);
+          dispatch(redo, false, editor);
         }}
       />
 
@@ -51,10 +50,18 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
                 color: "#000",
               },
             };
-            dispatch(createElement, selectedSlide, newText);
+            dispatch(createElement, true, selectedSlide, newText);
           }}
         />
-        <ActionButton icon="image" />
+        <ActionButton
+          icon="image"
+          onClick={() => {
+            const newImage: Image = {
+              url: "https://via.placeholder.com/150",
+            };
+            dispatch(createElement, true, selectedSlide, newImage);
+          }}
+        />
         <ActionButton icon="category" />
       </div>
     </div>

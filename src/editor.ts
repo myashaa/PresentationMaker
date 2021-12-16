@@ -1,3 +1,4 @@
+import { updateHistory } from "./model/editor/EditorActions";
 import { Editor } from "./model/editor/EditorTypes";
 
 let editor = {} as Editor;
@@ -15,9 +16,13 @@ function addChangeHandler(handler: Function) {
   editorChangeHandler = handler;
 }
 
-function dispatch(modify: Function, ...payload: any) {
+function dispatch(modify: Function, history: boolean = false, ...payload: any) {
   const newEditor = modify(editor, ...payload);
-  setEditor(newEditor);
+  if (history) {
+    setEditor(updateHistory(newEditor));
+  } else {
+    setEditor(newEditor);
+  }
 
   if (editorChangeHandler) {
     editorChangeHandler();

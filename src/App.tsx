@@ -8,8 +8,6 @@ import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
-import { dispatch } from "./editor";
-import { updateHistory } from "./model/editor/EditorActions";
 import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
@@ -20,10 +18,14 @@ function App({ editor }: AppProps) {
   const { slideList, name, selectedSlidesIds, selectedElementIds } =
     editor.presentation;
 
-    useEffect(() => {
+  const currentSlide = slideList.filter(
+    (slide) => slide.id === selectedSlidesIds[selectedSlidesIds.length - 1]
+  )[0];
 
-      console.log(editor)
-    }, [editor])
+  useEffect(() => {
+    // console.log("elements", currentSlide.elementList);
+    document.title = editor.presentation.name;
+  }, [editor]);
 
   return (
     <div className="app">
@@ -43,11 +45,7 @@ function App({ editor }: AppProps) {
           slides={slideList}
           selectedSlides={selectedSlidesIds}
         />
-        <Editor
-          slideId={selectedSlidesIds[selectedSlidesIds.length - 1]}
-          slide={slideList[selectedSlidesIds[selectedSlidesIds.length - 1]]}
-          selectedElements={selectedElementIds}
-        />
+        <Editor slide={currentSlide} selectedElements={selectedElementIds} />
         <ElementsPanel />
       </div>
     </div>

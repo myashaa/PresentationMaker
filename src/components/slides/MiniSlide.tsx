@@ -1,4 +1,3 @@
-import React, { MouseEvent } from "react";
 import { Element as ElementType } from "../../model/element/ElementTypes";
 import { Background } from "../../model/slide/SlideTypes";
 import { SlideElement } from "../editor/SlideElement";
