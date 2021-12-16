@@ -38,21 +38,23 @@ export function MiniSlide({
     >
       <span className={styles.slideIndex}>{index}</span>
       <div className={styles.slideMiniature}>
-        <span
-          className={`${styles.slideRemove} material-icons`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete && onDelete();
-          }}
-        >
-          close
-        </span>
-        <div className={styles.slidePreviewMini}>
+        {selected && (
+          <span
+            className={`${styles.slideRemove} material-icons`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete && onDelete();
+            }}
+          >
+            close
+          </span>
+        )}
+        {/* <div className={styles.slidePreviewMini}>
           {elements &&
             elements.map((element, index) => (
               <SlideElement key={index} element={element} />
             ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
