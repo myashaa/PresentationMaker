@@ -2,6 +2,7 @@ import { Image, Text } from "../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";
+import { loadImage } from "../../model/element/ImageActions";
 import { createElement } from "../../model/slide/SlideActions";
 import { createSlide } from "../../model/presentation/PresentationActions";
 
@@ -56,10 +57,11 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
         <ActionButton
           icon="image"
           onClick={() => {
-            const newImage: Image = {
-              url: "https://via.placeholder.com/150",
-            };
-            dispatch(createElement, true, selectedSlide, newImage);
+            loadImage('https://via.placeholder.com/150')
+            .then(newImage => {
+              console.log(newImage);
+              dispatch(createElement, true, selectedSlide, newImage); 
+            })
           }}
         />
         <ActionButton icon="category" />
