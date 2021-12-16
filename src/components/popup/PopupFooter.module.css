@@ -1,0 +1,29 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  border: none;
+  outline: none;  
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Montserrat";
+  padding: 12px 25px;
+  border-radius: 8px;
+  transition: 250ms;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #fff2b2;
+  color: #69623b;
+}
+
+.button:hover {
+  transition: 250ms;
+}
+
+.button:active {
+  transform: scaleX(0.97) scaleY(0.97);
+}
