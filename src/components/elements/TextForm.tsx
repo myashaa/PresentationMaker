@@ -12,62 +12,62 @@ export function TextForm({}: TextFormProps) {
         <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
         <span className={styles.headerFormTitle}>Текст</span>
       </div>
-      <FieldInput label={"Высота"} type={"number"} />
-      <FieldInput label={"Ширина"} type={"number"} />
-      <FieldInput label={"Отступ сверху"} type={"number"} />
-      <FieldInput label={"Отступ слева"} type={"number"} />
-      <FieldInput label={"Рамка"} type={"number"} />
-      <FieldSelect items={["точечная", "пунктирная", "сплошная", "двойная"]} />
-      <FieldSelect
-        items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
-        ]}
-      />
-      <FieldSelect
-        label={"Заливка"}
-        items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
-        ]}
-      />
-      <div className={styles.line}></div>
       <FieldSelect label={"Шрифт"} items={["Arial", "Roboto", "Open Sans"]} />
       <FieldInput label={"Размер"} type={"number"} />
       <FieldSelect
         label={"Цвет"}
         items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
         ]}
       />
       <FieldCheckbox label={"Жирный"} />
       <FieldCheckbox label={"Подчеркнутый"} />
       <FieldCheckbox label={"Курсивный"} />
+      <div className={styles.line}></div>
+      <FieldInput label={"Высота"} type={"number"} />
+      <FieldInput label={"Ширина"} type={"number"} />
+      <FieldInput label={"Отступ сверху"} type={"number"} />
+      <FieldInput label={"Отступ слева"} type={"number"} />
+      <FieldInput label={"Рамка"} type={"number"} />
+      <FieldSelect items={["Точечная", "Пунктирная", "Сплошная", "Двойная"]} />
+      <FieldSelect
+        items={[
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
+        ]}
+      />
+      <FieldSelect
+        label={"Заливка"}
+        items={[
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
+        ]}
+      />
     </div>
   );
 }

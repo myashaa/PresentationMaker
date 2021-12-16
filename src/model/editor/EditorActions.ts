@@ -45,7 +45,7 @@ export function createPresentation(editor: Editor): Editor {
       states: [],
     },
     presentation: {
-      name: "New Presentation",
+      name: "Название презентации",
       slideList: [],
       selectedSlidesIds: [],
       selectedElementIds: [],
