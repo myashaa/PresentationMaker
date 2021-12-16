@@ -8,6 +8,8 @@ import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
+import { useHotKey } from "./hooks/useHotKey";
+import { dispatch } from "./editor";
 // import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
