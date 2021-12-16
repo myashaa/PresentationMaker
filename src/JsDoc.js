@@ -35,14 +35,14 @@ function createSlide(editor) {} // ?
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @return { Editor }  //
  */
 function deleteSlide(editor, index) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { number } indexTo
  * @return { Editor }
  */
@@ -50,14 +50,14 @@ function moveSlide(editor, slideId, indexTo) {}
 
 /**
  * @param { Editor } editor
- * @param { number[] } slideIds
+ * @param { string[] } slideIds
  * @return { Editor }
  */
 function selectSlides(editor, slideIds) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { string } backgroundType
  * @return { Editor }
  */
@@ -65,37 +65,37 @@ function setBackground(editor, slideId, backgroundType) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @return { Editor }
  */
 function clearBackground(editor, slideId) {}
 
 /**
  * @param { Editor } editor // заменить Slide на Editor передавать slideId
- * @param { number } slideId
- * @param { (Text | Image | Figure) } elementType
+ * @param { string } slideId
+ * @param { (Text & Image & Figure) } elementType
  * @return { Editor }
  */
 function createElement(editor, slideId, elementType) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
- * @param { number } elementId
+ * @param { string } slideId
+ * @param { string } elementId
  * @return { Editor }
  */
 function removeElement(editor, slideId, elementId) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @return { Editor }
  */
 function removeElements(editor, slideId) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { Position } position
  * @return { Editor }
@@ -104,7 +104,7 @@ function moveElement(editor, slideId, element, position) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { number } width
  * @param { number } height
@@ -114,7 +114,7 @@ function resizeElement(editor, slideId, element, width, heigth) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { Border } border
  * @return { Editor }
@@ -123,7 +123,7 @@ function changeElementBorder(editor, slideId, element, border) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { string } color
  * @return { Editor }
@@ -132,7 +132,7 @@ function changeElementColor(editor, slideId, element, color) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { string } fontFamily
  * @return { Editor }
@@ -141,7 +141,7 @@ function setFontFamily(editor, slideId, element, fontFamily) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { string } color
  * @return { Editor }
@@ -150,7 +150,7 @@ function sentFontColor(editor, slideId, element, color) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { number } size
  * @return { Editor }
@@ -159,7 +159,7 @@ function setFontSize(editor, sldeId, element, size) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @param { string } filter
  * @return { Editor }
@@ -168,7 +168,7 @@ function setFilter(editor, slideId, element, filter) {}
 
 /**
  * @param { Editor } editor
- * @param { number } slideId
+ * @param { string } slideId
  * @param { Element } element
  * @return { Editor }
  */
@@ -192,7 +192,7 @@ function loadImage(editor, element, image) {}
 /**
  * @param { Editor } editor
  * @param { Presentation } presentation
- * @param { number } slideId
+ * @param { string } slideId
  * @return { Editor }
  */
 function selectSlide(editor, presentation, slideId) {}

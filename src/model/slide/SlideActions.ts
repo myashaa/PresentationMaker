@@ -7,14 +7,14 @@ import { Background } from "./SlideTypes";
 // Установка фона для слайда
 export function setBackground(
   editor: Editor,
-  slideId: number,
+  slideId: string,
   background: Background
 ): Editor {
   const { presentation } = editor;
   const { slideList } = presentation;
 
-  const newSlideList = slideList.map((slide, index) =>
-    index === slideId ? { ...slide, background } : slide
+  const newSlideList = slideList.map((slide) =>
+    slide.id === slideId ? { ...slide, background } : slide
   );
 
   const newEditor: Editor = {
@@ -29,13 +29,13 @@ export function setBackground(
 }
 
 // Очистка фона слайда
-export function clearBackground(editor: Editor, slideId: number): Editor {
+export function clearBackground(editor: Editor, slideId: string): Editor {
   const background: Background = {
     color: "#FFFFFF",
   };
 
-  const newSlideList = editor.presentation.slideList.map((slide, index) =>
-    index === slideId ? { ...slide, background } : slide
+  const newSlideList = editor.presentation.slideList.map((slide) =>
+    slide.id === slideId ? { ...slide, background } : slide
   );
 
   return {
@@ -83,17 +83,17 @@ export function createElement(
 // Удаление элемента
 export function removeElement(
   editor: Editor,
-  slideId: number,
-  elementId: number
+  slideId: string,
+  elementId: string
 ): Editor {
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
       return {
         ...slide,
         // ???
-        elementList: elementList.filter((element, id) => id !== elementId),
+        elementList: elementList.filter((element) => element.id !== elementId),
       };
     }
     return slide;
@@ -111,18 +111,18 @@ export function removeElement(
 // Удаление элементов
 export function removeElements(
   editor: Editor,
-  slideId: number,
-  elementIds: number[]
+  slideId: string,
+  elementIds: string[]
 ) {
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
       return {
         ...slide,
         elementList: elementList.filter(
           // ???
-          (element, id) => !elementIds.some(() => id)
+          (element) => !elementIds.some(() => element.id)
         ),
       };
     }
@@ -172,18 +172,18 @@ export function moveElement(
 // Изменение размеров элемента
 export function resizeElement(
   editor: Editor,
-  slideId: number,
-  elementId: number,
+  slideId: string,
+  elementId: string,
   newWidth: number,
   newHeight: number
 ): Editor {
   const { slideList } = editor.presentation;
 
-  const newSlideList = slideList.map((slide, index) => {
-    if (index === slideId) {
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
       const { elementList } = slide;
       const newElementList = elementList.map((element, id) =>
-        id === elementId
+        element.id === elementId
           ? { ...element, width: newWidth, height: newHeight }
           : element
       );
