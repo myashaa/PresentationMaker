@@ -79,7 +79,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
                   url: "https://via.placeholder.com/150",
                 };
 
-                if (file.type === "image/png") {
+                if (file.type.includes("image")) {
                   newImage.url = String(reader.result);
                 }
 
