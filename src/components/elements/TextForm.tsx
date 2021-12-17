@@ -6,6 +6,12 @@ import { useState } from "react";
 
 type TextFormProps = {};
 
+// для списка элементов нужно для кей
+type TListElement = {
+  id: string;
+  value: string;
+}
+
 const fonts = ["Arial", "Roboto", "Open Sans"]
 
 export function TextForm({ }: TextFormProps) {

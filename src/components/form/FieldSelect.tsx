@@ -12,7 +12,9 @@ export function FieldSelect({ label, items, onChange }: FieldSelectProps) {
     <Field label={label}>
       <select className={styles.fielSelect}>
         <option>Не выбрано</option>
+        {/* проблема */}
         {items?.map((item, index) => (
+          
           <option key={index} onClick={() => onChange && onChange(item)}>{item}</option>
         ))}
       </select>
