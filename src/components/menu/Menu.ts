@@ -2,6 +2,7 @@ import { dispatch } from "../../editor";
 import {
   loadPresentation,
   renamePresentation,
+  savePresentation,
 } from "../../model/editor/EditorActions";
 
 export const menu = [
@@ -19,12 +20,16 @@ export const menu = [
           fileInputNode.click();
           fileInputNode.addEventListener("change", () => {
             console.log(fileInputNode.files?.[0]);
-            loadPresentation(fileInputNode.files?.[0]);
+            // loadPresentation(fileInputNode.files?.[0]);
           });
         },
       },
       { label: "" },
-      { icon: "download_for_offline", label: "Сохранить" },
+      {
+        icon: "download_for_offline", label: "Сохранить", action: () => {
+          dispatch(savePresentation, false, {});
+        }
+      },
       { icon: "downloading", label: "Сохранить как pdf" },
       { label: "" },
       {

@@ -23,7 +23,7 @@ function App({ editor }: AppProps) {
   )[0];
 
   useEffect(() => {
-    // console.log("elements", currentSlide.elementList);
+    console.log("editor", editor);
     document.title = editor.presentation.name;
   }, [editor]);
 
