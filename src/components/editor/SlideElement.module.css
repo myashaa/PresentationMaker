@@ -2,26 +2,37 @@
   position: absolute;
   cursor: pointer;
   border-radius: 4px;
-  /* transition: 250ms border-color, 250ms transform; */
-  border-color: #fff;
-  padding: 12px;
+  border-color: rgba(255, 255, 255, 0);
+  border-width: 2px;
+  padding: 10px;
 }
 
 .element p {
   margin: 0;
   outline: none;
+  overflow: hidden;
 }
 
-.element:hover {
+.element::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  transition: 250ms border-color, 250ms transform;
+}
+
+.element:hover::before {
   border: 2px solid #e2e2e2;
   transition: 250ms border-color, 250ms transform;
-  padding: 12px;
 }
 
-.element.selected {
+.element.selected::before {
   border: 2px solid #fff2b2;
   transition: 250ms border-color, 250ms transform;
-  padding: 10px;
 }
 
 .moving.moving {

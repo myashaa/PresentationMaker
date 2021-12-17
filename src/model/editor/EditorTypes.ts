@@ -6,3 +6,8 @@ export type Editor = {
   history: PresentationHistory;
   presentation: Presentation;
 };
+
+export type Position = {
+  x: number;
+  y: number;
+};

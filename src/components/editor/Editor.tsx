@@ -15,8 +15,6 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
   const elements = slide?.elementList.map((element, index) => (
     <SlideElement
       key={index}
-      id={slide.id}
-      slideId={slideId}
       element={element}
       selected={selectedElements?.some((id) => id === element.id)}
       onClick={(onCtrl) => {
@@ -26,6 +24,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
       }}
     />
   ));
+
 
   return (
     <div className={styles.appEditorContainer}>
