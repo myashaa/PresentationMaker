@@ -8,6 +8,8 @@ import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
+import { useHotKey } from "./hooks/useHotKey";
+import { dispatch } from "./editor";
 import { Popup } from "./components/popup/Popup";
 
 type AppProps = {
@@ -23,7 +25,6 @@ function App({ editor }: AppProps) {
   )[0];
 
   useEffect(() => {
-    console.log("editor", editor);
     document.title = editor.presentation.name;
   }, [editor]);
 

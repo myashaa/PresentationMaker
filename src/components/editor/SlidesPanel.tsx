@@ -1,4 +1,5 @@
 import { dispatch } from "../../editor";
+import { useHotKey } from "../../hooks/useHotKey";
 import {
   deleteSlides,
   selectSlides,
@@ -18,6 +19,10 @@ export const SlidesPanel = ({
   slides,
   selectedSlides,
 }: SlidesPanelProps) => {
+  useHotKey(() => {
+    dispatch(deleteSlides, true, selectedSlides);
+  }, "Delete");
+
   const selectSlideHandle = (ids: string[]) => {
     dispatch(selectSlides, false, ids);
   };
@@ -40,7 +45,6 @@ export const SlidesPanel = ({
       }}
       onDelete={() => {
         dispatch(deleteSlides, true, selectedSlides);
-        // TODO: Выделение слайдов после удаления
       }}
     />
   ));
