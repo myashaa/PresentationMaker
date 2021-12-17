@@ -11,6 +11,8 @@ export function ImageForm({}: ImageFormProps) {
         <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
         <span className={styles.headerFormTitle}>Изображение</span>
       </div>
+      <FieldSelect label={"Фильтр"} items={["Блюр", "Выделение цвета"]} />  
+      <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} />
       <FieldInput label={"Ширина"} type={"number"} />
       <FieldInput label={"Отступ сверху"} type={"number"} />
@@ -19,35 +21,33 @@ export function ImageForm({}: ImageFormProps) {
       <FieldSelect items={["точечная", "пунктирная", "сплошная", "двойная"]} />
       <FieldSelect
         items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
         ]}
       />
       <FieldSelect
         label={"Заливка"}
         items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
         ]}
       />
-      <div className={styles.line}></div>
-      <FieldSelect label={"Фильтр"} items={["блюр", "выделение цвета"]} />
     </div>
   );
 }

@@ -2,27 +2,37 @@
   position: absolute;
   cursor: pointer;
   border-radius: 4px;
-  /* transition: 250ms border-color, 250ms transform; */
-  border-color: #fff;
-  padding: 12px;
+  border-color: rgba(255, 255, 255, 0);
+  border-width: 2px;
+  padding: 10px;
 }
 
 .element p {
   margin: 0;
   outline: none;
+  overflow: hidden;
 }
 
-.element:hover {
-  border: 2px dashed #f2f2f2;
+.element::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 4px;
   transition: 250ms border-color, 250ms transform;
-  padding: 12px;
 }
 
-.element.selected {
-  border-color: #ffdd00;
-  border-style: dashed;
+.element:hover::before {
+  border: 2px solid #e2e2e2;
   transition: 250ms border-color, 250ms transform;
-  padding: 10px;
+}
+
+.element.selected::before {
+  border: 2px solid #fff2b2;
+  transition: 250ms border-color, 250ms transform;
 }
 
 .moving.moving {
@@ -33,33 +43,33 @@
 .resizer {
   position: absolute;
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
   background-color: #fff;
-  border: 2px solid #ffdd00;
-  border-radius: 4px;
+  border: 2px solid #fff2b2;
+  border-radius: 2px;
 }
 
 .rt {
-  top: -8px;
-  right: -8px;
+  top: -5px;
+  right: -5px;
   cursor: sw-resize;
 }
 
 .rb {
-  bottom: -8px;
-  right: -8px;
+  bottom: -5px;
+  right: -5px;
   cursor: se-resize;
 }
 
 .lt {
-  top: -8px;
-  left: -8px;
+  top: -5px;
+  left: -5px;
   cursor: nw-resize;
 }
 
 .lb {
-  bottom: -8px;
-  left: -8px;
+  bottom: -5px;
+  left: -5px;
   cursor: ne-resize;
 }

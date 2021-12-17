@@ -11,45 +11,45 @@ export function FigureForm({}: FigureFormProps) {
         <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
         <span className={styles.headerFormTitle}>Фигура</span>
       </div>
+      <FieldSelect
+        label={"Тип фигуры"}
+        items={["Круг", "Треугольник", "Прямоугольник"]}
+      />
+      <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} />
       <FieldInput label={"Ширина"} type={"number"} />
       <FieldInput label={"Отступ сверху"} type={"number"} />
       <FieldInput label={"Отступ слева"} type={"number"} />
       <FieldInput label={"Рамка"} type={"number"} />
-      <FieldSelect items={["точечная", "пунктирная", "сплошная", "двойная"]} />
+      <FieldSelect items={["Точечная", "Пунктирная", "Сплошная", "Двойная"]} />
       <FieldSelect
         items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
         ]}
       />
       <FieldSelect
         label={"Заливка"}
         items={[
-          "красный",
-          "оранжевый",
-          "желтый",
-          "зеленый",
-          "голубой",
-          "синий",
-          "фиолетовый",
-          "розовый",
-          "белый",
-          "черный",
+          "Красный",
+          "Оранжевый",
+          "Желтый",
+          "Зеленый",
+          "Голубой",
+          "Синий",
+          "Фиолетовый",
+          "Розовый",
+          "Белый",
+          "Черный",
         ]}
-      />
-      <div className={styles.line}></div>
-      <FieldSelect
-        label={"Тип фигуры"}
-        items={["круг", "треугольник", "прямоугольник"]}
       />
     </div>
   );

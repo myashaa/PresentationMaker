@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.exit {
+  top: -43px;
+  right: -45px;
+  position: absolute;
+  padding: 8px;
+  font-size: 24px;
+  color: #c7c7c7;
+  transition: 200ms;
+  cursor: pointer;
+}
+
+.exit:hover {
+  color: #000;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0 0 0;
+}

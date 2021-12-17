@@ -4,7 +4,10 @@ import { ActionButton } from "./ActionButton";
 import { dispatch } from "../../editor";
 import { loadImage } from "../../model/element/ImageActions";
 import { createElement } from "../../model/slide/SlideActions";
-import { createSlide } from "../../model/presentation/PresentationActions";
+import {
+  createSlide,
+  deleteSlides,
+} from "../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
 import { Editor } from "../../model/editor/EditorTypes";
@@ -24,6 +27,12 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
         primary
         onClick={() => {
           dispatch(createSlide, true, {});
+        }}
+      />
+      <ActionButton
+        icon="delete"
+        onClick={() => {
+          dispatch(deleteSlides, false, editor.presentation.selectedSlidesIds);
         }}
       />
       <ActionButton

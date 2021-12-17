@@ -2,9 +2,9 @@ import { Editor } from "./EditorTypes";
 import { Presentation } from "../presentation/PresentationTypes";
 import { createSlide } from "../presentation/PresentationActions";
 
-export function loadPresentation(file?: File) {
+export function loadPresentation(file: File) {
   // console.log("file", file);
-  // const dataStr = window.URL.createObjectURL(file);
+  const dataStr = window.URL.createObjectURL(file);
   // console.log("data", dataStr);
   // let presentation = {};
   // fetch(filePath)
@@ -13,18 +13,20 @@ export function loadPresentation(file?: File) {
   // return presentation;
 }
 
-export function savePresentation(presentation: Presentation) {
-  const toJSON = JSON.stringify(presentation);
+export function savePresentation(editor: Editor) {
+  const toJSON = JSON.stringify(editor.presentation);
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(toJSON);
 
   const downloadAnchorNode = document.createElement("a");
   downloadAnchorNode.setAttribute("href", dataStr);
-  downloadAnchorNode.setAttribute("download", presentation.name + ".json");
+  downloadAnchorNode.setAttribute("download", editor.presentation.name + ".json");
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
+
+  return editor;
 }
 
-export function exportPresentation(presentation: Presentation) {}
+export function exportPresentation(presentation: Presentation) { }
 
 export function renamePresentation(editor: Editor, name: string): Editor {
   const newEditor: Editor = {
@@ -45,7 +47,7 @@ export function createPresentation(editor: Editor): Editor {
       states: [],
     },
     presentation: {
-      name: "New Presentation",
+      name: "Название презентации",
       slideList: [],
       selectedSlidesIds: [],
       selectedElementIds: [],
@@ -90,11 +92,11 @@ export function updateHistory(editor: Editor): Editor {
     },
   };
 
-  const newStates = newEditor.history.states.filter((value, index) => 
+  const newStates = newEditor.history.states.filter((value, index) =>
     index <= newEditor.history.index && value)
 
   newEditor.history.states = [...newStates, editor.presentation]
-    
+
   return newEditor;
 }
 
