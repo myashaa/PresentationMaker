@@ -11,6 +11,6 @@ type ElementsPanelProps = {
 
 export const ElementsPanel = ({ width = 300 }: ElementsPanelProps) => {
   return <div className={styles.sidePanel} style={{ width }}>
-    {/* <FigureForm /> */}
+    <TextForm />
   </div>;
 };
