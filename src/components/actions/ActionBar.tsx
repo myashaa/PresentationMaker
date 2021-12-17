@@ -31,6 +31,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
       />
       <ActionButton
         icon="delete"
+        primary
         onClick={() => {
           dispatch(deleteSlides, false, editor.presentation.selectedSlidesIds);
         }}
