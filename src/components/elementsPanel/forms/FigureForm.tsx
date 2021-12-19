@@ -5,8 +5,9 @@ import { FieldInput } from "../../fields/FieldInput";
 import { Element } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
 import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
-import { changeElementColor, changeFigureColor } from "../../../model/element/ElementActions";
+import { changeElementColor } from "../../../model/element/ElementActions";
 import { Figures } from "../../../model/element/FigureTypes";
+import { changeFigureColor } from "../../../model/element/FigureActions";
 
 type FigureFormProps = {
   element?: Element;
