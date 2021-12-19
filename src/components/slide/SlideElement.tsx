@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { COLORS } from "../../colors";
 import { Element as ElementType } from "../../model/element/ElementTypes";
 import { classnames } from "../../utils";
 import { CircleFigure } from "./figures/CircleFigure";
@@ -15,7 +16,7 @@ type ElementProps = {
 export function SlideElement({ element, selected, onClick }: ElementProps) {
   const elementRef = useRef(null);
 
-  const isText = element.data.hasOwnProperty("font");
+  const isText = element.data.hasOwnProperty("font"); 
   const isImage = element.data.hasOwnProperty("url");
   const isFigure = element.data.hasOwnProperty("type");
 
@@ -25,6 +26,10 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
     top: element.position.y,
     left: element.position.x,
     backgroundColor: element.color,
+    outlineStyle: element.border?.type ? element.border?.type : "solid",
+    outlineWidth: element.border?.width ? element.border?.width : "0",
+    outlineColor: element.border?.color ? element.border?.color : COLORS.black,
+    outlineOffset: `-${element.border?.width}px`,
     fontWeight: element.data.bold ? "bold" : "400",
     textDecoration: element.data.underline ? "underline" : "none",
     fontStyle: element.data.italic ? "italic" : "none"
