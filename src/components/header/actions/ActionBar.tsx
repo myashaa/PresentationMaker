@@ -1,17 +1,17 @@
-import { Figure, Image, Text } from "../../model/element/ElementTypes";
+import { Figure, Image, Text } from "../../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
-import { dispatch } from "../../editor";
-import { loadImage } from "../../model/element/ImageActions";
-import { createElement } from "../../model/slide/SlideActions";
+import { dispatch } from "../../../editor";
+import { loadImage } from "../../../model/element/ImageActions";
+import { createElement } from "../../../model/slide/SlideActions";
 import {
   createSlide,
   deleteSlides,
-} from "../../model/presentation/PresentationActions";
+} from "../../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
-import { Editor } from "../../model/editor/EditorTypes";
-import { undo, redo } from "../../model/editor/EditorActions";
+import { Editor } from "../../../model/editor/EditorTypes";
+import { undo, redo } from "../../../model/editor/EditorActions";
 
 type ActionBarProps = {
   selectedSlide: string;

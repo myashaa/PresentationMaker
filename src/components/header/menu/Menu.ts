@@ -1,10 +1,10 @@
-import { dispatch } from "../../editor";
+import { dispatch } from "../../../editor";
 import {
   loadPresentation,
   renamePresentation,
   savePresentation,
   setPresentation,
-} from "../../model/editor/EditorActions";
+} from "../../../model/editor/EditorActions";
 
 export const menu = [
   {

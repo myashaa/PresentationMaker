@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Element as ElementType } from "../../model/element/ElementTypes";
 import { classnames } from "../../utils";
 import styles from "./SlideElement.module.css";

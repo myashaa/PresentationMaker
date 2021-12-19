@@ -5,8 +5,8 @@ import {
   selectSlides,
 } from "../../model/presentation/PresentationActions";
 import { Slide } from "../../model/slide/SlideTypes";
-import { MiniSlide } from "../slides/MiniSlide";
-import styles from "./SidePanel.module.css";
+import { MiniSlide } from "./MiniSlide";
+import styles from "./SlidesPanel.module.css";
 
 type SlidesPanelProps = {
   width?: number;

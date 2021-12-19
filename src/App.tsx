@@ -1,16 +1,15 @@
 import { Header } from "./components/header/Header";
-import { ActionBar } from "./components/actions/ActionBar";
 import { Editor } from "./components/editor/Editor";
 import { Editor as EditorType } from "./model/editor/EditorTypes";
-
-import { SlidesPanel } from "./components/editor/SlidesPanel";
-import { ElementsPanel } from "./components/editor/ElementsPanel";
 
 import "./App.css";
 import { useEffect } from "react";
 import { useHotKey } from "./hooks/useHotKey";
 import { dispatch } from "./editor";
 import { Popup } from "./components/popup/Popup";
+import { ActionBar } from "./components/header/actions/ActionBar";
+import { SlidesPanel } from "./components/slidesPanel/SlidesPanel";
+import { ElementsPanel } from "./components/elementsPanel/ElementsPanel";
 
 type AppProps = {
   editor: EditorType;
