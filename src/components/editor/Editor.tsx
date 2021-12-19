@@ -4,6 +4,9 @@ import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
 import { SlideElement } from "../slide/SlideElement";
 import { Empty } from "../slide/Empty";
+import { SquareFigure } from "../slide/figures/SquareFigure";
+import { CircleFigure } from "../slide/figures/CircleFigure";
+import { TriangleFigure } from "../slide/figures/TriangleFigure";
 
 type EditorProps = {
   slide?: Slide;
@@ -37,6 +40,7 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           }}
         >
           {elements}
+          {/* <TriangleFigure width={100} height={100} /> */}
         </div>
       )}
 

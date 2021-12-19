@@ -2,6 +2,48 @@ import { Editor } from "../editor/EditorTypes";
 import { Slide } from "../slide/SlideTypes";
 import { Element, Text } from "./ElementTypes";
 
+export function setFontBold(
+  editor: Editor,
+  slideId: string,
+  elementId: string,
+  bold: boolean
+) {
+  const { presentation } = editor;
+  const { slideList } = presentation;
+
+  const currentSlide = slideList.filter((slide) => slide.id === slideId)[0];
+  const { elementList } = currentSlide;
+
+  const currentElement = elementList.filter(
+    (element) => element.id === elementId
+  )[0];
+
+  // console.log(bold)
+
+  const elementData = currentElement.data as Text;
+  const elementFont = { ...elementData?.font };
+  const newElement = {
+    ...currentElement,
+    data: { ...elementData, font: elementFont, bold },
+  };
+
+  console.log(newElement)
+
+  const newElementList = elementList.map((element) => element.id === elementId ? newElement : element)
+
+  return {
+    ...editor,
+    presentation: {
+      ...presentation,
+      slideList: slideList.map((slide) =>
+        slideId === slideId
+          ? { ...slide, elementList: newElementList }
+          : slide
+      ),
+    },
+  };
+}
+
 export function setFontFamily(
   editor: Editor,
   slideId: number,

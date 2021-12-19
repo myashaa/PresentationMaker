@@ -55,8 +55,8 @@ export function createElement(
 ): Editor {
   const newElement: Element = {
     id: uuid4(),
-    width: -1,
-    height: -1,
+    width: 100,
+    height: 100,
     position: { x: random(0, 640), y: random(0, 480) },
     color: "#FFFFFF",
     data: content,

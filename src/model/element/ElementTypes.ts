@@ -32,6 +32,7 @@ export type Image = {
 
 export type Figure = {
   type: "circle" | "triangle" | "sguare";
+  fill: string;
 };
 
 export type Border = {

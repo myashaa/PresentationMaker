@@ -12,6 +12,7 @@ import {
 import styles from "./ActionBar.module.css";
 import { Editor } from "../../../model/editor/EditorTypes";
 import { undo, redo } from "../../../model/editor/EditorActions";
+import { COLORS } from "../../../colors";
 
 type ActionBarProps = {
   selectedSlide: string;
@@ -60,6 +61,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
                 size: 16,
                 color: "#000",
               },
+              bold: false
             };
             dispatch(createElement, true, selectedSlide, newText);
           }}
@@ -95,7 +97,8 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
           icon="category"
           onClick={() => {
             const newFigure: Figure = {
-              type: "circle"
+              type: "triangle",
+              fill: COLORS.primary
             };
             dispatch(createElement, true, selectedSlide, newFigure);
           }}

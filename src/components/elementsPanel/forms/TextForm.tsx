@@ -3,8 +3,14 @@ import { useState } from "react";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
 import { FieldCheckbox } from "../../fields/FieldCheckbox";
+import { Element } from "../../../model/element/ElementTypes";
+import { dispatch } from "../../../editor";
+import { setFontBold } from "../../../model/element/TextActions";
 
-type TextFormProps = {};
+type TextFormProps = {
+  element?: Element;
+  slideId?: string;
+};
 
 // для списка элементов нужно для кей
 type TListElement = {
@@ -16,11 +22,11 @@ const fonts = ["Arial", "Roboto", "Open Sans"]
 const colors = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый", "Розовый", "Белый", "Черный"]
 const borders = ["Сплошная", "Пунктирная", "Точечная", "Двойная"]
 
-export function TextForm({ }: TextFormProps) {
+export function TextForm({ element, slideId }: TextFormProps) {
   const [fontFamily, setFontFamily] = useState(fonts[0])
   const [fontSize, setFontSize] = useState(0)
   const [color, setColor] = useState(colors[0])  
-  const [isBold, setBold] = useState(false)
+  // const [isBold, setBold] = useState(false)
   const [isUnderline, setUnderline] = useState(false)
   const [isItalic, setItalic] = useState(false)
   const [height, setHeight] = useState(0)
@@ -41,18 +47,18 @@ export function TextForm({ }: TextFormProps) {
       <FieldSelect label={"Шрифт"} items={fonts} onChange={(value) => setFontFamily(value)} />
       <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} />
       <FieldSelect label={"Цвет"} items={colors} onChange={(value) => setColor(value)} />
-      <FieldCheckbox label={"Жирный"} checked={isBold} onChange={() => setBold(!isBold)} />
+      <FieldCheckbox label={"Жирный"} checked={element?.data.bold} onChange={() => dispatch(setFontBold, true, slideId, element?.id, !element?.data.bold)} />
       <FieldCheckbox label={"Подчеркнутый"} checked={isUnderline} onChange={() => setUnderline(!isUnderline)} />
       <FieldCheckbox label={"Курсивный"} checked={isItalic} onChange={() => setItalic(!isItalic)} />
       <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} onChange={(text) => setHeight(parseInt(text))} value={height.toString()} />
       <FieldInput label={"Ширина"} type={"number"} onChange={(text) => setWidth(parseInt(text))} value={width.toString()} />
-      <FieldInput label={"Отступ сверху"} type={"number"} onChange={(text) => setMarginTop(parseInt(text))} value={marginTop.toString()} />
-      <FieldInput label={"Отступ слева"} type={"number"} onChange={(text) => setMarginLeft(parseInt(text))} value={marginLeft.toString()} />
+      <FieldInput label={"Позиция сверху"} type={"number"} onChange={(text) => setMarginTop(parseInt(text))} value={marginTop.toString()} />
+      <FieldInput label={"Позиция слева"} type={"number"} onChange={(text) => setMarginLeft(parseInt(text))} value={marginLeft.toString()} />
       <FieldInput label={"Рамка"} type={"number"} onChange={(text) => setBorderWidth(parseInt(text))} value={borderWidth.toString()} />
       <FieldSelect items={borders} onChange={(value) => setBorderType(value)} />
       <FieldSelect items={colors} onChange={(value) => setBorderColor(value)} />
-      <FieldSelect label={"Заливка"} items={colors} onChange={(value) => setBackgroundColor(value)} />
+      <FieldSelect label={"Фон"} items={colors} onChange={(value) => setBackgroundColor(value)} />
     </div>
   );
 }

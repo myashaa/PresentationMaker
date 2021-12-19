@@ -30,12 +30,12 @@ export function ImageForm({ }: ImageFormProps) {
       <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} onChange={(text) => setHeight(parseInt(text))} value={height.toString()} />
       <FieldInput label={"Ширина"} type={"number"} onChange={(text) => setWidth(parseInt(text))} value={width.toString()} />
-      <FieldInput label={"Отступ сверху"} type={"number"} onChange={(text) => setMarginTop(parseInt(text))} value={marginTop.toString()} />
-      <FieldInput label={"Отступ слева"} type={"number"} onChange={(text) => setMarginLeft(parseInt(text))} value={marginLeft.toString()} />
+      <FieldInput label={"Позиция сверху"} type={"number"} onChange={(text) => setMarginTop(parseInt(text))} value={marginTop.toString()} />
+      <FieldInput label={"Позиция слева"} type={"number"} onChange={(text) => setMarginLeft(parseInt(text))} value={marginLeft.toString()} />
       <FieldInput label={"Рамка"} type={"number"} onChange={(text) => setBorderWidth(parseInt(text))} value={borderWidth.toString()} />
       <FieldSelect items={borders} onChange={(value) => setBorderType(value)} />
       <FieldSelect items={colors} onChange={(value) => setBorderColor(value)} />
-      <FieldSelect label={"Заливка"} items={colors} onChange={(value) => setBackgroundColor(value)} />
+      <FieldSelect label={"Фон"} items={colors} onChange={(value) => setBackgroundColor(value)} />
     </div>
   );
 }
