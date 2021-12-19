@@ -4,7 +4,7 @@ import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
 import { Element } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
-import { moveElement, resizeElement, setBackground } from "../../../model/slide/SlideActions";
+import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
 import { changeElementColor, changeFigureColor } from "../../../model/element/ElementActions";
 import { Figures } from "../../../model/element/FigureTypes";
 
@@ -42,7 +42,6 @@ export function FigureForm({slideId, element}: FigureFormProps) {
       <FieldInput label={"Рамка"} type={"number"} onChange={(text) => setBorderWidth(parseInt(text))} value={borderWidth.toString()} />
       <FieldSelect items={borders} onChange={(value) => setBorderType(value)} />
       <FieldSelect items={colors} onChange={(value) => setBorderColor(value)} />
-      {/* <FieldSelect label={"Заливка"} items={colors} onChange={(value) => setBackgroundColor(value)} /> */}
       <FieldInput label={"Фон"} onChange={(text) => dispatch(changeElementColor, true, slideId, element?.id, text)} value={element?.color?.toUpperCase()} />
     </div>
   );

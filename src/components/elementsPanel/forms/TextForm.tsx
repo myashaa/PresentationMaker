@@ -5,6 +5,8 @@ import { FieldInput } from "../../fields/FieldInput";
 import { FieldCheckbox } from "../../fields/FieldCheckbox";
 import { Element } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
+import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
+import { changeElementColor } from "../../../model/element/ElementActions";
 import { setFontBold } from "../../../model/element/TextActions";
 
 type TextFormProps = {
@@ -29,10 +31,6 @@ export function TextForm({ element, slideId }: TextFormProps) {
   // const [isBold, setBold] = useState(false)
   const [isUnderline, setUnderline] = useState(false)
   const [isItalic, setItalic] = useState(false)
-  const [height, setHeight] = useState(0)
-  const [width, setWidth] = useState(0)
-  const [marginTop, setMarginTop] = useState(0)
-  const [marginLeft, setMarginLeft] = useState(0)
   const [borderWidth, setBorderWidth] = useState(0)
   const [borderType, setBorderType] = useState(borders[0])
   const [borderColor, setBorderColor] = useState(colors[0])  
@@ -51,14 +49,14 @@ export function TextForm({ element, slideId }: TextFormProps) {
       <FieldCheckbox label={"Подчеркнутый"} checked={isUnderline} onChange={() => setUnderline(!isUnderline)} />
       <FieldCheckbox label={"Курсивный"} checked={isItalic} onChange={() => setItalic(!isItalic)} />
       <div className={styles.line}></div>
-      <FieldInput label={"Высота"} type={"number"} onChange={(text) => setHeight(parseInt(text))} value={height.toString()} />
-      <FieldInput label={"Ширина"} type={"number"} onChange={(text) => setWidth(parseInt(text))} value={width.toString()} />
-      <FieldInput label={"Позиция сверху"} type={"number"} onChange={(text) => setMarginTop(parseInt(text))} value={marginTop.toString()} />
-      <FieldInput label={"Позиция слева"} type={"number"} onChange={(text) => setMarginLeft(parseInt(text))} value={marginLeft.toString()} />
+      <FieldInput label={"Высота"} type={"number"} onChange={(text) => dispatch(resizeElement, true, slideId, element?.id, element?.width, parseInt(text))} value={element?.height.toString()} />
+      <FieldInput label={"Ширина"} type={"number"} onChange={(text) => dispatch(resizeElement, true, slideId, element?.id, parseInt(text), element?.height)} value={element?.width.toString()} />
+      <FieldInput label={"Позиция сверху"} type={"number"} onChange={(text) => dispatch(moveElement, true, slideId, element?.id, {x: element?.position.x, y: parseInt(text)})} value={element?.position.y.toString()} />
+      <FieldInput label={"Позиция слева"} type={"number"} onChange={(text) => dispatch(moveElement, true, slideId, element?.id, {x: parseInt(text), y: element?.position.y})} value={element?.position.x.toString()} />
       <FieldInput label={"Рамка"} type={"number"} onChange={(text) => setBorderWidth(parseInt(text))} value={borderWidth.toString()} />
       <FieldSelect items={borders} onChange={(value) => setBorderType(value)} />
       <FieldSelect items={colors} onChange={(value) => setBorderColor(value)} />
-      <FieldSelect label={"Фон"} items={colors} onChange={(value) => setBackgroundColor(value)} />
+      <FieldInput label={"Фон"} onChange={(text) => dispatch(changeElementColor, true, slideId, element?.id, text)} value={element?.color?.toUpperCase()} />
     </div>
   );
 }
