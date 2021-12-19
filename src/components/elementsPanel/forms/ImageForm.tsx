@@ -18,14 +18,9 @@ const borders = ["Сплошная", "Пунктирная", "Точечная",
 
 export function ImageForm({element, slideId}: ImageFormProps) {
   const [filter, setFilter] = useState(filters[0])
-  const [height, setHeight] = useState(0)
-  const [width, setWidth] = useState(0)
-  const [marginTop, setMarginTop] = useState(0)
-  const [marginLeft, setMarginLeft] = useState(0)
   const [borderWidth, setBorderWidth] = useState(0)
   const [borderType, setBorderType] = useState(borders[0])
   const [borderColor, setBorderColor] = useState(colors[0])  
-  const [backgroundColor, setBackgroundColor] = useState(colors[0])  
 
   return (
     <div className={styles.form}>
