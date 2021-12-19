@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
 import { MenuButton } from "./MenuButton";
 import { MenuBarProps } from "./MenuTypes";

@@ -1,16 +1,16 @@
 import styles from "./Form.module.css";
-import { FieldInput } from "../form/FieldInput";
-import { FieldSelect } from "../form/FieldSelect";
 import { useState } from "react";
+import { FieldSelect } from "../../fields/FieldSelect";
+import { FieldInput } from "../../fields/FieldInput";
 
-type ImageFormProps = {};
+type FigureFormProps = {};
 
-const filters = ["Блюр", "Чб"]
+const types = ["Прямоугольник", "Круг", "Треугольник"]
 const colors = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый", "Розовый", "Белый", "Черный"]
 const borders = ["Сплошная", "Пунктирная", "Точечная", "Двойная"]
 
-export function ImageForm({ }: ImageFormProps) {
-  const [filter, setFilter] = useState(filters[0])
+export function FigureForm({ }: FigureFormProps) {
+  const [type, setType] = useState(types[0])
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)
   const [marginTop, setMarginTop] = useState(0)
@@ -24,9 +24,9 @@ export function ImageForm({ }: ImageFormProps) {
     <div className={styles.form}>
       <div className={styles.headerForm}>
         <span className={`material-icons ${styles.headerFormIcon}`}>category</span>
-        <span className={styles.headerFormTitle}>Изображение</span>
+        <span className={styles.headerFormTitle}>Фигура</span>
       </div>
-      <FieldSelect label={"Фильтр"} items={filters} onChange={(value) => setFilter(value)} />
+      <FieldSelect label={"Тип фигуры"} items={types} onChange={(value) => setType(value)} />
       <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} onChange={(text) => setHeight(parseInt(text))} value={height.toString()} />
       <FieldInput label={"Ширина"} type={"number"} onChange={(text) => setWidth(parseInt(text))} value={width.toString()} />

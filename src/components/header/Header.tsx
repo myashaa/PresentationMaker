@@ -1,10 +1,10 @@
-import { MenuBar } from "../menu/MenuBar";
 import { Title } from "./Title";
-import { menu } from "../menu/Menu";
 
 import Logo from "../../assets/icons/logo.svg";
 
 import styles from "./Header.module.css";
+import { MenuBar } from "./menu/MenuBar";
+import { menu } from "./menu/Menu";
 
 type HeaderProps = {
   title?: string;

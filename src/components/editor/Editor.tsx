@@ -2,8 +2,8 @@ import { Slide } from "../../model/slide/SlideTypes";
 import styles from "./Editor.module.css";
 import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
-import { SlideElement } from "./SlideElement";
-import { Empty } from "./Empty";
+import { SlideElement } from "../slide/SlideElement";
+import { Empty } from "../slide/Empty";
 
 type EditorProps = {
   slide?: Slide;

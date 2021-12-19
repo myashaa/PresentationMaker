@@ -1,8 +1,8 @@
 import styles from "./Form.module.css";
-import { FieldInput } from "../form/FieldInput";
-import { FieldCheckbox } from "../form/FieldCheckbox";
-import { FieldSelect } from "../form/FieldSelect";
 import { useState } from "react";
+import { FieldSelect } from "../../fields/FieldSelect";
+import { FieldInput } from "../../fields/FieldInput";
+import { FieldCheckbox } from "../../fields/FieldCheckbox";
 
 type TextFormProps = {};
 
