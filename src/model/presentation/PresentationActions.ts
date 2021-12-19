@@ -1,3 +1,4 @@
+import { COLORS } from "../../colors";
 import { at, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Slide } from "../slide/SlideTypes";
@@ -10,7 +11,7 @@ export function createSlide(editor: Editor): Editor {
     id: uuid4(),
     elementList: [],
     background: {
-      color: "#FFFFFF",
+      color: COLORS.white,
     },
   };
 

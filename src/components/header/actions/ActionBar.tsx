@@ -59,7 +59,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
               font: {
                 family: "Montserrat",
                 size: 16,
-                color: "#000",
+                color: COLORS.black,
               },
               bold: false
             };

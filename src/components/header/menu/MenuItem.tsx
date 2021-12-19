@@ -1,6 +1,7 @@
 import { MenuItemProps } from "./MenuTypes";
 
 import styles from "./MenuItem.module.css";
+import { COLORS } from "../../../colors";
 
 export function MenuItem({
   label,
@@ -13,7 +14,7 @@ export function MenuItem({
       onClick={actionCallback}
     >
       {materialIcon && (
-        <span className="material-icons" style={{ color: "#d2d2d2" }}>
+        <span className="material-icons" style={{ color: COLORS.lightGrey }}>
           {materialIcon}
         </span>
       )}
