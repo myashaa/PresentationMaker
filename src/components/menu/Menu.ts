@@ -3,6 +3,7 @@ import {
   loadPresentation,
   renamePresentation,
   savePresentation,
+  setPresentation,
 } from "../../model/editor/EditorActions";
 
 export const menu = [
@@ -14,14 +15,9 @@ export const menu = [
         icon: "folder_open",
         label: "Открыть",
         action: () => {
-          // ...
-          const fileInputNode = document.createElement("input");
-          fileInputNode.type = "file";
-          fileInputNode.click();
-          fileInputNode.addEventListener("change", () => {
-            console.log(fileInputNode.files?.[0]);
-            // loadPresentation(fileInputNode.files?.[0]);
-          });
+          loadPresentation((object) => {
+            dispatch(setPresentation, false, object);
+          })
         },
       },
       { label: "" },

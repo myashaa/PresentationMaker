@@ -2,15 +2,37 @@ import { Editor } from "./EditorTypes";
 import { Presentation } from "../presentation/PresentationTypes";
 import { createSlide } from "../presentation/PresentationActions";
 
-export function loadPresentation(file: File) {
-  // console.log("file", file);
-  const dataStr = window.URL.createObjectURL(file);
-  // console.log("data", dataStr);
-  // let presentation = {};
-  // fetch(filePath)
-  //   .then((response) => response.json())
-  //   .then((json) => (presentation = JSON.parse(json)));
-  // return presentation;
+export function setPresentation(editor: Editor, presentation: Presentation): Editor {
+  const newEditor: Editor = {
+    ...editor,
+    history: {
+      index: -1,
+      states: [],
+    },
+    presentation: presentation,
+  };
+
+  return newEditor;
+}
+
+export function loadPresentation(callback: (object: any) => void) {
+
+  const fileInputNode = document.createElement("input");
+  fileInputNode.type = "file";
+  fileInputNode.click();
+  fileInputNode.addEventListener("change", () => {
+    const file = fileInputNode.files?.[0] as File;
+    
+    const dataStr = window.URL.createObjectURL(file);
+
+    fetch(dataStr)
+    .then((response) => response.json())
+    .then((json) => {
+      callback(json)
+    }
+      );
+  });
+
 }
 
 export function savePresentation(editor: Editor) {
