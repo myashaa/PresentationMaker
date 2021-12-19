@@ -7,7 +7,7 @@ import { Element } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
 import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
 import { changeElementColor } from "../../../model/element/ElementActions";
-import { setFontBold } from "../../../model/element/TextActions";
+import { setFontBold, setFontUnderline } from "../../../model/element/TextActions";
 
 type TextFormProps = {
   element?: Element;
@@ -28,7 +28,6 @@ export function TextForm({ element, slideId }: TextFormProps) {
   const [fontFamily, setFontFamily] = useState(fonts[0])
   const [fontSize, setFontSize] = useState(0)
   const [color, setColor] = useState(colors[0])  
-  // const [isBold, setBold] = useState(false)
   const [isUnderline, setUnderline] = useState(false)
   const [isItalic, setItalic] = useState(false)
   const [borderWidth, setBorderWidth] = useState(0)
@@ -46,7 +45,8 @@ export function TextForm({ element, slideId }: TextFormProps) {
       <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} />
       <FieldSelect label={"Цвет"} items={colors} onChange={(value) => setColor(value)} />
       <FieldCheckbox label={"Жирный"} checked={element?.data.bold} onChange={() => dispatch(setFontBold, true, slideId, element?.id, !element?.data.bold)} />
-      <FieldCheckbox label={"Подчеркнутый"} checked={isUnderline} onChange={() => setUnderline(!isUnderline)} />
+      {/* <FieldCheckbox label={"Подчеркнутый"} checked={isUnderline} onChange={() => setUnderline(!isUnderline)} /> */}
+      <FieldCheckbox label={"Подчеркнутый"} checked={element?.data.underline} onChange={() => dispatch(setFontUnderline, true, slideId, element?.id, !element?.data.underline)} />
       <FieldCheckbox label={"Курсивный"} checked={isItalic} onChange={() => setItalic(!isItalic)} />
       <div className={styles.line}></div>
       <FieldInput label={"Высота"} type={"number"} onChange={(text) => dispatch(resizeElement, true, slideId, element?.id, element?.width, parseInt(text))} value={element?.height.toString()} />

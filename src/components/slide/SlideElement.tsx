@@ -25,7 +25,8 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
     top: element.position.y,
     left: element.position.x,
     backgroundColor: element.color,
-    fontWeight: element.data.bold ? "bold" : "400"
+    fontWeight: element.data.bold ? "bold" : "400",
+    textDecoration: element.data.underline ? "underline" : "none"
   };
   const resizers = (
     <>
