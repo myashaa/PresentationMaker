@@ -1,4 +1,4 @@
-import { Image, Text } from "../../model/element/ElementTypes";
+import { Figure, Image, Text } from "../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../editor";
@@ -31,6 +31,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
       />
       <ActionButton
         icon="delete"
+        primary
         onClick={() => {
           dispatch(deleteSlides, false, editor.presentation.selectedSlidesIds);
         }}
@@ -90,7 +91,15 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
             })
           }}
         />
-        <ActionButton icon="category" />
+        <ActionButton
+          icon="category"
+          onClick={() => {
+            const newFigure: Figure = {
+              type: "circle"
+            };
+            dispatch(createElement, true, selectedSlide, newFigure);
+          }}
+        />
       </div>
     </div>
   );
