@@ -35,9 +35,15 @@ export type Figure = {
   fill: string;
 };
 
+export enum BorderVariant {
+  solid = "Сплошной",
+  dotted = "Точечная",
+  dashed = "Пунктирная"
+}
+
 export type Border = {
   width: number;
-  type: "solid" | "dotted" | "dashed";
+  type: BorderVariant;
   color: string;
 };
 

@@ -1,5 +1,6 @@
 import { dispatch } from "../../../editor";
 import {
+  createPresentation,
   loadPresentation,
   renamePresentation,
   savePresentation,
@@ -10,7 +11,11 @@ export const menu = [
   {
     label: "Презентация",
     actions: [
-      { icon: "create_new_folder", label: "Создать" },
+      {
+        icon: "create_new_folder", label: "Создать", action: () => {
+          dispatch(createPresentation, false)
+        }
+      },
       {
         icon: "folder_open",
         label: "Открыть",
@@ -43,8 +48,8 @@ export const menu = [
   //   actions: [
   //     { icon: "add", label: "Новый слайд" },
   //     { icon: "delete", label: "Удалить слайд" },
-      // { label: "" },
-      // { icon: "filter", label: "Изменить фон" },
+  // { label: "" },
+  // { icon: "filter", label: "Изменить фон" },
   //   ],
   // },
   // {
