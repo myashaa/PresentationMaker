@@ -1,23 +1,27 @@
 import { Field } from "./Field";
 import styles from "./Field.module.css";
+import { Select } from "./Select";
 
 type FieldSelectProps = {
   label?: string;
-  items?: string[];
-  onChange?: (value: string) => void
+  value?: string;
+  items: string[];
+  onChange?: (value: string) => void;
 };
 
-export function FieldSelect({ label, items, onChange }: FieldSelectProps) {
+export function FieldSelect({
+  label,
+  items,
+  value,
+  onChange,
+}: FieldSelectProps) {
   return (
     <Field label={label}>
-      <select className={styles.fielSelect}>
-        <option>Не выбрано</option>
-        {/* проблема */}
-        {items?.map((item, index) => (
-          
-          <option key={index} onClick={() => onChange && onChange(item)}>{item}</option>
-        ))}
-      </select>
+      <Select
+        values={items}
+        current={value}
+        onClick={(value) => onChange && onChange(value)}
+      />
     </Field>
   );
 }

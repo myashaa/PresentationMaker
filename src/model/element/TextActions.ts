@@ -25,18 +25,16 @@ export function setFontItalic(
     data: { ...elementData, font: elementFont, italic },
   };
 
-  console.log(newElement)
-
-  const newElementList = elementList.map((element) => element.id === elementId ? newElement : element)
+  const newElementList = elementList.map((element) =>
+    element.id === elementId ? newElement : element
+  );
 
   return {
     ...editor,
     presentation: {
       ...presentation,
       slideList: slideList.map((slide) =>
-        slideId === slideId
-          ? { ...slide, elementList: newElementList }
-          : slide
+        slideId === slideId ? { ...slide, elementList: newElementList } : slide
       ),
     },
   };
@@ -65,18 +63,16 @@ export function setFontUnderline(
     data: { ...elementData, font: elementFont, underline },
   };
 
-  console.log(newElement)
-
-  const newElementList = elementList.map((element) => element.id === elementId ? newElement : element)
+  const newElementList = elementList.map((element) =>
+    element.id === elementId ? newElement : element
+  );
 
   return {
     ...editor,
     presentation: {
       ...presentation,
       slideList: slideList.map((slide) =>
-        slideId === slideId
-          ? { ...slide, elementList: newElementList }
-          : slide
+        slideId === slideId ? { ...slide, elementList: newElementList } : slide
       ),
     },
   };
@@ -105,18 +101,16 @@ export function setFontBold(
     data: { ...elementData, font: elementFont, bold },
   };
 
-  console.log(newElement)
-
-  const newElementList = elementList.map((element) => element.id === elementId ? newElement : element)
+  const newElementList = elementList.map((element) =>
+    element.id === elementId ? newElement : element
+  );
 
   return {
     ...editor,
     presentation: {
       ...presentation,
       slideList: slideList.map((slide) =>
-        slideId === slideId
-          ? { ...slide, elementList: newElementList }
-          : slide
+        slideId === slideId ? { ...slide, elementList: newElementList } : slide
       ),
     },
   };
@@ -124,37 +118,37 @@ export function setFontBold(
 
 export function setFontFamily(
   editor: Editor,
-  slideId: number,
-  elementId: number,
+  slideId: string,
+  elementId: string,
   fontFamily: string
 ): Editor {
   const { presentation } = editor;
   const { slideList } = presentation;
 
-  // ???
-  const currentSlide = slideList.filter((slide, index) => index === slideId)[0];
+  const currentSlide = slideList.filter((slide) => slide.id === slideId)[0];
 
   const { elementList } = currentSlide;
   const currentElement = elementList.filter(
-    // ???
-    (element, index) => index === elementId
+    (element) => element.id === elementId
   )[0];
 
-  const elementData = currentElement.data as Text;
+  const elementData = currentElement.data;
   const elementFont = { ...elementData?.font, family: fontFamily };
   const newElement = {
     ...currentElement,
     data: { ...elementData, font: elementFont },
   };
 
+  const newElementList = elementList.map((element) =>
+    element.id === elementId ? newElement : element
+  );
+
   return {
     ...editor,
     presentation: {
       ...presentation,
-      slideList: slideList.map((slide, index) =>
-        index === slideId
-          ? { ...slide, elementList: { ...elementList, newElement } }
-          : slide
+      slideList: slideList.map((slide) =>
+        slide.id === slideId ? { ...slide, elementList: newElementList } : slide
       ),
     },
   };
