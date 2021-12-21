@@ -4,6 +4,12 @@ import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
 import { SlideElement } from "../slide/SlideElement";
 import { Empty } from "../slide/Empty";
+import { SquareFigure } from "../slide/figures/SquareFigure";
+import { CircleFigure } from "../slide/figures/CircleFigure";
+import { TriangleFigure } from "../slide/figures/TriangleFigure";
+import { Slidee } from "../slide/Slidee";
+import { COLORS } from "../../colors";
+import { url } from "inspector";
 
 type EditorProps = {
   slide?: Slide;
@@ -23,9 +29,13 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           dispatch(selectElements, false, [...selectedElements, element.id]);
       }}
     />
-  ));
-
-
+  ));  
+  const style = {
+    backgroundColor: slide?.background?.color ? slide.background.color : COLORS.lightGrey,
+    backgroundImage: `url(${slide?.background?.picture?.url})`,
+    backgroundSize: 'cover'
+  };
+  
   return (
     <div className={styles.appEditorContainer}>
       {slide && (
@@ -35,8 +45,10 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
             e.stopPropagation();
             dispatch(selectElements, false, []);
           }}
+          style={style}
         >
           {elements}
+          {/* <TriangleFigure width={100} height={100} /> */}
         </div>
       )}
 

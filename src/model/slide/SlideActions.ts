@@ -1,3 +1,4 @@
+import { COLORS } from "../../colors";
 import { random, uuid4 } from "../../utils";
 import { Editor } from "../editor/EditorTypes";
 import { Element } from "../element/ElementTypes";
@@ -31,7 +32,7 @@ export function setBackground(
 // Очистка фона слайда
 export function clearBackground(editor: Editor, slideId: string): Editor {
   const background: Background = {
-    color: "#FFFFFF",
+    color: COLORS.white,
   };
 
   const newSlideList = editor.presentation.slideList.map((slide) =>
@@ -55,10 +56,10 @@ export function createElement(
 ): Editor {
   const newElement: Element = {
     id: uuid4(),
-    width: -1,
-    height: -1,
+    width: 100,
+    height: 100,
     position: { x: random(0, 640), y: random(0, 480) },
-    color: "#FFFFFF",
+    color: COLORS.white,
     data: content,
   };
 

@@ -1,9 +1,9 @@
-import { Figure, Image, Text } from "../../../model/element/ElementTypes";
+import { Figure, Image as ImageType, Text } from "../../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../../editor";
 import { loadImage } from "../../../model/element/ImageActions";
-import { createElement } from "../../../model/slide/SlideActions";
+import { createElement, resizeElement } from "../../../model/slide/SlideActions";
 import {
   createSlide,
   deleteSlides,
@@ -12,13 +12,15 @@ import {
 import styles from "./ActionBar.module.css";
 import { Editor } from "../../../model/editor/EditorTypes";
 import { undo, redo } from "../../../model/editor/EditorActions";
+import { COLORS } from "../../../colors";
 
 type ActionBarProps = {
   selectedSlide: string;
   editor: Editor;
+  selectedElement: string;
 };
 
-export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
+export function ActionBar({ selectedSlide, editor, selectedElement }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
       <ActionButton
@@ -58,8 +60,9 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
               font: {
                 family: "Montserrat",
                 size: 16,
-                color: "#000",
+                color: COLORS.black,
               },
+              bold: false
             };
             dispatch(createElement, true, selectedSlide, newText);
           }}
@@ -76,7 +79,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
 
               reader.onloadend = function () {
 
-                const newImage: Image = {
+                const newImage: ImageType = {
                   url: "https://via.placeholder.com/150",
                 };
 
@@ -95,7 +98,8 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
           icon="category"
           onClick={() => {
             const newFigure: Figure = {
-              type: "circle"
+              type: "triangle",
+              fill: COLORS.primary
             };
             dispatch(createElement, true, selectedSlide, newFigure);
           }}

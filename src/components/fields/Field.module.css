@@ -10,6 +10,7 @@
   font-size: 16px;
   line-height: 30px;
   color: #000;
+  margin-left: 8px;
 }
 
 .fieldValue {
@@ -27,7 +28,6 @@
   font-size: 14px;
   padding: 5px 7px;
   border-radius: 5px;
-  margin-right: 8px;
 }
 
 .fieldInput:hover  {
@@ -44,7 +44,7 @@
 }
 
 .fielSelect {
-  width: 160px; 
+  width: 140px; 
   height: 32px;
   border: 1px solid #fff;
   background: #fafafa;
@@ -61,4 +61,16 @@
 
 .fielSelect:focus {
   border: 1px solid #000;
+}
+
+.fieldButton {
+  border: none;
+  background: #fff2b2;
+  color: #69623b;
+  outline: none;
+  font-family: "Montserrat";
+  font-size: 14px;
+  padding: 7px 11px;
+  border-radius: 5px;
+  cursor: pointer;
 }

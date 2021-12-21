@@ -17,7 +17,7 @@ export function FieldInput({ label, type, value, onChange }: FieldInputProps) {
         value={value}
         onChange={(e) => onChange && onChange(e.target.value)}
       />
-      <span className={styles.fieldLabel}>px</span>
+      {type === "number" && <span className={styles.fieldLabel}>px</span>}
     </Field>
   );
 }
