@@ -59,7 +59,6 @@ export function createElement(
     width: 100,
     height: 100,
     position: { x: random(0, 640), y: random(0, 480) },
-    color: COLORS.white,
     data: content,
   };
 

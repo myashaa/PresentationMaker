@@ -6,6 +6,7 @@ import { CircleFigure } from "./figures/CircleFigure";
 import { SquareFigure } from "./figures/SquareFigure";
 import { TriangleFigure } from "./figures/TriangleFigure";
 import styles from "./SlideElement.module.css";
+import { TextElement } from "./text/TextElement";
 
 type ElementProps = {
   element: ElementType;
@@ -16,7 +17,7 @@ type ElementProps = {
 export function SlideElement({ element, selected, onClick }: ElementProps) {
   const elementRef = useRef(null);
 
-  const isText = element.data.hasOwnProperty("font"); 
+  const isText = element.data.hasOwnProperty("font");
   const isImage = element.data.hasOwnProperty("url");
   const isFigure = element.data.hasOwnProperty("type");
 
@@ -33,7 +34,7 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
     fontWeight: element.data.bold ? "bold" : "400",
     textDecoration: element.data.underline ? "underline" : "none",
     fontStyle: element.data.italic ? "italic" : "none",
-    fontFamily: element.data.font.family || "Arial",
+    fontFamily: element?.data.font.family || "Arial",
   };
   const resizers = (
     <>
@@ -55,11 +56,29 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
       ref={elementRef}
     >
       {!isText && selected && resizers}
-      {isText && <p>{element?.data?.content}</p>}
+      {isText && <TextElement text={element?.data?.content} />}
       {isImage && <img src={element.data.url} alt="" />}
-      {isFigure && element.data?.type === "circle" && <CircleFigure fill={element.data.fill} width={element.width} height={element.height} />}
-      {isFigure && element.data?.type === "sguare" && <SquareFigure fill={element.data.fill} width={element.width} height={element.height} />}
-      {isFigure && element.data?.type === "triangle" && <TriangleFigure fill={element.data.fill} width={element.width} height={element.height} />}
+      {isFigure && element.data?.type === "circle" && (
+        <CircleFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )}
+      {isFigure && element.data?.type === "sguare" && (
+        <SquareFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )}
+      {isFigure && element.data?.type === "triangle" && (
+        <TriangleFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )}
     </div>
   );
 }
