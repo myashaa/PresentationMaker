@@ -1,0 +1,54 @@
+.content {
+  position: relative;
+}
+
+.button {
+  background: #f2f2f2;
+  border: none;
+  border-radius: 8px;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  padding: 10px;
+  cursor: pointer;
+  color: #c7c7c7;
+}
+
+.buttonLabel {
+  font-weight: bold;
+  color: #000;
+  margin-right: 10px;
+}
+
+.selectContent {
+  background: #fafafa;
+  width: 150px;
+  border-radius: 8px;
+  top: 0px;
+  position: absolute;
+  z-index: 999;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.selectItem {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f2f2f2;
+  font-size: 14px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.selectItem:hover {
+  background-color: #e2e2e2;
+}

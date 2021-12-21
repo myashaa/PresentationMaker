@@ -10,6 +10,7 @@ import { Popup } from "./components/popup/Popup";
 import { ActionBar } from "./components/header/actions/ActionBar";
 import { SlidesPanel } from "./components/slidesPanel/SlidesPanel";
 import { ElementsPanel } from "./components/elementsPanel/ElementsPanel";
+import { Select } from "./components/fields/Select";
 
 type AppProps = {
   editor: EditorType;
@@ -24,7 +25,8 @@ function App({ editor }: AppProps) {
   )[0];
 
   const currentElement = currentSlide?.elementList.filter(
-    (element) => element.id === selectedElementIds[selectedElementIds.length - 1]
+    (element) =>
+      element.id === selectedElementIds[selectedElementIds.length - 1]
   )[0];
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function App({ editor }: AppProps) {
   }, [editor]);
 
   return (
-    <div className="app">
+    <div className="app" style={{ backgroundColor: "#FFFFFF" }}>
       {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} needButtons leftButton={"Сохранить"} rightButton={"Отменить"} />   */}
       {/* <Popup title={"О проекте"} text ={"Благодаря Ю Презентациям вы можете создавать файлы, редактировать и показывать их, а также работать над ними где и когда угодно – совершенно бесплатно."} needCat />   */}
       {/* <Popup title={"Инструкция пользователя"} text={"Помощь начинающим"  } needSlider /> */}
