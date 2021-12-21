@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import styles from "./ActionButton.module.css";
 
 type ActionButtonProps = {
@@ -5,6 +6,7 @@ type ActionButtonProps = {
   icon?: string;
   primary?: boolean;
   onClick?: () => void;
+  style?: CSSProperties
 };
 
 export function ActionButton({
@@ -12,9 +14,11 @@ export function ActionButton({
   icon,
   primary,
   onClick,
+  style,
 }: ActionButtonProps) {
   return (
     <button
+      style={style}
       className={primary ? styles.actionButtonPrimary : styles.actionButton}
       onClick={onClick}
     >

@@ -4,18 +4,19 @@ import { Element } from "../../model/element/ElementTypes";
 import { FigureForm } from "./forms/FigureForm";
 import { ImageForm } from "./forms/ImageForm";
 import { SlideForm } from "./forms/SlideForm";
+import { Slide } from "../../model/slide/SlideTypes";
 
 type ElementsPanelProps = {
-  slideId?: string;
+  slide?: Slide;
   width?: number;
   element?: Element;
 };
 
-export const ElementsPanel = ({ slideId, element, width = 300 }: ElementsPanelProps) => {
+export const ElementsPanel = ({ slide, element, width = 300 }: ElementsPanelProps) => {
   return <div className={styles.sidePanel} style={{ width }}>
-    {element?.data.font && <TextForm element={element} slideId={slideId} />}
-    {element?.data.type && <FigureForm element={element} slideId={slideId} />}
-    {element?.data.url && <ImageForm />}
-    {/* <SlideForm / > */}
+    {element?.data.font && <TextForm element={element} slideId={slide?.id} />}
+    {element?.data.type && <FigureForm element={element} slideId={slide?.id} />}
+    {element?.data.url && <ImageForm element={element} slideId={slide?.id} />}
+    {!(element?.data.font || element?.data.type || element?.data.url) && <SlideForm slide={slide} />}
   </div>;
 };

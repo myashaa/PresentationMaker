@@ -47,7 +47,7 @@ export function TextForm({ element, slideId }: TextFormProps) {
       <FieldInput label={"Позиция сверху"} type={"number"} onChange={(text) => dispatch(moveElement, true, slideId, element?.id, {x: element?.position.x, y: parseInt(text)})} value={element?.position.y.toString()} />
       <FieldInput label={"Позиция слева"} type={"number"} onChange={(text) => dispatch(moveElement, true, slideId, element?.id, {x: parseInt(text), y: element?.position.y})} value={element?.position.x.toString()} />
       {/* <FieldSelect label={"Вид рамки"} items={borders} onChange={(value) => setBorderType(value)} /> */}
-      <FieldInput label={"Толщина рамки"} type={"number"} onChange={(text) => dispatch(changeElementBorder, true, slideId, element?.id, { width: parseInt(text), type: element?.border?.type, color: element?.border?.color })} value={element?.border?.width.toString()} />
+      <FieldInput label={"Толщина рамки"} type={"number"} onChange={(text) => dispatch(changeElementBorder, true, slideId, element?.id, { width: parseInt(text), type: element?.border?.type, color: element?.border?.color })} value={element?.border?.width?.toString()} />
       <FieldInput label={"Цвет рамки"} onChange={(text) => dispatch(changeElementBorder, true, slideId, element?.id, {width: element?.border?.width, type: element?.border?.type, color: text})} value={element?.border?.color?.toUpperCase()} />
       <FieldInput label={"Фон"} onChange={(text) => dispatch(changeElementColor, true, slideId, element?.id, text)} value={element?.color?.toUpperCase()} />
     </div>

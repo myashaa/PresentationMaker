@@ -1,9 +1,9 @@
-import { Figure, Image, Text } from "../../../model/element/ElementTypes";
+import { Figure, Image as ImageType, Text } from "../../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../../editor";
 import { loadImage } from "../../../model/element/ImageActions";
-import { createElement } from "../../../model/slide/SlideActions";
+import { createElement, resizeElement } from "../../../model/slide/SlideActions";
 import {
   createSlide,
   deleteSlides,
@@ -17,9 +17,10 @@ import { COLORS } from "../../../colors";
 type ActionBarProps = {
   selectedSlide: string;
   editor: Editor;
+  selectedElement: string;
 };
 
-export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
+export function ActionBar({ selectedSlide, editor, selectedElement }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
       <ActionButton
@@ -78,7 +79,7 @@ export function ActionBar({ selectedSlide, editor }: ActionBarProps) {
 
               reader.onloadend = function () {
 
-                const newImage: Image = {
+                const newImage: ImageType = {
                   url: "https://via.placeholder.com/150",
                 };
 

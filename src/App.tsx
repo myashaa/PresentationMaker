@@ -41,6 +41,7 @@ function App({ editor }: AppProps) {
       <ActionBar
         selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
         editor={editor}
+        selectedElement={selectedElementIds[selectedElementIds.length]}
       />
 
       <div className="app-content">
@@ -50,7 +51,7 @@ function App({ editor }: AppProps) {
           selectedSlides={selectedSlidesIds}
         />
         <Editor slide={currentSlide} selectedElements={selectedElementIds} />
-        <ElementsPanel slideId={currentSlide?.id} element={currentElement} />
+        <ElementsPanel slide={currentSlide} element={currentElement} />
       </div>
     </div>
   );
