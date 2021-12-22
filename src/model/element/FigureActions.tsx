@@ -1,11 +1,11 @@
-import { Editor } from "../editor/EditorTypes";
+import { TEditor } from "../editor/EditorTypes";
 
 export function changeFigureColor(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string,
   color: string
-): Editor {
+): TEditor {
   const { presentation } = editor;
 
   const { slideList } = presentation;
@@ -13,13 +13,15 @@ export function changeFigureColor(
 
   const { elementList } = currentSlide;
   const newElementList = elementList.map((element) =>
-    element.id === elementId ? {
-      ...element,
-      data: {
-        ...element.data,
-        fill: color,
-      },
-    } : element
+    element.id === elementId
+      ? {
+          ...element,
+          data: {
+            ...element.data,
+            fill: color,
+          },
+        }
+      : element
   );
 
   return {

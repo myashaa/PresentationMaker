@@ -1,0 +1,8 @@
+.element {
+  position: absolute;
+  z-index: 1;
+}
+
+.selected {
+  border: 2px solid #f2f2f2;
+}

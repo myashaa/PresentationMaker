@@ -1,26 +1,35 @@
-import { Figure, Image as ImageType, Text } from "../../../model/element/ElementTypes";
 import { ActionButton } from "./ActionButton";
 
 import { dispatch } from "../../../editor";
 import { loadImage } from "../../../model/element/ImageActions";
-import { createElement, resizeElement } from "../../../model/slide/SlideActions";
+import {
+  createElement,
+  resizeElement,
+} from "../../../model/slide/SlideActions";
 import {
   createSlide,
   deleteSlides,
 } from "../../../model/presentation/PresentationActions";
 
 import styles from "./ActionBar.module.css";
-import { Editor } from "../../../model/editor/EditorTypes";
-import { undo, redo } from "../../../model/editor/EditorActions";
 import { COLORS } from "../../../colors";
+import { TEditor } from "../../../model/editor/EditorTypes";
+import { redo, undo } from "../../../model/history/HistoryActions";
+import { TText } from "../../../model/element/TextTypes";
+import { TImage } from "../../../model/element/ImageTypes";
+import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 
 type ActionBarProps = {
   selectedSlide: string;
-  editor: Editor;
+  editor: TEditor;
   selectedElement: string;
 };
 
-export function ActionBar({ selectedSlide, editor, selectedElement }: ActionBarProps) {
+export function ActionBar({
+  selectedSlide,
+  editor,
+  selectedElement,
+}: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
       <ActionButton
@@ -55,14 +64,16 @@ export function ActionBar({ selectedSlide, editor, selectedElement }: ActionBarP
         <ActionButton
           icon="title"
           onClick={() => {
-            const newText: Text = {
-              content: "Sample Text",
+            const newText: TText = {
+              text: "Sample Text",
               font: {
                 family: "Montserrat",
                 size: 16,
                 color: COLORS.black,
+                bold: false,
+                underline: false,
+                italic: false,
               },
-              bold: false
             };
             dispatch(createElement, true, selectedSlide, newText);
           }}
@@ -75,31 +86,30 @@ export function ActionBar({ selectedSlide, editor, selectedElement }: ActionBarP
             fileInputNode.click();
             fileInputNode.addEventListener("change", () => {
               const file = fileInputNode.files?.[0] as File;
-              const reader  = new FileReader();
+              const reader = new FileReader();
 
               reader.onloadend = function () {
-
-                const newImage: ImageType = {
-                  url: "https://via.placeholder.com/150",
+                const newImage: TImage = {
+                  image: "https://via.placeholder.com/150",
                 };
 
                 if (file.type.includes("image")) {
-                  newImage.url = String(reader.result);
+                  newImage.image = String(reader.result);
                 }
 
                 dispatch(createElement, true, selectedSlide, newImage);
-              }
+              };
 
               reader.readAsDataURL(file);
-            })
+            });
           }}
         />
         <ActionButton
           icon="category"
           onClick={() => {
-            const newFigure: Figure = {
-              type: "triangle",
-              fill: COLORS.primary
+            const newFigure: TFigure = {
+              figure: EFigureType.triangle,
+              fill: COLORS.primary,
             };
             dispatch(createElement, true, selectedSlide, newFigure);
           }}

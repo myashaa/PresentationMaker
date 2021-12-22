@@ -3,39 +3,22 @@ import { useState } from "react";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
 import { FieldCheckbox } from "../../fields/FieldCheckbox";
-import { Element } from "../../../model/element/ElementTypes";
+import { TElement } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
 import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
 import {
   changeElementColor,
   changeElementBorder,
 } from "../../../model/element/ElementActions";
-import {
-  setFontBold,
-  setFontUnderline,
-  setFontItalic,
-  setFontFamily,
-} from "../../../model/element/TextActions";
+import { TText } from "../../../model/element/TextTypes";
 
 type TextFormProps = {
-  element?: Element;
+  element?: TElement;
   slideId?: string;
 };
 
-// для списка элементов нужно для кей
-type TListElement = {
-  id: string;
-  value: string;
-};
-
-// const fonts = ["Arial", "Roboto", "Open Sans"]
-// const borders = ["Сплошная", "Пунктирная", "Точечная"]
-
 export function TextForm({ element, slideId }: TextFormProps) {
-  // const [fontFamily, setFontFamily] = useState(fonts[0])
-  // const [fontSize, setFontSize] = useState(0)
-  // const [color, setColor] = useState(colors[0])
-  // const [borderType, setBorderType] = useState(borders[0])
+  const textElement = element?.data as TText;
 
   return (
     <div className={styles.form}>
@@ -48,46 +31,52 @@ export function TextForm({ element, slideId }: TextFormProps) {
       <FieldSelect
         label={"Шрифт"}
         items={["Arial", "Montserrat"]}
-        value={element?.data.font.family}
-        onChange={(value) =>
-          dispatch(setFontFamily, true, slideId, element?.id, value)
-        }
+        value={textElement.font.family}
+        // onChange={(value) =>
+        //   dispatch(setFontFamily, true, slideId, element?.id, value)
+        // }
       />
       {/* <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} /> */}
       {/* <FieldSelect label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
-      <FieldCheckbox
+      {/* <FieldCheckbox
         label={"Жирный"}
-        checked={element?.data.bold}
+        checked={element?.data.text?.bold}
         onChange={() =>
-          dispatch(setFontBold, true, slideId, element?.id, !element?.data.bold)
+          dispatch(
+            setFontBold,
+            true,
+            slideId,
+            element?.id,
+            !element?.data.text?.bold
+          )
         }
-      />
-      <FieldCheckbox
+      /> */}
+      {/* <FieldCheckbox
         label={"Подчеркнутый"}
-        checked={element?.data.underline}
+        checked={element?.data.text?.underline}
         onChange={() =>
           dispatch(
             setFontUnderline,
             true,
             slideId,
             element?.id,
-            !element?.data.underline
+            !element?.data.text?.underline
           )
         }
-      />
-      <FieldCheckbox
+      /> */}
+      {/* <FieldCheckbox
         label={"Курсивный"}
-        checked={element?.data.italic}
+        checked={element?.data.text?.italic}
         onChange={() =>
           dispatch(
             setFontItalic,
             true,
             slideId,
             element?.id,
-            !element?.data.italic
+            !element?.data.text?.italic
           )
         }
-      />
+      /> */}
       <div className={styles.line}></div>
       <FieldInput
         label={"Высота"}

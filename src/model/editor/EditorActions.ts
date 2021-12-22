@@ -1,9 +1,12 @@
-import { Editor } from "./EditorTypes";
-import { Presentation } from "../presentation/PresentationTypes";
+import { EMode, TEditor } from "./EditorTypes";
+import { TPresentation } from "../presentation/PresentationTypes";
 import { createSlide } from "../presentation/PresentationActions";
 
-export function setPresentation(editor: Editor, presentation: Presentation): Editor {
-  const newEditor: Editor = {
+export function setPresentation(
+  editor: TEditor,
+  presentation: TPresentation
+): TEditor {
+  const newEditor: TEditor = {
     ...editor,
     history: {
       index: -1,
@@ -15,55 +18,57 @@ export function setPresentation(editor: Editor, presentation: Presentation): Edi
   return newEditor;
 }
 
-export function loadPresentation(callback: (object: any) => void) {
+export function renamePresentation(editor: TEditor, name: string): TEditor {
+  const newEditor: TEditor = {
+    ...editor,
+    presentation: {
+      ...editor.presentation,
+      name: name,
+    },
+  };
 
+  return newEditor;
+}
+
+export function loadPresentation(callback: (object: any) => void) {
   const fileInputNode = document.createElement("input");
   fileInputNode.type = "file";
   fileInputNode.click();
   fileInputNode.addEventListener("change", () => {
     const file = fileInputNode.files?.[0] as File;
-    
+
     const dataStr = window.URL.createObjectURL(file);
 
     fetch(dataStr)
-    .then((response) => response.json())
-    .then((json) => {
-      callback(json)
-    }
-      );
+      .then((response) => response.json())
+      .then((json) => {
+        callback(json);
+      });
   });
-
 }
 
-export function savePresentation(editor: Editor) {
+export function savePresentation(editor: TEditor) {
   const toJSON = JSON.stringify(editor.presentation);
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(toJSON);
 
   const downloadAnchorNode = document.createElement("a");
   downloadAnchorNode.setAttribute("href", dataStr);
-  downloadAnchorNode.setAttribute("download", editor.presentation.name + ".json");
+  downloadAnchorNode.setAttribute(
+    "download",
+    editor.presentation.name + ".json"
+  );
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 
   return editor;
 }
 
-export function exportPresentation(presentation: Presentation) { }
+export function exportPresentation(presentation: TPresentation) {}
 
-export function renamePresentation(editor: Editor, name: string): Editor {
-  const newEditor: Editor = {
+export function createPresentation(editor: TEditor): TEditor {
+  const newEditor: TEditor = {
     ...editor,
-  };
-  console.log(newEditor);
-
-  newEditor.presentation.name = name;
-
-  return newEditor;
-}
-
-export function createPresentation(editor: Editor): Editor {
-  const newEditor: Editor = {
-    ...editor,
+    mode: EMode.view,
     history: {
       index: -1,
       states: [],
@@ -79,50 +84,7 @@ export function createPresentation(editor: Editor): Editor {
   return createSlide(newEditor);
 }
 
-export function undo(editor: Editor): Editor {
-  const newEditor: Editor = {
-    ...editor,
-  };
-
-  if (editor.history.index > 0) {
-    newEditor.history.index = editor.history.index - 1;
-    newEditor.presentation = editor.history.states[newEditor.history.index];
-  }
-
-  return newEditor;
-}
-
-export function redo(editor: Editor): Editor {
-  const newEditor: Editor = {
-    ...editor,
-  };
-
-  if (editor.history.index < editor.history.states.length - 1) {
-    newEditor.history.index = editor.history.index + 1;
-    newEditor.presentation = editor.history.states[newEditor.history.index];
-  }
-
-  return newEditor;
-}
-
-export function updateHistory(editor: Editor): Editor {
-  const newEditor: Editor = {
-    ...editor,
-    history: {
-      ...editor.history,
-      index: editor.history.index + 1,
-    },
-  };
-
-  const newStates = newEditor.history.states.filter((value, index) =>
-    index <= newEditor.history.index && value)
-
-  newEditor.history.states = [...newStates, editor.presentation]
-
-  return newEditor;
-}
-
-export function changeMode(editor: Editor, mode: "view" | "edit"): Editor {
+export function changeMode(editor: TEditor, mode: EMode): TEditor {
   const newEditor = {
     ...editor,
   };

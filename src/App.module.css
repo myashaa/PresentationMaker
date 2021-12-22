@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.app-content {
+.content {
   display: flex;
   flex: 1;
   overflow: hidden;

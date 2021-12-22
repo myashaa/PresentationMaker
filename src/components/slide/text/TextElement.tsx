@@ -1,22 +1,55 @@
 import { useEffect, useRef, useState } from "react";
-import "./TextElement.module.css";
+
+import styles from "./TextElement.module.css";
 
 type TextElementProps = {
   text: string;
+  enableEdit?: boolean;
+  onChange?: (text: string) => void;
 };
 
-export const TextElement = ({ text }: TextElementProps) => {
-  const [isEdit, setEdit] = useState(false);
+export const TextElement = ({ text, onChange }: TextElementProps) => {
+  const [value, setValue] = useState(text);
+  const [isEdit, setEditMode] = useState(false);
+
+  const editRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    isEdit && editRef.current?.focus();
+    !isEdit && setValue(text);
+  }, [isEdit]);
+
+  const handleEdit = () => {
+    setEditMode(false);
+    onChange && onChange(value);
+  };
 
   return (
-    <div
-      onClick={() => {
-        alert("Жопочка");
-      }}
-      style={{ width: "100%", height: "100%" }}
-    >
-      {!isEdit && <p>{text}</p>}
-      {isEdit && <textarea>{text}</textarea>}
-    </div>
+    <>
+      {!isEdit && (
+        <p
+          className={styles.text}
+          onDoubleClick={(e) => {
+            isEdit && setEditMode(true);
+          }}
+        >
+          {text}
+        </p>
+      )}
+      {isEdit && (
+        <textarea
+          className={styles.editor}
+          ref={editRef}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          onBlur={handleEdit}
+          onKeyPress={(e) => {
+            e.key === "Enter" && handleEdit();
+          }}
+        />
+      )}
+    </>
   );
 };

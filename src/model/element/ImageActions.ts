@@ -1,13 +1,14 @@
-import { Editor } from "../editor/EditorTypes";
-import { Element, Filter, Image } from "./ElementTypes";
+import { TEditor } from "../editor/EditorTypes";
+import { TElement } from "./ElementTypes";
+import { TFilter, TImage } from "./ImageTypes";
 
 export function setFilter(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
-  element: Element,
-  filter: Filter
-): Editor {
-  const data = element.data as Image;
+  element: TElement,
+  filter: TFilter
+): TEditor {
+  const data = element.data as TImage;
   const newData = { ...data, filter };
   const newElement = { ...element, data: newData };
 
@@ -24,17 +25,17 @@ export function setFilter(
 
   const newPresentation = { ...editor.presentation, slideList: newSlideList };
 
-  const newEditor = { ...editor, newPresentation};
+  const newEditor = { ...editor, newPresentation };
 
   return newEditor;
 }
 
 export function deleteFilter(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
-  element: Element
-): Editor {
-  const data = element.data as Image;
+  element: TElement
+): TEditor {
+  const data = element.data as TImage;
   const newData = { ...data, filter: {} };
   const newElement = { ...element, data: newData };
 
@@ -51,32 +52,35 @@ export function deleteFilter(
 
   const newPresentation = { ...editor.presentation, slideList: newSlideList };
 
-  const newEditor = { ...editor, newPresentation};
+  const newEditor = { ...editor, newPresentation };
 
   return newEditor;
 }
 
-export async function loadImage(url: string): Promise<Image> {
-  let data = '';
+export async function loadImage(url: string): Promise<TImage> {
+  let data = "";
 
-  const toDataURL = (url: string) => fetch(url)
-  .then(response => response.blob())
-  .then(blob => new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onloadend = () => resolve(reader.result)
-    reader.onerror = reject
-    reader.readAsDataURL(blob)
-  }))
+  const toDataURL = (url: string) =>
+    fetch(url)
+      .then((response) => response.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          })
+      );
 
-  await toDataURL(url)
-    .then(dataUrl => {
-      console.log(dataUrl);
-      data = String(dataUrl);
-    })
+  await toDataURL(url).then((dataUrl) => {
+    console.log(dataUrl);
+    data = String(dataUrl);
+  });
 
-  const image: Image = { 
-    url: data,
-  };      
-  
+  const image: TImage = {
+    image: data,
+  };
+
   return image;
 }

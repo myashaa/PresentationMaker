@@ -1,8 +1,8 @@
 import { RefObject, useEffect, useState } from "react";
-import { Position } from "../model/editor/EditorTypes";
+import { TPosition } from "../model/element/ElementTypes";
 
 export const useDragAndDrop = (
   elementRef: RefObject<HTMLDivElement>,
-  position: Position,
+  position: TPosition,
   onMoveEnd: () => void
 ) => {};

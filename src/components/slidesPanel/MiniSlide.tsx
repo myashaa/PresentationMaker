@@ -1,11 +1,11 @@
-import { Element as ElementType } from "../../model/element/ElementTypes";
-import { Background } from "../../model/slide/SlideTypes";
+import { TElement } from "../../model/element/ElementTypes";
+import { TBackground } from "../../model/slide/SlideTypes";
 
 import styles from "./MiniSlide.module.css";
 
 type MiniSlideProps = {
-  elements?: ElementType[];
-  background?: Background;
+  elements?: TElement[];
+  background?: TBackground;
   index?: number;
   selected?: boolean;
   onSelect?: () => void;
