@@ -33,7 +33,7 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
     fontWeight: element.data.bold ? "bold" : "400",
     textDecoration: element.data.underline ? "underline" : "none",
     fontStyle: element.data.italic ? "italic" : "none",
-    fontFamily: element.data.font.family || "Arial",
+    // fontFamily: element.data.font.family || "Arial",
   };
   const resizers = (
     <>

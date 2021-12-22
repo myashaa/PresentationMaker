@@ -28,15 +28,7 @@ type TListElement = {
   value: string;
 };
 
-// const fonts = ["Arial", "Roboto", "Open Sans"]
-// const borders = ["Сплошная", "Пунктирная", "Точечная"]
-
 export function TextForm({ element, slideId }: TextFormProps) {
-  // const [fontFamily, setFontFamily] = useState(fonts[0])
-  // const [fontSize, setFontSize] = useState(0)
-  // const [color, setColor] = useState(colors[0])
-  // const [borderType, setBorderType] = useState(borders[0])
-
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
@@ -54,7 +46,7 @@ export function TextForm({ element, slideId }: TextFormProps) {
         }
       />
       {/* <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} /> */}
-      {/* <FieldSelect label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
+      {/* <FieldInput label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
       <FieldCheckbox
         label={"Жирный"}
         checked={element?.data.bold}
@@ -141,7 +133,24 @@ export function TextForm({ element, slideId }: TextFormProps) {
         }
         value={element?.position.x.toString()}
       />
-      {/* <FieldSelect label={"Вид рамки"} items={borders} onChange={(value) => setBorderType(value)} /> */}
+      <FieldSelect
+        label={"Вид рамки"}
+        items={["Сплошная", "Пунктирная", "Точечная", "Двойная"]}
+        value={element?.border?.type}
+        onChange={(value) => {
+          let text = "";
+          if (value == "Сплошная") text = "solid";
+          if (value == "Пунктирная") text = "dashed";
+          if (value == "Точечная") text = "dotted";
+          if (value == "Двойная") text = "double";
+          dispatch(changeElementBorder, true, slideId, element?.id, {
+            width: element?.border?.width,
+            type: text,
+            color: element?.border?.color,
+          })
+        }
+        }
+      />
       <FieldInput
         label={"Толщина рамки"}
         type={"number"}
