@@ -34,7 +34,7 @@ function App({ editor }: AppProps) {
   }, [editor]);
 
   return (
-    <div className="app" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="app">
       {/* <Popup title={"Подтверждение действия"} text={"Подтверждение действия"} needButtons leftButton={"Сохранить"} rightButton={"Отменить"} />   */}
       {/* <Popup title={"О проекте"} text ={"Благодаря Ю Презентациям вы можете создавать файлы, редактировать и показывать их, а также работать над ними где и когда угодно – совершенно бесплатно."} needCat />   */}
       {/* <Popup title={"Инструкция пользователя"} text={"Помощь начинающим"  } needSlider /> */}

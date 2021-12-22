@@ -62,15 +62,3 @@
 .fielSelect:focus {
   border: 1px solid #000;
 }
-
-.fieldButton {
-  border: none;
-  background: #fff2b2;
-  color: #69623b;
-  outline: none;
-  font-family: "Montserrat";
-  font-size: 14px;
-  padding: 7px 11px;
-  border-radius: 5px;
-  cursor: pointer;
-}
