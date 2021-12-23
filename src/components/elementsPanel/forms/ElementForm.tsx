@@ -9,7 +9,7 @@ import {
   TBorder,
   TElement,
 } from "../../../model/element/ElementTypes";
-import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
+import { moveElement, resizeElement, removeElement } from "../../../model/slide/SlideActions";
 import { FieldInput } from "../../fields/FieldInput";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { ActionButton } from "../../header/actions/ActionButton";
@@ -130,8 +130,8 @@ export function ElementForm({ element, slideId }: Props) {
         icon="delete"
         label={"Удалить элемент"}
         style={style}
-          //onClick={() => dispatch(clearBackground, true, slide?.id)}
-        />
+        onClick={() => dispatch(removeElement, true, slideId, element?.id)}
+      />
     </>
   );
 }
