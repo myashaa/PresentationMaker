@@ -50,7 +50,7 @@ export function Element({
     outlineWidth: element.border?.width ? element.border?.width : 0,
     outlineColor: element.border?.color ? element.border?.color : COLORS.lightGrey,
     outlineOffset: `-${element.border?.width}px`,
-    backgroudColor: element.color ? element.color : COLORS.white
+    backgroundColor: element.color ? element.color : COLORS.white
   };
 
   const data = element.data;
