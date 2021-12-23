@@ -66,8 +66,8 @@ export const menu = [
       { icon: "info", label: "О проекте" },
     ],
   },
-  {
-    label: "Просмотр",
+  // {
+  //   label: "Просмотр",
     // actions: [{ icon: "play_circle_filled", label: "Режим просмотра" }],
-  },
+  // },
 ];

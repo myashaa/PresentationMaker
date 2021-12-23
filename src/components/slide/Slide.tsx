@@ -23,6 +23,8 @@ export function SlideEditor({ slide, selectedElements }: SlideProps) {
     backgroundColor: slide?.background?.color
       ? slide?.background.color
       : COLORS.white,
+    backgroundImage: `url(${slide?.background.picture?.image})`,
+    backgroundSize: "cover",
   };
 
   return (

@@ -1,4 +1,4 @@
-import { TElement, TPosition, TSize } from "../../model/element/ElementTypes";
+import { EBorderStyle, TElement, TPosition, TSize } from "../../model/element/ElementTypes";
 import { TextElement } from "./text/TextElement";
 
 import styles from "./Element.module.css";
@@ -8,6 +8,9 @@ import { ImageElement } from "./image/ImageElement";
 import { FigureElement } from "./figures/FigureElement";
 import { useEffect, useRef, useState } from "react";
 import { classnames } from "../../utils";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { resizeElement } from "../../model/slide/SlideActions";
+import { COLORS } from "../../colors";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { moveElement, resizeElement } from "../../model/slide/SlideActions";
 import { useResize } from "../../hooks/useResize";
@@ -40,6 +43,11 @@ export function Element({
     !selected && setEdit(false);
   }, [selected]);
 
+  let borderType = "";
+  if (element.border?.type === EBorderStyle.solid) borderType = "solid";
+  if (element.border?.type === EBorderStyle.dashed) borderType = "dashed";
+  if (element.border?.type === EBorderStyle.dotted) borderType = "dotted";
+        
   useEffect(() => {
     !moving && dispatch(moveElement, true, slideId, element.id, pos);
   }, [moving]);
@@ -81,6 +89,11 @@ export function Element({
     left: moving ? pos.x : position.x,
     width: resizing ? sz.width : size.width,
     height: resizing ? sz.height : size.height,
+    outlineStyle: borderType ? borderType : "solid",
+    outlineWidth: element.border?.width ? element.border?.width : 0,
+    outlineColor: element.border?.color ? element.border?.color : COLORS.lightGrey,
+    outlineOffset: `-${element.border?.width}px`,
+    backgroundColor: element.color ? element.color : COLORS.white
   };
 
   const data = element.data;
@@ -101,9 +114,6 @@ export function Element({
         setResizing(false);
       }}
     >
-      {/* <div className={styles.empty}>пустой :(</div> */}
-      {/* {`r${resizing} m${moving}`} */}
-      {/* {`x-${pos.x} y-${pos.y}`} */}
       {"text" in data && (
         <TextElement
           text={data}
