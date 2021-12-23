@@ -1,3 +1,4 @@
+import { flattenDiagnosticMessageText } from "typescript";
 import { dispatch } from "../../../editor";
 import {
   changeElementBorder,
@@ -11,10 +12,18 @@ import {
 import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
 import { FieldInput } from "../../fields/FieldInput";
 import { FieldSelect } from "../../fields/FieldSelect";
+import { ActionButton } from "../../header/actions/ActionButton";
 
 type Props = {
   element?: TElement;
   slideId?: string;
+};
+
+const style = {
+  marginRight: 0,
+  width: "100%",
+  display: "flex",
+  justifyContent: "center"
 };
 
 export function ElementForm({ element, slideId }: Props) {
@@ -117,6 +126,12 @@ export function ElementForm({ element, slideId }: Props) {
         }
         value={element?.color?.toUpperCase()}
       />
+      <ActionButton
+        icon="delete"
+        label={"Удалить элемент"}
+        style={style}
+          //onClick={() => dispatch(clearBackground, true, slide?.id)}
+        />
     </>
   );
 }
