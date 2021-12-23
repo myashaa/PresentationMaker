@@ -32,89 +32,100 @@ export function ActionBar({
 }: ActionBarProps) {
   return (
     <div className={styles.appActionBar}>
+      <div className={styles.appActionsGroup}>
+        <ActionButton
+          icon="add_to_photos"
+          label="Добавить слайд"
+          primary
+          onClick={() => {
+            dispatch(createSlide, true, {});
+          }}
+        />
+        <ActionButton
+          icon="delete"
+          primary
+          onClick={() => {
+            dispatch(deleteSlides, false, editor.presentation.selectedSlidesIds);
+          }}
+        />
+        <ActionButton
+          icon="undo"
+          onClick={() => {
+            dispatch(undo, false, editor);
+          }}
+        />
+        <ActionButton
+          icon="redo"
+          onClick={() => {
+            dispatch(redo, false, editor);
+          }}
+        />
+
+        <div className={styles.appActionsRigth}>
+          <ActionButton
+            icon="title"
+            onClick={() => {
+              const newText: TText = {
+                text: "Sample Text",
+                font: {
+                  family: "Montserrat",
+                  size: 16,
+                  color: COLORS.black,
+                  bold: false,
+                  underline: false,
+                  italic: false,
+                },
+              };
+              dispatch(createElement, true, selectedSlide, newText);
+            }}
+          />
+          <ActionButton
+            icon="image"
+            onClick={() => {
+              const fileInputNode = document.createElement("input");
+              fileInputNode.type = "file";
+              fileInputNode.click();
+              fileInputNode.addEventListener("change", () => {
+                const file = fileInputNode.files?.[0] as File;
+                const reader = new FileReader();
+
+                reader.onloadend = function () {
+                  const newImage: TImage = {
+                    image: "https://via.placeholder.com/150",
+                  };
+
+                  if (file.type.includes("image")) {
+                    newImage.image = String(reader.result);
+                  }
+
+                  dispatch(createElement, true, selectedSlide, newImage);
+                };
+
+                reader.readAsDataURL(file);
+              });
+            }}
+          />
+          <ActionButton
+            icon="category"
+            onClick={() => {
+              const newFigure: TFigure = {
+                figure: EFigureType.triangle,
+                fill: COLORS.primary,
+              };
+              dispatch(createElement, true, selectedSlide, newFigure);
+            }}
+          />
+          </div>
+        </div>
+
       <ActionButton
-        icon="add_to_photos"
-        label="Добавить слайд"
+        icon="video_library"
+        label="Слай-шоу"
         primary
         onClick={() => {
           dispatch(createSlide, true, {});
         }}
       />
-      <ActionButton
-        icon="delete"
-        primary
-        onClick={() => {
-          dispatch(deleteSlides, false, editor.presentation.selectedSlidesIds);
-        }}
-      />
-      <ActionButton
-        icon="undo"
-        onClick={() => {
-          dispatch(undo, false, editor);
-        }}
-      />
-      <ActionButton
-        icon="redo"
-        onClick={() => {
-          dispatch(redo, false, editor);
-        }}
-      />
-
-      <div className={styles.appActionsRigth}>
-        <ActionButton
-          icon="title"
-          onClick={() => {
-            const newText: TText = {
-              text: "Sample Text",
-              font: {
-                family: "Montserrat",
-                size: 16,
-                color: COLORS.black,
-                bold: false,
-                underline: false,
-                italic: false,
-              },
-            };
-            dispatch(createElement, true, selectedSlide, newText);
-          }}
-        />
-        <ActionButton
-          icon="image"
-          onClick={() => {
-            const fileInputNode = document.createElement("input");
-            fileInputNode.type = "file";
-            fileInputNode.click();
-            fileInputNode.addEventListener("change", () => {
-              const file = fileInputNode.files?.[0] as File;
-              const reader = new FileReader();
-
-              reader.onloadend = function () {
-                const newImage: TImage = {
-                  image: "https://via.placeholder.com/150",
-                };
-
-                if (file.type.includes("image")) {
-                  newImage.image = String(reader.result);
-                }
-
-                dispatch(createElement, true, selectedSlide, newImage);
-              };
-
-              reader.readAsDataURL(file);
-            });
-          }}
-        />
-        <ActionButton
-          icon="category"
-          onClick={() => {
-            const newFigure: TFigure = {
-              figure: EFigureType.triangle,
-              fill: COLORS.primary,
-            };
-            dispatch(createElement, true, selectedSlide, newFigure);
-          }}
-        />
-      </div>
     </div>
   );
 }
