@@ -6,12 +6,13 @@ import { SlidesPanel } from "./components/slidesPanel/SlidesPanel";
 import { ElementsPanel } from "./components/elementsPanel/ElementsPanel";
 import { SlideEditor } from "./components/slide/Slide";
 
-import { TEditor } from "./model/editor/EditorTypes";
+import { EMode, TEditor } from "./model/editor/EditorTypes";
 import { TSlide } from "./model/slide/SlideTypes";
 import { TElement } from "./model/element/ElementTypes";
 
 import { getByKey, getLastElement } from "./utils";
 import styles from "./App.module.css";
+import { Player } from "./components/player/Player";
 
 type AppProps = {
   editor: TEditor;
@@ -38,22 +39,34 @@ function App({ editor }: AppProps) {
   }, [editor]);
 
   return (
-    <div className={styles.app}>
-      <Header title={name} />
-      <ActionBar
-        selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
-        editor={editor}
-        selectedElement={selectedElementIds[selectedElementIds.length]}
-      />
+    <div>
+      {editor.mode === EMode.edit && (
+        <div className={styles.app}>
+          <Header title={name} />
+          <ActionBar
+            selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
+            editor={editor}
+            selectedElement={selectedElementIds[selectedElementIds.length]}
+          />
 
-      <div className={styles.content}>
-        <SlidesPanel slides={slideList} selectedSlides={selectedSlidesIds} />
-        <SlideEditor
-          slide={currentSlide}
-          selectedElements={selectedElementIds}
-        />
-        <ElementsPanel slide={currentSlide} element={currentElement} />
-      </div>
+          <div className={styles.content}>
+            <SlidesPanel
+              slides={slideList}
+              selectedSlides={selectedSlidesIds}
+            />
+            <SlideEditor
+              slide={currentSlide}
+              selectedElements={selectedElementIds}
+            />
+            <ElementsPanel slide={currentSlide} element={currentElement} />
+          </div>
+        </div>
+      )}
+      {editor.mode === EMode.view && (
+        <div className={styles.playerContainer}>
+          <Player slides={slideList} />
+        </div>
+      )}
     </div>
   );
 }

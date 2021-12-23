@@ -1,0 +1,12 @@
+.player {
+  aspect-ratio: 4 / 3;
+  width: 860px;
+  position: relative;
+  background-color: #fff;
+  user-select: none;
+  overflow: hidden;
+}
+
+.player * {
+  position: absolute;
+}

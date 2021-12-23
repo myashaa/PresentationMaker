@@ -13,11 +13,12 @@ import {
 
 import styles from "./ActionBar.module.css";
 import { COLORS } from "../../../colors";
-import { TEditor } from "../../../model/editor/EditorTypes";
+import { EMode, TEditor } from "../../../model/editor/EditorTypes";
 import { redo, undo } from "../../../model/history/HistoryActions";
 import { TText } from "../../../model/element/TextTypes";
 import { TImage } from "../../../model/element/ImageTypes";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
+import { changeMode } from "../../../model/editor/EditorActions";
 
 type ActionBarProps = {
   selectedSlide: string;
@@ -115,15 +116,15 @@ export function ActionBar({
               dispatch(createElement, true, selectedSlide, newFigure);
             }}
           />
-          </div>
         </div>
+      </div>
 
       <ActionButton
         icon="video_library"
         label="Слай-шоу"
         primary
         onClick={() => {
-          dispatch(createSlide, true, {});
+          dispatch(changeMode, true, EMode.view);
         }}
       />
     </div>

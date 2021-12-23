@@ -17,7 +17,7 @@ type Props = {
   position: TPosition;
   size: TSize;
   element: TElement;
-  slideId: string;
+  slideId?: string;
   selected?: boolean;
   onClick?: () => void;
 };
