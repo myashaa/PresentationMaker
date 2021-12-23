@@ -29,13 +29,6 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
       }}
     />
   ));
-  const style = {
-    backgroundColor: slide?.background?.color
-      ? slide.background.color
-      : COLORS.lightGrey,
-    // backgroundImage: `url(${slide?.background?.picture?.url})`,
-    backgroundSize: "cover",
-  };
 
   return (
     <div className={styles.appEditorContainer}>
@@ -46,7 +39,6 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
             e.stopPropagation();
             dispatch(selectElements, false, []);
           }}
-          style={style}
         >
           {elements}
           {/* <TriangleFigure width={100} height={100} /> */}

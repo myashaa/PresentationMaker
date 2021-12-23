@@ -59,6 +59,8 @@ export function SlideForm({ slide }: SlideFormProps) {
                   picture: newImage,
                 };
 
+                console.log(b);
+
                 dispatch(setBackground, true, slide?.id, b);
               };
 
