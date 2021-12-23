@@ -1,26 +1,15 @@
 import styles from "./Form.module.css";
-import { useState } from "react";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
 import { FieldCheckbox } from "../../fields/FieldCheckbox";
 import { TElement } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
-import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
-import {
-  changeElementColor,
-  changeElementBorder,
-} from "../../../model/element/ElementActions";
-import { TText } from "../../../model/element/TextTypes";
+import { TFont, TText } from "../../../model/element/TextTypes";
+import { setFont } from "../../../model/element/TextActions";
 
 type TextFormProps = {
   element?: TElement;
   slideId?: string;
-};
-
-// для списка элементов нужно для кей
-type TListElement = {
-  id: string;
-  value: string;
 };
 
 export function TextForm({ element, slideId }: TextFormProps) {
@@ -39,153 +28,80 @@ export function TextForm({ element, slideId }: TextFormProps) {
         label={"Шрифт"}
         items={["Arial", "Montserrat"]}
         value={text.font.family}
-        // onChange={(value) =>
-        //   dispatch(setFontFamily, true, slideId, element?.id, value)
-        // }
+        onChange={(value) => {
+          const font: TFont = {
+            ...text.font,
+            family: value,
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
+        }}
       />
 
-      {/* <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} /> */}
-      {/* <FieldInput label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
+      <FieldInput
+        label={"Размер"}
+        type={"number"}
+        value={text.font.size.toString()}
+        onChange={(value) => {
+          const font: TFont = {
+            ...text.font,
+            size: parseInt(value),
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
+        }}
+      />
+
+      <FieldInput
+        label={"Цвет"}
+        value={text.font.color.toUpperCase()}
+        onChange={(value) => {
+          const font: TFont = {
+            ...text.font,
+            color: value,
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
+        }}
+      />
 
       <FieldCheckbox
         label={"Жирный"}
         checked={text.font?.bold}
-        // onChange={() =>
-        //   dispatch(
-        //     setFontBold,
-        //     true,
-        //     slideId,
-        //     element?.id,
-        //     !element?.data.text?.bold
-        //   )
-        // }
-      />
-      {/* <FieldCheckbox
-        label={"Подчеркнутый"}
-        checked={element?.data.text?.underline}
-        onChange={() =>
-          dispatch(
-            setFontUnderline,
-            true,
-            slideId,
-            element?.id,
-            !element?.data.text?.underline
-          )
-        }
-      /> */}
-      {/* <FieldCheckbox
-        label={"Курсивный"}
-        checked={element?.data.text?.italic}
-        onChange={() =>
-          dispatch(
-            setFontItalic,
-            true,
-            slideId,
-            element?.id,
-            !element?.data.text?.italic
-          )
-        }
-      /> */}
-      <div className={styles.line}></div>
-      <FieldInput
-        label={"Высота"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(
-            resizeElement,
-            true,
-            slideId,
-            element?.id,
-            element?.width,
-            parseInt(text)
-          )
-        }
-        value={element?.height.toString()}
-      />
-      <FieldInput
-        label={"Ширина"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(
-            resizeElement,
-            true,
-            slideId,
-            element?.id,
-            parseInt(text),
-            element?.height
-          )
-        }
-        value={element?.width.toString()}
-      />
-      <FieldInput
-        label={"Позиция сверху"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(moveElement, true, slideId, element?.id, {
-            x: element?.position.x,
-            y: parseInt(text),
-          })
-        }
-        value={element?.position.y.toString()}
-      />
-      <FieldInput
-        label={"Позиция слева"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(moveElement, true, slideId, element?.id, {
-            x: parseInt(text),
-            y: element?.position.y,
-          })
-        }
-        value={element?.position.x.toString()}
-      />
-      <FieldSelect
-        label={"Вид рамки"}
-        items={["Сплошная", "Пунктирная", "Точечная", "Двойная"]}
-        value={element?.border?.type}
-        onChange={(value) => {
-          let text = "";
-          if (value === "Сплошная") text = "solid";
-          if (value === "Пунктирная") text = "dashed";
-          if (value === "Точечная") text = "dotted";
-          if (value === "Двойная") text = "double";
-          dispatch(changeElementBorder, true, slideId, element?.id, {
-            width: element?.border?.width,
-            type: text,
-            color: element?.border?.color,
-          });
+        onChange={() => {
+          const font: TFont = {
+            ...text.font,
+            bold: !text.font.bold,
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
         }}
       />
-      <FieldInput
-        label={"Толщина рамки"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(changeElementBorder, true, slideId, element?.id, {
-            width: parseInt(text),
-            type: element?.border?.type,
-            color: element?.border?.color,
-          })
-        }
-        value={element?.border?.width?.toString()}
+      <FieldCheckbox
+        label={"Подчеркнутый"}
+        checked={text.font?.underline}
+        onChange={() => {
+          const font: TFont = {
+            ...text.font,
+            underline: !text.font.underline,
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
+        }}
       />
-      <FieldInput
-        label={"Цвет рамки"}
-        onChange={(text) =>
-          dispatch(changeElementBorder, true, slideId, element?.id, {
-            width: element?.border?.width,
-            type: element?.border?.type,
-            color: text,
-          })
-        }
-        value={element?.border?.color?.toUpperCase()}
+      <FieldCheckbox
+        label={"Курсивный"}
+        checked={text.font?.italic}
+        onChange={() => {
+          const font: TFont = {
+            ...text.font,
+            italic: !text.font.italic,
+          };
+
+          dispatch(setFont, true, slideId, element?.id, font);
+        }}
       />
-      <FieldInput
-        label={"Фон"}
-        onChange={(text) =>
-          dispatch(changeElementColor, true, slideId, element?.id, text)
-        }
-        value={element?.color?.toUpperCase()}
-      />
+      <div className={styles.line}></div>
     </div>
   );
 }

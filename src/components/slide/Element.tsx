@@ -9,6 +9,7 @@ import { FigureElement } from "./figures/FigureElement";
 import { useEffect, useRef, useState } from "react";
 import { classnames } from "../../utils";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { resizeElement } from "../../model/slide/SlideActions";
 
 type Props = {
   position: TPosition;
@@ -64,11 +65,20 @@ export function Element({
       )} */}
       {"text" in data && (
         <TextElement
-          text={data.text}
+          text={data}
           isEdit={selected && edit}
           onChange={(value) => {
             dispatch(setText, true, slideId, element.id, value);
           }}
+        />
+      )}
+      {"image" in data && <ImageElement src={data.image} />}
+      {"figure" in data && (
+        <FigureElement
+          figure={data.figure}
+          width={element.width}
+          height={element.height}
+          fill={data.fill}
         />
       )}
     </div>

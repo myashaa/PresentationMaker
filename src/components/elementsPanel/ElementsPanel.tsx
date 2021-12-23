@@ -1,13 +1,10 @@
 import { TextForm } from "./forms/TextForm";
 import styles from "./ElementsPanel.module.css";
 import { TElement } from "../../model/element/ElementTypes";
-import { FigureForm } from "./forms/FigureForm";
 import { ImageForm } from "./forms/ImageForm";
 import { SlideForm } from "./forms/SlideForm";
 import { TSlide } from "../../model/slide/SlideTypes";
-import { TText } from "../../model/element/TextTypes";
-import { TFigure } from "../../model/element/FigureTypes";
-import { TImage } from "../../model/element/ImageTypes";
+import { ElementForm } from "./forms/ElementForm";
 
 type ElementsPanelProps = {
   slide?: TSlide;
@@ -25,13 +22,13 @@ export const ElementsPanel = ({
   return (
     <div className={styles.sidePanel} style={{ width }}>
       {"text" in data && <TextForm element={element} slideId={slide?.id} />}
-      {/* {element?.data.figure && (
-        <FigureForm element={element} slideId={slide?.id} />
+      {"image" in data && <ImageForm element={element} slideId={slide?.id} />}
+      {("image" in data || "text" in data || "figure" in data) && (
+        <ElementForm element={element} slideId={slide?.id} />
       )}
-      {element?.data.image && (
-        <ImageForm element={element} slideId={slide?.id} />
-      )} */}
-      {/* {!(element?.data.font || element?.data.type || element?.data.url) && <SlideForm slide={slide} />} */}
+      {!("image" in data || "text" in data || "figure" in data) && (
+        <SlideForm slide={slide} />
+      )}
     </div>
   );
 };
