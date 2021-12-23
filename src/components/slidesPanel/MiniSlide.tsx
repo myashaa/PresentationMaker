@@ -1,5 +1,6 @@
 import { TElement } from "../../model/element/ElementTypes";
 import { TBackground } from "../../model/slide/SlideTypes";
+import { FigureElement } from "../slide/figures/FigureElement";
 
 import styles from "./MiniSlide.module.css";
 
@@ -48,12 +49,59 @@ export function MiniSlide({
             close
           </span>
         )}
-        {/* <div className={styles.slidePreviewMini}>
+        <div className={styles.slidePreviewMini}>
           {elements &&
-            elements.map((element, index) => (
-              <SlideElement key={index} element={element} />
-            ))}
-        </div> */}
+            elements.map((element, index) => {
+              const style = {
+                top: element.position.y,
+                left: element.position.x,
+                width: element.width,
+                height: element.height,
+              };
+
+              if ("image" in element.data) {
+                return (
+                  <img
+                    style={{ ...style, objectFit: "cover" }}
+                    key={element.id}
+                    src={element.data.image}
+                    alt=""
+                  />
+                );
+              }
+
+              if ("text" in element.data) {
+                const fontStyle = {
+                  margin: 0,
+                  fontFamily: element.data.font.family,
+                  fontSize: element.data.font.size,
+                  color: element.data.font.color,
+                  fontWeight: element.data.font.bold ? "bold" : "400",
+                  textDecoration: element.data.font.underline
+                    ? "underline"
+                    : "none",
+                  fontStyle: element.data.font.italic ? "italic" : "normal",
+                };
+
+                return (
+                  <p style={{ ...style, ...fontStyle }}>{element.data.text}</p>
+                );
+              }
+
+              if ("figure" in element.data) {
+                return (
+                  <div style={style}>
+                    <FigureElement
+                      figure={element.data.figure}
+                      width={element.width}
+                      height={element.height}
+                      fill={element.data.fill}
+                    />
+                  </div>
+                );
+              }
+            })}
+        </div>
       </div>
     </div>
   );

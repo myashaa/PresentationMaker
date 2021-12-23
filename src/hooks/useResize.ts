@@ -1,79 +1,55 @@
 import { RefObject, useEffect, useState } from "react";
+import { TSize } from "../model/element/ElementTypes";
 
 export const useResize = (
   elementRef: RefObject<HTMLDivElement>,
-  elementPosition: { x: number; y: number },
-  elementSize: { width: number; height: number },
-  topLeftRef: RefObject<HTMLSpanElement>,
-  topRightRef: RefObject<HTMLSpanElement>,
-  bottomLeftRef: RefObject<HTMLSpanElement>,
-  bottomRightRef: RefObject<HTMLSpanElement>
+  initSize: TSize,
+  onStart: () => void,
+  onResize: () => void,
+  onEnd: () => void,
+  enabled?: boolean
 ) => {
-  let startPosition: { x: number; y: number } = elementPosition;
-  const [size, setSize] =
-    useState<{ width: number; height: number }>(elementSize);
-  const [currentResizer, setResizer] = useState(-1);
+  const [size, setSize] = useState<TSize>(initSize);
+
+  let startDragX = 0;
+  let startDragY = 0;
 
   useEffect(() => {
-    topLeftRef.current?.addEventListener("mousedown", tlHandle);
-    topRightRef.current?.addEventListener("mousedown", trHandle);
-    bottomLeftRef.current?.addEventListener("mousedown", blHandle);
-    bottomRightRef.current?.addEventListener("mousedown", brHandle);
+    if (elementRef.current)
+      elementRef.current.addEventListener("mousedown", dragHandler);
     return () => {
-      topLeftRef.current?.removeEventListener("mousedown", tlHandle);
-      topRightRef.current?.removeEventListener("mousedown", trHandle);
-      bottomLeftRef.current?.removeEventListener("mousedown", blHandle);
-      bottomRightRef.current?.removeEventListener("mousedown", brHandle);
+      if (elementRef.current)
+        elementRef.current.removeEventListener("mousedown", dragHandler);
     };
   });
 
-  useEffect(() => {
-    console.log(currentResizer);
-  }, [currentResizer]);
+  const dragHandler = (e: MouseEvent) => {
+    startDragX = e.clientX;
+    startDragY = e.clientY;
 
-  const tlHandle = (e: MouseEvent) => {
-    e.preventDefault();
-    setResizer(1);
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
-  };
-  const trHandle = (e: MouseEvent) => {
-    e.preventDefault();
-    setResizer(2);
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
-  };
-  const blHandle = (e: MouseEvent) => {
-    e.preventDefault();
-    setResizer(3);
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
-  };
-  const brHandle = (e: MouseEvent) => {
-    e.preventDefault();
-    setResizer(4);
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
+    document.addEventListener("mousedown", onMoveInit);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onStop);
   };
 
-  const resize = (e: MouseEvent) => {
-    const delta = {
-      x: e.pageX - startPosition.x,
-      y: e.pageY - startPosition.y,
-    };
-
-    console.log(startPosition);
-
-    setSize({
-      width: e.pageX - size.width + delta.x,
-      height: e.pageY - size.height + delta.y,
-    });
+  const onMoveInit = () => {
+    onStart();
   };
 
-  const stopResize = () => {
-    document.removeEventListener("mousemove", resize);
-    document.removeEventListener("mouseup", stopResize);
-    setResizer(-1);
+  const onMove = (e: MouseEvent) => {
+    const newWidth = size.width - startDragX + e.clientX;
+    const newHeight = size.height - startDragY + e.clientY;
+    enabled && setSize({ width: newWidth, height: newHeight });
+    onResize();
+  };
+
+  const onStop = () => {
+    onEnd();
+    if (elementRef.current)
+      elementRef.current.removeEventListener("mousedown", dragHandler);
+    document.removeEventListener("mousedown", onMoveInit);
+    document.removeEventListener("mousemove", onMove);
+    document.removeEventListener("mouseup", onStop);
   };
 
   return size;

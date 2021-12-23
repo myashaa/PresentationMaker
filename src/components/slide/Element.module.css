@@ -39,3 +39,19 @@
   outline: none;
   padding: 14px;
 }
+
+.resizer {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border: 2px solid #fff2b2;
+  border-radius: 2px;
+}
+
+.rb {
+  bottom: -15px;
+  right: -15px;
+  cursor: se-resize;
+}
