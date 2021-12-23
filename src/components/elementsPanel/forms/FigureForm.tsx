@@ -1,8 +1,7 @@
 import styles from "./Form.module.css";
-import { useState } from "react";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
-import { TElement } from "../../../model/element/ElementTypes";
+import { EBorderStyle, TElement } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
 import { moveElement, resizeElement } from "../../../model/slide/SlideActions";
 import {
@@ -10,19 +9,14 @@ import {
   changeElementBorder,
 } from "../../../model/element/ElementActions";
 import { changeFigureColor } from "../../../model/element/FigureActions";
-import { TFigure } from "../../../model/element/FigureTypes";
+import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 
 type FigureFormProps = {
   element?: TElement;
   slideId?: string;
 };
 
-// const types = [Figures.square, Figures.circle, Figures.triangle]
-// const borders = ["Сплошная", "Пунктирная", "Точечная"]
-
 export function FigureForm({ slideId, element }: FigureFormProps) {
-  // const [type, setType] = useState(types[0])
-
   const figure = element?.data as TFigure;
 
   return (
@@ -33,10 +27,22 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         </span>
         <span className={styles.headerFormTitle}>Фигура</span>
       </div>
-      {/* <FieldSelect label={"Тип фигуры"} items={types} onChange={(value) => {
-        const t = value as Figures
-        setType(t)
-      }} /> */}
+
+      <FieldSelect
+        label={"Тип фигуры"}
+        items={[EFigureType.square, EFigureType.circle, EFigureType.triangle]}
+        value={figure.figure}
+        onChange={(value) => {
+          const type = value as EFigureType;
+
+          // dispatch(changeElementBorder, true, slideId, element?.id, {
+          //   width: element?.border?.width,
+          //   type,
+          //   color: element?.border?.color,
+          // });
+        }}
+      />
+
       <FieldInput
         label={"Заливка"}
         onChange={(text) =>
@@ -44,7 +50,9 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         }
         value={figure?.fill.toUpperCase()}
       />
+
       <div className={styles.line}></div>
+
       <FieldInput
         label={"Высота"}
         type={"number"}
@@ -60,6 +68,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         }
         value={element?.height.toString()}
       />
+
       <FieldInput
         label={"Ширина"}
         type={"number"}
@@ -97,7 +106,21 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         }
         value={element?.position.x.toString()}
       />
-      {/* <FieldSelect label={"Вид рамки"} items={borders} onChange={(value) => setBorderType(value)} /> */}
+
+      <FieldSelect
+        label={"Вид рамки"}
+        items={[EBorderStyle.dashed, EBorderStyle.dotted, EBorderStyle.solid]}
+        value={element?.border?.type}
+        onChange={(value) => {
+          const style = value as EBorderStyle;
+          dispatch(changeElementBorder, true, slideId, element?.id, {
+            width: element?.border?.width,
+            type: style,
+            color: element?.border?.color,
+          });
+        }}
+      />
+
       <FieldInput
         label={"Толщина рамки"}
         type={"number"}
@@ -110,6 +133,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         }
         value={element?.border?.width?.toString()}
       />
+
       <FieldInput
         label={"Цвет рамки"}
         onChange={(text) =>
@@ -121,6 +145,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         }
         value={element?.border?.color?.toUpperCase()}
       />
+
       <FieldInput
         label={"Фон"}
         onChange={(text) =>

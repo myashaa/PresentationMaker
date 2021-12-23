@@ -17,8 +17,14 @@ type TextFormProps = {
   slideId?: string;
 };
 
+// для списка элементов нужно для кей
+type TListElement = {
+  id: string;
+  value: string;
+};
+
 export function TextForm({ element, slideId }: TextFormProps) {
-  const textElement = element?.data as TText;
+  const text = element?.data as TText;
 
   return (
     <div className={styles.form}>
@@ -28,29 +34,32 @@ export function TextForm({ element, slideId }: TextFormProps) {
         </span>
         <span className={styles.headerFormTitle}>Текст</span>
       </div>
+
       <FieldSelect
         label={"Шрифт"}
         items={["Arial", "Montserrat"]}
-        value={textElement.font.family}
+        value={text.font.family}
         // onChange={(value) =>
         //   dispatch(setFontFamily, true, slideId, element?.id, value)
         // }
       />
+
       {/* <FieldInput label={"Размер"} type={"number"} onChange={(text) => setFontSize(parseInt(text))} value={fontSize.toString()} /> */}
-      {/* <FieldSelect label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
-      {/* <FieldCheckbox
+      {/* <FieldInput label={"Цвет"} items={colors} onChange={(value) => setColor(value)} /> */}
+
+      <FieldCheckbox
         label={"Жирный"}
-        checked={element?.data.text?.bold}
-        onChange={() =>
-          dispatch(
-            setFontBold,
-            true,
-            slideId,
-            element?.id,
-            !element?.data.text?.bold
-          )
-        }
-      /> */}
+        checked={text.font?.bold}
+        // onChange={() =>
+        //   dispatch(
+        //     setFontBold,
+        //     true,
+        //     slideId,
+        //     element?.id,
+        //     !element?.data.text?.bold
+        //   )
+        // }
+      />
       {/* <FieldCheckbox
         label={"Подчеркнутый"}
         checked={element?.data.text?.underline}
@@ -130,7 +139,23 @@ export function TextForm({ element, slideId }: TextFormProps) {
         }
         value={element?.position.x.toString()}
       />
-      {/* <FieldSelect label={"Вид рамки"} items={borders} onChange={(value) => setBorderType(value)} /> */}
+      <FieldSelect
+        label={"Вид рамки"}
+        items={["Сплошная", "Пунктирная", "Точечная", "Двойная"]}
+        value={element?.border?.type}
+        onChange={(value) => {
+          let text = "";
+          if (value === "Сплошная") text = "solid";
+          if (value === "Пунктирная") text = "dashed";
+          if (value === "Точечная") text = "dotted";
+          if (value === "Двойная") text = "double";
+          dispatch(changeElementBorder, true, slideId, element?.id, {
+            width: element?.border?.width,
+            type: text,
+            color: element?.border?.color,
+          });
+        }}
+      />
       <FieldInput
         label={"Толщина рамки"}
         type={"number"}

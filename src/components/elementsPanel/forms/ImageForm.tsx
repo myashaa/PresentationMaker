@@ -15,13 +15,7 @@ type ImageFormProps = {
   slideId?: string;
 };
 
-// const filters = ["Блюр", "Чб"]
-// const borders = ["Сплошная", "Пунктирная", "Точечная"]
-
 export function ImageForm({ element, slideId }: ImageFormProps) {
-  // const [filter, setFilter] = useState(filters[0])
-  // const [borderType, setBorderType] = useState(borders[0])
-
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
@@ -31,6 +25,24 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
         <span className={styles.headerFormTitle}>Изображение</span>
       </div>
       {/* <FieldSelect label={"Фильтр"} items={filters} onChange={(value) => setFilter(value)} /> */}
+      {/* <FieldSelect
+        label={"Фильтр"}
+        items={["Блюр"]}
+        value={element?.data?.filter}
+        onChange={(value) => {
+          // let text = "";
+          // if (value == "Сплошная") text = "solid";
+          // if (value == "Пунктирная") text = "dashed";
+          // if (value == "Точечная") text = "dotted";
+          // if (value == "Двойная") text = "double";
+          dispatch(changeElementBorder, true, slideId, element?.id, {
+            width: element?.border?.width,
+            type: value,
+            color: element?.border?.color,
+          })
+        }
+        }
+      />  */}
       <div className={styles.line}></div>
       <FieldInput
         label={"Высота"}
@@ -84,7 +96,23 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
         }
         value={element?.position.x.toString()}
       />
-      {/* <FieldSelect label={"Вид рамки"} items={borders} onChange={(value) => setBorderType(value)} /> */}
+      <FieldSelect
+        label={"Вид рамки"}
+        items={["Сплошная", "Пунктирная", "Точечная", "Двойная"]}
+        value={element?.border?.type}
+        onChange={(value) => {
+          let text = "";
+          if (value === "Сплошная") text = "solid";
+          if (value === "Пунктирная") text = "dashed";
+          if (value === "Точечная") text = "dotted";
+          if (value === "Двойная") text = "double";
+          dispatch(changeElementBorder, true, slideId, element?.id, {
+            width: element?.border?.width,
+            type: text,
+            color: element?.border?.color,
+          });
+        }}
+      />
       <FieldInput
         label={"Толщина рамки"}
         type={"number"}

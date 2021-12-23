@@ -22,21 +22,21 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
   const isImage = element.data.hasOwnProperty("url");
   const isFigure = element.data.hasOwnProperty("type");
 
-  // const style = {
-  //   width: element.width,
-  //   height: element.height,
-  //   top: element.position.y,
-  //   left: element.position.x,
-  //   backgroundColor: element.color,
-  //   outlineStyle: element.border?.type ? element.border?.type : "solid",
-  //   outlineWidth: element.border?.width ? element.border?.width : "0",
-  //   outlineColor: element.border?.color ? element.border?.color : COLORS.black,
-  //   outlineOffset: `-${element.border?.width}px`,
-  //   fontWeight: element.data.bold ? "bold" : "400",
-  //   textDecoration: element.data.underline ? "underline" : "none",
-  //   fontStyle: element.data.italic ? "italic" : "none",
-  //   fontFamily: element?.data.font.family || "Arial",
-  // };
+  const style = {
+    width: element.width,
+    height: element.height,
+    top: element.position.y,
+    left: element.position.x,
+    backgroundColor: element.color,
+    outlineStyle: element.border?.type ? element.border?.type : "solid",
+    outlineWidth: element.border?.width ? element.border?.width : "0",
+    outlineColor: element.border?.color ? element.border?.color : COLORS.black,
+    outlineOffset: `-${element.border?.width}px`,
+    // fontWeight: element?.data?.font?.bold ? "bold" : "400",
+    // textDecoration: element.data.underline ? "underline" : "none",
+    // fontStyle: element.data.italic ? "italic" : "none",
+    // fontFamily: element.data.font.family || "Arial",
+  };
   const resizers = (
     <>
       <span ref={null} className={classnames(styles.resizer, styles.lt)} />
