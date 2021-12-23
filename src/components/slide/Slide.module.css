@@ -17,4 +17,5 @@
   box-shadow: 0 4px 8px rgb(0 0 0 / 6%);
   overflow: hidden;
   position: relative;
+  background-position: center;
 }

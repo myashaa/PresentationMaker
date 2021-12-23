@@ -1,3 +1,4 @@
+import { COLORS } from "../../colors";
 import { TElement } from "../../model/element/ElementTypes";
 import { TBackground } from "../../model/slide/SlideTypes";
 import { FigureElement } from "../slide/figures/FigureElement";
@@ -23,6 +24,13 @@ export function MiniSlide({
   elements,
   background,
 }: MiniSlideProps) {
+  const style = {
+    backgroundColor: background?.color ? background.color : COLORS.white,
+    backgroundImage: `url(${background?.picture?.image})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+
   return (
     <div
       className={`${styles.slidePreview} ${
@@ -37,7 +45,7 @@ export function MiniSlide({
       }}
     >
       <span className={styles.slideIndex}>{index}</span>
-      <div className={styles.slideMiniature}>
+      <div className={styles.slideMiniature} style={style}>
         {selected && (
           <span
             className={`${styles.slideRemove} material-icons`}

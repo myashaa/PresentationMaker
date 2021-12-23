@@ -8,8 +8,6 @@ import { ImageElement } from "./image/ImageElement";
 import { FigureElement } from "./figures/FigureElement";
 import { useEffect, useRef, useState } from "react";
 import { classnames } from "../../utils";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
-import { resizeElement } from "../../model/slide/SlideActions";
 import { COLORS } from "../../colors";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { moveElement, resizeElement } from "../../model/slide/SlideActions";
