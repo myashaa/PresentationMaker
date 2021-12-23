@@ -1,4 +1,4 @@
-import { dispatch } from "../../../editor";
+import { dispatch, getEditor } from "../../../editor";
 import {
   createPresentation,
   loadPresentation,
@@ -6,6 +6,7 @@ import {
   savePresentation,
   setPresentation,
 } from "../../../model/editor/EditorActions";
+import { updateHistory } from "../../../model/history/HistoryActions";
 
 export const menu = [
   {
@@ -13,7 +14,8 @@ export const menu = [
     actions: [
       {
         icon: "create_new_folder", label: "Создать", action: () => {
-          dispatch(createPresentation, false)
+          dispatch(createPresentation, false);
+          dispatch(updateHistory, false, getEditor());
         }
       },
       {
@@ -22,6 +24,7 @@ export const menu = [
         action: () => {
           loadPresentation((object) => {
             dispatch(setPresentation, false, object);
+            dispatch(updateHistory, false, getEditor());
           })
         },
       },
