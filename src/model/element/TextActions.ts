@@ -33,7 +33,7 @@ export function setFont(
     presentation: {
       ...presentation,
       slideList: slideList.map((slide) =>
-        slideId === slideId ? { ...slide, elementList: newElementList } : slide
+        slideId === slide.id ? { ...slide, elementList: newElementList } : slide
       ),
     },
   };

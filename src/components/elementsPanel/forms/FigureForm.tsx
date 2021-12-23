@@ -3,7 +3,10 @@ import { FieldSelect } from "../../fields/FieldSelect";
 import { FieldInput } from "../../fields/FieldInput";
 import { TElement } from "../../../model/element/ElementTypes";
 import { dispatch } from "../../../editor";
-import { changeFigureColor } from "../../../model/element/FigureActions";
+import {
+  changeFigure,
+  changeFigureColor,
+} from "../../../model/element/FigureActions";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 
 type FigureFormProps = {
@@ -30,11 +33,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
         onChange={(value) => {
           const type = value as EFigureType;
 
-          // dispatch(changeElementBorder, true, slideId, element?.id, {
-          //   width: element?.border?.width,
-          //   type,
-          //   color: element?.border?.color,
-          // });
+          dispatch(changeFigure, true, slideId, element?.id, type);
         }}
       />
 

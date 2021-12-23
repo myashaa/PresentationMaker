@@ -1,12 +1,12 @@
 import { TEditor } from "../editor/EditorTypes";
 import { TElement } from "./ElementTypes";
-import { TFilter, TImage } from "./ImageTypes";
+import { EFilter, TImage } from "./ImageTypes";
 
 export function setFilter(
   editor: TEditor,
   slideId: string,
   element: TElement,
-  filter: TFilter
+  filter: EFilter
 ): TEditor {
   const data = element.data as TImage;
   const newData = { ...data, filter };

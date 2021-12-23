@@ -1,7 +1,9 @@
 import styles from "./Form.module.css";
 import { FieldSelect } from "../../fields/FieldSelect";
 import { TElement } from "../../../model/element/ElementTypes";
-import { TImage } from "../../../model/element/ImageTypes";
+import { EFilter, TImage } from "../../../model/element/ImageTypes";
+import { dispatch } from "../../../editor";
+import { setFilter } from "../../../model/element/ImageActions";
 
 type ImageFormProps = {
   element?: TElement;
@@ -14,27 +16,17 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>
-          category
-        </span>
+        <span className={`material-icons ${styles.headerFormIcon}`}>image</span>
         <span className={styles.headerFormTitle}>Изображение</span>
       </div>
       {/* <FieldSelect label={"Фильтр"} items={filters} onChange={(value) => setFilter(value)} /> */}
       <FieldSelect
         label={"Фильтр"}
-        items={["asf"]}
-        value={"Блюр"}
+        items={[EFilter.none, EFilter.blur, EFilter.baw]}
+        value={image.filter}
         onChange={(value) => {
-          // let text = "";
-          // if (value == "Сплошная") text = "solid";
-          // if (value == "Пунктирная") text = "dashed";
-          // if (value == "Точечная") text = "dotted";
-          // if (value == "Двойная") text = "double";
-          // dispatch(changeElementBorder, true, slideId, element?.id, {
-          //   width: element?.border?.width,
-          //   type: value,
-          //   color: element?.border?.color,
-          // });
+          const filter = value as EFilter;
+          dispatch(setFilter, true, slideId, element?.id, filter);
         }}
       />
       <div className={styles.line}></div>

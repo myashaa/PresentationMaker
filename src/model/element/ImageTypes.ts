@@ -1,9 +1,10 @@
 export type TImage = {
   image: string;
-  filter?: TFilter;
+  filter?: EFilter;
 };
 
-export type TFilter = {
-  blur: number;
-  colorSelection: string;
-};
+export enum EFilter {
+  none = "Ничего",
+  blur = "Размытие",
+  baw = "Черно-белое",
+}
