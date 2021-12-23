@@ -1,8 +1,41 @@
 .element {
   position: absolute;
   z-index: 1;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
 }
 
 .selected {
-  border: 2px solid #f2f2f2;
+  /* border: 2px solid #f2f2f2; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.empty {
+  font-size: 12px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c7c7c7;
+  border: 2px dashed #f2f2f2;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.textEditor {
+  position: absolute;
+  resize: none;
+  font-size: 16px;
+  font-family: Montserrat;
+  top: 0;
+  width: 250px;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  outline: none;
+  padding: 14px;
 }

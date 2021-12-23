@@ -9,6 +9,7 @@ import { Element } from "./Element";
 import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
 import { useState } from "react";
+import { Empty } from "./Empty";
 
 type SlideProps = {
   slide: TSlide;
@@ -16,11 +17,11 @@ type SlideProps = {
 };
 
 export function SlideEditor({ slide, selectedElements }: SlideProps) {
-  const elements = slide.elementList;
+  const elements = slide?.elementList;
 
   const style = {
-    backgroundColor: slide.background?.color
-      ? slide.background.color
+    backgroundColor: slide?.background?.color
+      ? slide?.background.color
       : COLORS.white,
   };
 
@@ -32,21 +33,24 @@ export function SlideEditor({ slide, selectedElements }: SlideProps) {
         dispatch(selectElements, false, []);
       }}
     >
-      <div className={classnames(styles.slide)} style={style}>
-        {elements.map((element) => (
-          <Element
-            key={element.id}
-            size={{ width: element.width, height: element.height }}
-            position={element.position}
-            element={element}
-            slideId={slide.id}
-            selected={selectedElements.includes(element.id)}
-            onClick={() => {
-              dispatch(selectElements, false, [element.id]);
-            }}
-          />
-        ))}
-      </div>
+      {slide && (
+        <div className={classnames(styles.slide)} style={style}>
+          {elements?.map((element) => (
+            <Element
+              key={element.id}
+              size={{ width: element.width, height: element.height }}
+              position={element.position}
+              element={element}
+              slideId={slide.id}
+              selected={selectedElements.includes(element.id)}
+              onClick={() => {
+                dispatch(selectElements, false, [element.id]);
+              }}
+            />
+          ))}
+        </div>
+      )}
+      {!slide && <Empty text="Создайте или выберите слайд" />}
     </div>
   );
 }

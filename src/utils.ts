@@ -26,9 +26,15 @@ export function classnames(...rest: any[]) {
 }
 
 export function getLastElement(array: any[]) {
-  return array[array.length - 1];
+  if (array) {
+    return array[array.length - 1];
+  }
+  return null;
 }
 
 export function getByKey(array: any[], key: string, value: string) {
-  return array.filter((element) => element[key] === value)[0];
+  if (array) {
+    return array.filter((element) => element[key] === value)[0];
+  }
+  return null;
 }

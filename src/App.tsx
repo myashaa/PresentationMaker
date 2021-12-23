@@ -28,13 +28,12 @@ function App({ editor }: AppProps) {
   );
 
   const currentElement: TElement = getByKey(
-    currentSlide.elementList,
+    currentSlide?.elementList,
     "id",
     getLastElement(selectedElementIds)
   );
 
   useEffect(() => {
-    console.log(editor);
     document.title = editor.presentation.name;
   }, [editor]);
 
