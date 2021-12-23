@@ -19,9 +19,11 @@ export const SlidesPanel = ({
   slides,
   selectedSlides,
 }: SlidesPanelProps) => {
-  useHotKey(() => {
-    dispatch(deleteSlides, true, selectedSlides);
-  }, "Delete");
+  useHotKey((key) => {
+    if (key === "Delete") {
+      dispatch(deleteSlides, true, selectedSlides);
+    }
+  });
 
   const selectSlideHandle = (ids: string[]) => {
     dispatch(selectSlides, false, ids);

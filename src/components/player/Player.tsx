@@ -36,7 +36,7 @@ export function Player({ slides }: PlayerProps) {
     if (key === "ArrowRight" && slideIndex < slides.length - 1) {
       setSlideIndex(slideIndex + 1);
     }
-  }, "ESC");
+  });
 
   const style = {
     backgroundColor: slide.background?.color
