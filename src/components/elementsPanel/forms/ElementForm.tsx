@@ -83,7 +83,7 @@ export function ElementForm({ element, slideId }: Props) {
             color: element?.border?.color || "",
             type: borderType,
           };
-
+          
           dispatch(changeElementBorder, true, slideId, element?.id, border);
         }}
       />
