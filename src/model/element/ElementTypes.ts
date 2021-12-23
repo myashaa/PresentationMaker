@@ -1,53 +1,35 @@
-export type Element = {
+import { TFigure } from "./FigureTypes";
+import { TImage } from "./ImageTypes";
+import { TText } from "./TextTypes";
+
+export type TElement = {
   id: string;
   width: number;
   height: number;
-  position: {
-    x: number;
-    y: number;
-  };
+  position: TPosition;
   color?: string;
-  border?: Border;
-  data: Text & Image & Figure;
+  border?: TBorder;
+  data: TText | TImage | TFigure;
 };
 
-export type Text = {
-  content: string;
-  font: Font;
-  bold?: boolean;
-  italic?: boolean;
-  underline?: boolean;
+export type TPosition = {
+  x: number;
+  y: number;
 };
 
-export type Font = {
-  family: string;
-  color: string;
-  size: number;
+export type TSize = {
+  width: number;
+  height: number;
 };
 
-export type Image = {
-  url: string;
-  filter?: Filter;
-};
-
-export type Figure = {
-  type: "circle" | "triangle" | "sguare";
-  fill: string;
-};
-
-export enum BorderVariant {
+export enum EBorderStyle {
   solid = "Сплошной",
   dotted = "Точечная",
-  dashed = "Пунктирная"
+  dashed = "Пунктирная",
 }
 
-export type Border = {
+export type TBorder = {
   width: number;
-  type: BorderVariant;
+  type: EBorderStyle;
   color: string;
-};
-
-export type Filter = {
-  blur: number;
-  colorSelection: string;
 };

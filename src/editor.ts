@@ -1,14 +1,14 @@
-import { updateHistory } from "./model/editor/EditorActions";
-import { Editor } from "./model/editor/EditorTypes";
+import { TEditor } from "./model/editor/EditorTypes";
+import { updateHistory } from "./model/history/HistoryActions";
 
-let editor = {} as Editor;
+let editor = {} as TEditor;
 let editorChangeHandler: Function = () => {};
 
-function getEditor(): Editor {
+function getEditor(): TEditor {
   return editor;
 }
 
-function setEditor(newEditor: Editor) {
+function setEditor(newEditor: TEditor) {
   editor = newEditor;
 }
 

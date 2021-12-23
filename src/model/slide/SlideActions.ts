@@ -1,16 +1,18 @@
 import { COLORS } from "../../colors";
 import { random, uuid4 } from "../../utils";
-import { Editor } from "../editor/EditorTypes";
-import { Element } from "../element/ElementTypes";
-import { Figure, Text, Image } from "../element/ElementTypes";
-import { Background } from "./SlideTypes";
+import { TEditor } from "../editor/EditorTypes";
+import { TElement } from "../element/ElementTypes";
+import { TFigure } from "../element/FigureTypes";
+import { TImage } from "../element/ImageTypes";
+import { TText } from "../element/TextTypes";
+import { TBackground, TSlide } from "./SlideTypes";
 
 // Установка фона для слайда
 export function setBackground(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
-  background: Background
-): Editor {
+  background: TBackground
+): TEditor {
   const { presentation } = editor;
   const { slideList } = presentation;
 
@@ -18,7 +20,7 @@ export function setBackground(
     slide.id === slideId ? { ...slide, background } : slide
   );
 
-  const newEditor: Editor = {
+  const newEditor: TEditor = {
     ...editor,
     presentation: {
       ...presentation,
@@ -30,8 +32,8 @@ export function setBackground(
 }
 
 // Очистка фона слайда
-export function clearBackground(editor: Editor, slideId: string): Editor {
-  const background: Background = {
+export function clearBackground(editor: TEditor, slideId: string): TEditor {
+  const background: TBackground = {
     color: COLORS.white,
   };
 
@@ -50,16 +52,15 @@ export function clearBackground(editor: Editor, slideId: string): Editor {
 
 // Создание элемента на слайде
 export function createElement(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
-  content: Text & Image & Figure
-): Editor {
-  const newElement: Element = {
+  content: TText | TImage | TFigure
+): TEditor {
+  const newElement: TElement = {
     id: uuid4(),
     width: 100,
     height: 100,
     position: { x: random(0, 640), y: random(0, 480) },
-    color: COLORS.white,
     data: content,
   };
 
@@ -83,17 +84,16 @@ export function createElement(
 
 // Удаление элемента
 export function removeElement(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string
-): Editor {
+): TEditor {
   const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide) => {
+  const newSlideList: TSlide[] = slideList.map((slide) => {
     if (slide.id === slideId) {
       const { elementList } = slide;
       return {
         ...slide,
-        // ???
         elementList: elementList.filter((element) => element.id !== elementId),
       };
     }
@@ -111,7 +111,7 @@ export function removeElement(
 
 // Удаление элементов
 export function removeElements(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementIds: string[]
 ) {
@@ -141,11 +141,11 @@ export function removeElements(
 
 // Перемещение элемента
 export function moveElement(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string,
   newPosition: { x: number; y: number }
-): Editor {
+): TEditor {
   const { slideList } = editor.presentation;
 
   const newSlideList = slideList.map((slide) => {
@@ -172,12 +172,12 @@ export function moveElement(
 
 // Изменение размеров элемента
 export function resizeElement(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string,
   newWidth: number,
   newHeight: number
-): Editor {
+): TEditor {
   const { slideList } = editor.presentation;
 
   const newSlideList = slideList.map((slide) => {
@@ -202,10 +202,13 @@ export function resizeElement(
   };
 }
 
-export function selectElements(editor: Editor, elementsIds: string[]): Editor {
+export function selectElements(
+  editor: TEditor,
+  elementsIds: string[]
+): TEditor {
   const { presentation } = editor;
 
-  const newEditor: Editor = {
+  const newEditor: TEditor = {
     ...editor,
     presentation: {
       ...presentation,

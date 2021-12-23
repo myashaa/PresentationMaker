@@ -24,3 +24,17 @@ export function at(data: Array<any>, n: number) {
 export function classnames(...rest: any[]) {
   return rest.join(" ").trim() || "";
 }
+
+export function getLastElement(array: any[]) {
+  if (array) {
+    return array[array.length - 1];
+  }
+  return null;
+}
+
+export function getByKey(array: any[], key: string, value: string) {
+  if (array) {
+    return array.filter((element) => element[key] === value)[0];
+  }
+  return null;
+}

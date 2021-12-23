@@ -1,60 +1,77 @@
 import styles from "./Form.module.css";
 import { FieldInput } from "../../fields/FieldInput";
 import { dispatch } from "../../../editor";
-import { clearBackground, setBackground } from "../../../model/slide/SlideActions";
-import { Background, Slide } from "../../../model/slide/SlideTypes";
+import {
+  clearBackground,
+  setBackground,
+} from "../../../model/slide/SlideActions";
 import { ActionButton } from "../../header/actions/ActionButton";
-import { Image } from "../../../model/element/ElementTypes";
+import { TBackground, TSlide } from "../../../model/slide/SlideTypes";
+import { TImage } from "../../../model/element/ImageTypes";
 
 type SlideFormProps = {
-  slide?: Slide;
+  slide?: TSlide;
 };
 
 export function SlideForm({ slide }: SlideFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>filter</span>
+        <span className={`material-icons ${styles.headerFormIcon}`}>
+          filter
+        </span>
         <span className={styles.headerFormTitle}>Слайд</span>
       </div>
-      <FieldInput label={"Установить цвет фона"} type={"text"} onChange={(text) => {
-        const b: Background = {
-          color: text,
-        }
-        dispatch(setBackground, true, slide?.id, b)
-      }} value={slide?.background?.color?.toUpperCase()} />
+      <FieldInput
+        label={"Установить цвет фона"}
+        type={"text"}
+        onChange={(text) => {
+          const b: TBackground = {
+            color: text,
+          };
+          dispatch(setBackground, true, slide?.id, b);
+        }}
+        value={slide?.background?.color?.toUpperCase()}
+      />
 
-      <div style={{display: "flex"}}>
-        <ActionButton label="Выбрать фон" style={{ flex: 1 }} onClick={() => {
-           const fileInputNode = document.createElement("input");
+      <div style={{ display: "flex" }}>
+        <ActionButton
+          label="Выбрать фон"
+          style={{ flex: 1 }}
+          onClick={() => {
+            const fileInputNode = document.createElement("input");
             fileInputNode.type = "file";
             fileInputNode.click();
             fileInputNode.addEventListener("change", () => {
               const file = fileInputNode.files?.[0] as File;
-              const reader  = new FileReader();
+              const reader = new FileReader();
 
               reader.onloadend = function () {
-
-                const newImage: Image = {
-                  url: "https://via.placeholder.com/150",
+                const newImage: TImage = {
+                  image: "https://via.placeholder.com/150",
                 };
 
                 if (file.type.includes("image")) {
-                  newImage.url = String(reader.result);
+                  newImage.image = String(reader.result);
                 }
 
-                const b: Background = {
-                  picture: newImage
-                }
+                const b: TBackground = {
+                  picture: newImage,
+                };
 
                 dispatch(setBackground, true, slide?.id, b);
-              }
+              };
 
               reader.readAsDataURL(file);
-            })
-        }} />
-        <ActionButton icon="delete" style={{ marginRight: 0 }} onClick={() =>  dispatch(clearBackground, true, slide?.id)} />
+            });
+          }}
+        />
+        <ActionButton
+          icon="delete"
+          style={{ marginRight: 0 }}
+          onClick={() => dispatch(clearBackground, true, slide?.id)}
+        />
       </div>
-    </div>  
+    </div>
   );
 }

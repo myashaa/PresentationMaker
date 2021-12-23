@@ -1,13 +1,13 @@
-import { PresentationHistory } from "../history/HistoryTypes";
-import { Presentation } from "../presentation/PresentationTypes";
+import { THistory } from "../history/HistoryTypes";
+import { TPresentation } from "../presentation/PresentationTypes";
 
-export type Editor = {
-  mode: "view" | "edit";
-  history: PresentationHistory;
-  presentation: Presentation;
-};
+export enum EMode {
+  view = "view",
+  edit = "edit",
+}
 
-export type Position = {
-  x: number;
-  y: number;
+export type TEditor = {
+  mode: EMode;
+  history: THistory;
+  presentation: TPresentation;
 };

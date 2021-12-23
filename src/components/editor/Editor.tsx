@@ -1,4 +1,4 @@
-import { Slide } from "../../model/slide/SlideTypes";
+import { TSlide } from "../../model/slide/SlideTypes";
 import styles from "./Editor.module.css";
 import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
@@ -7,12 +7,11 @@ import { Empty } from "../slide/Empty";
 import { SquareFigure } from "../slide/figures/SquareFigure";
 import { CircleFigure } from "../slide/figures/CircleFigure";
 import { TriangleFigure } from "../slide/figures/TriangleFigure";
-import { Slidee } from "../slide/Slidee";
 import { COLORS } from "../../colors";
 import { url } from "inspector";
 
 type EditorProps = {
-  slide?: Slide;
+  slide?: TSlide;
   slideId?: string;
   selectedElements: string[];
 };
@@ -29,13 +28,15 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           dispatch(selectElements, false, [...selectedElements, element.id]);
       }}
     />
-  ));  
+  ));
   const style = {
-    backgroundColor: slide?.background?.color ? slide.background.color : COLORS.lightGrey,
-    backgroundImage: `url(${slide?.background?.picture?.url})`,
-    backgroundSize: 'cover'
+    backgroundColor: slide?.background?.color
+      ? slide.background.color
+      : COLORS.lightGrey,
+    // backgroundImage: `url(${slide?.background?.picture?.url})`,
+    backgroundSize: "cover",
   };
-  
+
   return (
     <div className={styles.appEditorContainer}>
       {slide && (

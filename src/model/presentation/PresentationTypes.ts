@@ -1,8 +1,8 @@
-import { Slide } from "../slide/SlideTypes";
+import { TSlide } from "../slide/SlideTypes";
 
-export type Presentation = {
+export type TPresentation = {
   name: string;
-  slideList: Slide[];
+  slideList: TSlide[];
   selectedSlidesIds: string[];
   selectedElementIds: string[];
 };

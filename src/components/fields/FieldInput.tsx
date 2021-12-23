@@ -15,6 +15,7 @@ export function FieldInput({ label, type, value, onChange }: FieldInputProps) {
         className={styles.fieldInput}
         type={type}
         value={value}
+        min={"0"}
         onChange={(e) => onChange && onChange(e.target.value)}
       />
       {type === "number" && <span className={styles.fieldLabel}>px</span>}

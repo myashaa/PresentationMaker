@@ -1,6 +1,6 @@
-import { Presentation } from "../presentation/PresentationTypes";
+import { TPresentation } from "../presentation/PresentationTypes";
 
-export type PresentationHistory = {
+export type THistory = {
   index: number;
-  states: Presentation[];
+  states: TPresentation[];
 };

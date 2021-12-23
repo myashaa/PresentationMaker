@@ -4,13 +4,13 @@ import {
   deleteSlides,
   selectSlides,
 } from "../../model/presentation/PresentationActions";
-import { Slide } from "../../model/slide/SlideTypes";
+import { TSlide } from "../../model/slide/SlideTypes";
 import { MiniSlide } from "./MiniSlide";
 import styles from "./SlidesPanel.module.css";
 
 type SlidesPanelProps = {
   width?: number;
-  slides: Slide[];
+  slides: TSlide[];
   selectedSlides: string[];
 };
 

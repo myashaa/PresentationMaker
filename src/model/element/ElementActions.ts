@@ -1,12 +1,12 @@
-import { Editor } from "../editor/EditorTypes";
-import { Border } from "./ElementTypes";
+import { TEditor } from "../editor/EditorTypes";
+import { TBorder } from "./ElementTypes";
 
 export function changeElementBorder(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string,
-  border: Border
-): Editor {
+  border: TBorder
+): TEditor {
   const { presentation } = editor;
 
   const { slideList } = presentation;
@@ -29,11 +29,11 @@ export function changeElementBorder(
 }
 
 export function changeElementColor(
-  editor: Editor,
+  editor: TEditor,
   slideId: string,
   elementId: string,
   color: string
-): Editor {
+): TEditor {
   const { presentation } = editor;
 
   const { slideList } = presentation;

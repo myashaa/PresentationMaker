@@ -1,12 +1,13 @@
-import { Element, Image } from "../element/ElementTypes";
+import { TElement } from "../element/ElementTypes";
+import { TImage } from "../element/ImageTypes";
 
-export type Slide = {
+export type TSlide = {
   id: string;
-  elementList: Element[];
-  background: Background;
+  elementList: TElement[];
+  background: TBackground;
 };
 
-export type Background = {
+export type TBackground = {
   color?: string;
-  picture?: Image;
+  picture?: TImage;
 };

@@ -1,14 +1,16 @@
 import { useRef } from "react";
 import { COLORS } from "../../colors";
-import { Element as ElementType } from "../../model/element/ElementTypes";
+import { TElement } from "../../model/element/ElementTypes";
+import { EFigureType } from "../../model/element/FigureTypes";
 import { classnames } from "../../utils";
 import { CircleFigure } from "./figures/CircleFigure";
 import { SquareFigure } from "./figures/SquareFigure";
 import { TriangleFigure } from "./figures/TriangleFigure";
 import styles from "./SlideElement.module.css";
+import { TextElement } from "./text/TextElement";
 
 type ElementProps = {
-  element: ElementType;
+  element: TElement;
   selected?: boolean;
   onClick?: (onCtrl?: boolean) => void;
 };
@@ -16,7 +18,7 @@ type ElementProps = {
 export function SlideElement({ element, selected, onClick }: ElementProps) {
   const elementRef = useRef(null);
 
-  const isText = element.data.hasOwnProperty("font"); 
+  const isText = element.data.hasOwnProperty("font");
   const isImage = element.data.hasOwnProperty("url");
   const isFigure = element.data.hasOwnProperty("type");
 
@@ -30,10 +32,10 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
     outlineWidth: element.border?.width ? element.border?.width : "0",
     outlineColor: element.border?.color ? element.border?.color : COLORS.black,
     outlineOffset: `-${element.border?.width}px`,
-    fontWeight: element.data.bold ? "bold" : "400",
-    textDecoration: element.data.underline ? "underline" : "none",
-    fontStyle: element.data.italic ? "italic" : "none",
-    fontFamily: element.data.font.family || "Arial",
+    // fontWeight: element?.data?.font?.bold ? "bold" : "400",
+    // textDecoration: element.data.underline ? "underline" : "none",
+    // fontStyle: element.data.italic ? "italic" : "none",
+    // fontFamily: element.data.font.family || "Arial",
   };
   const resizers = (
     <>
@@ -47,19 +49,37 @@ export function SlideElement({ element, selected, onClick }: ElementProps) {
   return (
     <div
       className={classnames(styles.element, selected && styles.selected)}
-      style={style}
+      // style={style}
       onClick={(event) => {
         event.stopPropagation();
         onClick && onClick(event.ctrlKey);
       }}
       ref={elementRef}
     >
-      {!isText && selected && resizers}
-      {isText && <p>{element?.data?.content}</p>}
+      {/* {!isText && selected && resizers}
+      {isText && <TextElement text={element?.data?.content} />}
       {isImage && <img src={element.data.url} alt="" />}
-      {isFigure && element.data?.type === "circle" && <CircleFigure fill={element.data.fill} width={element.width} height={element.height} />}
-      {isFigure && element.data?.type === "sguare" && <SquareFigure fill={element.data.fill} width={element.width} height={element.height} />}
-      {isFigure && element.data?.type === "triangle" && <TriangleFigure fill={element.data.fill} width={element.width} height={element.height} />}
+      {isFigure && element.data?.type === EFigureType.circle && (
+        <CircleFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )}
+      {isFigure && element.data?.type === EFigureType.square && (
+        <SquareFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )}
+      {isFigure && element.data?.type === EFigureType.triangle && (
+        <TriangleFigure
+          fill={element.data.fill}
+          width={element.width}
+          height={element.height}
+        />
+      )} */}
     </div>
   );
 }

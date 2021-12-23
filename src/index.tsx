@@ -6,10 +6,8 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { addChangeHandler, dispatch, getEditor } from "./editor";
-import {
-  createPresentation,
-  updateHistory,
-} from "./model/editor/EditorActions";
+import { createPresentation } from "./model/editor/EditorActions";
+import { updateHistory } from "./model/history/HistoryActions";
 
 dispatch(createPresentation, false, {});
 dispatch(updateHistory, false, getEditor());
