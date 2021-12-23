@@ -68,7 +68,7 @@ export function exportPresentation(presentation: TPresentation) {}
 export function createPresentation(editor: TEditor): TEditor {
   const newEditor: TEditor = {
     ...editor,
-    mode: EMode.view,
+    mode: EMode.edit,
     history: {
       index: -1,
       states: [],
