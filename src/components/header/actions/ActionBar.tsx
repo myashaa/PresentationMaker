@@ -121,7 +121,7 @@ export function ActionBar({
 
       <ActionButton
         icon="video_library"
-        label="Слай-шоу"
+        label="Слайд-шоу"
         primary
         onClick={() => {
           dispatch(changeMode, true, EMode.view);

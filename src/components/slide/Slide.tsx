@@ -1,14 +1,10 @@
 import { TSlide } from "../../model/slide/SlideTypes";
 import { classnames } from "../../utils";
-
 import { COLORS } from "../../colors";
 import styles from "./Slide.module.css";
-import { TText } from "../../model/element/TextTypes";
-import { TextElement } from "./text/TextElement";
 import { Element } from "./Element";
 import { dispatch } from "../../editor";
 import { selectElements } from "../../model/slide/SlideActions";
-import { useState } from "react";
 import { Empty } from "./Empty";
 
 type SlideProps = {
