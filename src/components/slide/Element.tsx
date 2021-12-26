@@ -12,6 +12,7 @@ import { COLORS } from "../../colors";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { moveElement, resizeElement } from "../../model/slide/SlideActions";
 import { useResize } from "../../hooks/useResize";
+import { useMoveAndResize } from "../../hooks/useMoving";
 
 type Props = {
   position: TPosition;
@@ -45,7 +46,7 @@ export function Element({
   if (element.border?.type === EBorderStyle.solid) borderType = "solid";
   if (element.border?.type === EBorderStyle.dashed) borderType = "dashed";
   if (element.border?.type === EBorderStyle.dotted) borderType = "dotted";
-        
+
   useEffect(() => {
     !moving && dispatch(moveElement, true, slideId, element.id, pos);
   }, [moving]);
@@ -54,33 +55,21 @@ export function Element({
     dispatch(resizeElement, true, slideId, element.id, sz.width, sz.height);
   }, [resizing]);
 
-  const pos = useDragAndDrop(
+  const [p, s] = useMoveAndResize(
     elementRef,
-    position,
-    () => {
-      setMoving(true);
-      console.log("двигаю");
-    },
-    () => {
-      setMoving(false);
-    },
-    selected && !edit && !resizing
-  );
-
-  const sz = useResize(
     resizerRef,
+    position,
     size,
-    () => {
-      !moving && setResizing(true);
+    !edit && selected,
+    (status) => {
+      selected && setMoving(status);
     },
-    () => {
-      setMoving(false);
-    },
-    () => {
-      setResizing(false);
-    },
-    selected && !edit
+    (status) => {
+      selected && setResizing(status);
+    }
   );
+  const pos = p as TPosition;
+  const sz = s as TSize;
 
   const style = {
     top: moving ? pos.y : position.y,
@@ -89,9 +78,11 @@ export function Element({
     height: resizing ? sz.height : size.height,
     outlineStyle: borderType ? borderType : "solid",
     outlineWidth: element.border?.width ? element.border?.width : 0,
-    outlineColor: element.border?.color ? element.border?.color : COLORS.lightGrey,
+    outlineColor: element.border?.color
+      ? element.border?.color
+      : COLORS.lightGrey,
     outlineOffset: `-${element.border?.width}px`,
-    backgroundColor: element.color ? element.color : COLORS.white
+    backgroundColor: element.color,
   };
 
   const data = element.data;
