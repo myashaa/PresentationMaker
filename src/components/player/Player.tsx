@@ -81,6 +81,7 @@ export function Player({ slides }: PlayerProps) {
         onClose={() => dispatch(changeMode, false, EMode.edit)}
         onBack={prevSlide}
         onForward={nextSlide}
+        label={`${slideIndex + 1} / ${slides.length}`}
       />
       <div ref={playerRef} className={styles.player} style={style}>
         {slide.elementList.map((element) => {
@@ -143,9 +144,11 @@ type ControlsProps = {
   onClose?: () => void;
   onBack?: () => void;
   onForward?: () => void;
+  label?: string;
 };
 
 export const PlayerControls = ({
+  label,
   onBack,
   onClose,
   onForward,
@@ -164,6 +167,7 @@ export const PlayerControls = ({
       >
         arrow_back
       </button>
+      <span className={styles.controlsLabel}>{label}</span>
       <button
         className={`${styles.controlButton} material-icons`}
         onClick={onForward}

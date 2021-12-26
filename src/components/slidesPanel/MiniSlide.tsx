@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { COLORS } from "../../colors";
+import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { TElement } from "../../model/element/ElementTypes";
 import { TBackground } from "../../model/slide/SlideTypes";
 import { FigureElement } from "../slide/figures/FigureElement";
@@ -24,6 +26,8 @@ export function MiniSlide({
   elements,
   background,
 }: MiniSlideProps) {
+  const slideRef = useRef<HTMLDivElement>(null);
+
   const style = {
     backgroundColor: background?.color ? background.color : COLORS.white,
     backgroundImage: `url(${background?.picture?.image})`,
@@ -33,6 +37,7 @@ export function MiniSlide({
 
   return (
     <div
+      ref={slideRef}
       className={`${styles.slidePreview} ${
         selected && styles.slidePreviewActive
       }`}
