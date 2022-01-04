@@ -19,6 +19,7 @@ import { TText } from "../../../model/element/TextTypes";
 import { TImage } from "../../../model/element/ImageTypes";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 import { changeMode } from "../../../model/editor/EditorActions";
+import { TCanvas } from "../../../model/element/ElementTypes";
 
 type ActionBarProps = {
   selectedSlide: string;
@@ -114,6 +115,15 @@ export function ActionBar({
                 fill: COLORS.primary,
               };
               dispatch(createElement, true, selectedSlide, newFigure);
+            }}
+          />
+          <ActionButton
+            icon="camera"
+            onClick={() => {
+              const newCanvas: TCanvas = {
+                video: true,
+              };
+              dispatch(createElement, true, selectedSlide, newCanvas);
             }}
           />
         </div>

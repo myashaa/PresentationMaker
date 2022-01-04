@@ -1,4 +1,9 @@
-import { EBorderStyle, TElement, TPosition, TSize } from "../../model/element/ElementTypes";
+import {
+  EBorderStyle,
+  TElement,
+  TPosition,
+  TSize,
+} from "../../model/element/ElementTypes";
 import { TextElement } from "./text/TextElement";
 
 import styles from "./Element.module.css";
@@ -13,6 +18,7 @@ import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { moveElement, resizeElement } from "../../model/slide/SlideActions";
 import { useResize } from "../../hooks/useResize";
 import { useMoveAndResize } from "../../hooks/useMoving";
+import { Camera } from "./Camera";
 
 type Props = {
   position: TPosition;
@@ -121,6 +127,7 @@ export function Element({
           fill={data.fill}
         />
       )}
+      {"video" in data && <Camera />}
       {selected && (
         <div
           ref={resizerRef}

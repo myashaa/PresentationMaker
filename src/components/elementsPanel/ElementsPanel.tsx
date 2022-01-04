@@ -25,12 +25,18 @@ export const ElementsPanel = ({
       {"text" in data && <TextForm element={element} slideId={slide?.id} />}
       {"image" in data && <ImageForm element={element} slideId={slide?.id} />}
       {"figure" in data && <FigureForm element={element} slideId={slide?.id} />}
-      {("image" in data || "text" in data || "figure" in data) && (
+      {("image" in data ||
+        "text" in data ||
+        "figure" in data ||
+        "video" in data) && (
         <ElementForm element={element} slideId={slide?.id} />
       )}
-      {!("image" in data || "text" in data || "figure" in data) && (
-        <SlideForm slide={slide} />
-      )}
+      {!(
+        "image" in data ||
+        "text" in data ||
+        "figure" in data ||
+        "video" in data
+      ) && <SlideForm slide={slide} />}
     </div>
   );
 };

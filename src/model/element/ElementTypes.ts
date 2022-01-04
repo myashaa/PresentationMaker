@@ -9,7 +9,7 @@ export type TElement = {
   position: TPosition;
   color?: string;
   border?: TBorder;
-  data: TText | TImage | TFigure;
+  data: TText | TImage | TFigure | TCanvas;
 };
 
 export type TPosition = {
@@ -32,4 +32,8 @@ export type TBorder = {
   width: number;
   type: EBorderStyle;
   color: string;
+};
+
+export type TCanvas = {
+  video: boolean;
 };

@@ -3,6 +3,7 @@ import { COLORS } from "../../colors";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { TElement } from "../../model/element/ElementTypes";
 import { TBackground } from "../../model/slide/SlideTypes";
+import { Camera } from "../slide/Camera";
 import { FigureElement } from "../slide/figures/FigureElement";
 
 import styles from "./MiniSlide.module.css";
@@ -112,6 +113,10 @@ export function MiniSlide({
                     />
                   </div>
                 );
+              }
+
+              if ("video" in element.data) {
+                return <Camera />;
               }
             })}
         </div>
