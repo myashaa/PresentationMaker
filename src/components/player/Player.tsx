@@ -7,6 +7,7 @@ import { EMode } from "../../model/editor/EditorTypes";
 import { TPresentation } from "../../model/presentation/PresentationTypes";
 import { TSlide } from "../../model/slide/SlideTypes";
 import { at } from "../../utils";
+import { Camera } from "../slide/Camera";
 import { Element } from "../slide/Element";
 import { FigureElement } from "../slide/figures/FigureElement";
 import { ImageElement } from "../slide/image/ImageElement";
@@ -131,6 +132,14 @@ export function Player({ slides }: PlayerProps) {
                   height={element.height}
                   fill={element.data.fill}
                 />
+              </div>
+            );
+          }
+
+          if ("video" in element.data) {
+            return (
+              <div style={style}>
+                <Camera />
               </div>
             );
           }
