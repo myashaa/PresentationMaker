@@ -19,7 +19,7 @@ export function TextForm({ element, slideId }: TextFormProps) {
     <div className={styles.form}>
       <div className={styles.headerForm}>
         <span className={`material-icons ${styles.headerFormIcon}`}>
-          category
+          text_fields
         </span>
         <span className={styles.headerFormTitle}>Текст</span>
       </div>

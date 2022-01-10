@@ -65,7 +65,7 @@ export function ActionBar({
 
         <div className={styles.appActionsRigth}>
           <ActionButton
-            icon="title"
+            icon="text_fields"
             onClick={() => {
               const newText: TText = {
                 text: "Sample Text",
@@ -118,7 +118,7 @@ export function ActionBar({
             }}
           />
           <ActionButton
-            icon="camera"
+            icon="photo_camera"
             onClick={() => {
               const newCanvas: TCanvas = {
                 video: true,
