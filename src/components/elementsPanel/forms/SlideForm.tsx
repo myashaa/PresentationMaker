@@ -8,6 +8,7 @@ import {
 import { ActionButton } from "../../header/actions/ActionButton";
 import { TBackground, TSlide } from "../../../model/slide/SlideTypes";
 import { TImage } from "../../../model/element/ImageTypes";
+import { ColorPicker } from "../../fields/colorPicker/ColorPicker";
 
 type SlideFormProps = {
   slide?: TSlide;
@@ -72,6 +73,7 @@ export function SlideForm({ slide }: SlideFormProps) {
           onClick={() => dispatch(clearBackground, true, slide?.id)}
         />
       </div>
+      <ColorPicker />
     </div>
   );
 }

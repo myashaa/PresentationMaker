@@ -1,0 +1,94 @@
+.colorPickerUi {
+  border: 1px solid #e2e2e2;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.colorContainer {
+  display: flex;
+}
+
+.color {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.colorPoint {
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+  position: absolute;
+}
+
+.picker {
+  margin-bottom: 16px;
+  border-radius: 4px;
+  width: 252px;
+  height: 252px;
+  background: -webkit-linear-gradient(bottom, #000 0%, rgba(0, 0, 0, 0) 100%),
+    -webkit-linear-gradient(left, #fff 0%, rgba(255, 255, 255, 0) 100%);
+  background-color: red;
+  position: relative;
+}
+
+.hue {
+  width: 200px;
+  height: 32px;
+  border-radius: 4px;
+  background: -webkit-linear-gradient(
+    left,
+    #f00 0%,
+    #ff0 16.66%,
+    #0f0 33.33%,
+    #0ff 50%,
+    #00f 66.66%,
+    #f0f 83.33%,
+    #f00 100%
+  );
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0);
+  display: block;
+  margin-top: 10px;
+}
+
+.huePicker {
+  position: absolute;
+  top: -4px;
+  height: 38px;
+  width: 16px;
+  left: -8px;
+  /* background: rgba(255, 255, 255, 0.8); */
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.saturation {
+  width: 200px;
+  height: 32px;
+  border-radius: 4px;
+  background: #aaa;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0);
+  display: block;
+  margin-top: 10px;
+}
+
+.ligthness {
+  width: 200px;
+  height: 32px;
+  border-radius: 4px;
+  background: #aaa;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0);
+  display: block;
+  margin-top: 10px;
+}
