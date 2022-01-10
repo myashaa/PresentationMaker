@@ -13,36 +13,39 @@ import { TElement } from "./model/element/ElementTypes";
 import { getByKey, getLastElement } from "./utils";
 import styles from "./App.module.css";
 import { Player } from "./components/player/Player";
+import { connect } from "react-redux";
+import { RootState } from "./redux/store";
+import { TPresentation } from "./model/presentation/PresentationTypes";
 
 type AppProps = {
-  editor: TEditor;
+  presentation: TPresentation;
 };
 
-function App({ editor }: AppProps) {
-  const { slideList, name, selectedSlidesIds, selectedElementIds } =
-    editor.presentation;
+function App({ presentation }: AppProps) {
+  // const { slideList, name, selectedSlidesIds, selectedElementIds } =
+  //   presentation;
 
-  const currentSlide: TSlide = getByKey(
-    slideList,
-    "id",
-    getLastElement(selectedSlidesIds)
-  );
+  // const currentSlide: TSlide = getByKey(
+  //   slideList,
+  //   "id",
+  //   getLastElement(selectedSlidesIds)
+  // );
 
-  const currentElement: TElement = getByKey(
-    currentSlide?.elementList,
-    "id",
-    getLastElement(selectedElementIds)
-  );
+  // const currentElement: TElement = getByKey(
+  //   currentSlide?.elementList,
+  //   "id",
+  //   getLastElement(selectedElementIds)
+  // );
 
   useEffect(() => {
-    document.title = editor.presentation.name;
-  }, [editor]);
+    document.title = presentation.name;
+  }, [presentation]);
 
   return (
     <div>
-      {editor.mode === EMode.edit && (
+      <Header />
+      {/* {presentation.mode === EMode.edit && (
         <div className={styles.app}>
-          <Header title={name} />
           <ActionBar
             selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
             editor={editor}
@@ -61,14 +64,19 @@ function App({ editor }: AppProps) {
             <ElementsPanel slide={currentSlide} element={currentElement} />
           </div>
         </div>
-      )}
-      {editor.mode === EMode.view && (
+      )} */}
+      {/* {editor.mode === EMode.view && (
         <div className={styles.playerContainer}>
           <Player slides={slideList} />
         </div>
-      )}
+      )} */}
+      test
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state: RootState) => {
+  return { presentation: state.presentation };
+};
+
+export default connect(mapStateToProps)(App);
