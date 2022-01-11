@@ -73,7 +73,6 @@ export function SlideForm({ slide }: SlideFormProps) {
           onClick={() => dispatch(clearBackground, true, slide?.id)}
         />
       </div>
-      <ColorPicker />
     </div>
   );
 }

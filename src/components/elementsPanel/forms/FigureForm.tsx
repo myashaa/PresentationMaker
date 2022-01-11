@@ -43,6 +43,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
           dispatch(changeFigureColor, true, slideId, element?.id, text)
         }
         value={figure?.fill.toUpperCase()}
+        color
       />
 
       <div className={styles.line}></div>
