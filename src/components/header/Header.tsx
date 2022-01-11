@@ -4,7 +4,6 @@ import Logo from "../../assets/icons/logo.svg";
 
 import styles from "./Header.module.css";
 import { MenuBar } from "./menu/MenuBar";
-import { menu } from "./menu/Menu";
 
 export function Header() {
   return (
@@ -12,7 +11,7 @@ export function Header() {
       <img src={Logo} className={styles.appLogo} alt="" />
       <div className={styles.presentationInfo}>
         <Title />
-        <MenuBar menu={menu} />
+        <MenuBar />
       </div>
     </div>
   );

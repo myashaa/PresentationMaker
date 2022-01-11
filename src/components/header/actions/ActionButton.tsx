@@ -6,7 +6,8 @@ type ActionButtonProps = {
   icon?: string;
   primary?: boolean;
   onClick?: () => void;
-  style?: CSSProperties
+  style?: CSSProperties;
+  iconStyle?: CSSProperties;
 };
 
 export function ActionButton({
@@ -15,6 +16,7 @@ export function ActionButton({
   primary,
   onClick,
   style,
+  iconStyle
 }: ActionButtonProps) {
   return (
     <button
@@ -22,7 +24,7 @@ export function ActionButton({
       className={primary ? styles.actionButtonPrimary : styles.actionButton}
       onClick={onClick}
     >
-      {icon && <span className="material-icons">{icon}</span>}
+      {icon && <span style={iconStyle} className="material-icons">{icon}</span>}
       {label && <span className={styles.actionButtonLabel}>{label}</span>}
     </button>
   );

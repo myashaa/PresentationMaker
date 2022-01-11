@@ -1,25 +1,18 @@
-import { MenuButtonProps } from "./MenuTypes";
-import { MenuPopup } from "./MenuPopup";
-
 import styles from "./MenuButton.module.css";
 
-export function MenuButton({
-  label,
-  items,
-  expand,
-  onClick,
-  onHover,
-}: MenuButtonProps) {
+type Props = {
+  label: string;
+  icon?: string;
+  onClick?: () => void;
+};
+
+export function MenuButton({ label, icon, onClick }: Props) {
   return (
-    <div className={styles.menuButtonContainer}>
-      <span
-        className={expand ? styles.menuButtonLabelSelected : styles.menuButtonLabel}
-        onClick={onClick}
-        onMouseEnter={onHover}
-      >
-        {label}
-      </span>
-      {expand && items && <MenuPopup data={items || []} onAction={onClick} />}
+    <div className={styles.menuButton} onClick={onClick}>
+      {icon && (
+        <span className={`${styles.buttonIcon} material-icons`}>{icon}</span>
+      )}
+      {label}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { SlideForm } from "./forms/SlideForm";
 import { TSlide } from "../../model/slide/SlideTypes";
 import { ElementForm } from "./forms/ElementForm";
 import { FigureForm } from "./forms/FigureForm";
+import { VideoForm } from "./forms/VideoForm";
 
 type ElementsPanelProps = {
   slide?: TSlide;
@@ -25,6 +26,7 @@ export const ElementsPanel = ({
       {"text" in data && <TextForm element={element} slideId={slide?.id} />}
       {"image" in data && <ImageForm element={element} slideId={slide?.id} />}
       {"figure" in data && <FigureForm element={element} slideId={slide?.id} />}
+      {"video" in data && <VideoForm />}
       {("image" in data ||
         "text" in data ||
         "figure" in data ||
