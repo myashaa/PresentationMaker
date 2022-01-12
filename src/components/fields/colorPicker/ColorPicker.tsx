@@ -40,7 +40,7 @@ export const ColorPicker = ({ onClick }: ColorPickerProps) => {
           />
           <p>Тон {hue}</p>
           <HuePicker value={hue} onChange={setHue} />
-          <p>Прозрачность {ligthness}%</p>
+          <p>Яркость {ligthness}%</p>
           <LigthnessPicker value={ligthness} onChange={setLigthness} />
           <p>Насыщенность {saturation}%</p>
           <SaturationPicker value={saturation} onChange={setSaturation} />
