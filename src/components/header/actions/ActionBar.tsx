@@ -1,37 +1,14 @@
 import { ActionButton } from "./ActionButton";
-
-import { dispatch } from "../../../editor";
-import { loadImage } from "../../../model/element/ImageActions";
-import {
-  createElement,
-  resizeElement,
-} from "../../../model/slide/SlideActions";
-import {
-  createSlide,
-  deleteSlides,
-} from "../../../model/presentation/PresentationActions";
-
 import styles from "./ActionBar.module.css";
-import { COLORS } from "../../../colors";
-import { EMode, TEditor } from "../../../model/editor/EditorTypes";
-import { redo, undo } from "../../../model/history/HistoryActions";
-import { TText } from "../../../model/element/TextTypes";
-import { TImage } from "../../../model/element/ImageTypes";
-import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
-import { changeMode } from "../../../model/editor/EditorActions";
-import { TCanvas } from "../../../model/element/ElementTypes";
+import { AppDispatch } from "../../../redux/store";
+import { connect } from "react-redux";
 
-type ActionBarProps = {
-  selectedSlide: string;
-  editor: TEditor;
-  selectedElement: string;
+type Props = {
+  newSlide: () => void;
+  deleteSlides: () => void;
 };
 
-export function ActionBar({
-  selectedSlide,
-  editor,
-  selectedElement,
-}: ActionBarProps) {
+function ActionBar({ newSlide, deleteSlides }: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -40,16 +17,20 @@ export function ActionBar({
           label="Добавить слайд"
           primary
           onClick={() => {
-            dispatch(createSlide, true, {});
+            newSlide();
           }}
         />
         <ActionButton
           icon="delete"
           primary
           onClick={() => {
-            dispatch(deleteSlides, true, editor.presentation.selectedSlidesIds);
+            deleteSlides();
           }}
         />
+      </div>
+      {/* <div className={styles.appActionsGroup}>
+        
+        
         <ActionButton
           icon="undo"
           onClick={() => {
@@ -136,7 +117,24 @@ export function ActionBar({
         onClick={() => {
           dispatch(changeMode, true, EMode.view);
         }}
-      />
+      /> */}
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    newSlide: () =>
+      dispatch({
+        type: "NEW_SLIDE",
+        payload: null,
+      }),
+    deleteSlides: () =>
+      dispatch({
+        type: "DELETE_SLIDES",
+        payload: null,
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ActionBar);

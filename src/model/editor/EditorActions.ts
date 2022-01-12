@@ -81,7 +81,7 @@ export function createPresentation(editor: TEditor): TEditor {
     },
   };
 
-  return createSlide(newEditor);
+  return newEditor;
 }
 
 export function changeMode(editor: TEditor, mode: EMode): TEditor {

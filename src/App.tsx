@@ -1,21 +1,14 @@
 import { useEffect } from "react";
+import { connect } from "react-redux";
 
 import { Header } from "./components/header/Header";
-import { ActionBar } from "./components/header/actions/ActionBar";
-import { SlidesPanel } from "./components/slidesPanel/SlidesPanel";
-import { ElementsPanel } from "./components/elementsPanel/ElementsPanel";
-import { SlideEditor } from "./components/slide/Slide";
-
-import { EMode, TEditor } from "./model/editor/EditorTypes";
-import { TSlide } from "./model/slide/SlideTypes";
-import { TElement } from "./model/element/ElementTypes";
-
-import { getByKey, getLastElement } from "./utils";
-import styles from "./App.module.css";
-import { Player } from "./components/player/Player";
-import { connect } from "react-redux";
-import { RootState } from "./redux/store";
+import ActionBar from "./components/header/actions/ActionBar";
+import SlidesPanel from "./components/slidesPanel/SlidesPanel";
 import { TPresentation } from "./model/presentation/PresentationTypes";
+
+import { RootState } from "./redux/store";
+
+import styles from "./App.module.css";
 
 type AppProps = {
   presentation: TPresentation;
@@ -43,34 +36,25 @@ function App({ presentation }: AppProps) {
 
   return (
     <div>
-      <Header />
-      {/* {presentation.mode === EMode.edit && (
-        <div className={styles.app}>
-          <ActionBar
-            selectedSlide={selectedSlidesIds[selectedSlidesIds.length - 1]}
-            editor={editor}
-            selectedElement={selectedElementIds[selectedElementIds.length]}
-          />
-
-          <div className={styles.content}>
-            <SlidesPanel
-              slides={slideList}
-              selectedSlides={selectedSlidesIds}
-            />
-            <SlideEditor
-              slide={currentSlide}
-              selectedElements={selectedElementIds}
-            />
-            <ElementsPanel slide={currentSlide} element={currentElement} />
-          </div>
+      {/* {presentation.mode === EMode.edit && ( */}
+      <div className={styles.app}>
+        <Header />
+        <ActionBar />
+        <div className={styles.content}>
+          <SlidesPanel />
+          {/*   <SlideEditor
+            slide={currentSlide}
+            selectedElements={selectedElementIds}
+          />*/}
+          {/* <ElementsPanel /> */}
         </div>
-      )} */}
+      </div>
+      {/*)} */}
       {/* {editor.mode === EMode.view && (
         <div className={styles.playerContainer}>
           <Player slides={slideList} />
         </div>
       )} */}
-      test
     </div>
   );
 }

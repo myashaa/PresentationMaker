@@ -1,3 +1,8 @@
+import {
+  createSlide,
+  deleteSlides,
+  selectSlides,
+} from "../model/presentation/PresentationActions";
 import { TPresentation } from "../model/presentation/PresentationTypes";
 import { ActionType } from "./actionType";
 
@@ -13,15 +18,22 @@ export const presentationReducer = (
   action: ActionType
 ) => {
   switch (action.type) {
-    case "CREATE_PRESENTATION":
-      return action.payload;
-    case "LOAD_PRESENTATION":
-      return action.payload;
-    case "SAVE_PRESENTATION":
-      return action.payload;
-    case "RENAME_PRESENTATION":
-      return action.payload;
+    case "NEW_SLIDE":
+      return createSlide(state);
+    case "SELECT_SLIDES":
+      return selectSlides(state, action.payload);
+    case "DELETE_SLIDES":
+      return deleteSlides(state, state.selectedSlidesIds);
     default:
       return state;
   }
 };
+
+// case "CREATE_PRESENTATION":
+//       return action.payload;
+//     case "LOAD_PRESENTATION":
+//       return action.payload;
+//     case "SAVE_PRESENTATION":
+//       return action.payload;
+//     case "RENAME_PRESENTATION":
+//       return action.payload;

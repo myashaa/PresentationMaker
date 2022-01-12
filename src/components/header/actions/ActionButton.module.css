@@ -41,4 +41,10 @@
 
 .actionButtonLabel {
   margin-left: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.buttonIcon {
+  font-size: 21px;
 }
