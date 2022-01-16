@@ -52,10 +52,9 @@ export function clearBackground(editor: TEditor, slideId: string): TEditor {
 
 // Создание элемента на слайде
 export function createElement(
-  editor: TEditor,
-  slideId: string,
+  slide: TSlide,
   content: TText | TImage | TFigure
-): TEditor {
+): TSlide {
   const newElement: TElement = {
     id: uuid4(),
     width: 100,
@@ -64,21 +63,11 @@ export function createElement(
     data: content,
   };
 
-  const { slideList } = editor.presentation;
-  const newSlideList = slideList.map((slide) => {
-    if (slide.id === slideId) {
-      const { elementList } = slide;
-      return { ...slide, elementList: [...elementList, newElement] };
-    }
-    return slide;
-  });
+  const { elementList } = slide;
 
-  return {
-    ...editor,
-    presentation: {
-      ...editor.presentation,
-      slideList: newSlideList,
-    },
+  return { 
+    ...slide, 
+    elementList: [...elementList, newElement] 
   };
 }
 

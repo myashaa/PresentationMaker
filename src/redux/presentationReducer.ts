@@ -5,6 +5,7 @@ import {
 } from "../model/presentation/PresentationActions";
 import { TPresentation } from "../model/presentation/PresentationTypes";
 import { ActionType } from "./actionType";
+import { slideReducer } from "./slideReducer";
 
 const initialState: TPresentation = {
   name: "Presentation",
@@ -25,7 +26,10 @@ export const presentationReducer = (
     case "DELETE_SLIDES":
       return deleteSlides(state, state.selectedSlidesIds);
     default:
-      return state;
+      return {
+        ...state,
+        slideList: slideReducer
+      };
   }
 };
 
