@@ -2,13 +2,17 @@ import { ActionButton } from "./ActionButton";
 import styles from "./ActionBar.module.css";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
+import { loadImage } from "../../../model/element/ImageActions";
+import { TImage } from "../../../model/element/ImageTypes";
 
 type Props = {
   newSlide: () => void;
   deleteSlides: () => void;
+  addImage: (image: TImage) => void;
+  
 };
 
-function ActionBar({ newSlide, deleteSlides }: Props) {
+function ActionBar({ newSlide, deleteSlides, addImage}: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -63,23 +67,9 @@ function ActionBar({ newSlide, deleteSlides }: Props) {
         <ActionButton
           icon="image"
           onClick={() => {
-            // const fileInputNode = document.createElement("input");
-            // fileInputNode.type = "file";
-            // fileInputNode.click();
-            // fileInputNode.addEventListener("change", () => {
-            //   const file = fileInputNode.files?.[0] as File;
-            //   const reader = new FileReader();
-            //   reader.onloadend = function () {
-            //     const newImage: TImage = {
-            //       image: "https://via.placeholder.com/150",
-            //     };
-            //     if (file.type.includes("image")) {
-            //       newImage.image = String(reader.result);
-            //     }
-            //     dispatch(createElement, true, selectedSlide, newImage);
-            //   };
-            //   reader.readAsDataURL(file);
-            // });
+            loadImage((object) => {
+              addImage(object);
+            })
           }}
         />
         <ActionButton
@@ -126,6 +116,11 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
       dispatch({
         type: "DELETE_SLIDES",
         payload: null,
+      }),
+    addImage: (content: TImage) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: content,
       }),
   };
 };
