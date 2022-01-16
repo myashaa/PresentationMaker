@@ -1,27 +1,33 @@
 import { ActionButton } from "./ActionButton";
 import styles from "./ActionBar.module.css";
-import { AppDispatch } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { connect } from "react-redux";
 import { loadImage } from "../../../model/element/ImageActions";
 import { TImage } from "../../../model/element/ImageTypes";
 import { TText } from "../../../model/element/TextTypes";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 import { COLORS } from "../../../colors";
+import { getLastElement } from "../../../utils";
+import { TCanvas } from "../../../model/element/ElementTypes";
 
 type Props = {
+  currentSlideId: string;
   newSlide: () => void;
   deleteSlides: () => void;
-  addImage: (image: TImage) => void;
-  addText: (text: TText) => void;
-  addFigure: (figure: TFigure) => void;
+  addImage: (slideId: string, image: TImage) => void;
+  addText: (slideId: string, text: TText) => void;
+  addFigure: (slideId: string, figure: TFigure) => void;
+  addCamera: (slideId: string, camera: TCanvas) => void;
 };
 
 function ActionBar(
-  { newSlide, 
+  { currentSlideId,
+    newSlide, 
     deleteSlides, 
     addImage,
     addText,
-    addFigure, 
+    addFigure,
+    addCamera, 
   }: Props) {
   return (
     <div className={styles.appActionBar}>
@@ -71,14 +77,14 @@ function ActionBar(
                 italic: false,
               },
             };
-            addText(newText);
+            addText(currentSlideId, newText);
           }}
         />
         <ActionButton
           icon="image"
           onClick={() => {
             loadImage((object) => {
-              addImage(object);
+              addImage(currentSlideId, object);
             })
           }}
         />
@@ -89,16 +95,16 @@ function ActionBar(
               figure: EFigureType.triangle,
               fill: COLORS.primary,
             };
-            addFigure(newFigure);
+            addFigure(currentSlideId, newFigure);
           }}
         />
         <ActionButton
           icon="photo_camera"
           onClick={() => {
-            // const newCanvas: TCanvas = {
-            //   video: true,
-            // };
-            // dispatch(createElement, true, selectedSlide, newCanvas);
+            const newCanvas: TCanvas = {
+              video: true,
+            };
+            addCamera(currentSlideId, newCanvas);
           }}
         />
       </div>
@@ -115,6 +121,13 @@ function ActionBar(
   );
 }
 
+const mapStateToProps = (state: RootState) => {
+  return {
+    currentSlideId: getLastElement(state.presentation.selectedSlidesIds),
+  };
+};
+
+
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     newSlide: () =>
@@ -127,22 +140,27 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
         type: "DELETE_SLIDES",
         payload: null,
       }),
-    addImage: (content: TImage) =>
+    addImage: (slideId: string, content: TImage) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: content,
+        payload: {slideId: slideId, content: content},
       }),
-    addText: (content: TText) =>
+    addText: (slideId: string, content: TText) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: content,
+        payload: {slideId: slideId, content: content},
       }),
-    addFigure: (content: TFigure) =>
+    addFigure: (slideId: string, content: TFigure) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: content,
+        payload: {slideId: slideId, content: content},
+      }),
+    addCamera: (slideId: string, content: TCanvas) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
       }),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ActionBar);
+export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

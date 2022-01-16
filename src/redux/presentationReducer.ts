@@ -5,7 +5,7 @@ import {
 } from "../model/presentation/PresentationActions";
 import { TPresentation } from "../model/presentation/PresentationTypes";
 import { ActionType } from "./actionType";
-import { slideReducer } from "./slideReducer";
+import { slideListReducer } from "./slideListReducer";
 
 const initialState: TPresentation = {
   name: "Presentation",
@@ -28,7 +28,7 @@ export const presentationReducer = (
     default:
       return {
         ...state,
-        slideList: slideReducer
+        slideList: slideListReducer(state.slideList, action)
       };
   }
 };

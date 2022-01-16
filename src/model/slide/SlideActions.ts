@@ -1,7 +1,7 @@
 import { COLORS } from "../../colors";
 import { random, uuid4 } from "../../utils";
 import { TEditor } from "../editor/EditorTypes";
-import { TElement } from "../element/ElementTypes";
+import { TCanvas, TElement } from "../element/ElementTypes";
 import { TFigure } from "../element/FigureTypes";
 import { TImage } from "../element/ImageTypes";
 import { TText } from "../element/TextTypes";
@@ -52,9 +52,10 @@ export function clearBackground(editor: TEditor, slideId: string): TEditor {
 
 // Создание элемента на слайде
 export function createElement(
-  slide: TSlide,
-  content: TText | TImage | TFigure
-): TSlide {
+  slideList: TSlide[],
+  slideId: string,
+  content: TText | TImage | TFigure | TCanvas
+): TSlide[] {
   const newElement: TElement = {
     id: uuid4(),
     width: 100,
@@ -63,12 +64,15 @@ export function createElement(
     data: content,
   };
 
-  const { elementList } = slide;
+  const newSlideList = slideList.map((slide) => {
+    if (slide.id === slideId) {
+      const { elementList } = slide;
+      return { ...slide, elementList: [...elementList, newElement] };
+    }
+    return slide;
+  });
 
-  return { 
-    ...slide, 
-    elementList: [...elementList, newElement] 
-  };
+  return newSlideList;
 }
 
 // Удаление элемента
