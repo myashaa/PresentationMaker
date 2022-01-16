@@ -23,7 +23,8 @@ const style = {
   marginRight: 0,
   width: "100%",
   display: "flex",
-  justifyContent: "center"
+  justifyContent: "center",
+  marginTop: "5px"
 };
 
 export function ElementForm({ element, slideId }: Props) {
@@ -83,7 +84,7 @@ export function ElementForm({ element, slideId }: Props) {
       />
       <FieldSelect
         label={"Вид рамки"}
-        items={[EBorderStyle.dashed, EBorderStyle.dotted, EBorderStyle.solid]}
+        items={[EBorderStyle.none, EBorderStyle.dashed, EBorderStyle.dotted, EBorderStyle.solid]}
         value={element?.border?.type}
         onChange={(value) => {
           const borderType = value as EBorderStyle;
@@ -125,6 +126,12 @@ export function ElementForm({ element, slideId }: Props) {
           dispatch(changeElementColor, true, slideId, element?.id, text)
         }
         value={element?.color?.toUpperCase()}
+      />
+      <ActionButton
+        icon="delete"
+        label={"Очистить фон"}
+        style={style}
+        onClick={() =>dispatch(changeElementColor, true, slideId, element?.id, "#fff0 ")}
       />
       <ActionButton
         icon="delete"

@@ -6,16 +6,21 @@ import { SaturationPicker } from "./Saturation";
 
 import styles from "./ColorPicker.module.css";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import { hexToHSL } from "../../../utils";
 
 type ColorPickerProps = {
+  value?: string;
   onClick?: (value: string) => void;
+  onChange?: (value: {h: number, s: number, l: number}) => void;
 };
 
-export const ColorPicker = ({ onClick }: ColorPickerProps) => {
+export const ColorPicker = ({ onChange, value }: ColorPickerProps) => {
   const [visible, setVisible] = useState(false);
-  const [hue, setHue] = useState(20);
-  const [ligthness, setLigthness] = useState(20);
-  const [saturation, setSaturation] = useState(20);
+  const hslValue = hexToHSL(value || "")
+  
+  const [hue, setHue] = useState(hslValue[0] || 101);
+  const [ligthness, setLigthness] = useState(hslValue[2] || 101);
+  const [saturation, setSaturation] = useState(hslValue[1] || 101);
 
   const menuRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(menuRef, () => {
@@ -26,7 +31,13 @@ export const ColorPicker = ({ onClick }: ColorPickerProps) => {
   color: "#888888",
   cursor: "pointer",
   marginLeft: "3px"
-};
+  };
+  
+  const color = `hsl(${hue}, ${saturation}%, ${ligthness}%)`;
+
+  useEffect(() => {
+    onChange && onChange({h: hue, s: saturation, l: ligthness})
+  }, [hue, saturation, ligthness])
 
   return (
     <div className={styles.container}>
@@ -34,16 +45,29 @@ export const ColorPicker = ({ onClick }: ColorPickerProps) => {
 
       {visible && (
         <div className={styles.content}>
-          <div
-            className={styles.color}
-            style={{ backgroundColor: `hsl(${hue}, ${saturation}%, ${ligthness}%)` }}
-          />
-          <p>Тон {hue}</p>
-          <HuePicker value={hue} onChange={setHue} />
-          <p>Яркость {ligthness}%</p>
-          <LigthnessPicker value={ligthness} onChange={setLigthness} />
-          <p>Насыщенность {saturation}%</p>
-          <SaturationPicker value={saturation} onChange={setSaturation} />
+          <div className={styles.info}>
+            <div
+              className={styles.color}
+              style={{ backgroundColor: color }}
+            />
+            <div className={styles.values}>
+              <p style={{fontSize: "14px"}}>{hue} тон</p>
+              <p style={{fontSize: "14px"}}>{saturation}% насыщенность</p>
+              <p style={{fontSize: "14px"}}>{ligthness}% яркость</p>
+            </div>
+          </div>
+          <div className={styles.value}>
+            <p style={{fontSize: "14px"}}>H</p>
+            <HuePicker value={hue} onChange={setHue} />
+          </div>
+          <div className={styles.value}>
+            <p style={{fontSize: "14px"}}>S</p>
+            <SaturationPicker value={saturation} onChange={setSaturation} style={{ backgroundColor: `hsl(${hue}, 50%, ${ligthness}%)` }} />
+          </div>
+          <div className={styles.value}>
+            <p style={{fontSize: "14px"}}>L </p>
+            <LigthnessPicker value={ligthness} onChange={setLigthness} style={{ backgroundColor: `hsl(${hue}, ${saturation}%, 50%)` }} />
+          </div>  
         </div>
       )}
     </div>

@@ -28,7 +28,7 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
 
       <FieldSelect
         label={"Тип фигуры"}
-        items={[EFigureType.square, EFigureType.circle, EFigureType.triangle]}
+        items={[EFigureType.triangle, EFigureType.square, EFigureType.circle]}
         value={figure.figure}
         onChange={(value) => {
           const type = value as EFigureType;

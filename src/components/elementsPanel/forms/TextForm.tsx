@@ -26,7 +26,7 @@ export function TextForm({ element, slideId }: TextFormProps) {
 
       <FieldSelect
         label={"Шрифт"}
-        items={["Arial", "Montserrat"]}
+        items={["Montserrat", "Arial"]}
         value={text.font.family}
         onChange={(value) => {
           const font: TFont = {

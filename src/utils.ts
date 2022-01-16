@@ -53,7 +53,7 @@ function rgbToHSL(inp: number[]) {
   const min = Math.min(r, g, b);
   const max = Math.max(r, g, b);
   const delta = max - min;
-  
+
   let h = 0;
   if (max === min) {
     h = 0;
@@ -142,9 +142,9 @@ function hslToRGB(inp: number[]) {
 }
 
 function rgbToHEX(inp: number[]) {
-  let h = inp[0].toString(16).toUpperCase();
-  let e = inp[1].toString(16).toUpperCase();
-  let x = inp[2].toString(16).toUpperCase();
+  let h = Math.round(inp[0]).toString(16).toUpperCase();
+  let e = Math.round(inp[1]).toString(16).toUpperCase();
+  let x = Math.round(inp[2]).toString(16).toUpperCase();
   return "#" + h + e + x;
 }
 

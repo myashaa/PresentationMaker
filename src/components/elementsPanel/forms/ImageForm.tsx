@@ -19,7 +19,6 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
         <span className={`material-icons ${styles.headerFormIcon}`}>image</span>
         <span className={styles.headerFormTitle}>Изображение</span>
       </div>
-      {/* <FieldSelect label={"Фильтр"} items={filters} onChange={(value) => setFilter(value)} /> */}
       <FieldSelect
         label={"Фильтр"}
         items={[EFilter.none, EFilter.blur, EFilter.baw]}

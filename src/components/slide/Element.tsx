@@ -82,7 +82,7 @@ export function Element({
     left: moving ? pos.x : position.x,
     width: resizing ? sz.width : size.width,
     height: resizing ? sz.height : size.height,
-    outlineStyle: borderType ? borderType : "solid",
+    outlineStyle: borderType ? borderType : "none",
     outlineWidth: element.border?.width ? element.border?.width : 0,
     outlineColor: element.border?.color
       ? element.border?.color

@@ -1,3 +1,4 @@
+import { hslToHEX } from "../../utils";
 import { ColorPicker } from "./colorPicker/ColorPicker";
 import { Field } from "./Field";
 import styles from "./Field.module.css";
@@ -21,7 +22,10 @@ export function FieldInput({ label, type, color, value, onChange }: FieldInputPr
         onChange={(e) => onChange && onChange(e.target.value)}
       />
       {type === "number" && <span className={styles.fieldLabel}>px</span>}
-      {color && <ColorPicker />}
+      {color && <ColorPicker value={value} onChange={(value) => {
+        const hex = hslToHEX([value.h, value.s, value.l])
+        onChange && onChange(hex)
+      }} />}
     </Field>
   );
 }
