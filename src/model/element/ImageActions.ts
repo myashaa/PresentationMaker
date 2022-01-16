@@ -57,7 +57,27 @@ export function deleteFilter(
   return newEditor;
 }
 
-export async function loadImage(url: string): Promise<TImage> {
+export function loadImage(callback: (object: TImage) => void) {
+  const fileInputNode = document.createElement("input");
+  fileInputNode.type = "file";
+  fileInputNode.click();
+  fileInputNode.addEventListener("change", () => {
+    const file = fileInputNode.files?.[0] as File;
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const newImage: TImage = {
+        image: "https://via.placeholder.com/150",
+      };
+      if (file.type.includes("image")) {
+        newImage.image = String(reader.result);
+      }
+      callback(newImage);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+export async function loadImageFromURL(url: string): Promise<TImage> {
   let data = "";
 
   const toDataURL = (url: string) =>

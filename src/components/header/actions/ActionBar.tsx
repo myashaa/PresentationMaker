@@ -1,14 +1,34 @@
 import { ActionButton } from "./ActionButton";
 import styles from "./ActionBar.module.css";
-import { AppDispatch } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { connect } from "react-redux";
+import { loadImage } from "../../../model/element/ImageActions";
+import { TImage } from "../../../model/element/ImageTypes";
+import { TText } from "../../../model/element/TextTypes";
+import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
+import { COLORS } from "../../../colors";
+import { getLastElement } from "../../../utils";
+import { TCanvas } from "../../../model/element/ElementTypes";
 
 type Props = {
+  currentSlideId: string;
   newSlide: () => void;
   deleteSlides: () => void;
+  addImage: (slideId: string, image: TImage) => void;
+  addText: (slideId: string, text: TText) => void;
+  addFigure: (slideId: string, figure: TFigure) => void;
+  addCamera: (slideId: string, camera: TCanvas) => void;
 };
 
-function ActionBar({ newSlide, deleteSlides }: Props) {
+function ActionBar(
+  { currentSlideId,
+    newSlide, 
+    deleteSlides, 
+    addImage,
+    addText,
+    addFigure,
+    addCamera, 
+  }: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -46,59 +66,45 @@ function ActionBar({ newSlide, deleteSlides }: Props) {
         <ActionButton
           icon="text_fields"
           onClick={() => {
-            // const newText: TText = {
-            //   text: "Sample Text",
-            //   font: {
-            //     family: "Montserrat",
-            //     size: 16,
-            //     color: COLORS.black,
-            //     bold: false,
-            //     underline: false,
-            //     italic: false,
-            //   },
-            // };
-            // dispatch(createElement, true, selectedSlide, newText);
+            const newText: TText = {
+              text: "Sample Text",
+              font: {
+                family: "Montserrat",
+                size: 16,
+                color: COLORS.black,
+                bold: false,
+                underline: false,
+                italic: false,
+              },
+            };
+            addText(currentSlideId, newText);
           }}
         />
         <ActionButton
           icon="image"
           onClick={() => {
-            // const fileInputNode = document.createElement("input");
-            // fileInputNode.type = "file";
-            // fileInputNode.click();
-            // fileInputNode.addEventListener("change", () => {
-            //   const file = fileInputNode.files?.[0] as File;
-            //   const reader = new FileReader();
-            //   reader.onloadend = function () {
-            //     const newImage: TImage = {
-            //       image: "https://via.placeholder.com/150",
-            //     };
-            //     if (file.type.includes("image")) {
-            //       newImage.image = String(reader.result);
-            //     }
-            //     dispatch(createElement, true, selectedSlide, newImage);
-            //   };
-            //   reader.readAsDataURL(file);
-            // });
+            loadImage((object) => {
+              addImage(currentSlideId, object);
+            })
           }}
         />
         <ActionButton
           icon="category"
           onClick={() => {
-            // const newFigure: TFigure = {
-            //   figure: EFigureType.triangle,
-            //   fill: COLORS.primary,
-            // };
-            // dispatch(createElement, true, selectedSlide, newFigure);
+            const newFigure: TFigure = {
+              figure: EFigureType.triangle,
+              fill: COLORS.primary,
+            };
+            addFigure(currentSlideId, newFigure);
           }}
         />
         <ActionButton
           icon="photo_camera"
           onClick={() => {
-            // const newCanvas: TCanvas = {
-            //   video: true,
-            // };
-            // dispatch(createElement, true, selectedSlide, newCanvas);
+            const newCanvas: TCanvas = {
+              video: true,
+            };
+            addCamera(currentSlideId, newCanvas);
           }}
         />
       </div>
@@ -115,6 +121,13 @@ function ActionBar({ newSlide, deleteSlides }: Props) {
   );
 }
 
+const mapStateToProps = (state: RootState) => {
+  return {
+    currentSlideId: getLastElement(state.presentation.selectedSlidesIds),
+  };
+};
+
+
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     newSlide: () =>
@@ -127,7 +140,27 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
         type: "DELETE_SLIDES",
         payload: null,
       }),
+    addImage: (slideId: string, content: TImage) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addText: (slideId: string, content: TText) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addFigure: (slideId: string, content: TFigure) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addCamera: (slideId: string, content: TCanvas) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ActionBar);
+export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);
