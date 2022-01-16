@@ -4,15 +4,25 @@ import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
 import { loadImage } from "../../../model/element/ImageActions";
 import { TImage } from "../../../model/element/ImageTypes";
+import { TText } from "../../../model/element/TextTypes";
+import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
+import { COLORS } from "../../../colors";
 
 type Props = {
   newSlide: () => void;
   deleteSlides: () => void;
   addImage: (image: TImage) => void;
-  
+  addText: (text: TText) => void;
+  addFigure: (figure: TFigure) => void;
 };
 
-function ActionBar({ newSlide, deleteSlides, addImage}: Props) {
+function ActionBar(
+  { newSlide, 
+    deleteSlides, 
+    addImage,
+    addText,
+    addFigure, 
+  }: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -50,18 +60,18 @@ function ActionBar({ newSlide, deleteSlides, addImage}: Props) {
         <ActionButton
           icon="text_fields"
           onClick={() => {
-            // const newText: TText = {
-            //   text: "Sample Text",
-            //   font: {
-            //     family: "Montserrat",
-            //     size: 16,
-            //     color: COLORS.black,
-            //     bold: false,
-            //     underline: false,
-            //     italic: false,
-            //   },
-            // };
-            // dispatch(createElement, true, selectedSlide, newText);
+            const newText: TText = {
+              text: "Sample Text",
+              font: {
+                family: "Montserrat",
+                size: 16,
+                color: COLORS.black,
+                bold: false,
+                underline: false,
+                italic: false,
+              },
+            };
+            addText(newText);
           }}
         />
         <ActionButton
@@ -75,11 +85,11 @@ function ActionBar({ newSlide, deleteSlides, addImage}: Props) {
         <ActionButton
           icon="category"
           onClick={() => {
-            // const newFigure: TFigure = {
-            //   figure: EFigureType.triangle,
-            //   fill: COLORS.primary,
-            // };
-            // dispatch(createElement, true, selectedSlide, newFigure);
+            const newFigure: TFigure = {
+              figure: EFigureType.triangle,
+              fill: COLORS.primary,
+            };
+            addFigure(newFigure);
           }}
         />
         <ActionButton
@@ -118,6 +128,16 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
         payload: null,
       }),
     addImage: (content: TImage) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: content,
+      }),
+    addText: (content: TText) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: content,
+      }),
+    addFigure: (content: TFigure) =>
       dispatch({
         type: "CREATE_ELEMENT",
         payload: content,
