@@ -9,27 +9,13 @@ import { TPresentation } from "./model/presentation/PresentationTypes";
 import { RootState } from "./redux/store";
 
 import styles from "./App.module.css";
+import SlideEditor from "./components/slide/Slide";
 
 type AppProps = {
   presentation: TPresentation;
 };
 
 function App({ presentation }: AppProps) {
-  // const { slideList, name, selectedSlidesIds, selectedElementIds } =
-  //   presentation;
-
-  // const currentSlide: TSlide = getByKey(
-  //   slideList,
-  //   "id",
-  //   getLastElement(selectedSlidesIds)
-  // );
-
-  // const currentElement: TElement = getByKey(
-  //   currentSlide?.elementList,
-  //   "id",
-  //   getLastElement(selectedElementIds)
-  // );
-
   useEffect(() => {
     document.title = presentation.name;
   }, [presentation]);
@@ -42,10 +28,7 @@ function App({ presentation }: AppProps) {
         <ActionBar />
         <div className={styles.content}>
           <SlidesPanel />
-          {/*   <SlideEditor
-            slide={currentSlide}
-            selectedElements={selectedElementIds}
-          />*/}
+          <SlideEditor />
           {/* <ElementsPanel /> */}
         </div>
       </div>
@@ -60,7 +43,11 @@ function App({ presentation }: AppProps) {
 }
 
 const mapStateToProps = (state: RootState) => {
-  return { presentation: state.presentation };
+  return {
+    presentation: state.presentation,
+    slides: state.presentation.slideList,
+    selectedSlides: state.presentation.selectedSlidesIds,
+  };
 };
 
 export default connect(mapStateToProps)(App);

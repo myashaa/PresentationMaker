@@ -5,6 +5,7 @@ import { TCanvas, TElement } from "../element/ElementTypes";
 import { TFigure } from "../element/FigureTypes";
 import { TImage } from "../element/ImageTypes";
 import { TText } from "../element/TextTypes";
+import { TPresentation } from "../presentation/PresentationTypes";
 import { TBackground, TSlide } from "./SlideTypes";
 
 // Установка фона для слайда
@@ -134,13 +135,11 @@ export function removeElements(
 
 // Перемещение элемента
 export function moveElement(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   elementId: string,
   newPosition: { x: number; y: number }
-): TEditor {
-  const { slideList } = editor.presentation;
-
+): TSlide[] {
   const newSlideList = slideList.map((slide) => {
     if (slide.id === slideId) {
       const { elementList } = slide;
@@ -154,13 +153,7 @@ export function moveElement(
     return slide;
   });
 
-  return {
-    ...editor,
-    presentation: {
-      ...editor.presentation,
-      slideList: newSlideList,
-    },
-  };
+  return newSlideList;
 }
 
 // Изменение размеров элемента
@@ -196,18 +189,13 @@ export function resizeElement(
 }
 
 export function selectElements(
-  editor: TEditor,
+  presentation: TPresentation,
   elementsIds: string[]
-): TEditor {
-  const { presentation } = editor;
-
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      selectedElementIds: elementsIds,
-    },
+): TPresentation {
+  const newPresentation: TPresentation = {
+    ...presentation,
+    selectedElementIds: elementsIds,
   };
 
-  return newEditor;
+  return newPresentation;
 }
