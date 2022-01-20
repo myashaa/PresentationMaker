@@ -10,6 +10,7 @@ import { RootState } from "./redux/store";
 
 import styles from "./App.module.css";
 import SlideEditor from "./components/slide/Slide";
+import ElementsPanel from "./components/elementsPanel/ElementsPanel";
 
 type AppProps = {
   presentation: TPresentation;
@@ -29,7 +30,7 @@ function App({ presentation }: AppProps) {
         <div className={styles.content}>
           <SlidesPanel />
           <SlideEditor />
-          {/* <ElementsPanel /> */}
+          <ElementsPanel />
         </div>
       </div>
       {/*)} */}

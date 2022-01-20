@@ -1,4 +1,4 @@
-import { setText } from "../model/element/TextActions";
+import { setFont, setText } from "../model/element/TextActions";
 import {
   createElement,
   moveElement,
@@ -33,6 +33,13 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
         action.payload.slide,
         action.payload.id,
         action.payload.text
+      );
+    case "SET_TEXT_FONT":
+      return setFont(
+        state,
+        action.payload.slide,
+        action.payload.id,
+        action.payload.font
       );
     default:
       return state;

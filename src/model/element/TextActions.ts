@@ -4,14 +4,11 @@ import { TElement } from "./ElementTypes";
 import { TFont, TText } from "./TextTypes";
 
 export function setFont(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   elementId: string,
   font: TFont
 ) {
-  const { presentation } = editor;
-  const { slideList } = presentation;
-
   const currentSlide = slideList.filter((slide) => slide.id === slideId)[0];
   const { elementList } = currentSlide;
 
@@ -29,15 +26,11 @@ export function setFont(
     element.id === elementId ? newElement : element
   );
 
-  return {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: slideList.map((slide) =>
-        slideId === slide.id ? { ...slide, elementList: newElementList } : slide
-      ),
-    },
-  };
+  const newSlideList = slideList.map((slide) =>
+    slideId === slide.id ? { ...slide, elementList: newElementList } : slide
+  );
+
+  return newSlideList;
 }
 
 export function setText(
