@@ -7,10 +7,11 @@ import styles from "./ColorPicker.module.css";
 type Props = {
   value: number;
   onChange: (value: number) => void;
+  onSubmit: () => void;
   style?: CSSProperties;
 };
 
-export function SaturationPicker({ value, onChange, style }: Props) {
+export function SaturationPicker({ value, onChange, onSubmit, style }: Props) {
   const hueRef = useRef<HTMLDivElement>(null);
   const { x } = useHorizontalMove(hueRef, value, 9, 0, 201);
 
@@ -20,10 +21,13 @@ export function SaturationPicker({ value, onChange, style }: Props) {
   }, [x, onChange]);
 
   return (
-    <>
-      <div className={styles.saturation} style={style}>
-        <div ref={hueRef} style={{ left: x }} className={styles.huePicker} />
-      </div>
-    </>
+    <div className={styles.saturation} style={style}>
+      <div
+        ref={hueRef}
+        style={{ left: x }}
+        className={styles.huePicker}
+        onMouseUp={onSubmit}
+      />
+    </div>
   );
 }

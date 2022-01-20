@@ -3,7 +3,7 @@ import styles from "./ActionButton.module.css";
 
 type ActionButtonProps = {
   label?: string;
-  icon?: string;
+  icon?: string | React.ReactNode;
   primary?: boolean;
   onClick?: () => void;
   style?: CSSProperties;

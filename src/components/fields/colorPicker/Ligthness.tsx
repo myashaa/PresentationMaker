@@ -6,10 +6,11 @@ import styles from "./ColorPicker.module.css";
 type Props = {
   value: number;
   onChange: (value: number) => void;
+  onSubmit: () => void;
   style?: CSSProperties;
 };
 
-export function LigthnessPicker({ value, onChange, style }: Props) {
+export function LigthnessPicker({ value, onChange, onSubmit, style }: Props) {
   const hueRef = useRef<HTMLDivElement>(null);
   const { x } = useHorizontalMove(hueRef, value, 9, 0, 201);
 
@@ -21,7 +22,12 @@ export function LigthnessPicker({ value, onChange, style }: Props) {
   return (
     <>
       <div className={styles.ligthness} style={style}>
-        <div ref={hueRef} style={{ left: x }} className={styles.huePicker} />
+        <div
+          ref={hueRef}
+          style={{ left: x }}
+          className={styles.huePicker}
+          onMouseUp={onSubmit}
+        />
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+import { changeFigureColor } from "../model/element/FigureActions";
 import { setFont, setText } from "../model/element/TextActions";
 import {
   createElement,
@@ -40,6 +41,13 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
         action.payload.slide,
         action.payload.id,
         action.payload.font
+      );
+    case "SET_FIGURE_FILL":
+      return changeFigureColor(
+        state,
+        action.payload.slide,
+        action.payload.id,
+        action.payload.fill
       );
     default:
       return state;

@@ -5,9 +5,10 @@ import styles from "./ColorPicker.module.css";
 type Props = {
   value: number;
   onChange: (value: number) => void;
+  onSubmit?: () => void;
 };
 
-export function HuePicker({ value, onChange }: Props) {
+export function HuePicker({ value, onSubmit, onChange }: Props) {
   const hueRef = useRef<HTMLDivElement>(null);
   const { x } = useHorizontalMove(hueRef, value, 9, 0, 200);
 
@@ -17,10 +18,13 @@ export function HuePicker({ value, onChange }: Props) {
   }, [x, onChange]);
 
   return (
-    <>
-      <div className={styles.hue}>
-        <div ref={hueRef} style={{ left: x }} className={styles.huePicker} />
-      </div>
-    </>
+    <div className={styles.hue}>
+      <div
+        ref={hueRef}
+        style={{ left: x }}
+        className={styles.huePicker}
+        onMouseUp={onSubmit}
+      />
+    </div>
   );
 }

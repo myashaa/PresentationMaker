@@ -6,12 +6,18 @@ import styles from "./Field.module.css";
 type FieldInputProps = {
   label?: string;
   type?: "text" | "number";
-  color?: boolean; 
+  color?: boolean;
   value?: string;
   onChange?: (value: string) => void;
 };
 
-export function FieldInput({ label, type, color, value, onChange }: FieldInputProps) {
+export function FieldInput({
+  label,
+  type,
+  color,
+  value,
+  onChange,
+}: FieldInputProps) {
   return (
     <Field label={label}>
       <input
@@ -22,10 +28,10 @@ export function FieldInput({ label, type, color, value, onChange }: FieldInputPr
         onChange={(e) => onChange && onChange(e.target.value)}
       />
       {type === "number" && <span className={styles.fieldLabel}>px</span>}
-      {color && <ColorPicker value={value} onChange={(value) => {
+      {/* {color && <ColorPicker value={value} onChange={(value) => {
         const hex = hslToHEX([value.h, value.s, value.l])
         onChange && onChange(hex)
-      }} />}
+      }} />} */}
     </Field>
   );
 }

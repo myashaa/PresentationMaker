@@ -3,7 +3,7 @@ import { TElement } from "../../model/element/ElementTypes";
 import { ImageForm } from "./forms/ImageForm";
 import { SlideForm } from "./forms/SlideForm";
 import { TSlide } from "../../model/slide/SlideTypes";
-import { FigureForm } from "./forms/FigureForm";
+import FigureForm from "./forms/FigureForm";
 import { VideoForm } from "./forms/VideoForm";
 import { RootState } from "../../redux/store";
 import { getLastElement } from "../../utils";
