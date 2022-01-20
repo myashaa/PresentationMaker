@@ -109,49 +109,6 @@ function TextForm({ element, slideId, setFont }: Props) {
           onChange={setSize}
         />
       </div>
-
-      {/* <FieldSelect
-        label={"Шрифт"}
-        items={["Arial", "Montserrat"]}
-        value={text.font.family}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            family: value,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      <FieldInput
-        label={"Размер"}
-        type={"number"}
-        value={text.font.size.toString()}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            size: parseInt(value),
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      <FieldInput
-        label={"Цвет"}
-        value={text.font.color.toUpperCase()}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            color: value,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      */}
     </div>
   );
 }

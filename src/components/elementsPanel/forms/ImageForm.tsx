@@ -4,6 +4,7 @@ import { TElement } from "../../../model/element/ElementTypes";
 import { EFilter, TImage } from "../../../model/element/ImageTypes";
 import { dispatch } from "../../../editor";
 import { setFilter } from "../../../model/element/ImageActions";
+import { TextInput } from "../../inputs/TextInput";
 
 type ImageFormProps = {
   element?: TElement;
@@ -19,8 +20,14 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
         <span className={`material-icons ${styles.headerFormIcon}`}>image</span>
         <span className={styles.headerFormTitle}>Изображение</span>
       </div>
-      {/* <FieldSelect label={"Фильтр"} items={filters} onChange={(value) => setFilter(value)} /> */}
-      <FieldSelect
+
+      <div className={styles.formTitle}>Фильтр</div>
+      <div className={styles.formFlex}>
+        <TextInput style={{ marginRight: 8, flex: 1, width: "100%" }} />
+        <TextInput label="%" style={{ width: 64 }} />
+      </div>
+
+      {/* <FieldSelect
         label={"Фильтр"}
         items={[EFilter.none, EFilter.blur, EFilter.baw]}
         value={image.filter}
@@ -28,8 +35,7 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
           const filter = value as EFilter;
           dispatch(setFilter, true, slideId, element?.id, filter);
         }}
-      />
-      <div className={styles.line}></div>
+      /> */}
     </div>
   );
 }

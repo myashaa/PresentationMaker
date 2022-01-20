@@ -31,9 +31,8 @@ function ElementsPanel({
   return (
     <div className={styles.sidePanel} style={{ width }}>
       {"text" in data && <TextForm element={element} slideId={slide?.id} />}
-      {/*{"image" in data && <ImageForm element={element} slideId={slide?.id} />}
+      {"image" in data && <ImageForm element={element} slideId={slide?.id} />}
       {"figure" in data && <FigureForm element={element} slideId={slide?.id} />}
-      {"video" in data && <VideoForm />} */}
       {("image" in data ||
         "text" in data ||
         "figure" in data ||
