@@ -6,14 +6,16 @@ import { Element } from "./Element";
 import { Empty } from "./Empty";
 import { AppDispatch, RootState } from "../../redux/store";
 import { connect } from "react-redux";
-import { TPosition } from "../../model/element/ElementTypes";
+import { TPosition, TSize } from "../../model/element/ElementTypes";
 
 type Props = {
   slides: TSlide[];
   selectedSlide: string;
   selectedElements: string[];
   selectElements: (ids: string[]) => void;
-  moveElements: (ids: string, position: TPosition, slide: string) => void;
+  moveElement: (ids: string, position: TPosition, slide: string) => void;
+  resizeElement: (id: string, size: TSize, slide: string) => void;
+  setText: (id: string, text: string, slide: string) => void;
 };
 
 function SlideEditor({
@@ -21,7 +23,9 @@ function SlideEditor({
   selectedSlide,
   selectedElements,
   selectElements,
-  moveElements,
+  moveElement,
+  resizeElement,
+  setText,
 }: Props) {
   const slide = slides.filter((slide) => slide.id === selectedSlide)[0];
 
@@ -48,7 +52,15 @@ function SlideEditor({
   };
 
   const handleMoveElement = (id: string, position: TPosition) => {
-    moveElements(id, position, slide.id);
+    moveElement(id, position, slide.id);
+  };
+
+  const handleResizeElement = (id: string, size: TSize) => {
+    resizeElement(id, size, slide.id);
+  };
+
+  const handleChangeText = (id: string, text: string) => {
+    setText(id, text, slide.id);
   };
 
   return (
@@ -71,6 +83,8 @@ function SlideEditor({
                 ctrl && handleSelectElements(element.id);
               }}
               onMove={(position) => handleMoveElement(element.id, position)}
+              onResize={(size) => handleResizeElement(element.id, size)}
+              onSetText={(text) => handleChangeText(element.id, text)}
             />
           ))}
         </div>
@@ -95,14 +109,19 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
         type: "SELECT_ELEMENTS",
         payload: ids,
       }),
-    moveElements: (id: string, position: TPosition, slide: string) =>
+    moveElement: (id: string, position: TPosition, slide: string) =>
       dispatch({
         type: "MOVE_ELEMENT",
         payload: { id, position, slide },
       }),
+    resizeElement: (id: string, size: TSize, slide: string) =>
+      dispatch({
+        type: "RESIZE_ELEMENT",
+        payload: { id, width: size.width, height: size.height, slide },
+      }),
     setText: (id: string, text: string, slide: string) =>
       dispatch({
-        type: "SET_TEXT",
+        type: "SET_ELEMENT_TEXT",
         payload: { id, text, slide },
       }),
   };

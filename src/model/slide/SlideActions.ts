@@ -158,14 +158,12 @@ export function moveElement(
 
 // Изменение размеров элемента
 export function resizeElement(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   elementId: string,
   newWidth: number,
   newHeight: number
-): TEditor {
-  const { slideList } = editor.presentation;
-
+): TSlide[] {
   const newSlideList = slideList.map((slide) => {
     if (slide.id === slideId) {
       const { elementList } = slide;
@@ -179,13 +177,7 @@ export function resizeElement(
     return slide;
   });
 
-  return {
-    ...editor,
-    presentation: {
-      ...editor.presentation,
-      slideList: newSlideList,
-    },
-  };
+  return newSlideList;
 }
 
 export function selectElements(
