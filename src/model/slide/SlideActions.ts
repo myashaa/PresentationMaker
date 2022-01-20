@@ -1,5 +1,5 @@
 import { COLORS } from "../../colors";
-import { random, uuid4 } from "../../utils";
+import { uuid4 } from "../../utils";
 import { TEditor } from "../editor/EditorTypes";
 import { TCanvas, TElement } from "../element/ElementTypes";
 import { TFigure } from "../element/FigureTypes";
@@ -61,7 +61,7 @@ export function createElement(
     id: uuid4(),
     width: 100,
     height: 100,
-    position: { x: random(0, 640), y: random(0, 480) },
+    position: { x: 5, y: 5 },
     data: content,
   };
 

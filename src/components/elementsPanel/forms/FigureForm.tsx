@@ -28,22 +28,23 @@ export function FigureForm({ slideId, element }: FigureFormProps) {
 
       <FieldSelect
         label={"Тип фигуры"}
-        items={[EFigureType.square, EFigureType.circle, EFigureType.triangle]}
+        items={[EFigureType.triangle, EFigureType.square, EFigureType.circle]}
         value={figure.figure}
         onChange={(value) => {
           const type = value as EFigureType;
 
-          dispatch(changeFigure, true, slideId, element?.id, type);
+          // dispatch(changeFigure, true, slideId, element?.id, type);
         }}
       />
 
-      <FieldInput
+      {/* <FieldInput
         label={"Заливка"}
         onChange={(text) =>
           dispatch(changeFigureColor, true, slideId, element?.id, text)
         }
         value={figure?.fill.toUpperCase()}
-      />
+        color
+      /> */}
 
       <div className={styles.line}></div>
     </div>

@@ -1,6 +1,6 @@
 import { Field } from "./Field";
 import styles from "./Field.module.css";
-import { Select } from "./Select";
+import { Select } from "./select/Select";
 
 type FieldSelectProps = {
   label?: string;

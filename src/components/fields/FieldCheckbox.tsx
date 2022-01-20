@@ -1,4 +1,4 @@
-import { CheckBox } from "./CheckBox";
+import { CheckBox } from "./checkbox/CheckBox";
 import { Field } from "./Field";
 
 type FieldCheckboxProps = {

@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { CheckBox } from "../fields/CheckBox";
+import { CheckBox } from "../fields/checkbox/CheckBox";
 import styles from "./CheckInput.module.css";
 
 type Props = {
