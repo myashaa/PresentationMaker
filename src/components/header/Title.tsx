@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { renamePresentation } from "../../model/editor/EditorActions";
-import { TPresentation } from "../../model/presentation/PresentationTypes";
 import { AppDispatch, RootState } from "../../redux/store";
 
 import styles from "./Title.module.css";
 
 type Props = {
-  presentation: TPresentation;
-  renamePresentation: (presentation: TPresentation, name: string) => void;
+  presentationName: string;
+  renamePresentation: (name: string) => void;
 };
 
-export function Title({ presentation, renamePresentation }: Props) {
-  const [name, setName] = useState(presentation.name);
+export function Title({ presentationName, renamePresentation }: Props) {
+  const [name, setName] = useState(presentationName);
+
+  useEffect(() => {
+    setName(presentationName);
+  }, [presentationName]);
 
   const setTitle = () => {
-    renamePresentation(presentation, name);
+    renamePresentation(name);
   };
 
   return (
@@ -40,16 +42,16 @@ export function Title({ presentation, renamePresentation }: Props) {
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
-    renamePresentation: (presentation: TPresentation, name: string) =>
+    renamePresentation: (name: string) =>
       dispatch({
         type: "RENAME_PRESENTATION",
-        payload: renamePresentation(presentation, name),
+        payload: name,
       }),
   };
 };
 
 const mapStateToProps = (state: RootState) => {
-  return { presentation: state.presentation };
+  return { presentationName: state.presentation.name };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Title);

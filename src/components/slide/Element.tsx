@@ -86,6 +86,7 @@ export function Element({
       : COLORS.lightGrey,
     outlineOffset: `-${element.border?.width}px`,
     backgroundColor: element.color,
+    cursor: !view ? "pointer" : "default",
   };
 
   const data = element.data;
