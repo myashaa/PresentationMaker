@@ -2,9 +2,9 @@ import { COLORS } from "../../colors";
 import { at, uuid4 } from "../../utils";
 import { TEditor } from "../editor/EditorTypes";
 import { TSlide } from "../slide/SlideTypes";
+import { TPresentation } from "./PresentationTypes";
 
-export function createSlide(editor: TEditor): TEditor {
-  const { presentation } = editor;
+export function createSlide(presentation: TPresentation): TPresentation {
   const { slideList } = presentation;
 
   const newSlide: TSlide = {
@@ -15,20 +15,19 @@ export function createSlide(editor: TEditor): TEditor {
     },
   };
 
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: [...slideList, newSlide],
-      selectedSlidesIds: [newSlide.id],
-    },
+  const newPresentation: TPresentation = {
+    ...presentation,
+    slideList: [...slideList, newSlide],
+    selectedSlidesIds: [newSlide.id],
   };
 
-  return newEditor;
+  return newPresentation;
 }
 
-export function deleteSlides(editor: TEditor, slideIds: string[]): TEditor {
-  const { presentation } = editor;
+export function deleteSlides(
+  presentation: TPresentation,
+  slideIds: string[]
+): TPresentation {
   const { slideList } = presentation;
 
   const newSlideList = slideList.filter(
@@ -37,16 +36,13 @@ export function deleteSlides(editor: TEditor, slideIds: string[]): TEditor {
 
   const newSelectedSlides = at(newSlideList, -1)?.id;
 
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: newSlideList,
-      selectedSlidesIds: newSelectedSlides ? [newSelectedSlides] : [],
-    },
+  const newPresentation: TPresentation = {
+    ...presentation,
+    slideList: newSlideList,
+    selectedSlidesIds: newSelectedSlides ? [newSelectedSlides] : [],
   };
 
-  return newEditor;
+  return newPresentation;
 }
 
 // TODO: Переписать функцию для перемещения слайдов местами
@@ -78,16 +74,14 @@ export function moveSlide(
   return newEditor;
 }
 
-export function selectSlides(editor: TEditor, slideIds: string[]): TEditor {
-  const { presentation } = editor;
-
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      selectedSlidesIds: slideIds,
-    },
+export function selectSlides(
+  presentation: TPresentation,
+  slideIds: string[]
+): TPresentation {
+  const newPresentation: TPresentation = {
+    ...presentation,
+    selectedSlidesIds: slideIds,
   };
 
-  return newEditor;
+  return newPresentation;
 }

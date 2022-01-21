@@ -18,16 +18,16 @@ export function setPresentation(
   return newEditor;
 }
 
-export function renamePresentation(editor: TEditor, name: string): TEditor {
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...editor.presentation,
-      name: name,
-    },
+export function renamePresentation(
+  presentation: TPresentation,
+  name: string
+): TPresentation {
+  const newPresentation: TPresentation = {
+    ...presentation,
+    name,
   };
 
-  return newEditor;
+  return newPresentation;
 }
 
 export function loadPresentation(callback: (object: any) => void) {
@@ -81,7 +81,7 @@ export function createPresentation(editor: TEditor): TEditor {
     },
   };
 
-  return createSlide(newEditor);
+  return newEditor;
 }
 
 export function changeMode(editor: TEditor, mode: EMode): TEditor {

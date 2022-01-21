@@ -1,18 +1,18 @@
 import { TEditor } from "../editor/EditorTypes";
+import { TSlide } from "../slide/SlideTypes";
 import { TElement } from "./ElementTypes";
 import { EFilter, TImage } from "./ImageTypes";
 
 export function setFilter(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   element: TElement,
   filter: EFilter
-): TEditor {
+): TSlide[] {
   const data = element.data as TImage;
   const newData = { ...data, filter };
   const newElement = { ...element, data: newData };
 
-  const { slideList } = editor.presentation;
   const { elementList } = slideList.filter((slide) => slide.id === slideId)[0];
 
   const newElementList = elementList.map((element) =>
@@ -23,11 +23,9 @@ export function setFilter(
     slide.id === slideId ? { ...slide, elementList: newElementList } : slide
   );
 
-  const newPresentation = { ...editor.presentation, slideList: newSlideList };
+  console.log("newElement", newElement);
 
-  const newEditor = { ...editor, newPresentation };
-
-  return newEditor;
+  return newSlideList;
 }
 
 export function deleteFilter(
@@ -57,7 +55,28 @@ export function deleteFilter(
   return newEditor;
 }
 
-export async function loadImage(url: string): Promise<TImage> {
+export function loadImage(callback: (object: TImage) => void) {
+  const fileInputNode = document.createElement("input");
+  fileInputNode.type = "file";
+  fileInputNode.click();
+  fileInputNode.addEventListener("change", () => {
+    const file = fileInputNode.files?.[0] as File;
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const newImage: TImage = {
+        name: file.name,
+        image: "https://via.placeholder.com/150",
+      };
+      if (file.type.includes("image")) {
+        newImage.image = String(reader.result);
+      }
+      callback(newImage);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+export async function loadImageFromURL(url: string): Promise<TImage> {
   let data = "";
 
   const toDataURL = (url: string) =>

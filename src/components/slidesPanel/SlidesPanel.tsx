@@ -1,33 +1,30 @@
-import { dispatch } from "../../editor";
+import { connect } from "react-redux";
 import { useHotKey } from "../../hooks/useHotKey";
-import {
-  deleteSlides,
-  selectSlides,
-} from "../../model/presentation/PresentationActions";
 import { TSlide } from "../../model/slide/SlideTypes";
+import { AppDispatch, RootState } from "../../redux/store";
 import { MiniSlide } from "./MiniSlide";
 import styles from "./SlidesPanel.module.css";
 
-type SlidesPanelProps = {
+type Props = {
   width?: number;
   slides: TSlide[];
-  selectedSlides: string[];
+  selected: string[];
+  selectSlides: (ids: string[]) => void;
+  deleteSlides: () => void;
 };
 
-export const SlidesPanel = ({
+const SlidesPanel = ({
   width = 300,
   slides,
-  selectedSlides,
-}: SlidesPanelProps) => {
+  selected,
+  selectSlides,
+  deleteSlides,
+}: Props) => {
   useHotKey((key) => {
     if (key === "Delete") {
-      dispatch(deleteSlides, true, selectedSlides);
+      deleteSlides();
     }
   });
-
-  const selectSlideHandle = (ids: string[]) => {
-    dispatch(selectSlides, false, ids);
-  };
 
   const slideList = slides?.map((slide, index) => (
     <MiniSlide
@@ -35,18 +32,18 @@ export const SlidesPanel = ({
       index={index + 1}
       elements={slide.elementList}
       background={slide.background}
-      selected={selectedSlides.some((id) => id === slide.id)}
+      selected={selected.some((id) => id === slide.id)}
       onSelect={() => {
-        selectSlideHandle([slide.id]);
+        selectSlides([slide.id]);
       }}
       onMultiSelect={() => {
-        if (!selectedSlides.some((id) => id === slide.id))
-          selectSlideHandle([...selectedSlides, slide.id]);
-        else if (selectedSlides.length > 1)
-          selectSlideHandle(selectedSlides.filter((id) => id !== slide.id));
+        if (!selected.some((id) => id === slide.id))
+          selectSlides([...selected, slide.id]);
+        else if (selected.length > 1)
+          selectSlides(selected.filter((id) => id !== slide.id));
       }}
       onDelete={() => {
-        dispatch(deleteSlides, true, selectedSlides);
+        deleteSlides();
       }}
     />
   ));
@@ -57,3 +54,27 @@ export const SlidesPanel = ({
     </div>
   );
 };
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    slides: state.presentation.slideList,
+    selected: state.presentation.selectedSlidesIds,
+  };
+};
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    selectSlides: (ids: string[]) =>
+      dispatch({
+        type: "SELECT_SLIDES",
+        payload: ids,
+      }),
+    deleteSlides: () =>
+      dispatch({
+        type: "DELETE_SLIDES",
+        payload: null,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SlidesPanel);

@@ -2,36 +2,20 @@
   width: 100%;
 }
 
-.headerForm {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 30px;
-}
-
-.headerFormIcon {
-  border: none;
-  outline: none;
-  background-color: #fafafa;
-  color: #888888;
-  padding: 8px;
-  border-radius: 8px;
-  transition: 250ms;
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-}
-
-.headerFormTitle {
-  font-size: 16px;
-  line-height: 30px;
-  color: #000;
-}
-
 .line {
   width: 100%;
   height: 1px;
-  background-color: #888888;
-  margin: 15px 0 15px 0;
+  background-color: #f2f2f2;
+  margin: 16px 0 16px 0;
+}
+
+.formTitle {
+  font-size: 13px;
+  color: #c7c7c7;
+  margin-bottom: 8px;
+}
+
+.formFlex {
+  margin-bottom: 16px;
+  display: flex;
 }

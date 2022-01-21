@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
 import styles from "./Select.module.css";
 
@@ -21,7 +21,7 @@ export const Select = ({ values, current, onClick }: SelectProps) => {
     <div className={styles.content}>
       <button className={styles.button} onClick={() => setVisible(!visible)}>
         <span className={styles.buttonLabel}>{current || values[0]}</span>
-        <span className="material-icons">expand_more</span>
+        <span className="material-icons" style={{color: "#888888"}}>expand_more</span>
       </button>
 
       {visible && (

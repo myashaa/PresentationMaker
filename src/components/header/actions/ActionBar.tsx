@@ -1,37 +1,34 @@
 import { ActionButton } from "./ActionButton";
-
-import { dispatch } from "../../../editor";
-import { loadImage } from "../../../model/element/ImageActions";
-import {
-  createElement,
-  resizeElement,
-} from "../../../model/slide/SlideActions";
-import {
-  createSlide,
-  deleteSlides,
-} from "../../../model/presentation/PresentationActions";
-
 import styles from "./ActionBar.module.css";
-import { COLORS } from "../../../colors";
-import { EMode, TEditor } from "../../../model/editor/EditorTypes";
-import { redo, undo } from "../../../model/history/HistoryActions";
-import { TText } from "../../../model/element/TextTypes";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { connect } from "react-redux";
+import { loadImage } from "../../../model/element/ImageActions";
 import { TImage } from "../../../model/element/ImageTypes";
+import { TText } from "../../../model/element/TextTypes";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
-import { changeMode } from "../../../model/editor/EditorActions";
+import { COLORS } from "../../../colors";
+import { getLastElement } from "../../../utils";
 import { TCanvas } from "../../../model/element/ElementTypes";
 
-type ActionBarProps = {
-  selectedSlide: string;
-  editor: TEditor;
-  selectedElement: string;
+type Props = {
+  currentSlideId: string;
+  newSlide: () => void;
+  deleteSlides: () => void;
+  addImage: (slideId: string, image: TImage) => void;
+  addText: (slideId: string, text: TText) => void;
+  addFigure: (slideId: string, figure: TFigure) => void;
+  addCamera: (slideId: string, camera: TCanvas) => void;
 };
 
-export function ActionBar({
-  selectedSlide,
-  editor,
-  selectedElement,
-}: ActionBarProps) {
+function ActionBar(
+  { currentSlideId,
+    newSlide, 
+    deleteSlides, 
+    addImage,
+    addText,
+    addFigure,
+    addCamera, 
+  }: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -40,93 +37,76 @@ export function ActionBar({
           label="Добавить слайд"
           primary
           onClick={() => {
-            dispatch(createSlide, true, {});
+            newSlide();
           }}
         />
         <ActionButton
           icon="delete"
           primary
           onClick={() => {
-            dispatch(deleteSlides, true, editor.presentation.selectedSlidesIds);
+            deleteSlides();
           }}
+          style={{ marginRight: 24 }}
         />
+
         <ActionButton
           icon="undo"
           onClick={() => {
-            dispatch(undo, false, editor);
+            // dispatch(undo, false, editor);
           }}
         />
         <ActionButton
           icon="redo"
           onClick={() => {
-            dispatch(redo, false, editor);
+            // dispatch(redo, false, editor);
           }}
+          style={{ marginRight: 24 }}
         />
 
-        <div className={styles.appActionsRigth}>
-          <ActionButton
-            icon="text_fields"
-            onClick={() => {
-              const newText: TText = {
-                text: "Sample Text",
-                font: {
-                  family: "Montserrat",
-                  size: 16,
-                  color: COLORS.black,
-                  bold: false,
-                  underline: false,
-                  italic: false,
-                },
-              };
-              dispatch(createElement, true, selectedSlide, newText);
-            }}
-          />
-          <ActionButton
-            icon="image"
-            onClick={() => {
-              const fileInputNode = document.createElement("input");
-              fileInputNode.type = "file";
-              fileInputNode.click();
-              fileInputNode.addEventListener("change", () => {
-                const file = fileInputNode.files?.[0] as File;
-                const reader = new FileReader();
-
-                reader.onloadend = function () {
-                  const newImage: TImage = {
-                    image: "https://via.placeholder.com/150",
-                  };
-
-                  if (file.type.includes("image")) {
-                    newImage.image = String(reader.result);
-                  }
-
-                  dispatch(createElement, true, selectedSlide, newImage);
-                };
-
-                reader.readAsDataURL(file);
-              });
-            }}
-          />
-          <ActionButton
-            icon="category"
-            onClick={() => {
-              const newFigure: TFigure = {
-                figure: EFigureType.triangle,
-                fill: COLORS.primary,
-              };
-              dispatch(createElement, true, selectedSlide, newFigure);
-            }}
-          />
-          <ActionButton
-            icon="photo_camera"
-            onClick={() => {
-              const newCanvas: TCanvas = {
-                video: true,
-              };
-              dispatch(createElement, true, selectedSlide, newCanvas);
-            }}
-          />
-        </div>
+        <ActionButton
+          icon="text_fields"
+          onClick={() => {
+            const newText: TText = {
+              text: "Sample Text",
+              font: {
+                family: "Montserrat",
+                size: 16,
+                color: COLORS.black,
+                bold: false,
+                underline: false,
+                italic: false,
+              },
+            };
+            addText(currentSlideId, newText);
+          }}
+        />
+        <ActionButton
+          icon="image"
+          onClick={() => {
+            loadImage((object) => {
+              addImage(currentSlideId, object);
+            })
+          }}
+        />
+        <ActionButton
+          icon="category"
+          onClick={() => {
+            const newFigure: TFigure = {
+              figure: EFigureType.triangle,
+              fill: COLORS.primary,
+            };
+            addFigure(currentSlideId, newFigure);
+          }}
+        />
+        <ActionButton
+          icon="photo_camera"
+          onClick={() => {
+            const newCanvas: TCanvas = {
+              video: true,
+            };
+            addCamera(currentSlideId, newCanvas);
+          }}
+        />
       </div>
 
       <ActionButton
@@ -134,9 +114,53 @@ export function ActionBar({
         label="Слайд-шоу"
         primary
         onClick={() => {
-          dispatch(changeMode, true, EMode.view);
+          // dispatch(changeMode, true, EMode.view);
         }}
       />
     </div>
   );
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    currentSlideId: getLastElement(state.presentation.selectedSlidesIds),
+  };
+};
+
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    newSlide: () =>
+      dispatch({
+        type: "NEW_SLIDE",
+        payload: null,
+      }),
+    deleteSlides: () =>
+      dispatch({
+        type: "DELETE_SLIDES",
+        payload: null,
+      }),
+    addImage: (slideId: string, content: TImage) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addText: (slideId: string, content: TText) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addFigure: (slideId: string, content: TFigure) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+    addCamera: (slideId: string, content: TCanvas) =>
+      dispatch({
+        type: "CREATE_ELEMENT",
+        payload: {slideId: slideId, content: content},
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActionBar);

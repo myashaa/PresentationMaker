@@ -1,29 +1,18 @@
-import { Title } from "./Title";
+import Title from "./Title";
 
 import Logo from "../../assets/icons/logo.svg";
 
 import styles from "./Header.module.css";
-import { Menu } from "./newMenu/Menu";
-// import { MenuBar } from "./menu/MenuBar";
-// import { menu } from "./menu/Menu";
+import { MenuBar } from "./menu/MenuBar";
 
-type HeaderProps = {
-  title?: string;
-};
-
-export function Header({ title }: HeaderProps) {
+export function Header() {
   return (
     <div className={styles.header}>
       <img src={Logo} className={styles.appLogo} alt="" />
       <div className={styles.presentationInfo}>
-        <Title title={title} />
-        <Menu />
+        <Title />
+        <MenuBar />
       </div>
-      {/* <div className={styles.presentationInfo}> */}
-        {/* <Title title={title} /> */}
-        {/* <MenuBar menu={menu} /> */}
-        {/* <Menu /> */}
-      {/* </div> */}
     </div>
   );
 }

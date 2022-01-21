@@ -1,137 +1,86 @@
-import { flattenDiagnosticMessageText } from "typescript";
-import { dispatch } from "../../../editor";
+import { connect } from "react-redux";
 import {
-  changeElementBorder,
-  changeElementColor,
-} from "../../../model/element/ElementActions";
-import {
-  EBorderStyle,
-  TBorder,
   TElement,
+  TPosition,
+  TSize,
 } from "../../../model/element/ElementTypes";
-import { moveElement, resizeElement, removeElement } from "../../../model/slide/SlideActions";
-import { FieldInput } from "../../fields/FieldInput";
-import { FieldSelect } from "../../fields/FieldSelect";
-import { ActionButton } from "../../header/actions/ActionButton";
+import { AppDispatch } from "../../../redux/store";
+import { TextInput } from "../../inputs/TextInput";
+
+import styles from "./Form.module.css";
 
 type Props = {
-  element?: TElement;
-  slideId?: string;
+  element: TElement;
+  slideId: string;
+  moveElement: (id: string, position: TPosition, slide: string) => void;
+  resizeElement: (id: string, size: TSize, slide: string) => void;
 };
 
-const style = {
-  marginRight: 0,
-  width: "100%",
-  display: "flex",
-  justifyContent: "center"
-};
+function ElementForm({ element, slideId, resizeElement, moveElement }: Props) {
+  const setWidth = (value: string) => {
+    const w = parseInt(value);
+    resizeElement(element?.id, { width: w, height: element.height }, slideId);
+  };
 
-export function ElementForm({ element, slideId }: Props) {
+  const setHeight = (value: string) => {
+    const h = parseInt(value);
+    resizeElement(element.id, { width: element.width, height: h }, slideId);
+  };
+
+  const setX = (value: string) => {
+    const x = parseInt(value);
+    moveElement(element?.id, { x, y: element.position.y }, slideId);
+  };
+
+  const setY = (value: string) => {
+    const y = parseInt(value);
+    moveElement(element?.id, { x: element.position.x, y }, slideId);
+  };
+
   return (
-    <>
-      <FieldInput
-        label={"Высота"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(
-            resizeElement,
-            true,
-            slideId,
-            element?.id,
-            element?.width,
-            parseInt(text)
-          )
-        }
-        value={element?.height.toString()}
-      />
-      <FieldInput
-        label={"Ширина"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(
-            resizeElement,
-            true,
-            slideId,
-            element?.id,
-            parseInt(text),
-            element?.height
-          )
-        }
-        value={element?.width.toString()}
-      />
-      <FieldInput
-        label={"Позиция сверху"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(moveElement, true, slideId, element?.id, {
-            x: element?.position.x,
-            y: parseInt(text),
-          })
-        }
-        value={element?.position.y.toString()}
-      />
-      <FieldInput
-        label={"Позиция слева"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(moveElement, true, slideId, element?.id, {
-            x: parseInt(text),
-            y: element?.position.y,
-          })
-        }
-        value={element?.position.x.toString()}
-      />
-      <FieldSelect
-        label={"Вид рамки"}
-        items={[EBorderStyle.dashed, EBorderStyle.dotted, EBorderStyle.solid]}
-        value={element?.border?.type}
-        onChange={(value) => {
-          const borderType = value as EBorderStyle;
-          const border: TBorder = {
-            width: element?.border?.width || 0,
-            color: element?.border?.color || "",
-            type: borderType,
-          };
-          
-          dispatch(changeElementBorder, true, slideId, element?.id, border);
-        }}
-      />
-      <FieldInput
-        label={"Толщина рамки"}
-        type={"number"}
-        onChange={(text) =>
-          dispatch(changeElementBorder, true, slideId, element?.id, {
-            width: parseInt(text),
-            type: element?.border?.type,
-            color: element?.border?.color,
-          })
-        }
-        value={element?.border?.width?.toString()}
-      />
-      <FieldInput
-        label={"Цвет рамки"}
-        onChange={(text) =>
-          dispatch(changeElementBorder, true, slideId, element?.id, {
-            width: element?.border?.width,
-            type: element?.border?.type,
-            color: text,
-          })
-        }
-        value={element?.border?.color?.toUpperCase()}
-      />
-      <FieldInput
-        label={"Фон"}
-        onChange={(text) =>
-          dispatch(changeElementColor, true, slideId, element?.id, text)
-        }
-        value={element?.color?.toUpperCase()}
-      />
-      <ActionButton
-        icon="delete"
-        label={"Удалить элемент"}
-        style={style}
-        onClick={() => dispatch(removeElement, true, slideId, element?.id)}
-      />
-    </>
+    <div>
+      <div className={styles.formTitle}>Размеры</div>
+      <div className={styles.formFlex}>
+        <TextInput
+          label="Ширина"
+          value={`${element?.width}`}
+          style={{ marginRight: 8 }}
+          onChange={setWidth}
+        />
+        <TextInput
+          label="Высота"
+          value={`${element?.height}`}
+          onChange={setHeight}
+        />
+      </div>
+
+      <div className={styles.formTitle}>Позиция</div>
+      <div className={styles.formFlex}>
+        <TextInput
+          label="X"
+          value={`${element?.position.x}`}
+          style={{ marginRight: 8 }}
+          onChange={setX}
+        />
+        <TextInput label="Y" value={`${element?.position.y}`} onChange={setY} />
+      </div>
+    </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    moveElement: (id: string, position: TPosition, slide: string) =>
+      dispatch({
+        type: "MOVE_ELEMENT",
+        payload: { id, position, slide },
+      }),
+    resizeElement: (id: string, size: TSize, slide: string) =>
+      dispatch({
+        type: "RESIZE_ELEMENT",
+        payload: { id, width: size.width, height: size.height, slide },
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ElementForm);

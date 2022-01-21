@@ -3,7 +3,7 @@ import styles from "./ActionButton.module.css";
 
 type ActionButtonProps = {
   label?: string;
-  icon?: string;
+  icon?: string | React.ReactNode;
   primary?: boolean;
   onClick?: () => void;
   style?: CSSProperties;
@@ -16,7 +16,7 @@ export function ActionButton({
   primary,
   onClick,
   style,
-  iconStyle
+  iconStyle,
 }: ActionButtonProps) {
   return (
     <button
@@ -24,7 +24,14 @@ export function ActionButton({
       className={primary ? styles.actionButtonPrimary : styles.actionButton}
       onClick={onClick}
     >
-      {icon && <span style={iconStyle} className="material-icons">{icon}</span>}
+      {icon && (
+        <span
+          style={iconStyle}
+          className={`${styles.buttonIcon} material-icons`}
+        >
+          {icon}
+        </span>
+      )}
       {label && <span className={styles.actionButtonLabel}>{label}</span>}
     </button>
   );

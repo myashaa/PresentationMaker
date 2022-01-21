@@ -8,3 +8,32 @@
   padding: 30px;
   overflow: auto;
 }
+
+.headerForm {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.headerFormIcon {
+  border: none;
+  outline: none;
+  background-color: #fafafa;
+  color: #888888;
+  padding: 8px;
+  border-radius: 8px;
+  transition: 250ms;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.headerFormTitle {
+  font-size: 14px;
+  line-height: 30px;
+  color: #000;
+  font-weight: bold;
+  margin-left: 8px;
+}

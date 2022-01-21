@@ -23,6 +23,7 @@ export type TSize = {
 };
 
 export enum EBorderStyle {
+  none = "Нет",
   solid = "Сплошной",
   dotted = "Точечная",
   dashed = "Пунктирная",

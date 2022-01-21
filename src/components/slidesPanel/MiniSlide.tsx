@@ -98,13 +98,15 @@ export function MiniSlide({
                 };
 
                 return (
-                  <p style={{ ...style, ...fontStyle }}>{element.data.text}</p>
+                  <p key={element.id} style={{ ...style, ...fontStyle }}>
+                    {element.data.text}
+                  </p>
                 );
               }
 
               if ("figure" in element.data) {
                 return (
-                  <div style={style}>
+                  <div key={element.id} style={style}>
                     <FigureElement
                       figure={element.data.figure}
                       width={element.width}
@@ -116,7 +118,7 @@ export function MiniSlide({
               }
 
               if ("video" in element.data) {
-                return <Camera />;
+                return <Camera key={element.id} />;
               }
             })}
         </div>

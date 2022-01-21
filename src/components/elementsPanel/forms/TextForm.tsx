@@ -1,107 +1,135 @@
 import styles from "./Form.module.css";
-import { FieldSelect } from "../../fields/FieldSelect";
-import { FieldInput } from "../../fields/FieldInput";
-import { FieldCheckbox } from "../../fields/FieldCheckbox";
 import { TElement } from "../../../model/element/ElementTypes";
-import { dispatch } from "../../../editor";
 import { TFont, TText } from "../../../model/element/TextTypes";
-import { setFont } from "../../../model/element/TextActions";
+import { CheckInput } from "../../inputs/CheckInput";
+import { AppDispatch } from "../../../redux/store";
+import { connect } from "react-redux";
+import { TextInput } from "../../inputs/TextInput";
+import { Select } from "../../inputs/Select";
+import { ColorInput } from "../../inputs/ColorInput";
 
-type TextFormProps = {
-  element?: TElement;
-  slideId?: string;
+type Props = {
+  element: TElement;
+  slideId: string;
+  setFont: (id: string, slide: string, font: TFont) => void;
 };
 
-export function TextForm({ element, slideId }: TextFormProps) {
-  const text = element?.data as TText;
+function TextForm({ element, slideId, setFont }: Props) {
+  const text = element.data as TText;
+
+  const setBold = () => {
+    const font: TFont = {
+      ...text.font,
+      bold: !text.font.bold,
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
+  const setItalic = () => {
+    const font: TFont = {
+      ...text.font,
+      italic: !text.font.italic,
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
+  const setUnderline = () => {
+    const font: TFont = {
+      ...text.font,
+      underline: !text.font.underline,
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
+  const setFamily = (value: string) => {
+    const font: TFont = {
+      ...text.font,
+      family: value,
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
+  const setSize = (value: string) => {
+    const font: TFont = {
+      ...text.font,
+      size: parseInt(value),
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
+  const handleColor = (color: string) => {
+    const font: TFont = {
+      ...text.font,
+      color,
+    };
+
+    setFont(element.id, slideId, font);
+  };
 
   return (
     <div className={styles.form}>
-      <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>
-          text_fields
-        </span>
-        <span className={styles.headerFormTitle}>Текст</span>
+      <div className={styles.formTitle}>Стиль</div>
+      <div className={styles.formFlex}>
+        <CheckInput
+          label="Жир"
+          checked={text.font.bold}
+          style={{ marginRight: 8, fontWeight: "bold" }}
+          onChange={setBold}
+        />
+        <CheckInput
+          label="Нак"
+          checked={text.font.italic}
+          style={{ marginRight: 8, fontStyle: "italic" }}
+          onChange={setItalic}
+        />
+        <CheckInput
+          label="Под"
+          checked={text.font.underline}
+          style={{ textDecoration: "underline" }}
+          onChange={setUnderline}
+        />
       </div>
 
-      <FieldSelect
-        label={"Шрифт"}
-        items={["Arial", "Montserrat"]}
-        value={text.font.family}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            family: value,
-          };
+      <div className={styles.formTitle}>Шрифт</div>
+      <div className={styles.formFlex}>
+        <Select
+          items={["Montserrat", "Arial", "Times New Roman", "Courier New"]}
+          value={text.font.family}
+          onChange={setFamily}
+        />
+        <TextInput
+          label="px"
+          value={`${text.font.size}`}
+          style={{ width: 100, marginLeft: 8 }}
+          onChange={setSize}
+        />
+      </div>
 
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      <FieldInput
-        label={"Размер"}
-        type={"number"}
-        value={text.font.size.toString()}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            size: parseInt(value),
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      <FieldInput
-        label={"Цвет"}
-        value={text.font.color.toUpperCase()}
-        onChange={(value) => {
-          const font: TFont = {
-            ...text.font,
-            color: value,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-
-      <FieldCheckbox
-        label={"Жирный"}
-        checked={text.font?.bold}
-        onChange={() => {
-          const font: TFont = {
-            ...text.font,
-            bold: !text.font.bold,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-      <FieldCheckbox
-        label={"Подчеркнутый"}
-        checked={text.font?.underline}
-        onChange={() => {
-          const font: TFont = {
-            ...text.font,
-            underline: !text.font.underline,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-      <FieldCheckbox
-        label={"Курсивный"}
-        checked={text.font?.italic}
-        onChange={() => {
-          const font: TFont = {
-            ...text.font,
-            italic: !text.font.italic,
-          };
-
-          dispatch(setFont, true, slideId, element?.id, font);
-        }}
-      />
-      <div className={styles.line}></div>
+      <div className={styles.formTitle}>Цвет</div>
+      <div className={styles.formFlex}>
+        <ColorInput
+          label="HEX"
+          value={text.font.color.toUpperCase()}
+          onChange={handleColor}
+        />
+      </div>
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    setFont: (id: string, slide: string, font: TFont) =>
+      dispatch({
+        type: "SET_TEXT_FONT",
+        payload: { id, slide, font },
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TextForm);

@@ -1,8 +1,4 @@
-.menuButtonContainer {
-  position: relative;
-}
-
-.menuButtonLabel {
+.menuButton {
   font-size: 14px;
   padding: 6px 8px;
   border-radius: 8px;
@@ -10,24 +6,21 @@
   color: #727272;
   font-weight: 900;
   transition: 100ms;
+  align-items: center;
+  user-select: none;
+  display: flex;
 }
 
-.menuButtonLabel:active {
+.menuButton:active {
   transform: scaleX(0.95) scaleY(0.95);
   transition: 100ms;
 }
 
-.menuButtonLabel:hover {
+.menuButton:hover {
   background-color: #f2f2f2;
 }
 
-.menuButtonLabelSelected {
-  font-size: 14px;
-  padding: 6px 8px;
-  cursor: pointer;
-  font-weight: 900;
-  background-color: #fff2b2;
-  border-radius: 8px 8px 0px 0px;
-  transition: 100ms;
-  color: #423624;
+.buttonIcon {
+  margin-right: 8px;
+  font-size: 21px;
 }

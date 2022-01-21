@@ -7,7 +7,7 @@
 }
 
 .selected::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
