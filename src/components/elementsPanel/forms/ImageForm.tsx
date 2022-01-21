@@ -1,18 +1,23 @@
 import styles from "./Form.module.css";
-import { FieldSelect } from "../../fields/FieldSelect";
 import { TElement } from "../../../model/element/ElementTypes";
 import { EFilter, TImage } from "../../../model/element/ImageTypes";
-import { dispatch } from "../../../editor";
-import { setFilter } from "../../../model/element/ImageActions";
-import { TextInput } from "../../inputs/TextInput";
+import { Select } from "../../inputs/Select";
+import { connect } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
 
 type ImageFormProps = {
-  element?: TElement;
-  slideId?: string;
+  element: TElement;
+  slideId: string;
+  setFilter: (element: TElement, slide: string, filter: EFilter) => void;
 };
 
-export function ImageForm({ element, slideId }: ImageFormProps) {
+function ImageForm({ element, slideId, setFilter }: ImageFormProps) {
   const image = element?.data as TImage;
+
+  const handleSetFilter = (value: string) => {
+    const filter = value as EFilter;
+    setFilter(element, slideId, filter);
+  };
 
   return (
     <div className={styles.form}>
@@ -23,19 +28,24 @@ export function ImageForm({ element, slideId }: ImageFormProps) {
 
       <div className={styles.formTitle}>Фильтр</div>
       <div className={styles.formFlex}>
-        <TextInput style={{ marginRight: 8, flex: 1, width: "100%" }} />
-        <TextInput label="%" style={{ width: 64 }} />
+        <Select
+          items={[EFilter.none, EFilter.blur, EFilter.baw]}
+          value={image.filter || "Нет"}
+          onChange={handleSetFilter}
+        />
       </div>
-
-      {/* <FieldSelect
-        label={"Фильтр"}
-        items={[EFilter.none, EFilter.blur, EFilter.baw]}
-        value={image.filter}
-        onChange={(value) => {
-          const filter = value as EFilter;
-          dispatch(setFilter, true, slideId, element?.id, filter);
-        }}
-      /> */}
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    setFilter: (element: TElement, slide: string, filter: EFilter) =>
+      dispatch({
+        type: "SET_IMAGE_FILTER",
+        payload: { element, slide, filter },
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ImageForm);

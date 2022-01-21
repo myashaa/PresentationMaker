@@ -3,14 +3,11 @@ import { TSlide } from "../slide/SlideTypes";
 import { EFigureType } from "./FigureTypes";
 
 export function changeFigure(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   elementId: string,
   newFigure: EFigureType
-): TEditor {
-  const { presentation } = editor;
-
-  const { slideList } = presentation;
+): TSlide[] {
   const currentSlide = slideList.filter((slide) => slide.id === slideId)[0];
 
   const { elementList } = currentSlide;
@@ -26,15 +23,11 @@ export function changeFigure(
       : element
   );
 
-  return {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: slideList.map((slide) =>
-        slide.id === slideId ? { ...slide, elementList: newElementList } : slide
-      ),
-    },
-  };
+  const newSlideList = slideList.map((slide) =>
+    slide.id === slideId ? { ...slide, elementList: newElementList } : slide
+  );
+
+  return newSlideList;
 }
 
 export function changeFigureColor(

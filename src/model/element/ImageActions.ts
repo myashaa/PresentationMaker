@@ -1,18 +1,18 @@
 import { TEditor } from "../editor/EditorTypes";
+import { TSlide } from "../slide/SlideTypes";
 import { TElement } from "./ElementTypes";
 import { EFilter, TImage } from "./ImageTypes";
 
 export function setFilter(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   element: TElement,
   filter: EFilter
-): TEditor {
+): TSlide[] {
   const data = element.data as TImage;
   const newData = { ...data, filter };
   const newElement = { ...element, data: newData };
 
-  const { slideList } = editor.presentation;
   const { elementList } = slideList.filter((slide) => slide.id === slideId)[0];
 
   const newElementList = elementList.map((element) =>
@@ -23,11 +23,9 @@ export function setFilter(
     slide.id === slideId ? { ...slide, elementList: newElementList } : slide
   );
 
-  const newPresentation = { ...editor.presentation, slideList: newSlideList };
+  console.log("newElement", newElement);
 
-  const newEditor = { ...editor, newPresentation };
-
-  return newEditor;
+  return newSlideList;
 }
 
 export function deleteFilter(

@@ -1,4 +1,8 @@
-import { changeFigureColor } from "../model/element/FigureActions";
+import {
+  changeFigure,
+  changeFigureColor,
+} from "../model/element/FigureActions";
+import { setFilter } from "../model/element/ImageActions";
 import { setFont, setText } from "../model/element/TextActions";
 import {
   createElement,
@@ -48,6 +52,20 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
         action.payload.slide,
         action.payload.id,
         action.payload.fill
+      );
+    case "SET_FIGURE_TYPE":
+      return changeFigure(
+        state,
+        action.payload.slide,
+        action.payload.id,
+        action.payload.type
+      );
+    case "SET_IMAGE_FILTER":
+      return setFilter(
+        state,
+        action.payload.slide,
+        action.payload.element,
+        action.payload.filter
       );
     default:
       return state;

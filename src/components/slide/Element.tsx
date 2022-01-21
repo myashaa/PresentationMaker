@@ -18,6 +18,7 @@ import { Camera } from "./Camera";
 type Props = {
   element: TElement;
   selected?: boolean;
+  view?: boolean;
   onClick?: (ctrl: boolean) => void;
   onMove?: (position: TPosition) => void;
   onResize?: (size: TSize) => void;
@@ -27,6 +28,7 @@ type Props = {
 export function Element({
   element,
   selected,
+  view,
   onClick,
   onMove,
   onResize,
@@ -40,7 +42,7 @@ export function Element({
   const resizerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    !selected && setEdit(false);
+    !view && !selected && setEdit(false);
   }, [selected]);
 
   let borderType = "";
@@ -95,11 +97,11 @@ export function Element({
       className={classnames(styles.element, selected && styles.selected)}
       onClick={(e) => {
         e.stopPropagation();
-        onClick && onClick(e.ctrlKey);
+        !view && onClick && onClick(e.ctrlKey);
       }}
       onDoubleClick={(e) => {
         e.stopPropagation();
-        setEdit(true);
+        !view && setEdit(true);
         setMoving(false);
         setResizing(false);
       }}
@@ -113,7 +115,9 @@ export function Element({
           }}
         />
       )}
-      {"image" in data && <ImageElement src={data.image} />}
+      {"image" in data && (
+        <ImageElement src={data.image} filter={data.filter} />
+      )}
       {"figure" in data && (
         <FigureElement
           figure={data.figure}

@@ -1,15 +1,12 @@
 import styles from "./Form.module.css";
-import { FieldSelect } from "../../fields/FieldSelect";
-import { FieldInput } from "../../fields/FieldInput";
-import { FieldCheckbox } from "../../fields/FieldCheckbox";
 import { TElement } from "../../../model/element/ElementTypes";
-import { dispatch } from "../../../editor";
 import { TFont, TText } from "../../../model/element/TextTypes";
-import { setFont } from "../../../model/element/TextActions";
 import { CheckInput } from "../../inputs/CheckInput";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
 import { TextInput } from "../../inputs/TextInput";
+import { Select } from "../../inputs/Select";
+import { ColorInput } from "../../inputs/ColorInput";
 
 type Props = {
   element: TElement;
@@ -65,6 +62,15 @@ function TextForm({ element, slideId, setFont }: Props) {
     setFont(element.id, slideId, font);
   };
 
+  const handleColor = (color: string) => {
+    const font: TFont = {
+      ...text.font,
+      color,
+    };
+
+    setFont(element.id, slideId, font);
+  };
+
   return (
     <div className={styles.form}>
       <div className={styles.headerForm}>
@@ -97,16 +103,25 @@ function TextForm({ element, slideId, setFont }: Props) {
 
       <div className={styles.formTitle}>Шрифт</div>
       <div className={styles.formFlex}>
-        <TextInput
-          style={{ marginRight: 8, flex: 1, width: "100%" }}
+        <Select
+          items={["Montserrat", "Arial", "Times New Roman", "Courier New"]}
           value={text.font.family}
           onChange={setFamily}
         />
         <TextInput
           label="px"
           value={`${text.font.size}`}
-          style={{ width: 64 }}
+          style={{ width: 100, marginLeft: 8 }}
           onChange={setSize}
+        />
+      </div>
+
+      <div className={styles.formTitle}>Цвет</div>
+      <div className={styles.formFlex}>
+        <ColorInput
+          label="HEX"
+          value={text.font.color.toUpperCase()}
+          onChange={handleColor}
         />
       </div>
     </div>

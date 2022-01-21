@@ -1,32 +1,28 @@
 import styles from "./Form.module.css";
-import { FieldSelect } from "../../fields/FieldSelect";
-import { FieldInput } from "../../fields/FieldInput";
 import { TElement } from "../../../model/element/ElementTypes";
-import { dispatch } from "../../../editor";
-import {
-  changeFigure,
-  changeFigureColor,
-} from "../../../model/element/FigureActions";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
-import { ActionButton } from "../../header/actions/ActionButton";
-import { SquareFigure } from "../../slide/figures/SquareFigure";
-import { CircleFigure } from "../../slide/figures/CircleFigure";
-import { TriangleFigure } from "../../slide/figures/TriangleFigure";
 import { ColorInput } from "../../inputs/ColorInput";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
+import { Select } from "../../inputs/Select";
 
 type FigureFormProps = {
   element: TElement;
   slideId: string;
   setFill: (id: string, slide: string, fill: string) => void;
+  setType: (id: string, slide: string, type: EFigureType) => void;
 };
 
-function FigureForm({ slideId, element, setFill }: FigureFormProps) {
+function FigureForm({ slideId, element, setFill, setType }: FigureFormProps) {
   const figure = element.data as TFigure;
 
   const handleFill = (color: string) => {
     setFill(element.id, slideId, color);
+  };
+
+  const handleType = (value: string) => {
+    const type = value as EFigureType;
+    setType(element.id, slideId, type);
   };
 
   return (
@@ -40,20 +36,10 @@ function FigureForm({ slideId, element, setFill }: FigureFormProps) {
 
       <div className={styles.formTitle}>Тип фигуры</div>
       <div className={styles.formFlex} style={{ flexWrap: "wrap" }}>
-        <ActionButton
-          icon={<SquareFigure height={18} width={18} fill="#c7c7c7" />}
-          label="Квадрат"
-          style={{ marginBottom: 8, marginRight: 8 }}
-        />
-        <ActionButton
-          icon={<TriangleFigure height={18} width={18} fill="#c7c7c7" />}
-          label="Треугольник"
-          style={{ marginBottom: 8, marginRight: 8 }}
-        />
-        <ActionButton
-          icon={<CircleFigure height={18} width={18} fill="#c7c7c7" />}
-          label="Круг"
-          style={{ marginBottom: 8, marginRight: 8 }}
+        <Select
+          items={[EFigureType.triangle, EFigureType.square, EFigureType.circle]}
+          value={figure.figure}
+          onChange={handleType}
         />
       </div>
 
@@ -65,26 +51,6 @@ function FigureForm({ slideId, element, setFill }: FigureFormProps) {
           onChange={handleFill}
         />
       </div>
-
-      {/* <FieldSelect
-        label={"Тип фигуры"}
-        items={[EFigureType.triangle, EFigureType.square, EFigureType.circle]}
-        value={figure.figure}
-        onChange={(value) => {
-          const type = value as EFigureType;
-
-          dispatch(changeFigure, true, slideId, element?.id, type);
-        }}
-      /> */}
-
-      {/* <FieldInput
-        label={"Заливка"}
-        onChange={(text) =>
-          dispatch(changeFigureColor, true, slideId, element?.id, text)
-        }
-        value={figure?.fill.toUpperCase()}
-        color
-      /> */}
     </div>
   );
 }
@@ -95,6 +61,11 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
       dispatch({
         type: "SET_FIGURE_FILL",
         payload: { id, slide, fill },
+      }),
+    setType: (id: string, slide: string, type: EFigureType) =>
+      dispatch({
+        type: "SET_FIGURE_TYPE",
+        payload: { id, slide, type },
       }),
   };
 };

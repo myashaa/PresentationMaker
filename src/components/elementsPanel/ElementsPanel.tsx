@@ -1,6 +1,5 @@
 import styles from "./ElementsPanel.module.css";
 import { TElement } from "../../model/element/ElementTypes";
-import { ImageForm } from "./forms/ImageForm";
 import { SlideForm } from "./forms/SlideForm";
 import { TSlide } from "../../model/slide/SlideTypes";
 import FigureForm from "./forms/FigureForm";
@@ -10,6 +9,7 @@ import { getLastElement } from "../../utils";
 import { connect } from "react-redux";
 import ElementForm from "./forms/ElementForm";
 import TextForm from "./forms/TextForm";
+import ImageForm from "./forms/ImageForm";
 
 type ElementsPanelProps = {
   slides: TSlide[];

@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  background-color: #fafafa;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.label {
+  font-size: 13px;
+  color: #c7c7c7;
+  font-weight: bold;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+
+.input {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup {
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  left: 0;
+  top: 0;
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  animation: popup 200ms ease-in-out;
+}
+
+.item {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  color: #c7c7c7;
+}
+
+.item:hover {
+  background-color: #fafafa;
+  color: #000;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0);
+    transition: 200ms;
+  }
+  to {
+    transform: scale(1);
+    transition: 200ms;
+  }
+}
