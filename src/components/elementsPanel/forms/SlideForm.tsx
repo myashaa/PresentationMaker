@@ -15,7 +15,11 @@ type Props = {
 };
 
 function SlideForm({ slide, allElements, setBackground }: Props) {
-  const allImages = allElements.map((im) => im.data) as TImage[];
+  const allObjects = allElements.map(
+    (im) => "image" in im.data && im.data
+  ) as TImage[];
+
+  const allImages = allObjects.filter((image) => image);
 
   const handleBackgroundColor = (value: string) => {
     const background: TBackground = {
