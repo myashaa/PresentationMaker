@@ -64,6 +64,7 @@ export function loadImage(callback: (object: TImage) => void) {
     const reader = new FileReader();
     reader.onloadend = function () {
       const newImage: TImage = {
+        name: file.name,
         image: "https://via.placeholder.com/150",
       };
       if (file.type.includes("image")) {

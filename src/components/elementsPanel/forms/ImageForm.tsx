@@ -21,11 +21,6 @@ function ImageForm({ element, slideId, setFilter }: ImageFormProps) {
 
   return (
     <div className={styles.form}>
-      <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>image</span>
-        <span className={styles.headerFormTitle}>Изображение</span>
-      </div>
-
       <div className={styles.formTitle}>Фильтр</div>
       <div className={styles.formFlex}>
         <Select

@@ -1,5 +1,6 @@
 export type TImage = {
   image: string;
+  name?: string;
   filter?: EFilter;
 };
 

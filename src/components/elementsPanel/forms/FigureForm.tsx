@@ -5,6 +5,7 @@ import { ColorInput } from "../../inputs/ColorInput";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
 import { Select } from "../../inputs/Select";
+import { ActionButton } from "../../header/actions/ActionButton";
 
 type FigureFormProps = {
   element: TElement;
@@ -27,13 +28,6 @@ function FigureForm({ slideId, element, setFill, setType }: FigureFormProps) {
 
   return (
     <div className={styles.form}>
-      <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>
-          category
-        </span>
-        <span className={styles.headerFormTitle}>Фигура</span>
-      </div>
-
       <div className={styles.formTitle}>Тип фигуры</div>
       <div className={styles.formFlex} style={{ flexWrap: "wrap" }}>
         <Select

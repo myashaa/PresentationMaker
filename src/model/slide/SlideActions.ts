@@ -10,26 +10,15 @@ import { TBackground, TSlide } from "./SlideTypes";
 
 // Установка фона для слайда
 export function setBackground(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   background: TBackground
-): TEditor {
-  const { presentation } = editor;
-  const { slideList } = presentation;
-
+): TSlide[] {
   const newSlideList = slideList.map((slide) =>
     slide.id === slideId ? { ...slide, background } : slide
   );
 
-  const newEditor: TEditor = {
-    ...editor,
-    presentation: {
-      ...presentation,
-      slideList: newSlideList,
-    },
-  };
-
-  return newEditor;
+  return newSlideList;
 }
 
 // Очистка фона слайда
@@ -78,11 +67,10 @@ export function createElement(
 
 // Удаление элемента
 export function removeElement(
-  editor: TEditor,
+  slideList: TSlide[],
   slideId: string,
   elementId: string
-): TEditor {
-  const { slideList } = editor.presentation;
+): TSlide[] {
   const newSlideList: TSlide[] = slideList.map((slide) => {
     if (slide.id === slideId) {
       const { elementList } = slide;
@@ -94,13 +82,7 @@ export function removeElement(
     return slide;
   });
 
-  return {
-    ...editor,
-    presentation: {
-      ...editor.presentation,
-      slideList: newSlideList,
-    },
-  };
+  return newSlideList;
 }
 
 // Удаление элементов

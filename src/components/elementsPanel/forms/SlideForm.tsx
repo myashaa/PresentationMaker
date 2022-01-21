@@ -1,78 +1,113 @@
 import styles from "./Form.module.css";
-import { FieldInput } from "../../fields/FieldInput";
-import { dispatch } from "../../../editor";
-import {
-  clearBackground,
-  setBackground,
-} from "../../../model/slide/SlideActions";
-import { ActionButton } from "../../header/actions/ActionButton";
 import { TBackground, TSlide } from "../../../model/slide/SlideTypes";
+import { ColorInput } from "../../inputs/ColorInput";
+import { Select } from "../../inputs/Select";
+import { connect } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { TImage } from "../../../model/element/ImageTypes";
-import { ColorPicker } from "../../fields/colorPicker/ColorPicker";
+import { loadImage } from "../../../model/element/ImageActions";
+import { TElement } from "../../../model/element/ElementTypes";
 
-type SlideFormProps = {
-  slide?: TSlide;
+type Props = {
+  slide: TSlide;
+  allElements: TElement[];
+  setBackground: (slide: string, background: TBackground) => void;
 };
 
-export function SlideForm({ slide }: SlideFormProps) {
+function SlideForm({ slide, allElements, setBackground }: Props) {
+  const allImages = allElements.map((im) => im.data) as TImage[];
+
+  const handleBackgroundColor = (value: string) => {
+    const background: TBackground = {
+      color: value,
+    };
+    setBackground(slide.id, background);
+  };
+
+  const handleLoadBackground = () => {
+    loadImage((object) => {
+      const background: TBackground = {
+        picture: object,
+      };
+      setBackground(slide.id, background);
+    });
+  };
+
+  const handleSetBackground = (name: string) => {
+    const picture = allImages.filter((image) => image.name === name)[0];
+    const background: TBackground = {
+      picture,
+    };
+    setBackground(slide.id, background);
+  };
+
+  const handleClearBackground = () => {
+    const background: TBackground = {
+      color: "#FFFFFF",
+    };
+    setBackground(slide.id, background);
+  };
+
   return (
     <div className={styles.form}>
-      <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>
-          filter
-        </span>
-        <span className={styles.headerFormTitle}>Слайд</span>
-      </div>
-      <FieldInput
-        label={"Установить цвет фона"}
-        type={"text"}
-        onChange={(text) => {
-          const b: TBackground = {
-            color: text,
-          };
-          dispatch(setBackground, true, slide?.id, b);
-        }}
-        value={slide?.background?.color?.toUpperCase()}
-      />
-
-      <div style={{ display: "flex" }}>
-        <ActionButton
-          label="Выбрать фон"
-          style={{ flex: 1 }}
-          onClick={() => {
-            const fileInputNode = document.createElement("input");
-            fileInputNode.type = "file";
-            fileInputNode.click();
-            fileInputNode.addEventListener("change", () => {
-              const file = fileInputNode.files?.[0] as File;
-              const reader = new FileReader();
-
-              reader.onloadend = function () {
-                const newImage: TImage = {
-                  image: "https://via.placeholder.com/150",
-                };
-
-                if (file.type.includes("image")) {
-                  newImage.image = String(reader.result);
-                }
-
-                const b: TBackground = {
-                  picture: newImage,
-                };
-
-                dispatch(setBackground, true, slide?.id, b);
-              };
-
-              reader.readAsDataURL(file);
-            });
+      {!slide.background.picture && (
+        <>
+          <div className={styles.formTitle}>Цвет фона</div>
+          <div className={styles.formFlex} style={{ flexDirection: "column" }}>
+            <ColorInput
+              label="HEX"
+              value={slide?.background?.color?.toUpperCase()}
+              style={{ marginBottom: 8 }}
+              onChange={handleBackgroundColor}
+            />
+          </div>
+        </>
+      )}
+      <div className={styles.formTitle}>Фоновое изображение</div>
+      <div className={styles.formFlex} style={{ flexDirection: "column" }}>
+        <Select
+          items={[
+            "Нет фона",
+            ...allImages.map((i: TImage) => i.name || "undefined"),
+            "Выбрать...",
+          ]}
+          value={slide.background.picture?.name || "Нет фона"}
+          style={{ width: "auto" }}
+          onChange={(value) => {
+            switch (value) {
+              case "Нет фона":
+                handleClearBackground();
+                break;
+              case "Выбрать...":
+                handleLoadBackground();
+                break;
+              default:
+                handleSetBackground(value);
+                break;
+            }
           }}
-        />
-        <ActionButton
-          icon="delete"
-          style={{ marginRight: 0 }}
-          onClick={() => dispatch(clearBackground, true, slide?.id)}
         />
       </div>
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    setBackground: (slide: string, background: TBackground) =>
+      dispatch({
+        type: "SET_SLIDE_BACKGROUND",
+        payload: { slide, background },
+      }),
+  };
+};
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    allElements: state.presentation.slideList
+      .map((slide) => slide.elementList)
+      .flat(),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SlideForm);

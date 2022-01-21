@@ -73,12 +73,6 @@ function TextForm({ element, slideId, setFont }: Props) {
 
   return (
     <div className={styles.form}>
-      <div className={styles.headerForm}>
-        <span className={`material-icons ${styles.headerFormIcon}`}>
-          text_fields
-        </span>
-        <span className={styles.headerFormTitle}>Текст</span>
-      </div>
       <div className={styles.formTitle}>Стиль</div>
       <div className={styles.formFlex}>
         <CheckInput

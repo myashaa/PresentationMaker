@@ -7,7 +7,9 @@ import { setFont, setText } from "../model/element/TextActions";
 import {
   createElement,
   moveElement,
+  removeElement,
   resizeElement,
+  setBackground,
 } from "../model/slide/SlideActions";
 import { TSlide } from "../model/slide/SlideTypes";
 import { ActionType } from "./actionType";
@@ -17,6 +19,8 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
     case "CREATE_ELEMENT":
       const { slideId, content } = action.payload;
       return createElement(state, slideId, content);
+    case "DELETE_ELEMENT":
+      return removeElement(state, action.payload.slide, action.payload.element);
     case "MOVE_ELEMENT":
       return moveElement(
         state,
@@ -66,6 +70,12 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
         action.payload.slide,
         action.payload.element,
         action.payload.filter
+      );
+    case "SET_SLIDE_BACKGROUND":
+      return setBackground(
+        state,
+        action.payload.slide,
+        action.payload.background
       );
     default:
       return state;
