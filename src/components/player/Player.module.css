@@ -2,7 +2,7 @@
   aspect-ratio: 16 / 9;
   width: 860px;
   position: relative;
-  background-color: #fff;
+  background-color: #ffffff;
   user-select: none;
   overflow: hidden;
 }
@@ -58,5 +58,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #000000;
 }

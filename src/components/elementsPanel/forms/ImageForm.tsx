@@ -27,6 +27,7 @@ function ImageForm({ element, slideId, setFilter }: ImageFormProps) {
           items={[EFilter.none, EFilter.blur, EFilter.baw]}
           value={image.filter || "Нет"}
           onChange={handleSetFilter}
+          style={{width: '100%'}}
         />
       </div>
     </div>

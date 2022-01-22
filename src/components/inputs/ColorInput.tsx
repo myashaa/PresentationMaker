@@ -10,11 +10,11 @@ type Props = {
 };
 
 export function ColorInput({ label, value, style, onChange }: Props) {
-  const [text, setText] = useState(value || "#fff");
+  const [text, setText] = useState(value || "#ffffff");
   const [pickerVisible, setPickerVisible] = useState(false);
 
   useEffect(() => {
-    setText(value || "#fff");
+    setText(value || "#ffffff");
   }, [value]);
 
   const handlePicker = () => {

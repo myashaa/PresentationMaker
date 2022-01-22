@@ -71,7 +71,7 @@ export function createPresentation(editor: TEditor): TEditor {
     id: uuid4(),
     elementList: [],
     background: {
-      color: "#fff",
+      color: "#ffffff",
     },
   };
 

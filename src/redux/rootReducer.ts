@@ -19,7 +19,7 @@ const initialSlide = {
   id: uuid4(),
   elementList: [],
   background: {
-    color: "#fff",
+    color: "#ffffff",
   },
 };
 

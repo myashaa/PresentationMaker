@@ -10,7 +10,7 @@ type MenuProps = {
 
 export function Menu({ }: MenuProps) {
   const style = {
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     padding: "5px 0",
     marginRight: "3px",
     fontWeight: "bold",

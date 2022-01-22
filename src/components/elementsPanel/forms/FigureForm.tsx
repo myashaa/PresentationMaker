@@ -34,6 +34,7 @@ function FigureForm({ slideId, element, setFill, setType }: FigureFormProps) {
           items={[EFigureType.triangle, EFigureType.square, EFigureType.circle]}
           value={figure.figure}
           onChange={handleType}
+          style={{width: '100%'}}
         />
       </div>
 

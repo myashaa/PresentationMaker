@@ -27,11 +27,10 @@ function MenuBar({
     <div className={styles.presentationMenuBar}>
       <MenuButton
         label="Создать"
-        icon="insert_drive_file"
         onClick={newPresentation}
       />
-      <MenuButton label="Открыть" icon="folder_open" onClick={handleOpen} />
-      <MenuButton label="Сохранить" icon="save" onClick={savePresentation} />
+      <MenuButton label="Открыть" onClick={handleOpen} />
+      <MenuButton label="Сохранить" onClick={savePresentation} />
     </div>
   );
 }

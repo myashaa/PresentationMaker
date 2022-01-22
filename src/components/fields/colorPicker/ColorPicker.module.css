@@ -4,12 +4,13 @@
 
 p {
   margin: 5px 0 5px 0;
+  font-size: 14px;
 }
 
 .content {
   background: #ffffff;
   border-radius: 5px;
-  top: 28px;
+  top: 45px;
   right: 0;
   position: absolute;
   z-index: 999;

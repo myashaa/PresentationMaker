@@ -101,6 +101,7 @@ function TextForm({ element, slideId, setFont }: Props) {
           items={["Montserrat", "Arial", "Times New Roman", "Courier New"]}
           value={text.font.family}
           onChange={setFamily}
+          style={{width: '100%'}}
         />
         <TextInput
           label="px"

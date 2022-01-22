@@ -19,7 +19,7 @@
 }
 
 .buttonLabel {
-  color: #000;
+  color: #000000;
 }
 
 .selectContent {
@@ -56,5 +56,5 @@
 }
 
 .button:focus {
-  border: 1px solid #000;
+  border: 1px solid #000000;
 }
