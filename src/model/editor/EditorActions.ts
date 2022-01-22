@@ -1,6 +1,7 @@
 import { EMode, TEditor } from "./EditorTypes";
 import { TPresentation } from "../presentation/PresentationTypes";
 import { createSlide } from "../presentation/PresentationActions";
+import { uuid4 } from "../../utils";
 
 export function setPresentation(
   editor: TEditor,
@@ -66,6 +67,14 @@ export function savePresentation(editor: TEditor) {
 export function exportPresentation(presentation: TPresentation) {}
 
 export function createPresentation(editor: TEditor): TEditor {
+  const newSlide = {
+    id: uuid4(),
+    elementList: [],
+    background: {
+      color: "#fff",
+    },
+  };
+
   const newEditor: TEditor = {
     ...editor,
     mode: EMode.edit,
@@ -75,8 +84,8 @@ export function createPresentation(editor: TEditor): TEditor {
     },
     presentation: {
       name: "Название презентации",
-      slideList: [],
-      selectedSlidesIds: [],
+      slideList: [newSlide],
+      selectedSlidesIds: [newSlide.id],
       selectedElementIds: [],
     },
   };

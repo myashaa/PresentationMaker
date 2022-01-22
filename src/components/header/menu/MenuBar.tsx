@@ -1,23 +1,59 @@
-import React, { useRef, useState } from "react";
-import useOnClickOutside from "../../../hooks/useOnClickOutside";
-
 import { MenuButton } from "./MenuButton";
 
 import styles from "./MenuBar.module.css";
 import { AppDispatch } from "../../../redux/store";
+import { connect } from "react-redux";
+import { loadPresentation } from "../../../model/editor/EditorActions";
+import { TPresentation } from "../../../model/presentation/PresentationTypes";
 
-export function MenuBar() {
+type Props = {
+  newPresentation: () => void;
+  openPresentation: (presentation: TPresentation) => void;
+  savePresentation: () => void;
+};
+
+function MenuBar({
+  newPresentation,
+  openPresentation,
+  savePresentation,
+}: Props) {
+  const handleOpen = () => {
+    loadPresentation((object) => {
+      openPresentation(object);
+    });
+  };
+
   return (
     <div className={styles.presentationMenuBar}>
-      <MenuButton label="Создать" icon="insert_drive_file" onClick={() => {}} />
-      <MenuButton label="Открыть" icon="folder_open" onClick={() => {}} />
-      <MenuButton label="Сохранить" icon="save  " onClick={() => {}} />
+      <MenuButton
+        label="Создать"
+        icon="insert_drive_file"
+        onClick={newPresentation}
+      />
+      <MenuButton label="Открыть" icon="folder_open" onClick={handleOpen} />
+      <MenuButton label="Сохранить" icon="save" onClick={savePresentation} />
     </div>
   );
 }
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
-    // ...
+    newPresentation: () =>
+      dispatch({
+        type: "NEW_PRESENTATION",
+        payload: null,
+      }),
+    openPresentation: (presentation: TPresentation) =>
+      dispatch({
+        type: "OPEN_PRESENTATION",
+        payload: presentation,
+      }),
+    savePresentation: () =>
+      dispatch({
+        type: "SAVE_PRESENTATION",
+        payload: null,
+      }),
   };
 };
+
+export default connect(null, mapDispatchToProps)(MenuBar);

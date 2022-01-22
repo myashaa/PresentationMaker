@@ -18,17 +18,19 @@ type Props = {
   addText: (slideId: string, text: TText) => void;
   addFigure: (slideId: string, figure: TFigure) => void;
   addCamera: (slideId: string, camera: TCanvas) => void;
+  setPreview: () => void;
 };
 
-function ActionBar(
-  { currentSlideId,
-    newSlide, 
-    deleteSlides, 
-    addImage,
-    addText,
-    addFigure,
-    addCamera, 
-  }: Props) {
+function ActionBar({
+  currentSlideId,
+  newSlide,
+  deleteSlides,
+  addImage,
+  addText,
+  addFigure,
+  addCamera,
+  setPreview,
+}: Props) {
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -85,7 +87,7 @@ function ActionBar(
           onClick={() => {
             loadImage((object) => {
               addImage(currentSlideId, object);
-            })
+            });
           }}
         />
         <ActionButton
@@ -114,7 +116,7 @@ function ActionBar(
         label="Слайд-шоу"
         primary
         onClick={() => {
-          // dispatch(changeMode, true, EMode.view);
+          setPreview();
         }}
       />
     </div>
@@ -127,12 +129,16 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     newSlide: () =>
       dispatch({
         type: "NEW_SLIDE",
+        payload: null,
+      }),
+    setPreview: () =>
+      dispatch({
+        type: "SET_VIEW_MODE",
         payload: null,
       }),
     deleteSlides: () =>
@@ -143,22 +149,22 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
     addImage: (slideId: string, content: TImage) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: {slideId: slideId, content: content},
+        payload: { slideId: slideId, content: content },
       }),
     addText: (slideId: string, content: TText) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: {slideId: slideId, content: content},
+        payload: { slideId: slideId, content: content },
       }),
     addFigure: (slideId: string, content: TFigure) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: {slideId: slideId, content: content},
+        payload: { slideId: slideId, content: content },
       }),
     addCamera: (slideId: string, content: TCanvas) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: {slideId: slideId, content: content},
+        payload: { slideId: slideId, content: content },
       }),
   };
 };

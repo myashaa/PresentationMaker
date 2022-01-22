@@ -11,40 +11,42 @@ import { RootState } from "./redux/store";
 import styles from "./App.module.css";
 import SlideEditor from "./components/slide/Slide";
 import ElementsPanel from "./components/elementsPanel/ElementsPanel";
+import { EMode } from "./model/editor/EditorTypes";
+import Player from "./components/player/Player";
+import { TSlide } from "./model/slide/SlideTypes";
 
 type AppProps = {
   presentation: TPresentation;
+  slides: TSlide[];
+  mode: EMode;
 };
 
-function App({ presentation }: AppProps) {
+function App({ presentation, mode, slides }: AppProps) {
   useEffect(() => {
     document.title = presentation.name;
   }, [presentation]);
 
   return (
     <div>
-      {/* {presentation.mode === EMode.edit && ( */}
-      <div className={styles.app}>
-        <Header />
-        <ActionBar />
-        <div className={styles.content}>
-          <SlidesPanel />
-          <SlideEditor />
-          <ElementsPanel />
+      {mode === EMode.edit && (
+        <div className={styles.app}>
+          <Header />
+          <ActionBar />
+          <div className={styles.content}>
+            <SlidesPanel />
+            <SlideEditor />
+            <ElementsPanel />
+          </div>
         </div>
-      </div>
-      {/*)} */}
-      {/* {editor.mode === EMode.view && (
-        <div className={styles.playerContainer}>
-          <Player slides={slideList} />
-        </div>
-      )} */}
+      )}
+      {mode === EMode.view && <Player slides={slides} />}
     </div>
   );
 }
 
 const mapStateToProps = (state: RootState) => {
   return {
+    mode: state.mode,
     presentation: state.presentation,
     slides: state.presentation.slideList,
     selectedSlides: state.presentation.selectedSlidesIds,

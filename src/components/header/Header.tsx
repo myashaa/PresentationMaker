@@ -3,7 +3,7 @@ import Title from "./Title";
 import Logo from "../../assets/icons/logo.svg";
 
 import styles from "./Header.module.css";
-import { MenuBar } from "./menu/MenuBar";
+import MenuBar from "./menu/MenuBar";
 
 export function Header() {
   return (

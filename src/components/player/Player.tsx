@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
 import { COLORS } from "../../colors";
 import { dispatch } from "../../editor";
 import { useHotKey } from "../../hooks/useHotKey";
@@ -6,20 +7,23 @@ import { changeMode } from "../../model/editor/EditorActions";
 import { EMode } from "../../model/editor/EditorTypes";
 import { TPresentation } from "../../model/presentation/PresentationTypes";
 import { TSlide } from "../../model/slide/SlideTypes";
+import { AppDispatch } from "../../redux/store";
 import { at } from "../../utils";
 import { Camera } from "../slide/Camera";
 import { Element } from "../slide/Element";
 import { FigureElement } from "../slide/figures/FigureElement";
 import { ImageElement } from "../slide/image/ImageElement";
+import { SlideElement } from "../slide/SlideElement";
 import { TextElement } from "../slide/text/TextElement";
 
 import styles from "./Player.module.css";
 
 type PlayerProps = {
   slides: TSlide[];
+  setPreview: () => void;
 };
 
-export function Player({ slides }: PlayerProps) {
+function Player({ slides, setPreview }: PlayerProps) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [scale, setScale] = useState([1, 1]);
 
@@ -42,7 +46,7 @@ export function Player({ slides }: PlayerProps) {
 
   useHotKey((key) => {
     if (key === "Escape") {
-      dispatch(changeMode, false, EMode.edit);
+      editMode();
     }
 
     if (key === "ArrowLeft") {
@@ -68,6 +72,10 @@ export function Player({ slides }: PlayerProps) {
     }
   };
 
+  const editMode = () => {
+    setPreview();
+  };
+
   const style = {
     backgroundColor: slide.background?.color,
     backgroundImage: `url(${slide.background?.picture?.image})`,
@@ -76,76 +84,24 @@ export function Player({ slides }: PlayerProps) {
     transform: `scale(${scale[0]})`,
   };
 
+  const elements = slide.elementList.map((element, index) => (
+    <SlideElement key={index} element={element} />
+  ));
+
   return (
-    <>
+    <div className={styles.playerContainer}>
       <PlayerControls
-        onClose={() => dispatch(changeMode, false, EMode.edit)}
+        onClose={editMode}
         onBack={prevSlide}
         onForward={nextSlide}
         label={`${slideIndex + 1} / ${slides.length}`}
       />
       <div ref={playerRef} className={styles.player} style={style}>
-        {slide.elementList.map((element) => {
-          const style = {
-            top: element.position.y,
-            left: element.position.x,
-            width: element.width,
-            height: element.height,
-            backgroundColor: element.color,
-          };
-
-          if ("image" in element.data) {
-            return (
-              <img
-                style={{ ...style, objectFit: "cover" }}
-                key={element.id}
-                src={element.data.image}
-                alt=""
-              />
-            );
-          }
-
-          if ("text" in element.data) {
-            const fontStyle = {
-              margin: 0,
-              fontFamily: element.data.font.family,
-              fontSize: element.data.font.size,
-              color: element.data.font.color,
-              fontWeight: element.data.font.bold ? "bold" : "400",
-              textDecoration: element.data.font.underline
-                ? "underline"
-                : "none",
-              fontStyle: element.data.font.italic ? "italic" : "normal",
-            };
-
-            return (
-              <p style={{ ...style, ...fontStyle }}>{element.data.text}</p>
-            );
-          }
-
-          if ("figure" in element.data) {
-            return (
-              <div style={style}>
-                <FigureElement
-                  figure={element.data.figure}
-                  width={element.width}
-                  height={element.height}
-                  fill={element.data.fill}
-                />
-              </div>
-            );
-          }
-
-          if ("video" in element.data) {
-            return (
-              <div style={style}>
-                <Camera />
-              </div>
-            );
-          }
-        })}
+        {slide.elementList.map((element) => (
+          <Element key={element.id} element={element} view />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -186,3 +142,15 @@ export const PlayerControls = ({
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    setPreview: () =>
+      dispatch({
+        type: "SET_EDIT_MODE",
+        payload: null,
+      }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Player);

@@ -1,3 +1,4 @@
+import { renamePresentation } from "../model/editor/EditorActions";
 import {
   createSlide,
   deleteSlides,
@@ -29,6 +30,8 @@ export const presentationReducer = (
   action: ActionType
 ) => {
   switch (action.type) {
+    case "RENAME_PRESENTATION":
+      return renamePresentation(state, action.payload);
     case "NEW_SLIDE":
       return createSlide(state);
     case "SELECT_SLIDES":
@@ -44,12 +47,3 @@ export const presentationReducer = (
       };
   }
 };
-
-// case "CREATE_PRESENTATION":
-//       return action.payload;
-//     case "LOAD_PRESENTATION":
-//       return action.payload;
-//     case "SAVE_PRESENTATION":
-//       return action.payload;
-//     case "RENAME_PRESENTATION":
-//       return action.payload;

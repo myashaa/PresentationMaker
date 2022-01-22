@@ -41,7 +41,6 @@ export function Editor({ slide, slideId, selectedElements }: EditorProps) {
           }}
         >
           {elements}
-          {/* <TriangleFigure width={100} height={100} /> */}
         </div>
       )}
 
