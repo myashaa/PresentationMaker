@@ -7,6 +7,7 @@ import {
 import { EMode, TEditor } from "../model/editor/EditorTypes";
 import { uuid4 } from "../utils";
 import { ActionType } from "./actionType";
+import { historyReducer } from "./historyReducer";
 import { modeReducer } from "./modeReducer";
 import { presentationReducer } from "./presentationReducer";
 
@@ -51,9 +52,9 @@ export const rootReducer = (
       return state;
     default:
       return {
-        ...state,
         presentation: presentationReducer(state.presentation, action),
         mode: modeReducer(state.mode, action),
+        history: historyReducer(state, action).history,
       };
   }
 };
