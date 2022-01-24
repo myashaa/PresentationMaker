@@ -30,9 +30,7 @@ const initialState: TEditor = {
   presentation: initialPresentation,
   history: {
     index: 0,
-    states: [
-      initialPresentation
-    ],
+    states: [initialPresentation],
   },
 };
 
@@ -54,7 +52,7 @@ export const rootReducer = (
       return {
         presentation: presentationReducer(state.presentation, action),
         mode: modeReducer(state.mode, action),
-        history: historyReducer(state, action).history
+        history: historyReducer(state.history, action),
       };
   }
 };

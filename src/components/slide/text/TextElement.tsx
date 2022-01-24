@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { TText } from "../../../model/element/TextTypes";
 
 import styles from "./TextElement.module.css";

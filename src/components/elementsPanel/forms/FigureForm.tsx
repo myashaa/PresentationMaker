@@ -5,7 +5,6 @@ import { ColorInput } from "../../inputs/ColorInput";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
 import { Select } from "../../inputs/Select";
-import { ActionButton } from "../../header/actions/ActionButton";
 
 type FigureFormProps = {
   element: TElement;

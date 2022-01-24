@@ -1,43 +1,42 @@
-import { TEditor } from "../editor/EditorTypes";
+import { TPresentation } from "../presentation/PresentationTypes";
+import { THistory } from "./HistoryTypes";
 
-export function undo(editor: TEditor): TEditor {
-  const newEditor: TEditor = {
-    ...editor,
+export function undo(history: THistory): THistory {
+  const newHistory: THistory = {
+    ...history,
   };
 
-  if (editor.history.index > 0) {
-    newEditor.history.index = editor.history.index - 1;
+  if (newHistory.index > 0) {
+    newHistory.index = history.index - 1;
   }
 
-  return newEditor;
+  return newHistory;
 }
 
-export function redo(editor: TEditor): TEditor {
-  const newEditor: TEditor = {
-    ...editor,
+export function redo(history: THistory): THistory {
+  const newHistory: THistory = {
+    ...history,
   };
 
-  if (editor.history.index < editor.history.states.length - 1) {
-    newEditor.history.index = editor.history.index + 1;
+  if (history.index < history.states.length - 1) {
+    newHistory.index = history.index + 1;
   }
 
-  return newEditor;
+  return newHistory;
 }
 
-export function updateHistory(editor: TEditor): TEditor {
-  const newEditor: TEditor = {
-    ...editor,
-    history: {
-      ...editor.history,
-      index: editor.history.index + 1,
-    },
-  };
-
-  const newStates = newEditor.history.states.filter(
-    (value, index) => index <= newEditor.history.index - 1 && value
+export function updateHistory(
+  history: THistory,
+  presentation: TPresentation
+): THistory {
+  const newStates = history.states.filter(
+    (value, index) => index <= history.index - 1 && value
   );
 
-  newEditor.history.states = [...newStates, editor.presentation];
+  const newHistory: THistory = {
+    states: [...newStates, presentation],
+    index: history.index + 1,
+  };
 
-  return newEditor;
+  return newHistory;
 }

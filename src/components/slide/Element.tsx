@@ -95,7 +95,7 @@ export function Element({
     <div
       ref={elementRef}
       style={style}
-      className={classnames(styles.element, selected && styles.selected)}
+      className={`${styles.element} ${selected && styles.selected}`}
       onClick={(e) => {
         e.stopPropagation();
         !view && onClick && onClick(e.ctrlKey);
