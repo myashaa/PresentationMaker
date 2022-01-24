@@ -8,13 +8,13 @@ import { TText } from "../../../model/element/TextTypes";
 import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 import { COLORS } from "../../../colors";
 import { getLastElement } from "../../../utils";
-import { TCanvas } from "../../../model/element/ElementTypes";
+import { TCanvas, TSize } from "../../../model/element/ElementTypes";
 
 type Props = {
   currentSlideId: string;
   newSlide: () => void;
   deleteSlides: () => void;
-  addImage: (slideId: string, image: TImage) => void;
+  addImage: (slideId: string, image: TImage, size: TSize) => void;
   addText: (slideId: string, text: TText) => void;
   addFigure: (slideId: string, figure: TFigure) => void;
   addCamera: (slideId: string, camera: TCanvas) => void;
@@ -89,8 +89,8 @@ function ActionBar({
         <ActionButton
           icon="image"
           onClick={() => {
-            loadImage((object) => {
-              addImage(currentSlideId, object);
+            loadImage((object, size) => {
+              addImage(currentSlideId, object, size);
             });
           }}
         />
@@ -150,10 +150,10 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
         type: "DELETE_SLIDES",
         payload: null,
       }),
-    addImage: (slideId: string, content: TImage) =>
+    addImage: (slideId: string, content: TImage, size: TSize) =>
       dispatch({
         type: "CREATE_ELEMENT",
-        payload: { slideId: slideId, content: content },
+        payload: { slideId, content, size },
       }),
     addText: (slideId: string, content: TText) =>
       dispatch({
