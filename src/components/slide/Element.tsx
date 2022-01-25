@@ -14,6 +14,7 @@ import { classnames } from "../../utils";
 import { COLORS } from "../../colors";
 import { useMoveAndResize } from "../../hooks/useMoving";
 import { Camera } from "./Camera";
+import { useHotKey } from "../../hooks/useHotKey";
 
 type Props = {
   element: TElement;
@@ -75,6 +76,23 @@ export function Element({
   const sz = s as TSize;
   const data = element.data;
 
+  useHotKey((key, ctrl) => {
+    let mul = ctrl ? 20 : 1;
+    let dx = 0;
+    let dy = 0;
+
+    if (key === "ArrowLeft") dx = 1;
+    if (key === "ArrowRight") dx = -1;
+    if (key === "ArrowUp") dy = 1;
+    if (key === "ArrowDown") dy = -1;
+
+    onMove &&
+      onMove({
+        x: element.position.x - dx * mul,
+        y: element.position.y - dy * mul,
+      });
+  }, elementRef);
+
   const style = {
     top: moving ? pos.y : element.position.y,
     left: moving ? pos.x : element.position.x,
@@ -105,6 +123,7 @@ export function Element({
         setMoving(false);
         setResizing(false);
       }}
+      tabIndex={3}
     >
       {"text" in data && (
         <TextElement

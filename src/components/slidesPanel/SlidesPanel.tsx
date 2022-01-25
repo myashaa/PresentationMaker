@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { connect } from "react-redux";
 import { useHotKey } from "../../hooks/useHotKey";
 import { TSlide } from "../../model/slide/SlideTypes";
@@ -20,11 +21,13 @@ const SlidesPanel = ({
   selectSlides,
   deleteSlides,
 }: Props) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+
   useHotKey((key) => {
     if (key === "Delete") {
       deleteSlides();
     }
-  });
+  }, panelRef);
 
   const slideList = slides?.map((slide, index) => (
     <MiniSlide
@@ -49,7 +52,12 @@ const SlidesPanel = ({
   ));
 
   return (
-    <div className={styles.sidePanel} style={{ width }}>
+    <div
+      ref={panelRef}
+      tabIndex={0}
+      className={styles.sidePanel}
+      style={{ width }}
+    >
       {slideList}
     </div>
   );
