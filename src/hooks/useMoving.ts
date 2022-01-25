@@ -17,6 +17,10 @@ export const useMoveAndResize = (
   let startDragY = 0;
 
   useEffect(() => {
+    setPosition(initPosition);
+  }, [initPosition]);
+
+  useEffect(() => {
     if (elementRef.current)
       elementRef.current.addEventListener("mousedown", moveHandler);
     if (resizeRef.current)

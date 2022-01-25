@@ -41,7 +41,6 @@ const storeHistory =
           type: "UPDATE_HISTORY",
           payload: { presentation: oldState.presentation },
         });
-        console.log("UPDATE_HISTORY", newState.history);
       }
     }
 
@@ -64,7 +63,6 @@ const movingHistory =
         presentation,
       };
 
-      console.log(action.type, index, state.history);
       store.dispatch({ type: "SET_PRESENTATION", payload: newState });
     }
 
