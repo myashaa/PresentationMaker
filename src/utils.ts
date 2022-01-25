@@ -112,7 +112,7 @@ function hslToRGB(inp: number[]) {
   const rgb = [0, 0, 0];
 
   for (let i = 0; i < 3; i++) {
-    t3 = h + 1 / 3 * -(i - 1);
+    t3 = h + (1 / 3) * -(i - 1);
     if (t3 < 0) {
       t3++;
     }
@@ -152,4 +152,15 @@ export function hslToHEX(hsl: number[]) {
   const rgb = hslToRGB(hsl);
   const hex = rgbToHEX(rgb);
   return hex;
+}
+
+type UrlType = {
+  [key: string]: string;
+};
+
+export function url(path: string, object: UrlType) {
+  const keys = Object.keys(object);
+  const params = keys.map((key) => `${key}=${object[key]}`).join("&");
+
+  return `${path}?${params}`;
 }

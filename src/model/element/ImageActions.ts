@@ -23,8 +23,6 @@ export function setFilter(
     slide.id === slideId ? { ...slide, elementList: newElementList } : slide
   );
 
-  console.log("newElement", newElement);
-
   return newSlideList;
 }
 
@@ -71,7 +69,6 @@ export function loadImage(callback: (object: TImage, size: TSize) => void) {
       if (file.type.includes("image")) {
         newImage.image = String(reader.result);
       }
-      console.log(newImage.image);
       getImageSize(newImage.image, (size) => {
         callback(newImage, size);
       });
@@ -105,7 +102,6 @@ export async function loadImageFromURL(url: string): Promise<TImage> {
       );
 
   await toDataURL(url).then((dataUrl) => {
-    console.log(dataUrl);
     data = String(dataUrl);
   });
 
