@@ -9,6 +9,10 @@ import { EFigureType, TFigure } from "../../../model/element/FigureTypes";
 import { COLORS } from "../../../colors";
 import { getLastElement } from "../../../utils";
 import { TCanvas, TSize } from "../../../model/element/ElementTypes";
+import { getImageSize } from "../../../model/element/ImageActions";
+import { useState } from "react";
+import { Modal } from "../../modal/Modal";
+import { ImageSearchForm } from "../../forms/ImageSearchForm";
 
 type Props = {
   currentSlideId: string;
@@ -35,6 +39,33 @@ function ActionBar({
   undo,
   redo,
 }: Props) {
+  const [imageModal, setImageModal] = useState(false);
+
+  const handleImageModal = () => {
+    setImageModal(!imageModal);
+  };
+
+  const handleAddImage = (url: string) => {
+    getImageSize(url, (size) => {
+      const object: TImage = {
+        image: url,
+      };
+
+      let s = size;
+      if (size.width > 600) {
+        s.width = Math.floor(size.width / 3);
+        s.height = Math.floor(size.height / 3);
+      }
+      if (size.height > 500) {
+        s.width = Math.floor(size.width / 2);
+        s.height = Math.floor(size.height / 2);
+      }
+
+      addImage(currentSlideId, object, s);
+    });
+    setImageModal(false);
+  };
+
   return (
     <div className={styles.appActionBar}>
       <div className={styles.appActionsGroup}>
@@ -94,6 +125,7 @@ function ActionBar({
             });
           }}
         />
+        <ActionButton icon="language" onClick={handleImageModal} />
         <ActionButton
           icon="category"
           onClick={() => {
@@ -123,6 +155,12 @@ function ActionBar({
           setPreview();
         }}
       />
+
+      {imageModal && (
+        <Modal title="Изображение из интернетов" onClose={handleImageModal}>
+          <ImageSearchForm onSubmit={handleAddImage} />
+        </Modal>
+      )}
     </div>
   );
 }

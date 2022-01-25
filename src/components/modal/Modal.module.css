@@ -1,0 +1,48 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 472px;
+  min-width: 472px;
+  /* min-height: 400px; */
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 24px;
+  padding-top: 0;
+}
+
+.buttonClose {
+  cursor: pointer;
+  color: #c7c7c7;
+}
+
+.buttonClose:active {
+  color: #aaaaaa;
+}

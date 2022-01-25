@@ -12,9 +12,10 @@ type Props = {
   value?: string;
   style?: CSSProperties;
   onChange?: (value: string) => void;
+  onInput?: (value: string) => void;
 };
 
-export function TextInput({ label, value, style, onChange }: Props) {
+export function TextInput({ label, value, style, onChange, onInput }: Props) {
   const [text, setText] = useState(value || "");
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export function TextInput({ label, value, style, onChange }: Props) {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
+    onInput && onInput(e.target.value);
   };
 
   const handleBlur = () => {

@@ -38,8 +38,5 @@ export function updateHistory(
     index: newStates.length + 1,
   };
 
-  console.log(history.states);
-  console.log(newHistory.states);
-
   return newHistory;
 }

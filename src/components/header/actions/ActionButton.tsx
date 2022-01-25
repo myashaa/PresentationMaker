@@ -32,7 +32,14 @@ export function ActionButton({
           {icon}
         </span>
       )}
-      {label && <span className={styles.actionButtonLabel}>{label}</span>}
+      {label && (
+        <span
+          style={{ marginLeft: !icon ? 0 : 8 }}
+          className={styles.actionButtonLabel}
+        >
+          {label}
+        </span>
+      )}
     </button>
   );
 }

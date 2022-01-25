@@ -7,6 +7,9 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { TImage } from "../../../model/element/ImageTypes";
 import { loadImage } from "../../../model/element/ImageActions";
 import { TElement } from "../../../model/element/ElementTypes";
+import { useState } from "react";
+import { Modal } from "../../modal/Modal";
+import { ImageSearchForm } from "../../forms/ImageSearchForm";
 
 type Props = {
   slide: TSlide;
@@ -15,6 +18,8 @@ type Props = {
 };
 
 function SlideForm({ slide, allElements, setBackground }: Props) {
+  const [imageModal, setImageModal] = useState(false);
+
   const allObjects = allElements.map(
     (im) => "image" in im.data && im.data
   ) as TImage[];
@@ -37,12 +42,17 @@ function SlideForm({ slide, allElements, setBackground }: Props) {
     });
   };
 
-  const handleSetBackground = (name: string) => {
-    const picture = allImages.filter((image) => image.name === name)[0];
+  const handleSetBackground = (url: string) => {
+    const picture: TImage = {
+      image: url,
+    };
+
     const background: TBackground = {
       picture,
     };
+
     setBackground(slide.id, background);
+    setImageModal(false);
   };
 
   const handleClearBackground = () => {
@@ -70,11 +80,7 @@ function SlideForm({ slide, allElements, setBackground }: Props) {
       <div className={styles.formTitle}>Фоновое изображение</div>
       <div className={styles.formFlex} style={{ flexDirection: "column" }}>
         <Select
-          items={[
-            "Нет фона",
-            ...allImages.map((i: TImage) => i.name || "undefined"),
-            "Выбрать...",
-          ]}
+          items={["Нет фона", "Из интернетика...", "Из файла..."]}
           value={slide.background.picture?.name || "Нет фона"}
           style={{ width: "auto" }}
           onChange={(value) => {
@@ -82,7 +88,10 @@ function SlideForm({ slide, allElements, setBackground }: Props) {
               case "Нет фона":
                 handleClearBackground();
                 break;
-              case "Выбрать...":
+              case "Из интернетика...":
+                setImageModal(true);
+                break;
+              case "Из файла...":
                 handleLoadBackground();
                 break;
               default:
@@ -92,6 +101,12 @@ function SlideForm({ slide, allElements, setBackground }: Props) {
           }}
         />
       </div>
+
+      {imageModal && (
+        <Modal title="Фон из интернетов" onClose={() => setImageModal(false)}>
+          <ImageSearchForm onSubmit={handleSetBackground} />
+        </Modal>
+      )}
     </div>
   );
 }

@@ -1,0 +1,95 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  animation: pulse 1s linear infinite;
+}
+
+.image:nth-child(4n) {
+  margin-right: 0;
+}
+
+.image:nth-last-child(-n + 4) {
+  margin-bottom: 0;
+}
+
+.cardButton {
+  animation: none;
+  font-size: 13px;
+  color: #c7c7c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  flex: 1;
+  width: 100%;
+  font-size: 13px;
+  color: #c7c7c7;
+}
+
+.indicator {
+  width: 32px;
+  height: 32px;
+  animation: pulse 2s infinite;
+  transform: rotate(45deg);
+  /* background-color: rgba(104, 83, 223); */
+}
+
+.tabBar {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.preview {
+  width: 424px;
+  height: 424px;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  background-position: center;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.previewImage {
+  width: 424px;
+  height: 424px;
+  object-fit: contain;
+}
+
+.blur {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #fafafa;
+  }
+
+  50% {
+    background-color: #f2f2f2;
+  }
+
+  100% {
+    background-color: #fafafa;
+  }
+}
