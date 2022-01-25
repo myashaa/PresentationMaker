@@ -18,7 +18,7 @@ export const slideListReducer = (state: TSlide[], action: ActionType) => {
   switch (action.type) {
     case "CREATE_ELEMENT":
       const { slideId, content } = action.payload;
-      return createElement(state, slideId, content);
+      return createElement(state, slideId, content, action.payload.size);
     case "DELETE_ELEMENT":
       return removeElement(state, action.payload.slide, action.payload.element);
     case "MOVE_ELEMENT":

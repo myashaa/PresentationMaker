@@ -1,6 +1,6 @@
 import { TEditor } from "../editor/EditorTypes";
 import { TSlide } from "../slide/SlideTypes";
-import { TElement } from "./ElementTypes";
+import { TElement, TSize } from "./ElementTypes";
 import { EFilter, TImage } from "./ImageTypes";
 
 export function setFilter(
@@ -55,7 +55,7 @@ export function deleteFilter(
   return newEditor;
 }
 
-export function loadImage(callback: (object: TImage) => void) {
+export function loadImage(callback: (object: TImage, size: TSize) => void) {
   const fileInputNode = document.createElement("input");
   fileInputNode.type = "file";
   fileInputNode.click();
@@ -67,13 +67,25 @@ export function loadImage(callback: (object: TImage) => void) {
         name: file.name,
         image: "https://via.placeholder.com/150",
       };
+
       if (file.type.includes("image")) {
         newImage.image = String(reader.result);
       }
-      callback(newImage);
+      console.log(newImage.image);
+      getImageSize(newImage.image, (size) => {
+        callback(newImage, size);
+      });
     };
     reader.readAsDataURL(file);
   });
+}
+
+export function getImageSize(src: string, callback: (size: TSize) => void) {
+  const image = new Image();
+  image.onload = () => {
+    callback({ width: image.width, height: image.height });
+  };
+  image.src = src;
 }
 
 export async function loadImageFromURL(url: string): Promise<TImage> {

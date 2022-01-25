@@ -1,7 +1,7 @@
 import { COLORS } from "../../colors";
 import { uuid4 } from "../../utils";
 import { TEditor } from "../editor/EditorTypes";
-import { TCanvas, TElement } from "../element/ElementTypes";
+import { TCanvas, TElement, TSize } from "../element/ElementTypes";
 import { TFigure } from "../element/FigureTypes";
 import { TImage } from "../element/ImageTypes";
 import { TText } from "../element/TextTypes";
@@ -44,12 +44,13 @@ export function clearBackground(editor: TEditor, slideId: string): TEditor {
 export function createElement(
   slideList: TSlide[],
   slideId: string,
-  content: TText | TImage | TFigure | TCanvas
+  content: TText | TImage | TFigure | TCanvas,
+  size: TSize = { width: 100, height: 100 }
 ): TSlide[] {
   const newElement: TElement = {
     id: uuid4(),
-    width: 100,
-    height: 100,
+    width: size.width,
+    height: size.height,
     position: { x: 5, y: 5 },
     data: content,
   };
