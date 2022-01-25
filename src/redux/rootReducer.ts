@@ -19,7 +19,7 @@ const initialSlide = {
 };
 
 const initialPresentation = {
-  name: "Presentation",
+  name: "Презентация",
   selectedElementIds: [],
   slideList: [initialSlide],
   selectedSlidesIds: [initialSlide.id],
