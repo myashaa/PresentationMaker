@@ -23,53 +23,57 @@ const exceptions: string[] = [
   "SET_PRESENTATION",
 ];
 
-// const storeHistory =
-//   (store: MiddlewareAPI<Dispatch<AnyAction>, TEditor>) =>
-//   (next: AppDispatch) =>
-//   (action: AnyAction) => {
-//     const oldState: TEditor = store.getState();
-//     const result: AnyAction = next(action);
+const storeHistory =
+  (store: MiddlewareAPI<Dispatch<AnyAction>, TEditor>) =>
+  (next: AppDispatch) =>
+  (action: AnyAction) => {
+    const oldState: TEditor = store.getState();
+    const result: AnyAction = next(action);
 
-//     if (!exceptions.includes(action.type)) {
-//       const newState: TEditor = store.getState();
-//       if (
-//         JSON.stringify(oldState.presentation) !==
-//         JSON.stringify(newState.presentation)
-//       ) {
-//         store.dispatch({
-//           type: "UPDATE_HISTORY",
-//           state: updateHistory(oldState.history, newState.presentation),
-//         });
-//       }
-//     }
-//     return result;
-// };
+    if (!exceptions.includes(action.type)) {
+      const newState: TEditor = store.getState();
 
-// const movingHistory =
-//   (store: MiddlewareAPI<Dispatch<AnyAction>, TEditor>) =>
-//   (next: AppDispatch) =>
-//   (action: AnyAction) => {
-//     const oldState: TEditor = store.getState();
-//     const result: AnyAction = next(action);
+      if (
+        JSON.stringify(oldState.presentation) !==
+        JSON.stringify(newState.presentation)
+      ) {
+        store.dispatch({
+          type: "UPDATE_HISTORY",
+          payload: { presentation: oldState.presentation },
+        });
+        console.log("UPDATE_HISTORY", newState.history);
+      }
+    }
 
-//     if (["UNDO", "REDO"].includes(action.type)) {
-//       const currentIndex: number = oldState.history.index;
+    return result;
+  };
 
-//       const presentation: TPresentation = oldState.history.states[currentIndex];
+const movingHistory =
+  (store: MiddlewareAPI<Dispatch<AnyAction>, TEditor>) =>
+  (next: AppDispatch) =>
+  (action: AnyAction) => {
+    const result: AnyAction = next(action);
+    const state: TEditor = store.getState();
 
-//       const newState: TEditor = {
-//         ...oldState,
-//         presentation: presentation,
-//       };
-//       store.dispatch({ type: "SET_PRESENTATION", payload: newState });
-//     }
+    if (["UNDO", "REDO"].includes(action.type)) {
+      const index = state.history.index;
+      const presentation = state.history.states[index];
 
-//     return result;
-//   };
+      const newState: TEditor = {
+        ...state,
+        presentation,
+      };
+
+      console.log(action.type, index, state.history);
+      store.dispatch({ type: "SET_PRESENTATION", payload: newState });
+    }
+
+    return result;
+  };
 
 export const store: Store<TEditor> = createStore(
-  rootReducer
-  // applyMiddleware(storeHistory, movingHistory)
+  rootReducer,
+  applyMiddleware(storeHistory, movingHistory)
 );
 
 export type RootState = ReturnType<typeof store.getState>;

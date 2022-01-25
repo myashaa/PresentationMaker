@@ -30,12 +30,12 @@ export function updateHistory(
   presentation: TPresentation
 ): THistory {
   const newStates = history.states.filter(
-    (value, index) => index <= history.index - 1 && value
+    (value, index) => index < history.index && value
   );
 
   const newHistory: THistory = {
     states: [...newStates, presentation],
-    index: history.index + 1,
+    index: newStates.length + 1,
   };
 
   return newHistory;

@@ -29,7 +29,7 @@ const initialState: TEditor = {
   mode: EMode.edit,
   presentation: initialPresentation,
   history: {
-    index: 0,
+    index: 1,
     states: [initialPresentation],
   },
 };
