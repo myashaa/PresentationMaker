@@ -18,21 +18,35 @@ type Props = {
 export function ImageSearchForm({ onSubmit }: Props) {
   const [images, setImages] = useState<TImage[]>([]);
   const [urlImage, setUrlImage] = useState("");
+  const [query, setQuery] = useState("");
   const [tab, setTab] = useState(0);
+  const [page, setPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(1);
+
+  // useEffect(() => {
+  //   loadUnsplashImages((data) => {
+  //     setImages(
+  //       data.map((image: any) => {
+  //         return { image: image.urls.regular };
+  //       })
+  //     );
+  //   });
+  // }, []);
 
   useEffect(() => {
-    loadUnsplashImages((data) => {
-      setImages(
-        data.map((image: any) => {
-          return { image: image.urls.regular };
-        })
-      );
-    });
-  }, []);
+    handleSearchPics();
+  }, [page]);
 
-  const handleSearchPics = (search: string) => {
-    setImages([]);
-    searchUnsplashImages(search, (data) => {
+  const handleChangePage = (step: number) => {
+    if (page > 0 && page < maxPages) {
+      setPage(page + step);
+    }
+  };
+
+  const handleSearchPics = () => {
+    // setImages([]);
+    searchUnsplashImages(query, page, (data) => {
+      setMaxPages(data["total_pages"]);
       setImages(
         data.results.map((image: any) => {
           return { image: image.urls.regular };
@@ -97,20 +111,35 @@ export function ImageSearchForm({ onSubmit }: Props) {
 
       {tab === 1 && (
         <div>
-          <TextInput label="Unsplash" onChange={handleSearchPics} />
-          <div className={styles.grid}>
-            {images.map((image) => (
-              <img
-                key={uuid4()}
-                className={styles.image}
-                src={image.image}
-                onClick={() => handleImageSelect(image.image)}
-              />
-            ))}
-            {!images.length && (
-              <div className={styles.loader}>идет загрузка...</div>
-            )}
-          </div>
+          <TextInput
+            label="Unsplash"
+            onChange={handleSearchPics}
+            onInput={setQuery}
+          />
+          {!!images.length && (
+            <div className={styles.grid}>
+              {images.map((image) => (
+                <img
+                  key={uuid4()}
+                  className={styles.image}
+                  src={image.image}
+                  onClick={() => handleImageSelect(image.image)}
+                />
+              ))}
+              {page !== 1 && (
+                <div
+                  className={`${styles.image} ${styles.cardButton}`}
+                  onClick={() => handleChangePage(-1)}
+                >{`<<< ${page - 1}`}</div>
+              )}
+              {maxPages > 0 && (
+                <div
+                  className={`${styles.image} ${styles.cardButton}`}
+                  onClick={() => handleChangePage(1)}
+                >{`>>> ${page + 1}`}</div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

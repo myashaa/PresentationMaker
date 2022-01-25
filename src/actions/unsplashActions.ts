@@ -13,9 +13,13 @@ export const loadUnsplashImages = (callback?: (data: any) => void) => {
 
 export const searchUnsplashImages = (
   query: string,
+  page: number,
   callback?: (data: any) => void
 ) => {
-  const urlString = url("https://api.unsplash.com/search/photos", { query });
+  const urlString = url("https://api.unsplash.com/search/photos", {
+    query,
+    page: `${page}`,
+  });
 
   fetch(urlString, {
     method: "GET",

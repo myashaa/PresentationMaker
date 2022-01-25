@@ -23,6 +23,16 @@
   margin-bottom: 0;
 }
 
+.cardButton {
+  animation: none;
+  font-size: 13px;
+  color: #c7c7c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+}
+
 .loader {
   display: flex;
   justify-content: center;
