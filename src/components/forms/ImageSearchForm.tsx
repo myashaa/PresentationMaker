@@ -22,19 +22,15 @@ export function ImageSearchForm({ onSubmit }: Props) {
   const [tab, setTab] = useState(0);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
-
-  // useEffect(() => {
-  //   loadUnsplashImages((data) => {
-  //     setImages(
-  //       data.map((image: any) => {
-  //         return { image: image.urls.regular };
-  //       })
-  //     );
-  //   });
-  // }, []);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    handleSearchPics();
+    handleMainUsplash();
+  }, []);
+
+  useEffect(() => {
+    query !== "" && handleSearchPics();
+    query === "" && handleMainUsplash();
   }, [page]);
 
   const handleChangePage = (step: number) => {
@@ -43,9 +39,19 @@ export function ImageSearchForm({ onSubmit }: Props) {
     }
   };
 
+  const handleMainUsplash = () => {
+    loadUnsplashImages((data) => {
+      setImages(
+        data.map((image: any) => {
+          return { image: image.urls.regular };
+        })
+      );
+    });
+  };
+
   const handleSearchPics = () => {
-    // setImages([]);
     searchUnsplashImages(query, page, (data) => {
+      setTotal(data["total"]);
       setMaxPages(data["total_pages"]);
       setImages(
         data.results.map((image: any) => {
@@ -116,6 +122,16 @@ export function ImageSearchForm({ onSubmit }: Props) {
             onChange={handleSearchPics}
             onInput={setQuery}
           />
+          {total !== 0 && (
+            <div
+              style={{
+                marginBottom: 16,
+                marginTop: 16,
+                fontSize: 13,
+                color: "#c7c7c7",
+              }}
+            >{`найдено ${total}, страница ${page} из ${maxPages}`}</div>
+          )}
           {!!images.length && (
             <div className={styles.grid}>
               {images.map((image) => (
