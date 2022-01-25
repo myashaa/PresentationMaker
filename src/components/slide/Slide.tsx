@@ -7,6 +7,8 @@ import { Empty } from "./Empty";
 import { AppDispatch, RootState } from "../../redux/store";
 import { connect } from "react-redux";
 import { TPosition, TSize } from "../../model/element/ElementTypes";
+import { useRef } from "react";
+import { useHotKey } from "../../hooks/useHotKey";
 
 type Props = {
   slides: TSlide[];
@@ -16,6 +18,7 @@ type Props = {
   moveElement: (ids: string, position: TPosition, slide: string) => void;
   resizeElement: (id: string, size: TSize, slide: string) => void;
   setText: (id: string, text: string, slide: string) => void;
+  deleteElement: (slide: string, element: string) => void;
 };
 
 function SlideEditor({
@@ -26,6 +29,7 @@ function SlideEditor({
   moveElement,
   resizeElement,
   setText,
+  deleteElement,
 }: Props) {
   const slide = slides.filter((slide) => slide.id === selectedSlide)[0];
 
@@ -38,6 +42,14 @@ function SlideEditor({
     backgroundImage: `url(${slide?.background.picture?.image})`,
     backgroundSize: "cover",
   };
+
+  const slideRef = useRef<HTMLDivElement>(null);
+
+  useHotKey((key) => {
+    if (key === "Delete") {
+      selectedElements.map((id) => deleteElement(slide.id, id));
+    }
+  }, slideRef);
 
   const handleSelectElement = (id: string) => {
     selectElements([id]);
@@ -66,6 +78,8 @@ function SlideEditor({
   return (
     <div
       className={styles.editor}
+      ref={slideRef}
+      tabIndex={1}
       onClick={(e) => {
         e.stopPropagation();
         handleDeselectElements();
@@ -123,6 +137,11 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
       dispatch({
         type: "SET_ELEMENT_TEXT",
         payload: { id, text, slide },
+      }),
+    deleteElement: (slide: string, element: string) =>
+      dispatch({
+        type: "DELETE_ELEMENT",
+        payload: { slide, element },
       }),
   };
 };

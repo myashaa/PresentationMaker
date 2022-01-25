@@ -7,4 +7,5 @@
   border-bottom: 0;
   padding: 30px;
   overflow: auto;
+  outline: none;
 }
