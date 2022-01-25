@@ -132,7 +132,7 @@ export function ImageSearchForm({ onSubmit }: Props) {
                   onClick={() => handleChangePage(-1)}
                 >{`<<< ${page - 1}`}</div>
               )}
-              {maxPages > 0 && (
+              {maxPages > 1 && page !== maxPages && (
                 <div
                   className={`${styles.image} ${styles.cardButton}`}
                   onClick={() => handleChangePage(1)}
