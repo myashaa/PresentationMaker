@@ -1,5 +1,5 @@
 import { ChangeEvent, CSSProperties, useEffect, useState } from "react";
-import { ColorPicker } from "../fields/colorPicker/ColorPicker";
+import { ColorPicker } from "./colorPicker/ColorPicker";
 import styles from "./ColorInput.module.css";
 
 type Props = {

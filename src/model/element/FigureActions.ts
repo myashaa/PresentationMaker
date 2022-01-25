@@ -1,4 +1,3 @@
-import { TEditor } from "../editor/EditorTypes";
 import { TSlide } from "../slide/SlideTypes";
 import { EFigureType } from "./FigureTypes";
 

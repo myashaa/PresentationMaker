@@ -73,6 +73,7 @@ export function Element({
   );
   const pos = p as TPosition;
   const sz = s as TSize;
+  const data = element.data;
 
   const style = {
     top: moving ? pos.y : element.position.y,
@@ -89,13 +90,11 @@ export function Element({
     cursor: !view ? "pointer" : "default",
   };
 
-  const data = element.data;
-
   return (
     <div
       ref={elementRef}
       style={style}
-      className={classnames(styles.element, selected && styles.selected)}
+      className={`${styles.element} ${selected && styles.selected}`}
       onClick={(e) => {
         e.stopPropagation();
         !view && onClick && onClick(e.ctrlKey);

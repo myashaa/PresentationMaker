@@ -1,10 +1,8 @@
-import { useRef } from "react";
+import { MouseEvent, useRef } from "react";
 import { COLORS } from "../../colors";
-import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import { TElement } from "../../model/element/ElementTypes";
 import { TBackground } from "../../model/slide/SlideTypes";
-import { Camera } from "../slide/Camera";
-import { FigureElement } from "../slide/figures/FigureElement";
+import { Element } from "../slide/Element";
 
 import styles from "./MiniSlide.module.css";
 
@@ -29,6 +27,19 @@ export function MiniSlide({
 }: MiniSlideProps) {
   const slideRef = useRef<HTMLDivElement>(null);
 
+  const handleDelete = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    onDelete && onDelete();
+  };
+
+  const handleSelect = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.ctrlKey) {
+      onMultiSelect && onMultiSelect();
+    } else {
+      onSelect && onSelect();
+    }
+  };
+
   const style = {
     backgroundColor: background?.color ? background.color : COLORS.white,
     backgroundImage: `url(${background?.picture?.image})`,
@@ -36,92 +47,30 @@ export function MiniSlide({
     backgroundPosition: "center",
   };
 
+  const elementList =
+    elements?.map((element) => (
+      <Element key={element.id} element={element} view />
+    )) || [];
+
   return (
     <div
       ref={slideRef}
       className={`${styles.slidePreview} ${
         selected && styles.slidePreviewActive
       }`}
-      onClick={(event) => {
-        if (event.ctrlKey) {
-          onMultiSelect && onMultiSelect();
-        } else {
-          onSelect && onSelect();
-        }
-      }}
+      onClick={handleSelect}
     >
       <span className={styles.slideIndex}>{index}</span>
       <div className={styles.slideMiniature} style={style}>
         {selected && (
           <span
             className={`${styles.slideRemove} material-icons`}
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete && onDelete();
-            }}
+            onClick={handleDelete}
           >
             close
           </span>
         )}
-        <div className={styles.slidePreviewMini}>
-          {elements &&
-            elements.map((element, index) => {
-              const style = {
-                top: element.position.y,
-                left: element.position.x,
-                width: element.width,
-                height: element.height,
-              };
-
-              if ("image" in element.data) {
-                return (
-                  <img
-                    style={{ ...style, objectFit: "cover" }}
-                    key={element.id}
-                    src={element.data.image}
-                    alt=""
-                  />
-                );
-              }
-
-              if ("text" in element.data) {
-                const fontStyle = {
-                  margin: 0,
-                  fontFamily: element.data.font.family,
-                  fontSize: element.data.font.size,
-                  color: element.data.font.color,
-                  fontWeight: element.data.font.bold ? "bold" : "400",
-                  textDecoration: element.data.font.underline
-                    ? "underline"
-                    : "none",
-                  fontStyle: element.data.font.italic ? "italic" : "normal",
-                };
-
-                return (
-                  <p key={element.id} style={{ ...style, ...fontStyle }}>
-                    {element.data.text}
-                  </p>
-                );
-              }
-
-              if ("figure" in element.data) {
-                return (
-                  <div key={element.id} style={style}>
-                    <FigureElement
-                      figure={element.data.figure}
-                      width={element.width}
-                      height={element.height}
-                      fill={element.data.fill}
-                    />
-                  </div>
-                );
-              }
-
-              if ("video" in element.data) {
-                return <Camera key={element.id} />;
-              }
-            })}
-        </div>
+        <div className={styles.slidePreviewMini}>{elementList}</div>
       </div>
     </div>
   );

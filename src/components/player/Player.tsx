@@ -1,20 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { COLORS } from "../../colors";
-import { dispatch } from "../../editor";
 import { useHotKey } from "../../hooks/useHotKey";
-import { changeMode } from "../../model/editor/EditorActions";
-import { EMode } from "../../model/editor/EditorTypes";
-import { TPresentation } from "../../model/presentation/PresentationTypes";
 import { TSlide } from "../../model/slide/SlideTypes";
 import { AppDispatch } from "../../redux/store";
 import { at } from "../../utils";
-import { Camera } from "../slide/Camera";
 import { Element } from "../slide/Element";
-import { FigureElement } from "../slide/figures/FigureElement";
-import { ImageElement } from "../slide/image/ImageElement";
-import { SlideElement } from "../slide/SlideElement";
-import { TextElement } from "../slide/text/TextElement";
 
 import styles from "./Player.module.css";
 
@@ -61,8 +51,6 @@ function Player({ slides, setPreview }: PlayerProps) {
   const nextSlide = () => {
     if (slideIndex < slides.length - 1) {
       setSlideIndex(slideIndex + 1);
-    } else {
-      dispatch(changeMode, false, EMode.edit);
     }
   };
 
@@ -84,8 +72,8 @@ function Player({ slides, setPreview }: PlayerProps) {
     transform: `scale(${scale[0]})`,
   };
 
-  const elements = slide.elementList.map((element, index) => (
-    <SlideElement key={index} element={element} />
+  const elements = slide.elementList.map((element) => (
+    <Element key={element.id} element={element} view />
   ));
 
   return (
@@ -97,9 +85,7 @@ function Player({ slides, setPreview }: PlayerProps) {
         label={`${slideIndex + 1} / ${slides.length}`}
       />
       <div ref={playerRef} className={styles.player} style={style}>
-        {slide.elementList.map((element) => (
-          <Element key={element.id} element={element} view />
-        ))}
+        {elements}
       </div>
     </div>
   );

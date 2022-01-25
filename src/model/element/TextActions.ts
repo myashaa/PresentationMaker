@@ -1,6 +1,4 @@
-import { TEditor } from "../editor/EditorTypes";
 import { TSlide } from "../slide/SlideTypes";
-import { TElement } from "./ElementTypes";
 import { TFont, TText } from "./TextTypes";
 
 export function setFont(

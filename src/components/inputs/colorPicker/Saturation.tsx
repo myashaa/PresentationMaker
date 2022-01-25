@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { CSSProperties } from "react";
-import { useHorizontalMove } from "./../../../hooks/useHorizontalMove";
+import { useHorizontalMove } from "../../../hooks/useHorizontalMove";
 
 import styles from "./ColorPicker.module.css";
 

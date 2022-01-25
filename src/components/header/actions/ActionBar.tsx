@@ -19,6 +19,8 @@ type Props = {
   addFigure: (slideId: string, figure: TFigure) => void;
   addCamera: (slideId: string, camera: TCanvas) => void;
   setPreview: () => void;
+  undo: () => void;
+  redo: () => void;
 };
 
 function ActionBar({
@@ -30,6 +32,8 @@ function ActionBar({
   addFigure,
   addCamera,
   setPreview,
+  undo,
+  redo,
 }: Props) {
   return (
     <div className={styles.appActionBar}>
@@ -54,13 +58,13 @@ function ActionBar({
         <ActionButton
           icon="undo"
           onClick={() => {
-            // dispatch(undo, false, editor);
+            undo();
           }}
         />
         <ActionButton
           icon="redo"
           onClick={() => {
-            // dispatch(redo, false, editor);
+            redo();
           }}
           style={{ marginRight: 24 }}
         />
@@ -165,6 +169,14 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
       dispatch({
         type: "CREATE_ELEMENT",
         payload: { slideId: slideId, content: content },
+      }),
+    undo: () =>
+      dispatch({
+        type: "UNDO",
+      }),
+    redo: () =>
+      dispatch({
+        type: "REDO",
       }),
   };
 };

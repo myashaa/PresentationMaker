@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import {
   createPresentation,
   savePresentation,
@@ -7,13 +6,9 @@ import {
 import { EMode, TEditor } from "../model/editor/EditorTypes";
 import { uuid4 } from "../utils";
 import { ActionType } from "./actionType";
+import { historyReducer } from "./historyReducer";
 import { modeReducer } from "./modeReducer";
 import { presentationReducer } from "./presentationReducer";
-
-// export const rootReducer = combineReducers({
-//   mode: modeReducer,
-//   presentation: presentationReducer,
-// });
 
 const initialSlide = {
   id: uuid4(),
@@ -23,17 +18,19 @@ const initialSlide = {
   },
 };
 
+const initialPresentation = {
+  name: "Presentation",
+  selectedElementIds: [],
+  slideList: [initialSlide],
+  selectedSlidesIds: [initialSlide.id],
+};
+
 const initialState: TEditor = {
   mode: EMode.edit,
-  presentation: {
-    name: "Presentation",
-    selectedElementIds: [],
-    slideList: [initialSlide],
-    selectedSlidesIds: [initialSlide.id],
-  },
+  presentation: initialPresentation,
   history: {
-    index: 0,
-    states: [],
+    index: 1,
+    states: [initialPresentation],
   },
 };
 
@@ -49,11 +46,13 @@ export const rootReducer = (
     case "SAVE_PRESENTATION":
       savePresentation(state);
       return state;
+    case "SET_PRESENTATION":
+      return action.payload;
     default:
       return {
-        ...state,
         presentation: presentationReducer(state.presentation, action),
         mode: modeReducer(state.mode, action),
+        history: historyReducer(state.history, action),
       };
   }
 };

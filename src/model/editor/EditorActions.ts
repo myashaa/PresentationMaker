@@ -1,6 +1,5 @@
 import { EMode, TEditor } from "./EditorTypes";
 import { TPresentation } from "../presentation/PresentationTypes";
-import { createSlide } from "../presentation/PresentationActions";
 import { uuid4 } from "../../utils";
 
 export function setPresentation(
