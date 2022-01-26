@@ -52,7 +52,7 @@ export function Element({
   if (element.border?.type === EBorderStyle.dotted) borderType = "dotted";
 
   useEffect(() => {
-    !moving && onMove && onMove(pos);
+    !moving &&  onMove && onMove(pos);
   }, [moving]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function Element({
     if (key === "ArrowUp") dy = 1;
     if (key === "ArrowDown") dy = -1;
 
-    onMove &&
+    !edit && onMove &&
       onMove({
         x: element.position.x - dx * mul,
         y: element.position.y - dy * mul,
