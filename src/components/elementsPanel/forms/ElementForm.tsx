@@ -62,7 +62,11 @@ function ElementForm({ element, slideId, resizeElement, moveElement }: Props) {
           style={{ marginRight: 8 }}
           onChange={setX}
         />
-        <TextInput label="Y" value={`${element?.position.y}`} onChange={setY} />
+        <TextInput
+          label="Y"
+          value={`${element?.position.y}`}
+          onChange={setY}
+        />
       </div>
     </div>
   );
