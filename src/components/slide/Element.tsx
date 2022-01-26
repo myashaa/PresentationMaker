@@ -144,8 +144,8 @@ export function Element({
       {"figure" in data && (
         <FigureElement
           figure={data.figure}
-          width={sz.width}
-          height={sz.height}
+          width={style.width}
+          height={style.height}
           fill={data.fill}
         />
       )}

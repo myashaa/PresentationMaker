@@ -51,19 +51,24 @@ function ActionBar({
         image: url,
       };
 
-      let s = size;
-      if (size.width > 600) {
-        s.width = Math.floor(size.width / 3);
-        s.height = Math.floor(size.height / 3);
-      }
-      if (size.height > 500) {
-        s.width = Math.floor(size.width / 2);
-        s.height = Math.floor(size.height / 2);
-      }
-
-      addImage(currentSlideId, object, s);
+      addImage(currentSlideId, object, reduceSize(size, 3));
     });
     setImageModal(false);
+  };
+
+  const reduceSize = (size: TSize, scale: number = 2) => {
+    let s = size;
+
+    if (size.width > 600) {
+      s.width = Math.floor(size.width / scale);
+      s.height = Math.floor(size.height / scale);
+    }
+    if (size.height > 500) {
+      s.width = Math.floor(size.width / scale);
+      s.height = Math.floor(size.height / scale);
+    }
+
+    return s;
   };
 
   return (
@@ -121,7 +126,7 @@ function ActionBar({
           icon="image"
           onClick={() => {
             loadImage((object, size) => {
-              addImage(currentSlideId, object, size);
+              addImage(currentSlideId, object, reduceSize(size, 3));
             });
           }}
         />

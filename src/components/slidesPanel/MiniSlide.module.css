@@ -25,15 +25,21 @@
   top: 0;
   right: 0;
   position: absolute;
-  padding: 8px;
+  padding: 4px;
   font-size: 16px;
-  color: #c7c7c7;
+  color: rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: 200ms;
+  z-index: 2;
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-right: 8px;
+  margin-top: 8px;
 }
 
 .slideRemove:hover {
-  color: #000000;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .slideIndex {
