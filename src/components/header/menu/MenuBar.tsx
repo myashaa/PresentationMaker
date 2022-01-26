@@ -1,5 +1,4 @@
 import { MenuButton } from "./MenuButton";
-
 import styles from "./MenuBar.module.css";
 import { AppDispatch } from "../../../redux/store";
 import { connect } from "react-redux";
@@ -29,8 +28,14 @@ function MenuBar({
         label="Создать"
         onClick={newPresentation}
       />
-      <MenuButton label="Открыть" onClick={handleOpen} />
-      <MenuButton label="Сохранить" onClick={savePresentation} />
+      <MenuButton
+        label="Открыть"
+        onClick={handleOpen}
+      />
+      <MenuButton
+        label="Сохранить"
+        onClick={savePresentation}
+      />
     </div>
   );
 }

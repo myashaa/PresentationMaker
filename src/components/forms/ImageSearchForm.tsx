@@ -3,7 +3,7 @@ import {
   loadUnsplashImages,
   searchUnsplashImages,
 } from "../../actions/unsplashActions";
-import { loadImage, loadImageFromURL } from "../../model/element/ImageActions";
+import { loadImageFromURL } from "../../model/element/ImageActions";
 import { TImage } from "../../model/element/ImageTypes";
 import { uuid4 } from "../../utils";
 import { ActionButton } from "../header/actions/ActionButton";
@@ -94,7 +94,10 @@ export function ImageSearchForm({ onSubmit }: Props) {
 
       {tab === 0 && (
         <div>
-          <TextInput label="URL" onChange={handleLoadFromUrl} />
+          <TextInput
+            label="URL"
+            onChange={handleLoadFromUrl}
+          />
           {urlImage !== "" && (
             <div
               className={styles.preview}
@@ -146,13 +149,13 @@ export function ImageSearchForm({ onSubmit }: Props) {
                 <div
                   className={`${styles.image} ${styles.cardButton}`}
                   onClick={() => handleChangePage(-1)}
-                >{`<<< ${page - 1}`}</div>
+                ><span className="material-icons">chevron_left</span>{`${page - 1}`}</div>
               )}
               {maxPages > 1 && page !== maxPages && (
                 <div
                   className={`${styles.image} ${styles.cardButton}`}
                   onClick={() => handleChangePage(1)}
-                >{`>>> ${page + 1}`}</div>
+                >{`${page + 1}`}<span className="material-icons">navigate_next</span></div>
               )}
             </div>
           )}

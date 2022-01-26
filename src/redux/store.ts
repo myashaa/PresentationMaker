@@ -6,11 +6,7 @@ import {
   MiddlewareAPI,
   Store,
 } from "redux";
-import { setPresentation } from "../model/editor/EditorActions";
-import { EMode, TEditor } from "../model/editor/EditorTypes";
-import { redo, undo, updateHistory } from "../model/history/HistoryActions";
-import { THistory } from "../model/history/HistoryTypes";
-import { TPresentation } from "../model/presentation/PresentationTypes";
+import { TEditor } from "../model/editor/EditorTypes";
 import { rootReducer } from "./rootReducer";
 
 const exceptions: string[] = [

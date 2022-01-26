@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-
 import styles from "./Title.module.css";
 
 type Props = {

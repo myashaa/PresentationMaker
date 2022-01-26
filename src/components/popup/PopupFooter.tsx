@@ -1,4 +1,3 @@
-
 import styles from "./PopupFooter.module.css";
 
 type PopupFooterProps = {

@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { HuePicker } from "./Hue";
 import { LigthnessPicker } from "./Ligthness";
 import { SaturationPicker } from "./Saturation";
-
 import styles from "./ColorPicker.module.css";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { hexToHSL, hslToHEX } from "../../../utils";
