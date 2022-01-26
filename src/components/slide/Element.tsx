@@ -52,7 +52,7 @@ export function Element({
   if (element.border?.type === EBorderStyle.dotted) borderType = "dotted";
 
   useEffect(() => {
-    !moving &&  onMove && onMove(pos);
+    !moving && onMove && onMove(pos);
   }, [moving]);
 
   useEffect(() => {
@@ -86,7 +86,8 @@ export function Element({
     if (key === "ArrowUp") dy = 1;
     if (key === "ArrowDown") dy = -1;
 
-    !edit && onMove &&
+    !edit &&
+      onMove &&
       onMove({
         x: element.position.x - dx * mul,
         y: element.position.y - dy * mul,
@@ -105,7 +106,6 @@ export function Element({
       : COLORS.lightGrey,
     outlineOffset: `-${element.border?.width}px`,
     backgroundColor: element.color,
-    cursor: !view ? "pointer" : "default",
   };
 
   return (
@@ -114,12 +114,16 @@ export function Element({
       style={style}
       className={`${styles.element} ${selected && styles.selected}`}
       onClick={(e) => {
-        e.stopPropagation();
-        !view && onClick && onClick(e.ctrlKey);
+        if (!view) {
+          e.stopPropagation();
+          onClick && onClick(e.ctrlKey);
+        }
       }}
       onDoubleClick={(e) => {
-        e.stopPropagation();
-        !view && setEdit(true);
+        if (!view) {
+          e.stopPropagation();
+          setEdit(true);
+        }
         setMoving(false);
         setResizing(false);
       }}
