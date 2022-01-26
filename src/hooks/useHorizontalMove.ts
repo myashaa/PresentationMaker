@@ -26,24 +26,6 @@ export function useHorizontalMove(
     if (newX < min - offset) {
       setPos({ x: min - offset, y: pos.y });
     }
-
-    // if (newX > max  - offset && newY < max && newY > min) {
-    //   setPos({ x: max, y: newY });
-    // }
-    // if (newY > max && newX < max && newX > min) {
-    //   setPos({ x: newX, y: max });
-    // }
-
-    // if (newX < min && newY < max && newY > min) {
-    //   setPos({ x: min, y: newY });
-    // }
-    // if (newY < min && newX < max && newX > min) {
-    //   setPos({ x: newX, y: min });
-    // }
-
-    // if (newX < max && newX > min && newY < max && newY > min) {
-    //   setPos({ x: newX, y: newY });
-    // }
   };
 
   const onStop = () => {
