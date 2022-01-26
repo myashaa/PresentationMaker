@@ -35,7 +35,7 @@ export function updateHistory(
 
   const newHistory: THistory = {
     states: [...newStates, presentation],
-    index: newStates.length + 1,
+    index: history.index + 1,
   };
 
   return newHistory;

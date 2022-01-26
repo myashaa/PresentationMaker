@@ -10,6 +10,8 @@ import { historyReducer } from "./historyReducer";
 import { modeReducer } from "./modeReducer";
 import { presentationReducer } from "./presentationReducer";
 
+const preloadedPresentation = localStorage.getItem("presentation");
+
 const initialSlide = {
   id: uuid4(),
   elementList: [],
@@ -27,7 +29,9 @@ const initialPresentation = {
 
 const initialState: TEditor = {
   mode: EMode.edit,
-  presentation: initialPresentation,
+  presentation: preloadedPresentation
+    ? JSON.parse(preloadedPresentation)
+    : initialPresentation,
   history: {
     index: 1,
     states: [initialPresentation],
