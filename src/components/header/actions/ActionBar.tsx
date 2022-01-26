@@ -109,7 +109,7 @@ function ActionBar({
           icon="text_fields"
           onClick={() => {
             const newText: TText = {
-              text: "Sample Text",
+              text: "Text",
               font: {
                 family: "Montserrat",
                 size: 16,
