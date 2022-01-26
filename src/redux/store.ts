@@ -29,6 +29,11 @@ const storeHistory =
     if (!exceptions.includes(action.type)) {
       const newState: TEditor = store.getState();
 
+      localStorage.setItem(
+        "presentation",
+        JSON.stringify(newState.presentation)
+      );
+
       if (
         JSON.stringify(oldState.presentation) !==
         JSON.stringify(newState.presentation)
