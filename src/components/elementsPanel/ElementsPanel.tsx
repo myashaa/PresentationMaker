@@ -37,6 +37,7 @@ function ElementsPanel({
     if ("image" in data) return { icon: "image", text: "Изображение" };
     if ("text" in data) return { icon: "text_fields", text: "Текст" };
     if ("figure" in data) return { icon: "category", text: "Фигура" };
+    if ("video" in data) return { icon: "photo_camera", text: "Веб-камера" };
     return { icon: "filter", text: "Слайд" };
   };
 
